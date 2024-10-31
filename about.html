@@ -1,106 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor's Technical Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+        }
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #333;
+            color: #fff;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        /* Navigation Styles */
+        nav {
+            background-color: #fff;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+        }
+        nav a:hover {
+            color: #0073e6;
+        }
+        /* Blog Content Styles */
+        .intro-text {
+            background-color: #fff;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            color: #555;
+        }
+        .post {
+            background-color: #fff;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .post h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .post p {
+            line-height: 1.6;
+            color: #555;
+        }
+        .post a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
 
-  <head>
+<header>
+    <h1>About Me</h1>
+    <p>A personal introduction</p>
+</header>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="TemplateMo">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+<nav>
+    <a href="index.html">Home</a>
+    <a href="#blog">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</nav>
 
-    <title>V - About Me </title>
-
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
-
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-<!--
-
-TemplateMo 551 Stand Blog
-
-https://templatemo.com/tm-551-stand-blog
-
--->
-  </head>
-
-  <body>
-
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
-
-    <!-- Header -->
-    <header class="">
-      <nav class="navbar navbar-expand-lg">
-        <div class="container">
-          <a class="navbar-brand" href="index.html"><h2>V.H.Bayer - About<em>.</em></h2></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarResponsive">
-              <ul class="navbar-nav ml-auto">
-                  <li class="nav-item">
-                      <a class="nav-link" href="index.html">
-                          Home
-                      </a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="blog.html">Blog</a>
-                  </li>
-                  <li class="nav-item active">
-                    <a class="nav-link" href="about.html">About Me</a>
-                    <span class="sr-only">(current)</span>
-                </li>
-                  <!-- 
-                  <li class="nav-item">
-                      <a class="nav-link" href="post-details.html">Science</a>
-                  </li>
-                  <li class="nav-item">
-                      <a class="nav-link" href="contact.html">Art</a>
-                  </li>
-                  -->
-                  <li class="nav-item">
-                      <a class="nav-link" href="contact.html">Contact</a>
-                  </li>
-              </ul>
-          </div>
-        </div>
-      </nav>
-    </header>
-
-    .about-us {
-      padding: 60px 0; /* Add padding for spacing */
-      background-color: #f9f9f9; /* Light background color to distinguish the section */
-      
-    }
-   .text-left: left;
     <section class="about-us">
       <div class="container">
         <div class="row">
           <div class="text-left">
             <p>Hi, my name is Victor. My friends would describe me as creative, curious and, hopefully, kind. 
               I enjoy being in environments that encourage me and try to encourage others.
-              I studied Aerospace Engineering, Automation and Control Engineering.
+              I studied Aerospace Engineering, Automation and Control Engineering. 
               <br><br>  During my Bachelors i developed an interest in mathematical modelling and programming. 
               Like many inspired by the sucesses of machine learning and analogies to mathematical models of neuronal functioning in biology. 
               Furthermore, control theory attracted me as the study of dynamical systems, or, in more abstract terms,
                the study of input-output relationships, their stability properties and algorithms to guide outputs by adequate inputs. 
-              <br> I was lucky to have had the opportunity to work on industrial robot systems, study controllers and develop 
-              machine learning algorithms in the R&D company, Fraunhofer IPA. 
-              I also worked with back-end software feature integration, generative machine learning models and (little) reinforcement learning.
-              Furthermore, i am happy to have studied Aerospace Engineering since it provided a basis of physics and mathematics that is 
-              very interesting by itself, but also useful in other fields.
+              <br><br> I was lucky to have had the opportunity to work on industrial robot systems, study controllers and develop 
+              machine learning algorithms in the R&D company,  <a href="https://www.ipa.fraunhofer.de/en/expertise/robot-and-assistive-systems/assembly-automation/analysis-of-automation-potentials-in-assembly-processes.html" target="_blank">Fraunhofer IPA</a> . 
+              I also worked with back-end software feature integration (at <a href="https://www.astos.de/" target="_blank">astos solutions</a>), generative machine learning models (at <a href="https://www.elem.bio/" target="_blank">elem biotech</a>) and (little) reinforcement learning (at <a href="https://www.imsb.uni-stuttgart.de/research/cbb/" target="_blank">IMSB Uni Stuttgart</a>).
+              Furthermore, i am happy to have studied Aerospace Engineering since it provided a basis of physics and mathematics in an engineering context that is 
+              very interesting by itself, but also useful in other fields (thinking about thermo-dynamics, fluid-dynamics, etc.).
               I also enjoyed the fact that the University in Stuttgart is quite industry oriented. <br>  <br> 
               Due to my multicultural upbringing i was sure that i wanted to leave Germany, either to France or to Italy. 
               My choice ended up being the University in Padova, Italy, which is among the most prestigious in Italy.
@@ -112,35 +124,35 @@ https://templatemo.com/tm-551-stand-blog
               I might also be biased by my choice of studies.
               <br><br>
               My change of study to Automation and Control Engineering was inspired by mathematical modelling of biological systems 
-              (just see where a model of long-term potentiation got us once we had the compute for back-propagation). I took some courses on systems biology and gene network, 
+              (back-propagation can be viewed as a model of long-term potentiation). I took some courses on systems biology and gene networks, 
               which turned out to be mainly about stability analysis of nonlinear functions representing protein networks. 
               In line with this interest in life sciences and mathematical computing, i managed to apply machine learning to 
-              in-silico models of human hearts at a very innovative start-up called ELEM bio-tech. 
-              ELEM bio-tech develops virtual models of hearts to enable a better understanding of (ubiquitous) heart diseases and treatments. 
+              in-silico models of human hearts at a very innovative start-up called  <a href="https://www.elem.bio/" target="_blank">ELEM</a> bio-tech. 
+              <a href="https://www.elem.bio/" target="_blank">ELEM</a> develops virtual models of hearts to enable a better understanding of ubiquitous heart diseases and treatments. 
               It was a much appreciated experience which sparked curiosity and created hope with regard to the impact technology can have on 
               humanity.
               <br><br> Currently I am in the process of finishing my Master's degree in Automation and Control Engineering, 
-              with focus on complex systems and machine learning. 
+              with a focus on complex systems and machine learning. 
               <br><br>
               When i have enough time, i enjoy following my curiosities and read about topics that interest me.
               Such tend to be in the fields of biochemistry, computer science, machine learning and information theory.
               Differential geometry is also very fascinating.
               I did spend some time reading on Equivariant Convolutions, Density Functional Theory and Hartree-Fock methods, 
-              ML-methods for the Schrödinger wave equation, spherical harmonics, molecular simulations and Bio-chemical property predictions.
+              ML-methods for the Schrödinger wave equation, spherical harmonics, molecular simulations and bio-chemical property predictions.
               Also a tiny bit on the interesting fields of Cryptography and Computer System Security. 
               Apart from mathematical methods, i want to understand the systems which i use daily, such as telecommunications, 
               network routing and my computer. This involves established protocols, computer hardware and software + data architectures.
               Lately I have been interested in information geometry, wasserstein distances and optimal transport as well as 
-              unifying my understanding of EM, VAEs, Gps and other algorithms. 
+              unifying my understanding of EM, VAEs, GPs and other algorithms. 
               <br><br>
-              Since i am interested in more things than i have time for, i prefer working on challenging problems in an concrete application (or customer) oriented way. 
+              Since i am interested in more things than i have time for, i prefer working on challenging problems in a concrete application (or customer) oriented way. 
               Bringing concepts to production is more rewarding to me than purely theoretical research. Although the latter has its place and time. 
               If you have work or research opportunities for me, please contact me.
               <br><br>
               Furthermore, i enjoy sports, like acrobatics, running, swimming and pretty much anything that gets me to move.
               <br><br>
               On this website I want to try to summarize some topics i consider interesting so i can look them up whenever needed.
-              Maybe in a way that is also understandable to others. I will also include sources I found useful.
+              Maybe in a way that is also understandable to others. I will also include sources I found useful altough i might forget sometimes..
           </div>
         </div>
       </div>
