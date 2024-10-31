@@ -1,290 +1,182 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor's Technical Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+        }
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #333;
+            color: #fff;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        /* Navigation Styles */
+        nav {
+            background-color: #fff;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+        }
+        nav a:hover {
+            color: #0073e6;
+        }
+        /* Blog Content Styles */
+        .intro-text {
+            background-color: #fff;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            color: #555;
+        }
+        .post {
+            background-color: #fff;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .post h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .post p {
+            line-height: 1.6;
+            color: #555;
+        }
+        .post a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
 
-  <head>
+<header>
+    <h1>Victor's Technical Blog</h1>
+    <p>Mathematics, Machine Learning, and Information Theory</p>
+</header>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&display=swap" rel="stylesheet">
+<nav>
+    <a href="index.html">Home</a>
+    <a href="#blog">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</nav>
 
-    <title>Victors Website</title>
+<div class="container">
+    <section class="intro-text">
+        <p>Many of these blog entries are written in a hurry and are thus very informal. While I try to offer good explanations, not all posts are suited for learning a topic from scratch. Many serve as summaries of relevant mathematics. With prior knowledge, they provide helpful reviews.</p>
+        <p>Additionally, do not believe that this is the result of independent research. I stand on the shoulders of giants, drawing from papers, videos, and online content. Some posts mention sources, but I may have missed others. If you’re interested in a topic, I’m happy to point you toward researchers and resources.</p>
+    </section>
 
-    <!-- Bootstrap core CSS -->
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <section id="blog">
+        <article class="post" id="MCMC">
+            <h2>Monte Carlo and Metropolis Hastings</h2>
+            <p>Useful when direct sampling is difficult but evaluation is easy.</p>
+            <a href="blogs/MCMC.html">Read more</a>
+        </article>
+        
+        <article class="post" id="ILC">
+            <h2>Iterative Learning Control - Publication</h2>
+            <p>Automated execution time reduction of repetitive processes; applied machine learning on industrial robots.</p>
+            <a href="blogs/ILC.html">Read more</a>
+        </article>
 
+        <article class="post" id="reservoir-sampling">
+            <h2>Reservoir Sampling</h2>
+            <p>A technique for sampling uniformly from an infinite stream; a handy method to know.</p>
+            <a href="blogs/reservoir-sampling.html">Read more</a>
+        </article>
 
-    <!-- Additional CSS Files -->
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
-    <link rel="stylesheet" href="assets/css/templatemo-stand-blog.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
-<!--
+        <article class="post" id="quantum-information">
+            <h2>Quantum Information and Computing</h2>
+            <p>A collection of mathematics related to quantum computing; involves bra-ket notation.</p>
+            <a href="blogs/quantum_summary.html">Read more</a>
+        </article>
 
-TemplateMo 551 Stand Blog
+        <article class="post" id="basis-splines">
+            <h2>Basis Splines</h2>
+            <p>A summary on Bezier functions and basis splines, mapping functions onto control points.</p>
+            <a href="blogs/basis-splines.html">Read more</a>
+        </article>
 
-https://templatemo.com/tm-551-stand-blog
+        <article class="post" id="Wasserstein">
+            <h2>Wasserstein Distance</h2>
+            <p>An exploration of Wasserstein distance in probability and statistics.</p>
+            <a href="blogs/Wasserstein.html">Read more</a>
+        </article>
 
--->
-  </head>
+        <article class="post" id="MLE">
+            <h2>From MLE and MAP to EM and VAE</h2>
+            <p>Basics of machine learning algorithms, their extension to expectation maximization, and their relation to variational autoencoders.</p>
+            <a href="blogs/MLE.html">Read more</a>
+        </article>
 
-  <body>
+        <article class="post" id="GANs">
+            <h2>Generative Adversarial Networks</h2>
+            <p>Adversarial training is state-of-the-art but can be challenging to train.</p>
+            <a href="blogs/GANs.html">Read more</a>
+        </article>
 
-      <!-- ***** Preloader Start ***** -->
-      <div id="preloader">
-          <div class="jumper">
-              <div></div>
-              <div></div>
-              <div></div>
-          </div>
-      </div>
-      <!-- ***** Preloader End ***** -->
-      <!-- Header -->
-      <header class="">
-          <nav class="navbar navbar-expand-lg">
-              <div class="container">
-                  <a class="navbar-brand" href="index.html"><h2>V.H.Bayer - Blog Entries<em>.</em></h2></a>
-                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                      <span class="navbar-toggler-icon"></span>
-                  </button>
-                  <div class="collapse navbar-collapse" id="navbarResponsive">
-                      <ul class="navbar-nav ml-auto">
-                          <li class="nav-item">
-                              <a class="nav-link" href="index.html">
-                                  Home
-                                  
-                              </a>
-                          </li>
-                          <li class="nav-item active">
-                              <a class="nav-link" href="blog.html">Blog</a>
-                              <span class="sr-only">(current)</span>
-                          </li>
-                          <li class="nav-item">
-                            <a class="nav-link" href="about.html">About ME</a>
-                        </li>
-                          <li class="nav-item">
-                              <a class="nav-link" href="contact.html">Contact</a>
-                          </li>
-                      </ul>
-                  </div>
-              </div>
-          </nav>
-      </header>
+        <article class="post" id="diffusion_networks">
+            <h2>Diffusion Networks</h2>
+            <p>A Markov chain approach to machine learning a reverse-diffusive process.</p>
+            <a href="blogs/Diffusion_models.html">Read more</a>
+        </article>
 
-      <!-- Page Content -->
-      <!-- Banner Starts Here -->
-      <div class="heading-page header-text">
-          <section class="page-heading">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-lg-12">
-                          <div class="text-content">
-                              <h3>Many of these blog entries are written in a hurry are thus very informal. <br>
-                                 While i try to offer good explanations, not all blogs are suited to learn about a topic.<br>
-                                 Many are more of a summary of relevant mathematics.
-                                 Given prior knowledge, they serve as a helpful review. <br>
-                                 Additionally, do not believe that this is the result of independent research.
-                                 I stand on the shoulders of giants who provide papers, youtube videos and content on the internet. 
-                                 Some of the blogs have a mention of the related sources. 
-                                 However, it is very much possible that i forgot some. If you are interested in knowing more about some topic, i can gladly hint you 
-                                 towards researchers and rescources.
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </section>
-      </div>
+        <article class="post" id="normalizing_flows">
+            <h2>Normalizing Flows</h2>
+            <p>Invertible transformations of a non-Gaussian density.</p>
+            <a href="blogs/Flow_based_networks.html">Read more</a>
+        </article>
 
-       <!-- Sidebar -->
-        <div class="sidebar">
-            <h4>Blog Titles</h4>
-            <ul>
-                <li><a href="#MCMC">Monte Carlo and Metropolis Hastings</a></li>
-                <li><a href="#ILC">Iterative Learning Control - publication</a></li>
-                <li><a href="#reservoir-sampling">Reservoir Sampling</a></li>
-                <li><a href="#quantum information">Quantum Information and Computing</a></li>
-                <li><a href="#basis-splines">Basis splines</a></li>
-                <li><a href="#Wassertsein">Wasserstein Distance</a></li>
-                <li><a href="#MLE">From MLE and MAP to EM and VAE</a></li>
-                <li><a href="#GANs">GANs</a></li>
-                <li><a href="#diffusion_neworks">Langevin dynamics/Diffusion Networks</a></li>
-                <li><a href="#normalizing_flows">Normalizing Flows</a></li>
-                <li><a href="#information_geometry">Information geometrical intuitions for expecation maximization</a></li>
-                <li><a href="#ELBO">ELBO decomposition</a></li>
-                <!-- Add more titles as needed -->
-            </ul>
-        </div>
+        <article class="post" id="information_geometry">
+            <h2>Geometrical Intuitions in Information Science</h2>
+            <p>Perspectives on maximum likelihood estimation and expectation maximization from a geometrical standpoint.</p>
+            <a href="blogs/information-geometry-em.html">Read more</a>
+        </article>
 
-      <section class="blog-posts grid-system">
-          <div class="container">
-              <div class="row">
-                  <div class="col-lg-8">
-                      <div class="all-blog-posts">
-                          <div class="row">
-                              <div class="col-lg-6">
+        <article class="post" id="ELBO">
+            <h2>ELBO Decomposition</h2>
+            <p>An in-depth look at evidence lower bound (ELBO) in machine learning.</p>
+            <a href="blogs/ELBO.html">Read more</a>
+        </article>
+    </section>
+</div>
 
-                                  <div class="blog-post" id ="MCMC">
-
-                                      <div class="down-content">
-                                          <span>Monte Carlo and Metropolis Hastings</span>
-                                          <a href="blogs/MCMC.html"><h4>a summary on rejection sampling and Metropolis Hastings</h4></a>
-                                          <p>useful when direct sampling is difficult but evaluation is easy.</p>
-                                          <div class="post-options">
-                                              <div class="row">
-                                                  <div class="col-lg-12">
-                                                  </div>
-                                              </div>
-                                          </div>
-                                      </div>
-
-                                      <div class="down-content" id="GANs">
-                                        <span>GANs</span>
-                                        <a href="blogs/GANs.html"><h4>a summary on GANs and variants</h4></a>
-                                        <p>adversarial training is state-of-the-art but challenging to train</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="down-content" id ="Diffusion_models">
-                                        <span>Diffusion Networks</span>
-                                        <a href="blogs/Diffusion_models.html"><h4>a summary on Diffusion models</h4></a>
-                                        <p>a markov chain approach to machine learning a reverse-diffusive process</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="down-content"  id="normalizing_flows">
-                                        <span>normalizing-flows</span>
-                                        <a href="blogs/Flow_based_networks.html"><h4>a summary on Flow-based networks</h4></a>
-                                        <p>invertible transformations of a non-Gaussian density</p>
-                                        <div class="post-options">
-                                            <div class="row">
-                                                <div class="col-lg-12">
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                      <div class="blog-post" id="ILC">
-                                        <div class="down-content">
-                                            <span>Iterative Learning Control - publication</span>
-                                            <a href="blogs/ILC.html"><h4>automated execution time reduction of repetitive processes</h4></a>
-                                            <p>machine learning on industrial robots.</p>
-                                            <div class="post-options">
-                                                <div class="row">
-                                                    <div class="col-lg-12">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div class="blog-post" id="Reservoir Sampling">
-                                            <div class="down-content">
-                                                <span>Reservoir Sampling</span>
-                                                <a href="blogs/reservoir-sampling.html"><h4>an algorithm to sample uniformly from an infinite stream</h4></a>
-                                                <p>This is a ubiquitous method and handy to know</p>
-                                                <div class="post-options">
-                                                    <div class="row">
-                                                        <div class="col-lg-12">
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="blog-post" id ="basis-splines">
-                                                <div class="down-content">
-                                                    <span>Basis Splines</span>
-                                                    <a href="blogs/basis-splines.html"><h4>summary on bezier functions and basis splines</h4></a>
-                                                    <p>a way of mapping functions onto basis functions defined on control points</p>
-                                                    <div class="post-options">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                            <div class="blog-post" id ="quantum information">
-                                                <div class="down-content">
-                                                    <span>Quantum Information and Computing</span>
-                                                    <a href="blogs/quantum_summary.html"><h4>a collection of mathematics related to quantum computing</h4></a>
-                                                    <p>few words - just a whole bunch of math and some quantum algorithms. You should be okay with bra-ket notation</p>
-                                                    <div class="post-options">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-                                                <div class="blog-post" id ="MLE">
-                                                    <div class="down-content">
-                                                        <span>MLE to MAP to EM to VAE - basics of machine learning</span>
-                                                        <a href="blogs/MLE.html"><h4>basics of machine learning</h4></a>
-                                                        <p>a description of the simplest machine learning algorithms, their extension to expectation maximization
-                                                             and its relation to variational autoencoders</p>
-                                                        <div class="post-options">
-                                                            <div class="row">
-                                                                <div class="col-lg-12">
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    
-                                                    
-                                            <div class="blog-post" id ="information_geometry">
-                                                <div class="down-content">
-                                                    <span>Geometrical intuitions on Information</span>
-                                                    <a href="blogs/information-geometry-em.html"><h4>a high-level view on geometry in information science</h4></a>
-                                                    <p>views on MLE and EM from a geometrical perspective</p>
-                                                    <div class="post-options">
-                                                        <div class="row">
-                                                            <div class="col-lg-12">
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-
-
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-          </div>
-      </section>
-
-      <!-- Bootstrap core JavaScript -->
-      <script src="vendor/jquery/jquery.min.js"></script>
-      <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-      <!-- Additional Scripts -->
-      <script src="assets/js/custom.js"></script>
-      <script src="assets/js/owl.js"></script>
-      <script src="assets/js/slick.js"></script>
-      <script src="assets/js/isotope.js"></script>
-      <script src="assets/js/accordions.js"></script>
-
-      <script language="text/Javascript">
-          cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-          function clearField(t) {                   //declaring the array outside of the
-              if (!cleared[t.id]) {                      // function makes it static and global
-                  cleared[t.id] = 1;  // you could use true and false, but that's more typing
-                  t.value = '';         // with more chance of typos
-                  t.style.color = '#fff';
-              }
-          }
-      </script>
-
-  </body>
+</body>
 </html>

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor's Technical Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+        }
+        /* Header Styles */
+        header {
+            text-align: center;
+            padding: 2rem 0;
+            background-color: #333;
+            color: #fff;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        /* Navigation Styles */
+        nav {
+            background-color: #fff;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+        }
+        nav a:hover {
+            color: #0073e6;
+        }
+        /* Blog Content Styles */
+        .intro-text {
+            background-color: #fff;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            color: #555;
+        }
+        .post {
+            background-color: #fff;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        .post h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .post p {
+            line-height: 1.6;
+            color: #555;
+        }
+        .post a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+        .post a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Victor's Technical Blog</h1>
+    <p>Mathematics, Machine Learning, and Information Theory</p>
+</header>
+
+<nav>
+    <a href="index.html">Home</a>
+    <a href="#blog">Blog</a>
+    <a href="about.html">About</a>
+    <a href="contact.html">Contact</a>
+</nav>
+
+<div class="container">
+    <section class="intro-text">
+        <p>Graphs are mathematical structures that model pairwise relationships between objects. 
+            They are used in computer science to model networks of communication, data organization, computational devices, and more. 
+            Find here some algorithms .</p>
+    </section>
+
+    <section id="blog">
+        <article class="post" id="MCMC">
+            <h2>Betweeness centrality</h2>
+            <p>a value that measures how important a node is in node-travsersals</p>
+            <a href="graph_algorithms/betweeness_centrality.html">Read more</a>
+        </article>
+        
+        <article class="post" id="MCMC">
+            <h2>Cluster coefficient</h2>
+            <p>counts the expected number of triangles (can be extended to the expected numer of a motif (here: motig=triangle)</p>
+            <a href="graph_algorithms/cluster_coefficient.html">Read more</a>
+        </article>
+        
+        <article class="post" id="MCMC">
+            <h2>Graph clustering</h2>
+            <p>methods to partition graphs into clusters and measuring the "fit" of the clustering</p>
+            <a href="graph_algorithms/graph_clustering.html">Read more</a>
+        </article>
+    </section>
+</div>
+
+</body>
+</html>
+
+
+</body>
+</html>
