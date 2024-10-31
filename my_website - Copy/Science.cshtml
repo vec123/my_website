@@ -1,0 +1,264 @@
+﻿@page
+@model ScienceModel
+@{
+    ViewData["Title"] = "Science Stuff";
+}
+
+<head>
+    <h1>@ViewData["Title"]</h1>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+
+<p>This page displays science stuff.</p>
+<p>Propositional Caluculus and Goedels Theorem. (2019) </p>
+<p>
+    Remark: This is a summary of specific parts from "Goedel,Escher,Bach" by Douglas Hofstaedter and aims to offer
+    a comprehensive guide towards Goedels proof
+</p>
+<p>
+    List of rules:
+    <br><br>
+    1) If \(x\) and \(y\) are theorems, then \(< x \land y >\) is a theorem. <br>
+    2) If  \(< x \land y >\) is a theorem, then both \(x\) and \(y\) are theorems. <br>
+    3) The string '~~' can be deleted from any theorem. I can also be inserted into any theorem, provided that the result is still well-formed. <br>
+    4) If \(y\) can be derived when \(x\) is assumed to be a theorem, then \(< x \subset y >\) is a theorem. <br>
+    5) Inside a fantasy (4) any theorem from the "reality" one level higher can be brought in and used. <br>
+    6) If \(x\) and \(< x \subset y >\) are both theorems, then \(y\) is a theorem. <br>
+    7) \(< x \supset y >\) and \(< ~x \subset ~y >\) are interchangeable. <br>
+    8) \(< ~x \land ~y >\) and \(~< x \lor y >\) are interchangeable. <br>
+    <br>
+    Formation rules:<br>
+    If x and y are well formed, then the following strings are also well formed:<br>
+    1) \(~x\)<br>
+    2)\(< x \land y >\)<br>
+    3)\(< x \lor y >\)<br>
+    3)\(< x \subset y >\)<br>
+    <br>
+    Intented Interpretation of Symbols:<br>
+    \( \land \) - and<br>
+    ~ - not<br>
+    < ... > - groupers<br>
+    \( \lor \) - or<br>
+
+    It makes sense, when reading a theorem of Propositional Calculus to interpres anything but the atoms. For example the theorem \(< P \lor \text{~} P >\) is read as P or not P.
+    Despite the fact that P is not a sentence it is easy to see that the resulting sentence will be true, no matter what is chosen for P.
+    The Power of Propositional Calculus is, that it gives a set of rules for producing statements which would be true in all conceivable worlds. Furthermore those statements can be produced
+    by a set of typographical rules
+    <\p>
+<p>
+    Göder Numbering explained by introducing the MIU system <br>
+    Axiom: MI <br>
+    Rules: <br>
+    (1) If you posses a string whose last letter is I, you can add a U aat the end. <br>
+    (2) Suppose you have Mx. Then Mxx is also an allowed string <br>
+    (3) You may replace III by U, however not U by III <br>
+    (4) If UU occurs within a string you may drop it <br>
+    <br>
+    From typographical to arithmetical:<br>
+    M < - > 3 <br>
+    I < - > 1 <br>
+    U < - > 0 <br>
+    MU < - > 30 <br>
+    .<br>.<br>.<br>
+    Derivation of strings:<br>
+    (1) MI < - > 31 <br>
+    (2) MII  < - > 311 <br>
+    (3) MIII < - > 3111 <br>
+    (4) MUI  < - > 301  <br>
+    (5) MUIU < - > 3010 <br>
+    (6) MUIUUIU < - > 3010010 <br>
+    (7) MUIIU < - > 30100 <br>
+    The former typographical rules can now be transformed into arithmetical steps:
+    (1) \(10m +1\) can be made into \(10*(10m+1)\)<br>
+    (2) \(3*10^{m}+n\) can be maade into \(10^{m}*(3*10^{m}+n)+n\) <br>
+    (3) \(k'10^{m+3}+111*10^{m}+n\) can be made into \(k*10^{m+1}+n\) <br>
+    (4) \(k*10^{m+2}+n\) can be makde into \(k*10^{m}+n \)
+    <br>
+    Axiom: 31<br>
+    <br>
+    Proposition: If there is a typographical rule which tells us how certain digits are to be shifted, changed, dropped or inserted in
+    any number represented decimally, then this rule can be represented equally well by an arithmetical counterpart which involves
+    operations with powers of 10 as wll as additions, subtractions and so forth.
+    <br>
+    < - >
+    <br>
+    Typographical rules for manipulating numbers are actually arithmetical rules for operating on numbers.
+    <br>
+    Now "Is Mu a theorem of the MIU-system?" is equivalent to "Is 30 a MIU-number?".
+    <br>
+    This sentence is translateable into TNT (typographical number theory) since it is a statement of number theory.
+    <\p>
+<p>
+    TNT - Typographical Number Theory <br>
+    zero: O <br>
+    one: SO <br>
+    two: SSO <br>
+    three: SSSO <br>
+    etc. <br>
+    <br>
+    The 5 axioms: <br>
+    (1) /(   /) <br>
+    (2) /(   /) <br>
+    (3) /(   /) <br>
+    (4) /(   /) <br>
+    (5) /(   /) <br>
+    <br>
+    <br>
+    Variables:
+    <br>
+    a  b c d <br>
+    a' b' c' d' <br>
+    a'' b'' c'' d'' <br>
+    .   .   .   .  <br>
+    <br>
+    <br>
+    Example: \( 1+2+3 -> (SO + (SSO + SSSO)) \)
+    <br>
+    All symbold of Propositional Calculus are adopted. Atoms of TNT are statements of equality. E.g. \( (SSO + SSS0) = SSSSO \)
+    <br>
+    Rules of Well-Formedness: <br>
+    1) Numerals: \( O \) is a numeral. Any numeral preceded by \( S \)is also a numeral <br>
+    2) Variables: a,b,c,d are variables. Any variable followed by ' is also a variable <br>
+    3) Terms: \( \forall numerals \land variables \) are terms. Any term preceded by \( S \) is a term <br>
+    4) Atoms: If S and t are terms, then so are \((s+t)\) and \((s*t)\) <br>
+    5) Negations: a well-formed formula preceded by ~ is well formed <br>
+    5) Compounds: If x and y are well formed and no free variable is quantified in both, then the following are well formed: <br>
+    \( < x \land y > , < x \lor y > , < x \subset y >\) <br>
+    6) Quantification: If \( u \) is a variable and \( x \) is well formed with the free variable u in it, then the following is well formed:
+    \( \exists u:x \) and  \( \forall u:x \)
+    <br>
+    Rule of Specification: <br>
+    Suppose the variable u occurs within a string \(x \). If  \( \forall u : x \) is a theorem, then so is \(x \) and so are any strings made by replacing u
+    <br>
+    <br>
+    Rule of Generalization:  <br>
+    Suppose \(x \) is a theorem in which \( u \) is a free variable. The \( \forall u: x \) is a theorem
+    <br>
+    <br>
+    Rule of Interchange:  <br>
+    Suppose \( u \) is a variable. Then the strings \( \forall u:~ \) and \( ~\exists u \) are interchangable
+    <br>
+    <br>
+    Rule of Existance:  <br>
+    Suppose a term appears once of multiply in a theorem. Then any of the appearances my be replaced by a variable which otherwise does not occur in the theorem
+    and the corresponding quantifier must be placed in front.
+    <br>
+    <br>
+    Rule of Equality:  <br>
+    If \( r = s \) is a theorem then so is \( s = r \)  <br>
+    If \( r = s \) and \(s=t \)are theorems, then \( r = t \) is a theorem  <br>
+    <br>
+    <br>
+    Rule of Successorship: <br>
+    If \( r = t \) is a theorem, then \( Sr = St \) is a theorem  <br>
+    If \( Sr = St \) is a theorem, then \( r = t \) is a theorem  <br>
+    <br>
+    <br>
+    Rule of Induction:  <br>
+    If \( u \) is a variable and \( X(u) \) is well formed, then theoremhood of \( /forall u: < X(u) \subset X(Su|u) > \) and \( X(O|u) \)
+    asserts \( \forall u: X(u) \)
+    <br>
+    <br>
+    Incompleteness and Inconsistency:  <br>
+    Using the specified rules one can produce  <br>
+    \( (O + O) = O \) <br>
+    \( (O + SO) = SO \) <br>
+    \( (O + SSO) = SSO \) <br>
+    etc. <br>
+    However the summarizing string of this series \( \forall a: (O + a) = a \) is not producable. <br>
+    This kind of incompleteness is called \( \omega \)-Incompleteness. <br>
+    Additionally the string \( ~\forall a : (O+a)=a \) is also not a theorem. Neither of those is decideable within the system. <br>
+    Adding \( ~\forall a : (O+a) = a \) seems to create am inconsistency between the pyramidal string family which asserts that all numbers have the states property
+    and the statement that not all numbers have it. However imagining some unsuspected supernatural numbers solves this. <br>
+    This kind of inconsistency is calles \( \omega \)-inconsistency.
+    <br>
+    <br>
+    <\p>
+
+<p>
+    Formally Undecidable Propositions of TNT and Related Systems:
+    <br>
+    <br>
+    (1) Proof Pairs: <br>
+    Two natural numbers, \( m \) and /( n \) respectively, form a TNT-proof-pair if and only if \( m \) is the Gödel-number of a TNT-derivation, whose bottom line is the string
+    with Gödel-number \( n \).
+    <br>
+    Example:
+    <pre>MIU proof pairs                   TNT proof pairs</pre>
+    <pre>m=3131131111301   m = 626,262,636,223,123,262,111,666,611,223,123,666,111,666</pre>
+    <pre>m: MI     \( \forall a : \text{~}Sa = O \text{punc.} \text{~} SO = O\) </pre>
+    <pre>MII                              n = 123,666,111,666</pre>
+    <pre>MIII                             \( SO = O\)</pre>
+    <pre>MUI                       </pre>
+    <pre>n = 301                    </pre>
+    <br>
+    To check whether the derivation coded for by \(m\) is actually a proof-pair with \(n\) we will look at <br>
+    (1) whether the derivation is legitimate <br>
+    (2) whether the last line of the derivation coincides with \(n\)<br>
+    In this example (1) is the case, however (2) is wrong since the last line is 223,123,666,111,666 and not 123,666,111,666. <br>
+    For m = 626,262,636,223,123,262,111,666,611,223,333,262,636,123,111,666<br>
+    \(\forall a : \text{~}Sa = O \text{punc.} \exists a : Sa = O \) <br>
+    and n = 223,333,262,636,123,111,666 <br>
+    \( \exists a : Sa = O\) <br>
+    both, (1) and (2) are correct.
+    <br>
+    <br>
+    The property of being a prrof-pair is a primitive recursive number-theoretical property of Proof-pairness and that of being a theorem number. The latter would be to assert that some
+    value \(m\) exists, which forms a proof-pair with \(n\).
+    <br>
+    Suppose we wanted to say: "O=O is a theorem of TNT" or "666,111,666 is a theorem number"<br>
+    Then we would write the TNT formula: \(\exists a: \text{TNT-Proof-Pair} (a,SS...SO)\)<br>
+    or \(\text{~}O = O \) is a theorem of TNT < - > \(\exists a: \text{TNT-Proof-Pair}(a,SS...SO)\)<br>
+    or \(\text{~}O = O \) is not a theorem of TNT < - > \(\text{~}\exists a: \text{TNT-Proof-Pair}(a,SS...SO)\)
+    <br>
+    <br>
+    In order to gain insights on the notation of TNT-theoremhood, we will look at what happens, when you substitute variables by a numeral.
+    <br>
+    1) 362,262,112,262,163,323,111,123,123,123,123,666 <br>
+    \( (a + a' ) = SSSSO \) <br>
+    362,123,123,666,112,123,123,666,323,111,123,123,123,123,666 <br>
+    \( (SSO + SSO ) = SSSSO \)
+    <br>
+    <br>
+    2) 223,362,262,236,262,323,111,262,163 <br>
+    \( \text{~}(a * a) = a \) <br>
+    223,362,123,666,236,123,666,323,111,262,163 <br>
+    \(\text{~} (SO * SO) = a' \)
+    <br>
+    <br>
+    This relationship between two numbers will be called substitution relationship. <br>
+    There is going on an isomorphic arithmetical process in which the original Goedel-number is turned into an even higher number. <br>
+    The relationship between the original Goedel-number, the substituted numeral and the resulting Goedel-number is primary recursive (a BLOOP-test can be written with YES/NO - see GED) <br>
+    Therefore this property is represented in TNT
+    <br>
+    <br>
+
+</p>
+
+<p>Basics of Neural Nets.</p>
+<p>Basics of DNA and genetic replication.</p>
+<p>Basic brain structures and functionlities.</p>
+<p>On recursive loops.</p>
+
+<body>
+
+    <h2>Math in TeX notation</h2>
+
+    When $a \ne 0$, there are two solutions to \(ax^2 + bx + c = 0\) and they are
+    $$x = {-b \pm \sqrt{b^2-4ac} \over 2a}.$$
+    $$ \begin{array}{rcll}
+    y & = & x^{2}+bx+c\\
+    & = & x^{2}+2\times\dfrac{b}{2}x+c\\
+    & = & \underbrace{x^{2}+2\times\dfrac{b}{2}x+\left(\frac{b}{2}\right)^{2}}-
+    {\left(\dfrac{b}{2}\right)^{2}+c}\\
+    &  & \qquad\left(x+{\dfrac{b}{2}}\right)^{2}\\
+    & = & \left(x+\dfrac{b}{2}\right)^{2}-\left(\dfrac{b}{2}\right)^{2}+c
+    & \left|+\left({\dfrac{b}{2}}\right)^{2}-c\right.\\
+    y+\left(\dfrac{b}{2}\right)^{2}-c & = & \left(x+
+    \dfrac{b}{2}\right)^{2} & \left|\strut(\textrm{vertex form})\right.\\
+    y-y_{S} & = & (x-x_{S})^{2}\\
+    S(x_{S};y_{S}) & \,\textrm{or}\,
+    & S\left(-\dfrac{b}{2};\,\left(\dfrac{b}{2}\right)^{2}-c\right)
+    \end{array} $$
+
+</body>

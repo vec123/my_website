@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms on Networks</title>
+
+    <!-- MathJax for rendering math expressions -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+        .equation-block {
+            margin: 20px 0;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .algorithm {
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        ol {
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Algorithms on Networks</h1>
+<p class="author-date">vic-bayer, August 2024</p>
+
+<h2>Computing the Clustering Coefficient</h2>
+
+<p><strong>Definition:</strong></p>
+<div class="equation-block">
+    $$\text{CC}(v) = \frac{| \{ u, w \: u \in N(v) \text{ and } w \in N(v) \text{ and } (u, w) \in E \} |}{\text{deg}(v) \times (\text{deg}(v) - 1)} =  \frac{2 \cdot t_v}{\text{deg}(v) \times (\text{deg}(v) - 1)}$$
+</div>
+<p>Every triangle is counted twice. \( t_v \) is the number of triangles which include node \( v \). An algorithm to approximate this quantity in a streaming model is:</p>
+
+<ul>
+    <li>Initialize \( \text{count} = 0 \)</li>
+    <li>Set \( S = \emptyset \)</li>
+    <li>Set \( p = \frac{m}{M} \)</li>
+    <li>\( \text{deg}(v) = 0 \) for all \( v \in V \)</li>
+    <li>\( dt_v^S = 0 \) for all \( v \in V \)</li>
+    <ul>
+        <li>For each \( (u, v) \in E_{\text{stream}} \):
+            <ul>
+                <li>Set \( \text{deg}(v) = \text{deg}(v) + 1 \)</li>
+                <li>Set \( \text{deg}(u) = \text{deg}(u) + 1 \)</li>
+                <li>\( N_{(u,v)}^S = N_{(u)}^S \cap N_{(v)}^S \)</li>
+                <li>For each \( w \in N_{(u,v)}^S \):
+                    <ul>
+                        <li>Set \( t_v^S = t_v^S + 1 \)</li>
+                        <li>Set \( t_u^S = t_u^S + 1 \)</li>
+                        <li>Set \( t_w^S = t_w^S + 1 \)</li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>If \( \text{SampleProb}(p) \):
+            <ul>
+                <li> \( S = S \cup \{(u,v)\} \)</li>
+            </ul>
+        </li>
+    </ul>
+    <li>Return \( t_v^S \frac{2}{\text{deg}(v) (\text{deg}(v)-1)} \) for all \( v \in V \)</li>
+</ul>
+
+<h2>Proposition</h2>
+<div class="equation-block">
+    $$\mathbb{E}\left( t_v^S \frac{2}{\text{deg}(v) (\text{deg}(v)-1)} \right) = \text{CC}(v)$$
+</div>
+
+<h2>Proof</h2>
+
+<p>Let</p>
+<div class="equation-block">
+    $$X_i = \begin{cases}
+    1 & \text{if i-th triangle is counted}  \\
+    0 & \text{else}
+    \end{cases}$$
+</div>
+<p>Consider:</p>
+<div class="equation-block">
+    $$\mathbb{E}\left( \sum_{i=0}^{t_v^G} X_i \right) = \sum_{i=0}^{t_v^G} \Pr(X_i = 1) =  \sum_{i=0}^{t_v^G} p^2 = t_v^G p^2,$$
+</div>
+<p>where \( t_v^G \) is the number of triangles in the graph \( G \) which involve \( v \). Thus:</p>
+<div class="equation-block">
+    $$\mathbb{E}\left( \frac{1}{p^2} \sum_{i=0}^{t_v^G} X_i \right) = \frac{1}{p^2} \sum_{i=0}^{t_v^G} \Pr(X_i = 1) = \frac{1}{p^2} \sum_{i=0}^{t_v^G} p^2 = t_v^G,$$
+</div>
+<p>and therefore:</p>
+<div class="equation-block">
+    $$\mathbb{E}\left( \frac{1}{p^2} \sum_{i=0}^{t_v^G} X_i \frac{2}{\text{deg}(v) (\text{deg}(v)-1)} \right) = \frac{2 \cdot t_v^G}{\text{deg}(v)(\text{deg}(v) - 1)} = \text{CC}(v).$$
+</div>
+
+</body>
+</html>

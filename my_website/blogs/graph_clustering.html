@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms on Networks</title>
+
+    <!-- MathJax for rendering math expressions -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+        .equation-block {
+            margin: 20px 0;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .algorithm {
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        ol, ul {
+            margin-top: 0;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Algorithms on Networks</h1>
+<p class="author-date">vic-bayer, August 2024</p>
+
+<h2>Algorithms for Graph Clustering</h2>
+
+<div class="algorithm">
+    <h3>Algorithm: AgglomerativeClustering(G) - Ravasz Algorithm</h3>
+    <p><strong>Input:</strong> Connected graph \( G = (V, E) \)</p>
+    <p><strong>Output:</strong> Dendrogram whose leaves are the elements of \( V \)</p>
+    <ol>
+        <li>Assign each node \( u \) to its own cluster \( C_u \)</li>
+        <li>For all pairs \( u, v \in V, u \neq v \), compute their similarity \( \text{sim}(u, v) \)</li>
+        <li>Repeat until all nodes are in a single cluster:
+            <ol>
+                <li>Find the pair of clusters \( C_1, C_2 \) with the highest similarity \( \text{sim}(C_1, C_2) \) (ties are broken arbitrarily)</li>
+                <li>Merge clusters \( C_1, C_2 \) into a single cluster \( C' \)</li>
+                <li>Compute similarity between \( C' \) and all other clusters</li>
+            </ol>
+        </li>
+        <li>Return the corresponding dendrogram</li>
+    </ol>
+</div>
+
+<p>Common choice for \( \text{sim}(u, v) \):</p>
+<div class="equation-block">
+    $$\text{sim}(u, v) = \frac{|N(u) \cap N(v)| + A_{uv}}{\min\{\deg(u), \deg(v)\} + 1 - A_{uv}}$$
+</div>
+<p>where \( A \) is the adjacency matrix of \( G \).</p>
+
+<p>Common choices for \( \text{sim}(C_1, C_2) \) are defined by different types of linkage clustering:</p>
+<ul>
+    <li><strong>Single linkage clustering:</strong>
+        <div class="equation-block">
+            $$\text{sim}(C_1, C_2) = \min_{u \in C_1, v \in C_2} \text{sim}(u, v)$$
+        </div>
+    </li>
+    <li><strong>Average linkage clustering:</strong>
+        <div class="equation-block">
+            $$\text{sim}(C_1, C_2) = \frac{1}{|C_1| \cdot |C_2|} \sum_{u \in C_1, v \in C_2} \text{sim}(u, v)$$
+        </div>
+    </li>
+    <li><strong>Complete linkage clustering:</strong>
+        <div class="equation-block">
+            $$\text{sim}(C_1, C_2) = \max_{u \in C_1, v \in C_2} \text{sim}(u, v)$$
+        </div>
+    </li>
+</ul>
+
+<div class="algorithm">
+    <h3>Algorithm: GNClustering(G) - Girvan-Newman Algorithm</h3>
+    <p><strong>Input:</strong> Connected graph \( G = (V, E) \)</p>
+    <p><strong>Output:</strong> Dendrogram whose leaves are the elements of \( V \)</p>
+    <ol>
+        <li>Assign all nodes \( u \) to a single cluster \( C \)</li>
+        <li>Repeat until all nodes are in different clusters:
+            <ol>
+                <li>For each cluster \( C \):
+                    <ol>
+                        <li>For each edge \( e \in C \), compute \( b(e, C) \)</li>
+                    </ol>
+                </li>
+                <li>Let \( e_{\text{max}} \) be the edge of maximum betweenness, and let \( C(e) \) be its cluster</li>
+                <li>Remove \( e \) from \( C(e) \)</li>
+            </ol>
+        </li>
+        <li>Report the corresponding dendrogram</li>
+    </ol>
+</div>
+
+<h2>Modularity-Based Clustering</h2>
+
+<p>Definition of Modularity:</p>
+<div class="equation-block">
+    $$M(S) = \frac{1}{2m} \sum_{u, v \in S} \left( A_{uv} - \frac{\deg(u) \deg(v)}{2m} \right)$$
+</div>
+
+<p>And:</p>
+<div class="equation-block">
+    $$M(\mathcal{C}) = \sum_{C \in \mathcal{C}} M(C) = \frac{1}{2m} \sum_{C \in \mathcal{C}} \sum_{u, v \in C} \left( A_{uv} - \frac{\deg(u) \deg(v)}{2m} \right)$$
+</div>
+
+<p>Similarity between clusters:</p>
+<div class="equation-block">
+    $$\text{sim}(C_i, C_1, C_2) = \frac{|E(C_1, C_2)|}{m} - \frac{\left(\sum_{u \in C_1} \deg(u)\right) \left(\sum_{v \in C_2} \deg(v)\right)}{2m^2}$$
+</div>
+
+<div class="algorithm">
+    <h3>Algorithm: GreedyModularityClustering(G)</h3>
+    <p><strong>Input:</strong> Connected graph \( G = (V, E) \)</p>
+    <p><strong>Output:</strong> Clustering of the elements of \( V \)</p>
+    <ol>
+        <li>Initialize \( C_1 \) as the clustering where each node \( u \) is assigned to its own cluster \( C_u \); set \( i \gets 1 \)</li>
+        <li>Repeat until all nodes are in a single cluster:
+            <ol>
+                <li>For each pair of clusters \( C_1, C_2 \) such that there exists one edge between \( C_1 \) and \( C_2 \), compute:
+                    <div class="equation-block">
+                        $$\Delta(C_i, C_1, C_2) = M(C_i \cup C_1 \cup C_2 + (C_1 \cup C_2)) - M(C_i)$$
+                    </div>
+                </li>
+                <li>Find \( C'_1, C'_2 \) that maximize \( \Delta(C_i, C'_1, C'_2) \)</li>
+                <li>Update \( C_{i+1} \gets C_i \cup C'_1 \cup C'_2 + (C'_1 \cup C'_2) \); increment \( i \gets i + 1 \)</li>
+            </ol>
+        </li>
+        <li>Return the clustering \( C^* \), across iterations, of maximum modularity:
+            <div class="equation-block">
+                $$C^* = \arg \max_{C_i, i=1,2,\ldots} M(C_i)$$
+            </div>
+        </li>
+    </ol>
+</div>
+
+</body>
+</html>

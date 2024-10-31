@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diffusion Networks</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h2, h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            overflow: auto;
+        }
+        .math-display {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h2>Diffusion Networks</h2>
+        <p>
+            Diffusion Networks derive their working from the parametrization of a Markov-chain which removes noise from a random image. This parametrization is learned by applying a diffusion process on the training data. This process iteratively adds a small amount of Gaussian noise over \( T \) steps, producing a sequence of noisy samples \( x_1, x_2, \ldots, x_T \). The step sizes are controlled by a variable schedule \( (\beta_t \in (0,1))_{t=1}^T \).
+        </p>
+        <p>The forward diffusion process is defined by:</p>
+        <p class="math-display">
+            \[
+            q(x_t \mid x_{t-1}) = \mathcal{N}(x_t; \sqrt{1 - \beta_t} \, x_{t-1}, \beta_t I)
+            \]
+        </p>
+        <p>and</p>
+        <p class="math-display">
+            \[
+            q(x_{1:T} \mid x_0) = \prod_{t=1}^{T} q(x_t \mid x_{t-1})
+            \]
+        </p>
+        <p>
+            The data sample \( x_0 \) is gradually superimposed with noise. This creates a chain of images, from the original at time 0, to the maximally noisy image at time \( T \). An output at time \( t \) can be sampled considering:
+        </p>
+        <p class="math-display">
+            \[
+            x = \mu + \sigma \epsilon \sim \mathcal{N}(\mu, \sigma)
+            \]
+        </p>
+        <p>if</p>
+        <p class="math-display">
+            \[
+            \epsilon \sim \mathcal{N}(0, 1)
+            \]
+        </p>
+        <p>Therefore,</p>
+        <p class="math-display">
+            \[
+            x_t = \sqrt{1-\beta_t} \, x_{t-1} + \sqrt{\beta_t} \, \epsilon \sim \mathcal{N}(x_t; \sqrt{1 - \beta_t} \, x_{t-1}) = q(x_t \mid x_{t-1})
+            \]
+        </p>
+        <p>Let</p>
+        <p class="math-display">
+            \[
+            \alpha_t = 1 - \beta_t
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            \epsilon_t \sim \mathcal{N}(0, I) \quad \forall t
+            \]
+        </p>
+        <p>and</p>
+        <p class="math-display">
+            \[
+            \bar{\epsilon}_t \sim \mathcal{N}(0, (\sigma_1^2 + \sigma_2^2) I)
+            \]
+        </p>
+        <p>be from a new distribution which merges two Gaussians.</p>
+        <p>Then,</p>
+        <p class="math-display">
+            \[
+            x_t = \sqrt{\alpha_t} \, x_{t-1} + \sqrt{1-\alpha_t} \, \epsilon_{t-1} = \sqrt{\alpha_t \alpha_{t-1}} \, x_{t-2} + \sqrt{1-\alpha_t \alpha_{t-1}} \, \bar{\epsilon}_{t-2} = \ldots
+            \]
+        </p>
+        <p>enables sampling at every time-step \( t \) by knowing \( \alpha_t \) and \( \bar{\epsilon}_t \), so that</p>
+        <p class="math-display">
+            \[
+            q(x_t \mid x_0) = \mathcal{N}(\bar{\alpha} \, x_0, (1-\bar{\alpha}) I)
+            \]
+        </p>
+        <p>where \( \bar{\alpha}_T = \prod_{t=1}^{T} \alpha_t \) and</p>
+        <p class="math-display">
+            \[
+            x_t = \bar{\alpha} \, x_0 + (1-\bar{\alpha}) \, \epsilon_t
+            \]
+        </p>
+        <p>This enables sampling noisy data given \( x_0 \). If this noise amplifying process can be reversed, one can recreate the noise-free sample \( x_0 \) from Gaussian Noise \( x_T \sim \mathcal{N}(0, I) \).</p>
+        <p>
+            The forward diffusion process defined by \( q(x_t \mid x_{t-1}) \) has a corresponding reverse diffusion \( q(x_{t-1} \mid x_t) \), which we would like to approximate with a learned model \( p_\theta(x_{t-1} \mid x_t) \), so that:
+        </p>
+        <p class="math-display">
+            \[
+            p(x_{t-1} \mid x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            p(x_{0:T}) = p(x_T) \prod_{t=1}^{T} p_\theta(x_{t-1} \mid x_t)
+            \]
+        </p>
+        <p>Importantly, the goal is that:</p>
+        <p class="math-display">
+            \[
+            p_\theta(x_0) = \int_{x_1:T} p(x_0, x_{1:T}) dx_{1:T} = p_{\text{Data}}
+            \]
+        </p>
+    </section>
+    <section>
+        <h3>Training Loss</h3>
+        <p>
+            To measure the difference between two distributions, an adequate loss term is given by the Kullback-Leibler (KL) divergence. It can be considered an approximation of the geodesic distance between two distributions. The objective is to maximize the log-likelihood \( \log(p_\theta(x_0)) \), which involves additional unmeasured variables \( z = x_{1:T} \).
+        </p>
+        <p>We can rewrite \( p_\theta(x_0) \) as:</p>
+        <p class="math-display">
+            \[
+            p_\theta(x_0) = \int_{z} p_\theta(x_0, z) dz = \int_{z} p(x_0 \mid z) p(z)
+            \]
+        </p>
+        <p>Formulating the bound, we have:</p>
+        <p class="math-display">
+            \[
+            -\log(p_\theta(x_0)) \leq -\int_{z} \log\left(\frac{p_\theta(x_0, z)}{q(z \mid x_0)}\right) q(z \mid x_0) dz = D_{\text{KL}}(q(z \mid x_0) \mid\mid p_\theta(z \mid x_0))
+            \]
+        </p>
+        <p>
+            This defines a bound on the objective. Minimizing it implicitly maximizes the maximum likelihood. Let us decompose the loss into the relevant time-steps:
+        </p>
+        <p class="math-display">
+            \[
+            \mathbb{E}_{x_{1:T} \sim q(x_{1:T} \mid x_0)} \left[\log\left(\frac{q(x_{1:T} \mid x_0)}{p_\theta(x_{0:T})}\right)\right] = D_{\text{KL}}\left(\frac{q(x_{1:T} \mid x_0)}{p_\theta(x_{0:T})}\right)
+            \]
+        </p>
+        <p>Decomposing further, we get:</p>
+        <p class="math-display">
+            \[
+            L_T + \sum_{t=2}^{T} D_{\text{KL}}(q(x_{t-1} \mid x_t, x_0) \mid\mid p_\theta(x_{t-1} \mid x_t)) - \log(p_\theta(x_0 \mid x_1))
+            \]
+        </p>
+        <p>where \( L_T \) can be ignored during training since \( q(x_T \mid x_0) \) has no learnable parameters and \( x_T \) is pure Gaussian noise.</p>
+
+        <h3>Parameterization</h3>
+        <p>
+            Conditioning \( q(x_{t-1} \mid x_t) \) on \( x_0 \) and applying Bayes' rule, we can parameterize its mean as:
+        </p>
+        <p class="math-display">
+            \[
+            \mu_t(x_t, x_0) = \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t + \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0
+            \]
+        </p>
+        <p>Expressing \( x_0 \) as:</p>
+        <p class="math-display">
+            \[
+            x_0 = \frac{1}{\bar{\alpha}_t} \left(x_t - \sqrt{1-\bar{\alpha}_t} \epsilon_t\right)
+            \]
+        </p>
+        <p>leads to:</p>
+        <p class="math-display">
+            \[
+            \mu_t(x_t, x_0) = \frac{1}{\bar{\alpha}_t} \left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_t\right)
+            \]
+        </p>
+        <p>
+            This allows us to parameterize \( q(x_{t-1} \mid x_t, x_0) \) as a Gaussian distribution \( \mathcal{N}(\mu(x_t, x_0), \tilde{\beta} I) \).
+        </p>
+
+        <h3>Simplified Objective</h3>
+        <p>
+            Instead of calculating the KL divergence between \( q(x_{t-1} \mid x_t, x_0) \) and \( p_\theta(x_{t-1} \mid x_t) \), simple diffusion models consider a loss that fits the mean of \( p_\theta(x_{t-1} \mid x_t) \) to the real mean of \( q(x_{t-1} \mid x_t) \):
+        </p>
+        <p class="math-display">
+            \[
+            L_t = \mathbb{E}_{x_0, t} \left[\frac{(1-\alpha_t)^2}{2 \alpha_t (1-\bar{\alpha}_t)} \|\epsilon_t - \epsilon_\theta(\sqrt{\bar{\alpha}} x_0 + \sqrt{1-\bar{\alpha}} \epsilon_t, t)\|^2\right]
+            \]
+        </p>
+        <p>
+            Here, \( \Sigma_\theta(x_t, t) = \sigma_t^2 I \), where \( \sigma = \beta_t \) or \( \sigma = \frac{1-\bar{\alpha}_{t-1}}{1-\bar{\alpha}_t} \beta_t \).
+        </p>
+    </section>
+    <section>
+        <h3>Variance Considerations</h3>
+        <p>
+            The paper "Denoising Diffusion Probabilistic Models" shows that learning a diagonal variance can lead to unstable training. Other approaches, such as those in "Improved Denoising Diffusion Probabilistic Models," propose learning as an interpolation of two diagonal matrices. It has been shown that the algorithm performs better with a simplified objective:
+        </p>
+        <p class="math-display">
+            \[
+            L_t = \mathbb{E}_{t \sim [1, T], x_0, t} \left[ \|\epsilon_t - \epsilon_\theta(x_t, t)\|^2 \right]
+            \]
+        </p>
+        <p>
+            This can be rewritten as:
+        </p>
+        <p class="math-display">
+            \[
+            L_t = \mathbb{E}_{t \sim [1, T], x_0, t} \left[ \|\epsilon_t - \epsilon_\theta(\sqrt{\bar{\alpha}} x_0 + \sqrt{1-\bar{\alpha}} \epsilon_t, t)\|^2 \right]
+            \]
+        </p>
+        <p>
+            where \( \epsilon_t \) is sampled during the noisifying process and used in training. The neural network output \( \epsilon_\theta \) receives the current time \( t \) and the noisy sample \( x_t \) as input, learning the (de-)noisifying relationship that is the inverse of:
+        </p>
+        <p class="math-display">
+            \[
+            x_t = \bar{\alpha} x_0 + (1-\bar{\alpha}) \epsilon_t
+            \]
+        </p>
+        <p>
+            Although the real model should be:
+        </p>
+        <p class="math-display">
+            \[
+            p_\theta(x_{t-1} \mid x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t))
+            \]
+        </p>
+        <p>
+            only the mean is considered in the simplified loss, and the variance is not learned. The variance of the (de-)noisifying schedule is fixed by the schedule and is very small compared to the values of \( x \). While extensions to learn the variance exist, they are difficult to optimize, and in practice, they do not seem to be necessary.
+        </p>
+
+        <h3>Loss Decomposition</h3>
+        <p>
+            In more detail, the training loss can be decomposed into components corresponding to different stages of the reverse diffusion process:
+        </p>
+        <p class="math-display">
+            \[
+            L = L_T + \sum_{t=2}^{T} L_{t-1} + L_0
+            \]
+        </p>
+        <p>
+            Here, \( L_T \) corresponds to the KL divergence for the final timestep, which can be ignored since \( q(x_T \mid x_0) \) is pure Gaussian noise and has no learnable parameters. \( L_0 \) corresponds to a discrete decoder term, and \( L_{t-1} \) represents the parameterized loss term for the intermediate steps.
+        </p>
+
+        <h3>Conditional Probability and Bayes' Rule</h3>
+        <p>
+            By conditioning \( q(x_{t-1} \mid x_t) \) on \( x_0 \) and applying Bayes' rule, we obtain a parameterization for its mean:
+        </p>
+        <p class="math-display">
+            \[
+            \mu_t(x_t, x_0) = \frac{\sqrt{\alpha_t}(1-\bar{\alpha}_{t-1})}{1-\bar{\alpha}_t} x_t + \frac{\sqrt{\bar{\alpha}_{t-1}} \beta_t}{1-\bar{\alpha}_t} x_0
+            \]
+        </p>
+        <p>
+            By expressing \( x_0 \) as:
+        </p>
+        <p class="math-display">
+            \[
+            x_0 = \frac{1}{\bar{\alpha}_t} \left(x_t - \sqrt{1-\bar{\alpha}_t} \epsilon_t\right)
+            \]
+        </p>
+        <p>
+            we arrive at the following form for the mean:
+        </p>
+        <p class="math-display">
+            \[
+            \mu_t(x_t, t) = \frac{1}{\bar{\alpha}_t} \left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_t\right)
+            \]
+        </p>
+        <p>
+            At training time, \( x_t \) is available, allowing us to parameterize the learned mean as:
+        </p>
+        <p class="math-display">
+            \[
+            \mu_\theta(x_t, t) = \frac{1}{\bar{\alpha}_t} \left(x_t - \frac{1-\alpha_t}{\sqrt{1-\bar{\alpha}_t}} \epsilon_\theta\right)
+            \]
+        </p>
+
+        <h3>Figure</h3>
+        <figure>
+            <img src="machine-learning/Diffusion/DDPM.png" alt="The Diffusion Process" style="width:100%;">
+            <figcaption>The Diffusion Process</figcaption>
+        </figure>
+    </section>
+</body>
+</html>

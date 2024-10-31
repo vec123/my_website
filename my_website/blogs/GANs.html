@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generative Adversarial Networks</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h2, h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .math-display {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h2>Generative Adversarial Networks</h2>
+        <figure>
+            <img src="machine-learning/GAN/Generative-Adversarial-Network-Architecture.png" alt="Generative Adversarial Network Architecture" style="width:100%;">
+            <figcaption>
+                An Auto-Encoder.
+                <small><em>Source: <a href="https://www.researchgate.net/profile/Bhaskar-Ghosh/publication/344544069/figure/fig1/AS:944366453542923@1602165916976/Generative-Adversarial-Network-Architecture-2.jpg">Generative Adversarial Network Architecture</a></em></small>
+            </figcaption>
+        </figure>
+        <p>
+            Generative Adversarial Networks (GANs) make use of two competing (adversarial) Networks, which aim to minimize/maximize an objective function. These two networks are denoted as the Generator-model and the Discriminator-model respectively:
+        </p>
+        <p class="math-display">
+            \[
+            \text{Generator:} \quad G(z) \quad \text{Discriminator:} \quad D(x)
+            \]
+        </p>
+        <p>
+            The original framework can be oriented in mathematical <em>Game theory</em>, which is the study of strategic interaction between rational agents. The generative adversarial game consists of the Generator-Agent trying to minimize the adversarial objective while the Discriminator-Agent tries to maximize it.
+        </p>
+        <p>
+            Let \(x  \sim p_{G}(z)\) be a sample created by the Generator from random noise \(z\), and \(x  \sim p_{\text{Data}}\) be a sample from the data distribution. Consider a penalty for the false discrimination of original samples and a penalty for false discrimination of generated samples. The goal of the discriminator \(y = D(x)\) is to produce values of \(y\) close to zero whenever \(x  \sim p_{\text{Data}}\) and close to one when \(x  \sim p_G\). Its output is restricted to \([0, 1]\).
+        </p>
+        <p>
+            The Generator aims to produce \(x  \sim p_G\), so that the Discriminator outputs zero even though \(x  \sim p_G\). We can therefore distinguish between two components. The Generator Loss:
+        </p>
+        <p class="math-display">
+            \[
+            \mathcal{L}_G = \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z)))]
+            \]
+        </p>
+        <p>
+            This should be as small (negative) as possible, since \(D(G(z)) = 0\) means that the Generator produced a sample that could not be discriminated from the real data. The other important component is the Discriminator Loss:
+        </p>
+        <p class="math-display">
+            \[
+            \mathcal{L}_D = \mathbb{E}_{x \sim p_{\text{data}}(x)}[\log D(x)] + \mathbb{E}_{z \sim p_z(z)}[\log(1 - D(G(z)))]
+            \]
+        </p>
+        <p>
+            This should be as big as possible since high values for the first term mean incorrect discrimination, whereas \(1 - D(G(z)) \approx 0\) means the Discriminator was fooled, causing highly negative values.
+        </p>
+        <p>
+            The game-theoretic training algorithm can be described as:
+        </p>
+        <p class="math-display">
+            \[
+            \text{Repeat until convergence:}
+            \]
+            <br>
+            <strong>1. Update the discriminator:</strong> \(D \leftarrow \arg \max_D \mathcal{L}_D\) <br>
+            <strong>2. Update the generator:</strong> \(G \leftarrow \arg \min_G \mathcal{L}_G\)
+        </p>
+        <p>
+            This is equivalent to:
+        </p>
+        <p class="math-display">
+            \[
+            \min_G \max_D \mathcal{L}(D, G) =  \mathbb{E}_{x \sim p_{\text{data}}} [\log D(x)] + \mathbb{E}_{z \sim p_z} [\log (1 - D(G(z)))]
+            \]
+        </p>
+        <p>
+            This min-max formulation makes GANs relatively complicated. For example, the notion of an equilibrium can depend on who is updated first.
+        </p>
+        <p>
+            GANs are oriented in the field of implicit generative models. They do not explicitly model the data-likelihood function, unlike Variational Autoencoders. The learned distribution is, however, trained implicitly through discriminative training which penalizes outputs that do not fit the original distribution.
+        </p>
+        <p>
+            When the data contains multiple classes, supervised or semi-supervised learning can be used. In this case, the Discriminator is a multi-class classifier and trained with the class labels, with the ability to output class-prediction and realness.
+        </p>
+    </section>
+    <section>
+        <h3>Conditional GANs</h3>
+        <p>
+            Ways of guiding the generative process are <em>Conditional GANs</em>. Here, the Generator, as well as the Discriminator, receive labeled data. As before, the Generator tries to create a sample that fools the Discriminator, starting from a random latent vector and a label vector. The Discriminator then evaluates the <em>realness</em> of the sample, receiving the generated sample with its respective label. During training, the Discriminator is updated on the labeled dataset, enabling it to distinguish which label corresponds to which samples. With this architecture, it is possible to learn a Generator that produces outputs corresponding to the input labels.
+        </p>
+        <h3>Challenges with GANs</h3>
+        <p>
+            GANs suffer from several problems which make them hard to train and interpret. Among these is a phenomenon called <em>mode collapse</em>, where they fail to generalize properly. A possible cause is when the Generator learns much quicker than the Discriminator. It might learn a very specific output \(x  \sim p_G\) that consistently fools the Discriminator but does not span the data space well.
+        </p>
+        <p>
+            Additionally, due to the nature of the adversarial formulation, the training is sensitive to the learning rates of both networks. While equilibria for the objective function exist, it is possible for both agents to get stuck in local minima, where a poor Generator is not able to fool the Discriminator. The Discriminator might learn too fast or too slow, and either case can result in poor generative sample quality. A balance is required between the learning of the Generator and the Discriminator.
+        </p>
+        <h3>Geometric Perspective</h3>
+        <p>
+            From a geometric perspective, GANs also aim to minimize the divergence between the space of generated distributions and real distributions. The type of divergence is not explicit as in other algorithms (like EM and VAE), but rather implicit. Consider the optimal Discriminator, which can be derived by point-wise differentiation of the loss with respect to \(D(x)\), resulting in:
+        </p>
+        <p class="math-display">
+            \[
+            D_{\text{opt}}(x) = \frac{p_{\text{data}}}{p_{\text{data}} + p_G}
+            \]
+        </p>
+        <p>
+            Then, we have:
+        </p>
+        <p class="math-display">
+            \[
+            \min_G  \mathcal{L}(D_{\text{opt}}, G) = \mathbb{E}_{x \sim p_{\text{data}}} \left[\log \frac{p_{\text{data}}}{p_{\text{data}} + p_G}\right] + \mathbb{E}_{z \sim p_z} \left[\log \frac{p_G}{p_{\text{data}} + p_G}\right]
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            = \mathbb{E}_{x \sim p_{\text{data}}} \left[\log \frac{2 p_{\text{data}}}{p_{\text{data}} + p_G}\right] + \mathbb{E}_{z \sim p_z} \left[\log \frac{2 p_G}{p_{\text{data}} + p_G}\right]
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            = \mathbb{E}_{x \sim p_{\text{data}}} \left[\log \frac{p_{\text{data}}}{p_{\text{data}} + p_G} - \log 2\right] + \mathbb{E}_{z \sim p_z} \left[\log \frac{p_G}{p_{\text{data}} + p_G} - \log 2\right]
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            = \mathbb{E}_{x \sim p_{\text{data}}} \left[\log \frac{p_{\text{data}}}{p_{\text{data}} + p_G}\right] + \mathbb{E}_{z \sim p_z} \left[\log \frac{p_G}{p_{\text{data}} + p_G}\right] - \log 4
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            = KL(2 p_{\text{data}} \| p_{\text{data}} + p_G) + KL(2 p_G \| p_{\text{data}} + p_G) - \log 4
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            = 2 \cdot JS(p_G \| p_{\text{data}}) - \log 4
+            \]
+        </p>
+        <p>
+            Here, the factor of 2 comes from considering the mixture distribution \(0.5(p_{\text{data}} + p_G)\). It is required for the mixture to be a well-defined distribution.
+        </p>
+        <h3>Extensions to Other Divergences</h3>
+        <p>
+            The GAN framework can be extended to minimize other divergences, such as the Wasserstein or KL divergence. Let us examine the extension to other forms of divergences.
+        </p>
+        <p>
+            A common class of divergences are the so-called f-divergences, which include the KL and Jensen-Shannon divergences. They are defined as:
+        </p>
+        <p class="math-display">
+            \[
+            D_f(p(x) \| q(x)) = \int q(x) f\left(\frac{p(x)}{q(x)}\right) dx
+            \]
+        </p>
+        <p>
+            If \(f(x) = x \log(x)\), then it corresponds to the KL-divergence. If \(f(x) = -(x+1) \log\left(\frac{x+1}{2}\right) + x \log(x)\), it corresponds to the Jensen-Shannon divergence. The f-GAN objective is:
+        </p>
+        <p class="math-display">
+            \[
+            \min_G \max_D \mathcal{L}(D, G) = \mathbb{E}_{x \sim p_{\text{data}}} [f'(D(x))] - \mathbb{E}_{z \sim p_z} [f^*(D(x))]
+            \]
+        </p>
+        <p>
+            Here, \(f'(\cdot)\) is the derivative, and \(f^*(\cdot)\) is the convex conjugate known as the Fenchel conjugate \(f^*(t) = \sup_{u \in \text{dom} f} \{ ut - f(u) \}\). The generator is implicit in the second term via \(x \sim p_z\).
+        </p>
+    </section>
+    <section>
+        <h3>Wasserstein GANs</h3>
+        <p>
+            Another successful objective is the Wasserstein or Earth-Mover distance. Contrary to the divergences examined until now, this quantity fulfills all properties necessary for distances (e.g., the triangle inequality and symmetry). It is based on optimal transport and quantifies how easy it is to transform one distribution into another, as described in the section on Wasserstein distances. Consider the dual formulation of the Wasserstein distance for \(p=1\):
+        </p>
+        <p style="text-align: center;">
+            \( W_1(P, Q) = \sup_{||f||_L \leq 1} \left( \mathbb{E}_{x \sim P} (f(x)) - \mathbb{E}_{x \sim Q}(f(x)) \right) \).
+        </p>
+        <p>
+            Note that this formulation is only valid for \( W_1(P, Q) \), whereas for \( W_2(P, Q) \), there is a gradient field for the optimal transport map. However, Wasserstein GANs (WGANs) use the \( W_1(P, Q) \) distance, which still has properties that the KL-divergence or Jensen-Shannon divergence does not offer.
+        </p>
+        <p>
+            An extension to \(K\)-Lipschitz functions is done by replacing \(||f||_L \leq 1\) with \(||f||_L \leq K\), leading to \(K \cdot W_1(P, Q)\). Thus, given a parameterized family \(\{ f_w \}\), solving:
+        </p>
+        <p style="text-align: center;">
+            \( \arg \max_w \left( \mathbb{E}_{x \sim P} (f_w(x)) - \mathbb{E}_{z \sim p(z)} (f_w(g_\theta(z))) \right) \),
+        </p>
+        <p>
+            where \(g_\theta(z)\) is a feed-forward neural network defining the distribution \(Q\), and \(p(z)\) is a prior over \(z\), this forms the WGAN objective. Here, \(g_\theta(z)\) corresponds to the Generator, while \(f_w\) is known as the Critic. The \( W_1(P, Q) \) objective is continuous everywhere and differentiable, even in cases where the Jensen-Shannon divergence might not be.
+        </p>
+        <p>
+            The WGAN algorithm uses weight clipping to ensure that the Lipschitz constraint is maintained during training, though alternative methods like gradient penalty can also be employed to enforce the constraint in a more flexible manner. These methods aim to make the training of GANs more stable and effective.
+        </p>
+    
+        <h3>Practical Considerations for GAN Training</h3>
+        <p>
+            Training GANs involves challenges such as balancing the Generator and Discriminator's learning rates, preventing mode collapse, and ensuring that the training dynamics converge to a stable equilibrium. Techniques like batch normalization, different learning rate schedules, and architectural choices for the networks can help address these issues. Additionally, using improved loss functions like Wasserstein loss and implementing techniques like gradient penalty can significantly enhance training stability and performance.
+        </p>
+    
+        <h3>Conclusion</h3>
+        <p>
+            GANs are a powerful class of generative models that can generate high-quality synthetic data by training two adversarial networks in a game-theoretic setting. While training GANs presents numerous challenges, various modifications to the original architecture and training objectives, such as f-GANs and Wasserstein GANs, have expanded their applicability and made the training process more stable. Despite these advancements, further research is still needed to fully overcome the limitations inherent in adversarial training and to better understand the theoretical foundations behind these models.
+        </p>
+    
+        <figure>
+            <img src="machine-learning/GAN/Generative-Adversarial-Network-Architecture.png" alt="An Auto-Encoder" style="width:100%;">
+            <figcaption>An illustration of the Generative Adversarial Network Architecture</figcaption>
+        </figure>
+    </section>
+    
+</body>
+</html>

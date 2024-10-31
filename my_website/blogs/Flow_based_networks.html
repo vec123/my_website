@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flow Based Networks</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h2, h3 {
+            color: #333;
+        }
+        p {
+            margin: 10px 0;
+        }
+        .math-display {
+            text-align: center;
+            font-size: 1.2em;
+            margin: 20px 0;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h2>Flow Based Networks</h2>
+        <figure>
+            <img src="machine-learning/flow/flow.jpg" alt="A normalizing flow" style="width:100%;">
+            <figcaption>
+                A normalizing flow.
+                <small><em>Source: <a href="https://creatis-myriad.github.io/tutorials/2023-01-05-tutorial_normalizing_flow.html">Tutorial on Normalizing Flows</a></em></small>
+            </figcaption>
+        </figure>
+        <p>
+            Flow based Models are probabilistic Models which enable computation of the maximal likelihood estimation directly. This contrasts GANS, where the MLE-problem is replaced by a minimax game and solved only implicitly. In VAEs and Diffusion Models, the MLE-problem is replaced by a lower-bound instead, made necessary by the problem structure and the intractability of \(p(x) = \int_{z} p(x,z) dz\).
+        </p>
+        <p>
+            In contrast to these methods, flow based models perform a series of invertible computations which make the Maximum Likelihood Problem tractable.
+        </p>
+        <p>
+            Let \(p(x)\) be the density function of the data distribution \(X \in \mathbb{R}^d\). Let \(p(f(x))\) be a transformed density function of a transformed latent distribution \(Z \in \mathbb{R}^d\). This mapping \(f: X \rightarrow Z\) is by design invertible and can be used to generate new data-points by \(x = f^{-1}(z)\).
+        </p>
+        <p>
+            Given such an invertible function \(f\) exists, we can write with some abuse of notation:
+        </p>
+        <p class="math-display">
+            \[
+            \int_{-\infty}^{+\infty} p( x )  dx =  \int_{-\infty}^{+\infty}  p( z ) dz =  \int_{-\infty}^{+\infty} p( f(x) ) dx.
+            \]
+        </p>
+        <p>
+            Constricting to a subspace \(\alpha \in X\) and \(\hat{\alpha} \in Z\), we can write:
+        </p>
+        <p class="math-display">
+            \[
+            \int_{\alpha} p(x) dx  = \int_{\hat{\alpha}} p(z) dz =   \int_{\alpha} p( f(x) ) dx.
+            \]
+        </p>
+        <p>
+            Consider a single region only:
+        </p>
+        <p class="math-display">
+            \[
+            p( x ) dx  = p( z) dz =  p( f(x) ) dx.
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            p( x ) \left| \frac{dx}{dz} \right| = p( x ) \left| \frac{dx}{df(x)} \right| = p( z ).
+            \]
+        </p>
+        <p class="math-display">
+            \[
+            p( x )  = p( z ) \left| \frac{dz}{dx} \right| = p( z ) \left| \det\left( \frac{df(x)}{dx} \right) \right|.
+            \]
+        </p>
+        <p>
+            These two relations describe the transformation law between the two densities. Since the density is always positive, we apply the absolute norm to the Jacobian term. Generalization to multivariate distributions results in:
+        </p>
+        <p class="math-display">
+            \[
+            p( x )  = p( z ) \left| \det\left( \frac{df(x)}{dx} \right) \right|.
+            \]
+        </p>
+        <p>
+            This can be written as the log-likelihood:
+        </p>
+        <p class="math-display">
+            \[
+            \log( p( x ) )  = \log( p( z ) ) + \log\left( \det\left( \frac{df(x)}{dx} \right) \right).
+            \]
+        </p>
+        <p>
+            Assume:
+        </p>
+        <p class="math-display">
+            \[
+            z = f(x) = f_n \circ \ldots \circ f_1(x),
+            \]
+        </p>
+        <p>
+            where \(f(x)\) is the concatenation of \(n\) invertible functions. The log-likelihood becomes:
+        </p>
+        <p class="math-display">
+            \[
+            \log( p( x ) )  = \log( p( z ) ) + \sum_{i=1}^{n}\log\left( \det\left( \frac{df_i(x)}{df_{i-1}(x)} \right) \right),
+            \]
+        </p>
+        <p>
+            where \(f_0 = x\). In theory, \(f_{i}\) can be any diffeomorphism (bijective function). However, sensible requirements are that its inverse and the determinant of its Jacobian can be easily computed. The difficulty lies in finding such functions which are simple enough yet capable of simplifying the MLE-problem sufficiently while maintaining high expressive power.
+        </p>
+        <h3>Planar and Radial Flows</h3>
+        <p>
+            Planar flows apply:
+        </p>
+        <p class="math-display">
+            \[
+            f(z) = z + u\sigma(w^T z + b),
+            \]
+        </p>
+        <p>
+            where \(\lambda = \{w \in \mathbb{R}^D, u \in \mathbb{R}^D, b \in \mathbb{R}\}\) and \(\sigma\) is a differentiable nonlinear function. Since:
+        </p>
+        <p class="math-display">
+            \[
+            z = f(z) - u\sigma(w^T z + b),
+            \]
+        </p>
+        <p>
+            the function is invertible. Furthermore, the Jacobian determinant is described by:
+        </p>
+        <p class="math-display">
+            \[
+            \left|\det\left( \frac{\partial f(z)}{\partial z} \right)\right| = 1 + u^T \sigma'(w^T z + b)w,
+            \]
+        </p>
+        <p>
+            and can be computed efficiently.
+        </p>
+        <p>
+            A related family of flows, the radial flow, is described by:
+        </p>
+        <p class="math-display">
+            \[
+            f(z) = z + \beta \sigma(\alpha, r)(z + z_0),
+            \]
+        </p>
+        <p>
+            where \(r = |z - z_0|\), \(\sigma(\alpha, r) = \frac{1}{\alpha + r}\), and \(\lambda = \{z_0 \in \mathbb{R}^D, \alpha \in \mathbb{R^+}, \beta \in \mathbb{R}\}\). The determinant of the Jacobian in this case is:
+        </p>
+        <p class="math-display">
+            \[
+            \left|\det\left( \frac{\partial f(z)}{\partial z} \right)\right| = \left[1 + \beta \sigma(\alpha, r)\right]^{d-1} \left[1 + \beta \sigma(\alpha, r) + \beta \sigma'(\alpha, r)\right].
+            \]
+        </p>
+        <h3>Coupling Layers</h3>
+        <p>
+            A family of normalizing flows is called coupling layers.
+        </p>
+        <p>
+            The input is split into two parts \(x_{1:D} = [x_{1:d}; x_{d+1:D}]\). The output is then obtained separately by operating on these parts:
+        </p>
+        <p class="math-display">
+            \[
+            z_{1:d} = x_{1:d}, \quad z_{d+1:D} = g(z_{d+1:D}, m(z_{1:d})).
+            \]
+        </p>
+        <p>
+            The inverse is obtained by:
+        </p>
+        <p class="math-display">
+            \[
+            x_{1:d} = z_{1:d}, \quad x_{d+1:D} = g^{-1}(z_{d+1:D}, m(z_{1:d})).
+            \]
+        </p>
+        <p>
+            The Jacobian matrix is:
+        </p>
+        <p class="math-display">
+            \[
+            \begin{pmatrix}
+                I_d & 0 \\
+                \frac{\partial g(z_{d+1:D}, m(z_{1:d}))}{\partial z_{0:d}} & \frac{\partial g(z_{d+1:D}, m(z_{1:d}))}{\partial z_{d+1:D}}
+            \end{pmatrix}
+            \]
+        </p>
+        <p>
+            The advantage of this approach is that \(\frac{\partial g(z_{d+1:D}, m(z_{1:d}))}{\partial z_{0:d}}\) is not part of its determinant, and therefore \(m(z_{1:d})\) does not need to be inverted for the transformation between densities. It can be represented by any non-invertible function, in the most general case by a Transformer. However, \(g(.)\) must be chosen in an easily differentiable and invertible way.
+        </p>
+        <p>
+            Since coupling layers only transform part of the input, they are often stacked and alternated with permutations.
+        </p>
+    </section>
+</body>
+</html>

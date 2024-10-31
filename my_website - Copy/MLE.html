@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MLE MAP and EM</title>
+
+    <!-- MathJax for rendering math expressions -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+        .equation-block {
+            margin: 20px 0;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+
+<h1>MLE MAP and EM</h1>
+<p><strong>Author:</strong> vic-bayer </p>
+<p><strong>Date:</strong> October 2024</p>
+
+<h2>Table of Contents</h2>
+<ul>
+    <li><a href="#mle-map-elbo-em-vae">MLE $\rightarrow$ MAP $\rightarrow$ ELBO $\rightarrow$ EM $\rightarrow$ VAE</a></li>
+    <li><a href="#mle">MLE - Maximum Likelihood Estimation</a></li>
+    <li><a href="#map">MAP - Maximum A-Posteriori</a></li>
+    <li><a href="#expectation-maximization">Expectation Maximization</a></li>
+    <li><a href="#expectation-maximization">VAEs</a></li>
+</ul>
+
+<h2 id="mle-map-elbo-em-vae">MLE $\rightarrow$ MAP $\rightarrow$ ELBO $\rightarrow$ EM $\rightarrow$ VAE</h2>
+<p>This is a description of maximum likelihood estimation, maximum a-posteriori and their connection with each other. These concepts are then extended to distributions with unobserved (latent) variables, leading to expectation maximization which, in turn, is related to gaussian mixture models and variational auto-encoders.</p>
+
+<p>We start with maximum likelihood estimation since it is the easiest. Then the viewpoint is extended to Bayesian maximum a-posteriori, which assumes probabilistic model-parameters. Both methods turn out to be equivalent if one incorporates prior knowledge into maximum likelihood estimation by a regularization term.</p>
+
+<p>Subsequently, distributions with latent variables are examined. The resulting integral and tractability problematic is explained and how it gives rise to the important quantity called evidence lower bound (ELBO). 
+  Then, under consideration of this lower bound, the expectation maximization algorithm is explained in its general formulation, on the example of Gaussian Mixture Models,
+   where the optimal posterior can be computed. This is then extended to variational auto-encoders, 
+   where intractabilitiy means that the posterior must be parameterized and optimized to fit an assumed prior via gradient descent.</p>
+
+<h3 id="mle">MLE - Maximum Likelihood Estimation</h3>
+<p>Consider a model, parameterized by $\theta$, so that,</p>
+
+<div class="equation-block">
+$$ z = h(\theta) + \epsilon $$
+</div>
+
+<p>with $ \epsilon \sim \mathcal{N}(0,\sigma^2) $ and $\theta $ deterministic. Then $y \sim \mathcal{N}(h(\theta), \sigma^2)$. </p>
+
+<p>The probability density function of this Gaussian is defined as</p>
+
+<div class="equation-block">
+$$
+p(y, h(\theta)) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( \frac{-(y - h(\theta))^2}{2\sigma^2} \right).
+$$
+</div>
+
+<p>Given data-samples $(x_{i})$ with $i = 1,...,N$, Maximum Likelihood Estimation amounts to finding the model which results in the maximum joint probability of </p>
+
+<div class="equation-block">
+$$
+\prod_{i=1}^{N} p(x_{i}| h(\theta)).
+$$
+</div>
+
+<p>For $N= \infty$, the strong law of large numbers states</p>
+
+<div class="equation-block">
+$$
+p(x| h(\theta)) = \prod_{i=1}^{N} p(x_{i}, h(\theta)).
+$$
+</div>
+<p>The problem can be cast into an optimization problem:</p>
+
+<div class="equation-block">
+$$
+\begin{aligned}
+\theta_{opt}(x) &= \operatorname*{argmax}_{\theta} \prod_{i=1}^{N} p(x_{i}, h(\theta)) \\
+                &= \operatorname*{argmax}_{\theta} \sum_{i=1}^{N} \ln(P(x_{i}, h(\theta))) \\
+                &= \operatorname*{argmin}_{\theta} - \sum_{i=1}^{N} \ln(P(x_{i}, h(\theta))) \\
+                &= \operatorname*{argmin}_{\theta} - \sum_{i=1}^{N} \left[\ln\left(\frac{1}{\sqrt{2\pi \sigma^2}}\right) + \frac{-(x_{i} - h(\theta))^2}{2\sigma^2}\right] \\
+                &= \operatorname*{argmin}_{\theta} - \sum_{i=1}^{N} \frac{-(x_{i} - h(\theta))^2}{2\sigma^2} \\
+                &= \operatorname*{argmin}_{\theta} \sum_{i=1}^{N} (x_{i} - h(\theta))^2 \ast \text{const.}
+\end{aligned}
+$$
+</div>
+
+<p>Often $ \text{const.}=\frac{1}{N} $. The $h_{\theta}(x)$, which minimizes this function, maximizes $\prod_{i=1}^{N} p(y_{i}| h_{\theta}(x_{i}) )$. Given a sufficient amount of data-samples, this approximation of the data-density is exact, assuming that a Gaussian parameterization is suitable. The proposed method uses data-samples $(y_{i},x_{i})$ to extract the most likely parameterization of $y=h_\theta(x)$.</p>
+
+<p>Note, that:</p>
+
+<div class="equation-block">
+$$
+\sum_{i=1}^{N} (x - h(\theta))^2 \ast \frac{1}{N}
+$$
+</div>
+
+<p>is often referred to as <em>mean squared error</em>. Minimizing the mean squared error returns optimal model parameters if the data distribution is Gaussian. It can be proven that the estimator $h(\theta_{opt})$, which maximizes $p(x|h(\theta))$, is an unbiased minimum variance estimator (UMVE) for $x = h(\theta) + \epsilon$.</p>
+
+<p>Summarizing, Maximum Likelihood Estimation amounts to computing</p>
+
+<div class="equation-block">
+$$
+\theta_{opt}(x) = \operatorname*{argmin}_{\theta} \sum_{i=1}^{N} (x_{i} - h(\theta))^2 \ast \text{const.}
+$$
+</div>
+
+<h3 id="map">MAP - Maximum A-Posteriori</h3>
+<p>Consider a model, parameterized by $\theta$, so that,</p>
+
+<div class="equation-block">
+$$
+y = h(\theta) + \epsilon
+$$
+</div>
+
+<p>with $ \epsilon \sim \mathcal{N}(0,\sigma^2) $ and $ \theta \sim \mathcal{N}(0,\tau^2) $. Contrary to MLE, we assume a probabilistic model parameterization.</p>
+
+<p>Then, by definition, the density function of this Gaussian can be written as:</p>
+
+<div class="equation-block">
+$$
+p(\theta) = \frac{1}{\sqrt{2\pi\tau^2}} \exp\left(\frac{\theta^2}{2\tau^2}\right).
+$$
+</div>
+
+<p>Furthermore, given a dataset $\{x_i\}$, note that:</p>
+
+<div class="equation-block">
+$$
+p(x, h(\theta)) = p(\theta | \{x_1,...,x_N\}) p(\{x_1,...,x_N\}) = p(\{x_1,...,x_N\}|\theta)p(\theta)
+$$
+</div>
+
+<p>where $p(\{x_1,...,x_N\}) = \text{const.}$ is determined by the data.</p>
+
+<p>Therefore,</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmax}_{\theta} p(\theta|\{x_1,...,x_N\})
+$$
+</div>
+
+<p>which is equivalent to:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmax}_{\theta} \prod_{i=1}^{N} [p(x_i|\theta)]p(\theta)
+$$
+</div>
+
+<p>which leads to the following optimization problem:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmin}_{\theta} -\sum_{i=1}^{N} [\ln(p(x_i|\theta))] - \ln(p(\theta)).
+$$
+</div>
+
+<p>The problem can be cast into an optimization problem:</p>
+
+<div class="equation-block">
+$$
+\begin{aligned}
+\theta_{opt}(x) &= \operatorname*{argmax}_{\theta} \prod_{i=1}^{N} p(x_{i}, h(\theta)) \\
+                &= \operatorname*{argmax}_{\theta} \sum_{i=1}^{N} \ln(P(x_{i}, h(\theta))) \\
+                &= \operatorname*{argmin}_{\theta} - \sum_{i=1}^{N} \ln(P(x_{i}, h(\theta))) \\
+                &= \operatorname*{argmin}_{\theta} - \sum_{i=1}^{N} \left[\ln\left(\frac{1}{\sqrt{2\pi \sigma^2}}\right) + \frac{-(x_{i} - h(\theta))^2}{2\sigma^2}\right] \\
+                &= \operatorname*{argmin}_{\theta} - \sum_{i=1}^{N} \frac{-(x_{i} - h(\theta))^2}{2\sigma^2} \\
+                &= \operatorname*{argmin}_{\theta} \sum_{i=1}^{N} (x_{i} - h(\theta))^2 \ast \text{const.}
+\end{aligned}
+$$
+</div>
+
+<p>Often $ \text{const.}=\frac{1}{N} $. The $h_{\theta}(x)$, which minimizes this function, maximizes $\prod_{i=1}^{N} p(y_{i}| h_{\theta}(x_{i}) )$. Given a sufficient amount of data-samples, this approximation of the data-density is exact, assuming that a Gaussian parameterization is suitable. The proposed method uses data-samples $(y_{i},x_{i})$ to extract the most likely parameterization of $y=h_\theta(x)$.</p>
+
+<p>Note, that:</p>
+
+<div class="equation-block">
+$$
+\sum_{i=1}^{N} (x - h(\theta))^2 \ast \frac{1}{N}
+$$
+</div>
+
+<p>is often referred to as <em>mean squared error</em>. Minimizing the mean squared error returns optimal model parameters if the data distribution is Gaussian. It can be proven that the estimator $h(\theta_{opt})$, which maximizes $p(x|h(\theta))$, is an unbiased minimum variance estimator (UMVE) for $x = h(\theta) + \epsilon$.</p>
+
+<p>Summarizing, Maximum Likelihood Estimation amounts to computing</p>
+
+<div class="equation-block">
+$$
+\theta_{opt}(x) = \operatorname*{argmin}_{\theta} \sum_{i=1}^{N} (x_{i} - h(\theta))^2 \ast \text{const.}
+$$
+</div>
+
+<h3 id="map">MAP - Maximum A-Posteriori</h3>
+<p>Consider a model, parameterized by $\theta$, so that,</p>
+
+<div class="equation-block">
+$$
+y = h(\theta) + \epsilon
+$$
+</div>
+
+<p>with $ \epsilon \sim \mathcal{N}(0,\sigma^2) $ and $ \theta \sim \mathcal{N}(0,\tau^2) $. Contrary to MLE, we assume a probabilistic model parameterization.</p>
+
+<p>Then, by definition, the density function of this Gaussian can be written as:</p>
+
+<div class="equation-block">
+$$
+p(\theta) = \frac{1}{\sqrt{2\pi\tau^2}} \exp\left(\frac{\theta^2}{2\tau^2}\right).
+$$
+</div>
+
+<p>Furthermore, given a dataset $\{x_i\}$, note that:</p>
+
+<div class="equation-block">
+$$
+p(x, h(\theta)) = p(\theta | \{x_1,...,x_N\}) p(\{x_1,...,x_N\}) = p(\{x_1,...,x_N\}|\theta)p(\theta)
+$$
+</div>
+
+<p>where $p(\{x_1,...,x_N\}) = \text{const.}$ is determined by the data.</p>
+
+<p>Therefore,</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmax}_{\theta} p(\theta|\{x_1,...,x_N\})
+$$
+</div>
+
+<p>which is equivalent to:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmax}_{\theta} \prod_{i=1}^{N} [p(x_i|\theta)]p(\theta)
+$$
+</div>
+
+<p>which leads to the following optimization problem:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmin}_{\theta} -\sum_{i=1}^{N} [\ln(p(x_i|\theta))] - \ln(p(\theta)).
+$$
+</div>
+
+I'll continue with the next part in the following response.
+
+
+
+
+
+You said:
+continue
+ChatGPT said:
+ChatGPT
+Here is the continuation of your document:
+
+html
+Copy code
+<p>This leads to:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmin}_{\theta} -\sum_{i=1}^{N} \left[\frac{-(y_{i} - h_{\theta}(x_{i}))^2}{2\sigma^2}\right] - \frac{\theta^2}{2\tau^2}
+$$
+</div>
+
+<p>or, equivalently:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmin}_{\theta} -\frac{1}{N}\sum_{i=1}^{N} [-(y_{i} - h_{\theta}(x_{i}))^2] - \lambda \theta^2,
+$$
+</div>
+
+<p>with $\lambda = \frac{\sigma^2}{N\tau^2}$.</p>
+
+<p>Note that the first term is equal to the mean squared error, as obtained during MLE. The second term in this objective function can be seen as a regularizer that constrains the model-parameters $\theta$ to be as small as possible. This is in accordance with Occam's razor. The loss obtained through Maximum A-Posteriori coincides with a Maximum-Likelihood approach with regularization.</p>
+
+<h4>Connections between MLE and MAP</h4>
+<p>Assume a probability-distribution $p(x,\theta)$ as we have done in the MLE and MAP sections. Then, by the rules of probability:</p>
+
+<div class="equation-block">
+$$
+p(x,\theta) = p(x|\theta)p(\theta).
+$$
+</div>
+
+<p>Since, in MLE, we consider a fixed parameter $\theta$, the term $p(\theta)$ is irrelevant, and the MLE objective:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmax}_{\theta} p(x|\theta)
+$$
+</div>
+
+<p>is equivalent to:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmax}_{\theta} p(x,\theta),
+$$
+</div>
+
+<p>under the MLE assumption that $p(\theta)$ is uniform, i.e., all $\theta$ are equally likely.</p>
+
+<p>Furthermore,</p>
+
+<div class="equation-block">
+$$
+p(x,\theta) = p(x|\theta)p(\theta) = p(\theta|x)p(x).
+$$
+</div>
+
+<p>Since $p(x)$ does not depend on $\theta$, the MAP objective:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmax}_{\theta} p(\theta|x) = \operatorname*{argmax}_{\theta} p(x|\theta)p(\theta)
+$$
+</div>
+
+<p>is also equivalent to:</p>
+
+<div class="equation-block">
+$$
+\theta_{opt} = \operatorname*{argmax}_{\theta} p(x,\theta),
+$$
+</div>
+
+<p>However, this time the parameters $\theta$ are also drawn from a non-uniform distribution $p(\theta)$ which is optimized.</p>
+
+<p>Note that the loss function resulting via MAP corresponds to the loss function resulting via MLE with an additional term. This methodology, which introduces additional penalty terms to the MLE loss, is called model regularization. For example, one might penalize the square of the parameter magnitude so that the algorithm explores low-parameter spaces more. This can help to avoid overfitting by balancing small training errors with complex (and strongly biased) models.</p>
+
+<p>Several methods exist, with common ones being Ridge regularization and Lasso regularization. Maximum likelihood estimation with Ridge regularization is equivalent to Maximum A-Posteriori estimation when the prior $p(\theta)$ is assumed to be Gaussian. Regularization uses prior assumptions to derive terms that penalize deviations. As such, it is not surprising that MLE with regression is equivalent to MAP with an imposed prior.</p>
+
+<p>Penalizing model complexity can help with overfitting, and penalizing distribution differences (as done with the KL-divergence) favors certain parameterizations.</p>
+
+<p>Summarizing, note that MLE and MAP are different, although similar, methodologies for maximizing the likelihood of $p(x,\theta)$ given some observed data $x$. The sections on MLE and MAP considered data availability in pairs $(x_i, y_i)$, but this is not a strict requirement on the methodologies.</p>
+
+<h3 id="expectation-maximization">Expectation Maximization</h3>
+<p>We presented two popular ways of looking at data distributions and finding a corresponding model. Both methods aim towards maximizing $p(x, h(\theta)) = p(x,\theta)$ given the data $\{x\}$ and model $h(\theta)$ by minimizing a loss function $L(\theta)$.</p>
+
+<p>The difficulty of the MLE and MAP depends strongly on the chosen model. For simple models, such as linear models $h(\theta) = \theta^T \ast x + b$, a closed-form solution for $\nabla L(\theta)=0$ is available, and the likelihood can be evaluated at the extrema to find the best. In fact, for linear models, the loss function is found to be convex, yielding one unique optimal point. For more complex models, the loss landscape might be non-convex, and closed-form solutions are often not available.</p>
+
+<p>Furthermore, an additional complication is that $p(x,\theta)$ might involve a third, unmeasured variable $z$ so that:</p>
+
+<div class="equation-block">
+$$
+p(x,\theta) = \int_{z} p(x,z,\theta)dz.
+$$
+</div>
+
+<p>If $p(x,\theta)$ can be evaluated, this indicates that the integral is tractable.</p>
+
+<p>In more complicated cases, $p(x,\theta)$ cannot be evaluated, indicating that the integral is not tractable.</p>
+<p>One can also write the log-likelihood as:</p>
+
+<div class="equation-block">
+$$
+\log(p(x,\theta)) = \log \int_{z} \left( \frac{p(x,z,\theta)}{q(z)} q(z) \right).
+$$
+</div>
+
+<p>By Jensen's inequality, this gives:</p>
+
+<div class="equation-block">
+$$
+\log(p(x,\theta)) \geq \int_{z} q(z) \log \left( \frac{p(x,z,\theta)}{q(z)} \right),
+$$
+</div>
+
+<p>which leads to:</p>
+
+<div class="equation-block">
+$$
+\text{ELBO}(p(x,z,\theta), q(z)) = \mathbb{E}_{z \sim q(z)} \left[ \log \left( \frac{p(x,z,\theta)}{q(z)} \right) \right],
+$$
+</div>
+
+<p>where $\mathbb{E}_{z \sim q(z)}$ denotes the expectation under $q(z)$, and the right-hand side is known as the evidence lower bound (ELBO).</p>
+
+<p>Thus, while the integral itself might not be tractable, the lower bound, defined by the ELBO, is.</p>
+
+<p>Furthermore, note:</p>
+
+<div class="equation-block">
+$$
+\log(p(x,\theta)) - \int q(z) \log \left( \frac{p(x,z,\theta)}{q(z)} \right) dz = D_{KL}(q(z) || p(z|x,\theta)),
+$$
+</div>
+
+<p>where $D_{KL}$ denotes the Kullback-Leibler divergence. This gives the following relationships:</p>
+
+<div class="equation-block">
+$$
+\log(p(x,\theta)) \geq \text{ELBO}(p(x,z,\theta), q(z)),
+$$
+</div>
+
+<p>and:</p>
+
+<div class="equation-block">
+$$
+\log(p(x,\theta)) - \text{ELBO}(p(x,z,\theta), q(z)) = D_{KL}(q(z) || p(z|x,\theta)).
+$$
+</div>
+
+<p>In the Expectation-Maximization (EM) algorithm, one starts by minimizing the gap defined by the KL divergence by finding the $q(z)$ closest to $p(z|y,\theta)$. This is equivalent to maximizing the ELBO.</p>
+
+<p>If $p(z|y,\theta_t)$ can be evaluated, then one can directly set:</p>
+
+<div class="equation-block">
+$$
+q(z) = p(z|y,\theta_t).
+$$
+</div>
+
+<p>This step is called the Expectation-step because it requires finding the expectation of $z$ given $x$ and $\theta$. Then one computes the Q-function, which quantifies how well this $q(z)$ fits the log-likelihood:</p>
+
+<div class="equation-block">
+$$
+Q(\theta, \theta_t) = \frac{1}{n} \sum_{i=1}^{n} \int_{z} p(z|x_i; \theta_t) \log p(x_i,z,\theta) dz.
+$$
+</div>
+
+<p>In the next step, one aims to find $\theta_{t+1}$ that maximizes $Q(\theta, \theta_t)$. This step is called the Maximization-step because one maximizes the likelihood of the model given the data $x$ and the estimated $z$.</p>
+
+<p>Repeated iterations of the Expectation and Maximization step are expected to converge. The EM algorithm can also be used for MAP. The evaluation of $p(z|y,\theta_t)$ is not always possible. In the case of a VAE, the ELBO parameterizes the objective to be maximized, however, since $p(z|y,\theta_t)$ cannot be evaluated analytically, $q(z)$ is parameterized by a prior and the KL-divergence is minimized via gradient descent.</p>
+
+<h3 id="from-em-to-gmm-vae">From EM to Gaussian Mixture Models and VAE</h3>
+<p>Gaussian Mixture Models (GMMs) are a popular unsupervised learning model that uses the EM algorithm to find a mixture of $K$ Gaussians that describe the data optimally. In essence, the distribution $p(x,\theta)$ involves a third, unknown variable such that:</p>
+
+<div class="equation-block">
+$$
+p(x,\theta) = \int p(x,z,\theta)dz,
+$$
+</div>
+
+<p>where $z$ represents the parameters of the Gaussians. Specifically, the set $\{(\mu_k, \Sigma_k)\}_{k=1}^{K}$ consists of $K$ means and covariances, respectively. This is the same setting as for Expectation Maximization.</p>
+
+<p>Each Gaussian can be written as:</p>
+
+<div class="equation-block">
+$$
+\mathcal{N}(x|\mu_k, \Sigma_k) = \frac{1}{(2\pi)^{D/2}|\Sigma_k|^{1/2}} \exp \left( -\frac{1}{2}(x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k) \right),
+$$
+</div>
+
+<p>where $x, \mu_k \in \mathbb{R}^D$ and $\Sigma_k \in \mathbb{R}^{D \times D}$.</p>
+
+<p>We can write:</p>
+
+<div class="equation-block">
+$$
+p(x_i) = \sum_{k=1}^{K} \pi_k p(x_i | z_k),
+$$
+</div>
+
+<p>where $\sum_{k=1}^{K} \pi_k = 1$. This corresponds to the probability of drawing $x_i$ from the mixture of Gaussians, with each Gaussian being weighted by a probability that states how likely it is that the $k$-th Gaussian generates $x_i$.</p>
+
+<p>Importantly, we can also write:</p>
+
+<div class="equation-block">
+$$
+p(z_k | x_i) = \frac{ p(x_i | z_k)p(z_k) }{ \sum_{k=1}^{K} p(x_i | z_k)p(z_k) },
+$$
+</div>
+
+<p>which corresponds to the probability that the $k$-th Gaussian is responsible for $x_i$. Thus $p(z|x) = \sum_{i=1}^{N}\sum_{k=1}^{K} p(z_k | x_i)$ can be evaluated.</p>
+<p>Now, let us consider the likelihood $p(x,\theta) = \int p(x,z,\theta)dz$ which we would like to maximize.</p>
+
+<p>As in equation (from Expectation Maximization):</p>
+
+<div class="equation-block">
+$$
+\log p(x,\theta) = \log \int p(x,z,\theta)dz \geq \int q(z) \log \frac{p(x,z,\theta)}{q(z)} dz = \text{ELBO}(q(z), p(x,z,\theta)),
+$$
+</div>
+
+<p>Equivalently, we also obtain the gap equation:</p>
+
+<div class="equation-block">
+$$
+\log(p(x,\theta)) - \text{ELBO}(p(x,z,\theta), q(z)) = D_{KL}(q(z), p(z|x,\theta)).
+$$
+</div>
+
+<p>The EM algorithm starts by minimizing the gap from the equation above by setting $q(z) = p(z|x,\theta)$. Since $p(z|x,\theta)$ can be evaluated via the Gaussian mixture probabilities, this can be done analytically.</p>
+
+<p>The Maximization step maximizes the Q-function:</p>
+
+<div class="equation-block">
+$$
+Q(\theta, \theta_t) = \frac{1}{n} \sum_{i=1}^{n} \int_{z} p(z|x_i; \theta_t) \log p(x_i, z, \theta) dz.
+$$
+</div>
+
+<p>Thus, the Gaussian Mixture Model is a particular case of the EM algorithm where $p(z|x,\theta)$ can be evaluated, allowing for an analytical minimization of the KL-divergence between $q(z)$ and $p(z|x,\theta)$. The $z$ variables (the set $\{(\mu_k, \Sigma_k)\}_{k=1}^{K}$) can be used as a representation of the available data-distribution.</p>
+
+<h3 id="vae">Variational Auto-Encoders (VAE)</h3>
+<p>In a variational auto-encoder setting, no expression for $p(z|x,\theta)$ can be evaluated, so no analytical minimization of the gap equation is possible by setting $q(z) = p(z|x,\theta)$. Instead, one assumes a prior parametric description $q(z,\phi)$ and maximizes the ELBO with numerical gradient methods.</p>
+
+<p>Note that:</p>
+
+<div class="equation-block">
+$$
+\text{ELBO}(p(x,z,\theta), q(z)) = \mathbb{E}_{z \sim q(z)} [ \log(p(x,z,\theta)) ] - \mathbb{E}_{z \sim q(z)} [\log(q(z))].
+$$
+</div>
+
+<p>This can be decomposed as:</p>
+
+<div class="equation-block">
+$$
+\text{ELBO}(p(x,z,\theta), q(z)) = \mathbb{E}_{z \sim q(z)} [ \log(p(x|z,\theta)) ] + \mathbb{E}_{z \sim q(z)} [\log(p(z,\theta))] - \mathbb{E}_{z \sim q(z)} [\log(q(z))].
+$$
+</div>
+
+<p>Or equivalently:</p>
+
+<div class="equation-block">
+$$
+= \mathbb{E}_{z \sim q(z)} [\log(p(x|z,\theta))] - D_{KL}(q(z) || p(z,\theta)),
+$$
+</div>
+
+<p>which is the common expression for the objective employed in VAEs. The density $q(z)$ is parameterized by a neural net to $q(z,\phi)$. The posterior $p(z,\theta)$ is parameterized via prior assumptions, usually as an isometric Gaussian. 
+Note, that during the derivation of the ELBO, any distribution that contains the hidden variable $z$ can be used. One might replace $q(z)$ with $q(z|x)$ or $q(z|x,\phi)$ without loss of generality.</p>
+
+<p>While in standard Gaussian Mixture Models the term $\mathbb{E}_{z \sim q(z)} [ \log(p(x|z,\theta)) ]$ can be evaluated directly, for a VAE this is not the case,
+   so instead Monte Carlo approximations are used. This term gives rise to the reconstruction error, 
+   which is essentially maximum likelihood estimation of $p(x|z,\theta)$ with respect to $\theta$. A more detailed description can be found in the blog dedicated to VAEs.</p>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Algorithms on Networks</title>
+
+    <!-- MathJax for rendering math expressions -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            }
+        };
+    </script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1, h2, h3 {
+            margin-bottom: 10px;
+        }
+        .equation-block {
+            margin: 20px 0;
+            text-align: center;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .algorithm {
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Algorithms on Networks</h1>
+<p class="author-date">vic-bayer, August 2024</p>
+
+<h2>Betweenness Centrality</h2>
+
+<p><strong>Definition:</strong></p>
+<div class="equation-block">
+    $$b(v, G) = \sum_{s \neq v \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}}$$
+</div>
+<div class="equation-block">
+    $$b_n(v, G) = \sum_{s \neq v \neq t} \frac{1}{n(n-1)}\frac{\sigma_{st}(v)}{\sigma_{st}}$$
+</div>
+<p>where \( \sigma_{st}(v) \) is the number of shortest paths from \( s \) to \( t \) that include \( v \), and \( \sigma_{st} \) is the total number of shortest paths from \( s \) to \( t \). Here, \( n \) is the number of nodes in the graph. For large graphs, an algorithm to approximate \( b_n(v, G) \) is:</p>
+
+<ul>
+    <li>Set <code>count</code> = 0</li>
+    <li>For each \( i \in \{1, \dots, K\} \):
+        <ul>
+            <li>Pick \( s \leftarrow \) at random from \( V \)</li>
+            <li>Pick \( t \neq s \leftarrow \) at random from \( V \)</li>
+            <li>Run: find all shortest paths from \( s \) to \( t \)</li>
+            <li>\( \Pi_{s} \leftarrow \) shortest path from \( s \) to \( t \) at random</li>
+            <li>If \( v \in \Pi_{st} \):
+                <ul>
+                    <li>Set <code>count</code> = <code>count</code> + 1</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+    <li>Return <code>count</code>/\( K \)</li>
+</ul>
+
+<h2>Proposition</h2>
+<div class="equation-block">
+    $$\lim_{K \to \infty} \frac{1}{K} \sum_{i=1}^{K} \text{count} \approx b(v, G)$$
+</div>
+
+<h2>Proof</h2>
+
+<p>Let</p>
+<div class="equation-block">
+    $$X_i = \begin{cases}
+    1 & \text{if } v \in \Pi_{i,st} \\
+    0 & \text{else}
+    \end{cases}$$
+</div>
+<p>Then,</p>
+<div class="equation-block">
+    $$\frac{1}{K} \sum_{i=1}^{K} X_i = \frac{\text{count}}{K}$$
+</div>
+<p>We have,</p>
+<div class="equation-block">
+    $$\mathbb{E}(\text{count}) = \mathbb{E} \left(\sum_{i=1}^{K} X_i\right) = \sum_{i=1}^{K}\mathbb{E} (X_i) = \sum_{i=1}^{K} \Pr( X_i = 1)$$
+</div>
+<div class="equation-block">
+    $$= \sum_{i=1}^{K} \sum_{s,t \in V; s \neq t} \Pr( X_i = 1 \mid s,t)\Pr(s,t) = \sum_{i=1}^{K} \sum_{s,t \in V; s \neq t} \Pr( X_i = 1 \mid s,t)\frac{1}{n(n-1)}$$
+</div>
+<div class="equation-block">
+    $$=\sum_{i=1}^{K} \sum_{s,t \in V; s \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}} \frac{1}{n(n-1)} = K \cdot \sum_{s,t \in V; s \neq t} \frac{\sigma_{st}(v)}{\sigma_{st}} \frac{1}{n(n-1)} = K \cdot b_n(v, G)$$
+</div>
+
+<p>Thus,</p>
+<div class="equation-block">
+    $$\hat{b}(v, G) = \frac{1}{n(n-1)} \sum_{i=1}^{K} \frac{\text{count}}{K} = b(v, G)$$
+</div>
+
+</body>
+</html>
