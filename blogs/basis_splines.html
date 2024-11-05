@@ -85,8 +85,8 @@
 <h2>Bezier Functions</h2>
 
 <div class="figure1">
-    <img src="basis-splines/quadratic-bernstein.png" alt="Quadratic Bernstein">
-    <img src="basis-splines/cubic_bernstein.png" alt="Cubic Bernstein">
+    <img src="../images/basis-splines/quadratic-bernstein.png" alt="Quadratic Bernstein">
+    <img src="../images/basis-splines/cubic_bernstein.png" alt="Cubic Bernstein">
 </div>
 
 <p>Bezier functions can be used to represent lines in space as a linear combination of basis functions. Consider a 1D-function and discrete $d+1$ control points $p_i = x_i$ for $i=0,...,d$.</p>
@@ -142,11 +142,11 @@ $$
 </div>
 
 <p>where $c = [ c_0, c_1, ..., c_d]^T$, $u = [1, u, u^2, ..., u^d]$ and $M$ is a matrix of scalars. For most practical purposes, $d=3$ is sufficient.</p>
-
+<!-- 
 <div class="figure2">
-    <img src="basis-splines/quadratic_bezier.png" alt="Quadratic Bezier">
+    <img src="../images/basis-splines/quadratic_bezier.png" alt="Quadratic Bezier">
 </div>
-
+-->
 <p>Assume there is a function $r(u)$ that is provided as a vector of discrete values at $n$ points, i.e., $r \in \mathbb{R}^n$. This function can be approximated by:</p>
 
 <div class="equation-block">
@@ -172,14 +172,14 @@ $$
 </div>
 
 <div class="figure3">
-    <img src="basis-splines/bezier_surface.png" alt="Bezier Surface">
+    <img src="../images/basis-splines/bezier_surface.png" alt="Bezier Surface">
 </div>
 
 <h2>Basis Splines</h2>
 <p>The basis-spline approach approximates functions by the linear combination of section-wise defined basis functions. In essence, each basis function only has a finite range of influence. This provides increased control and eliminates the issue of increasing basis function degree with increasing control points, but it introduces potential continuity issues at the control points.</p>
 
 <div class="figure4">
-    <img src="basis-splines/combinationa.png" alt="Combination of Basis Splines">
+    <img src="../images/basis-splines/combinationa.png" alt="Combination of Basis Splines">
 </div>
 
 <p>A $k$-degree B-spline curve defined by $n+1$ control points will consist of $n-k+1$ Bezier curves. For example, a cubic B-spline defined by 6 control points $P_0, ..., P_6$ consists of 3 Bezier curves. The support of each basis function is determined by a knot vector $k \in m + d + 1$, where $m$ represents the number of control points and $d$ the degree of the basis functions.</p>
@@ -230,7 +230,7 @@ $$
 </div>
 
 <div class="figure5">
-    <img src="basis-splines/Basis-spline.png" alt="Basis Spline">
+    <img src="../images/basis-splines/Basis-spline.png" alt="Basis Spline">
 </div>
 
 <h2>Extension to 3D and Application</h2>
