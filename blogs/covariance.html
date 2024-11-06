@@ -31,46 +31,60 @@
 
 <h3>Example: White Noise</h3>
 <p>The simplest distribution is white noise, which in \(2D\) corresponds to a Gaussian with mean at the origin and covariance matrix:</p>
-<pre>
-<div>$$ 
+
+<div class="equation-block">
+$$
 \Sigma = \begin{bmatrix}
 1 & 0 \\
 0 & 1
 \end{bmatrix}
-$$</div>
-</pre>
+$$
+</div>
+
 
 <p>Note that it is regular. White noise can be transformed to another (linear) data-distribution by a linear transformation. Let:</p>
-<pre>
+<div class="equation-block">
+$$
 z \sim \mathcal{N}(0, I)
-</pre>
+$$
+</div>
 
 <p>be sampled from white noise. Then</p>
-<pre>
+<div class="equation-block">
+$$
 x = A z + b
-</pre>
+$$
+</div>
 
 <p>has covariance</p>
-<pre>
+<div class="equation-block">
+$$
 \Sigma_x = A I A^T = A A^T
-</pre>
+$$
+</div>
 
 <p>and mean</p>
-<pre>
+<div class="equation-block">
+$$
 \mu_x = b.
-</pre>
+$$
+</div>
 
 <p>The covariance matrix can be diagonalized. The eigendecomposition of \(\Sigma\) gives:</p>
-<pre>
+<div class="equation-block">
+$$
 \Sigma = U D U^T
-</pre>
+$$
+</div>
 
 <p>where \( U \) is a matrix of eigenvectors, and \( D \) is a diagonal matrix of eigenvalues.</p>
 
 <p>Set \( A = U D^{1/2} \), where \( D^{1/2} \) is the square root of the diagonal eigenvalue matrix. The transformation then becomes:</p>
-<pre>
+<div class="equation-block">
+$$
 x = U D^{1/2} z + b
-</pre>
+$$
+</div>
 
 <p>giving the desired covariance. In the following, the distributions which can be described in this way are visualized.</p>
 <h3>Linear Distributions</h3>
@@ -93,54 +107,74 @@ x = U D^{1/2} z + b
 </div>
 
 <p>If we want the mean of our transformed distribution to follow the line:</p>
-<pre>
+<div class="equation-block">
+$$
 y = a \cdot x + b.
-</pre>
+$$
+</div>
+
 
 <p>We introduce noise with variance \( c \) in the normal direction to the line. The line \( y = a \cdot x + b \) has a slope vector \( (1, a) \). The normal direction to this slope is given by:</p>
-<pre>
+<div class="equation-block">
+    $$
 \vec{n} = (-a, 1).
-</pre>
+$$
+</div>
 
 <p>The normalized normal vector is:</p>
-<pre>
+<div class="equation-block">
+    $$
 \hat{n} = \frac{(-a, 1)}{\sqrt{1 + a^2}}.
-</pre>
+$$
+</div>
 
 <p>Scale the noise to have variance \( c \):</p>
-<pre>
+<div class="equation-block">
+    $$
 \sqrt{c} \cdot \epsilon \sim N(0, c).
-</pre>
+$$
+</div>
 
 <p>Project the scaled noise along the normalized normal direction:</p>
-<pre>
+<div class="equation-block">
+    $$
 \delta = \sqrt{c} \cdot \epsilon \cdot \hat{n} = \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}.
-</pre>
+$$
+</div>
 
 <p>Combine the mean and the noise to get the final distribution:</p>
-<pre>
+<div class="equation-block">
+    $$
 y = a \cdot x + b + \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}.
-</pre>
-
+$$
+</div>
 <p>To shift the distribution from a mean of \( a \cdot x + b \) to a mean of \( c \cdot x + b \) a rotation matrix can be applied. Essentially,</p>
-<pre>
+<div class="equation-block">
+    $$
 \mu' = R \mu
-</pre>
+$$
+</div>
 
 <p>and</p>
-<pre>
+<div class="equation-block">
+    $$
 \Sigma' = R \Sigma R^T.
-</pre>
+$$
+</div>
 
 <p>For \( c \cdot x + d \), an offset has to be included so that</p>
-<pre>
+<div class="equation-block">
+    $$
 y = a \cdot x + b + \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}} + (d - b).
-</pre>
+$$
+</div>
 
 <p>Note that if \( cx + d = 0 \),</p>
-<pre>
+<div class="equation-block">
+    $$
 y = \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}
-</pre>
+$$
+</div>
 
 <p>and we return to a distribution with a certain covariance around mean zero. In this case, the covariance matrix is constant.</p>
 
@@ -188,9 +222,11 @@ y = \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}
 <p>If we measure data with a singular covariance, some directions are degenerate (have zero variance). This is an indication that those directions provide no information, and these dimensions can be omitted without losing description accuracy.</p>
 <h3>Mahalanobis Distance and Covariance Geometry</h3>
 <p>Within the linear space that contains our distribution, one can define the Mahalanobis distance as:</p>
-<pre>
+<div class="equation-block">
+    $$
 d_M(x, \mu) = \sqrt{(x - \mu)^T \Sigma^{-1} (x - \mu)}.
-</pre>
+$$
+</div>
 
 <p>In directions where the data has high variance, the Mahalanobis distance will be smaller. Conversely, in directions of low variance, the distance will be larger. This accounts for the fact that outliers in low-variance directions are more significant than in high-variance directions.</p>
 
@@ -219,12 +255,14 @@ d_M(x, \mu) = \sqrt{(x - \mu)^T \Sigma^{-1} (x - \mu)}.
 
 <h3>Distributions with Varying Covariance</h3>
 <p>Another interesting case is when the data distribution is not described by a constant covariance matrix. Instead, the covariance is a function of the parameters. We can distinguish between cases where this function is linear vs. non-linear. Since this relationship is not a constant, it requires a parameterized covariance matrix of the form:</p>
-<pre>
+<div class="equation-block">
+    $$
 \Sigma(x,y) = \begin{bmatrix}
 f_{x,x}(x,y) & f_{x,y}(x,y) \\
 f_{y,x}(x,y) & f_{y,y}(x,y)
 \end{bmatrix}.
-</pre>
+$$
+</div>
 
 <p>In most cases, we will consider only continuous functions for the elements of \(\Sigma(x,y)\).</p>
 
@@ -283,58 +321,75 @@ f_{y,x}(x,y) & f_{y,y}(x,y)
 <p>An interesting covariance is the Fisher Information Matrix. In machine learning, one aims to maximize a likelihood \( p(x, \theta) \) or log-likelihood \( \log(p(x, \theta)) \) by finding the optimal parameters \( \theta \).</p>
 
 <p>The gradient of the likelihood with respect to the parameters is defined as:</p>
-<pre>
+<div class="equation-block">
+    $$
 s(x, \theta) = \frac{\partial \log (p(x, \theta))}{\partial \theta}
-</pre>
+$$
+</div>
 
 <p>and is called the score of the model. It can be shown that, under regularity conditions, the score of the true model \( \tilde{\theta} \) is zero. In general, the score is indicative of the model-parameter sensitivity. The notion of a score-based gradient has been exploited successfully in generative modeling, under the name of score matching.</p>
 
 <p>For each \( \theta \), it is possible to define the Fisher Information Matrix as the covariance of the score:</p>
-<pre>
+<div class="equation-block">
+    $$
 \mathbf{I}(\theta) = \mathbb{E}\left[ \left( \frac{\partial \log p(x, \theta)}{\partial \theta} \right) \left( \frac{\partial \log p(x, \theta)}{\partial \theta} \right)^T \right]
-</pre>
+$$
+</div>
 
 <p>which is also expressed as:</p>
-<pre>
+<div class="equation-block">
+    $$
 = -\mathbb{E}\left[ \frac{\partial^2 \log p(x|\theta)}{\partial \theta \partial \theta^T} \right]
 = \int_{x} \frac{\partial}{\partial \theta} \log(p(x, \theta)^2) p(x, \theta) \, dx.
-</pre>
+$$
+</div>
 
 <p>Given the previous examples, this should create some intuition of the underlying geometry defined by this matrix. Note that this covariance matrix varies smoothly, depending on the location. Considering the distance induced by a covariance matrix, it can be shown that \( \mathbf{I}(\theta) \) is a Riemannian metric, providing the tangent space of \( \theta \) with an inner product and defining distances between distributions. The geodesic distance is the path-integral of distances induced in each point by the local covariance matrix. The idea is similar to the Mahalanobis distance, but, due to the interpretation in terms of model parameter sensitivity (as opposed to data sensitivity), we do not use the inverse.</p>
 
 <h3>Geodesic Distance in Parameter Space</h3>
 <p>Consider an infinitesimal displacement \( \frac{d\theta }{dt} = \lim_{\Delta \rightarrow 0} = \theta + \Delta \) and a path \( \gamma(t) \) related to the displacement by:</p>
-<pre>
+<div class="equation-block">
+    $$
 d \theta = \frac{d \gamma(t)}{dt} \, dt.
-</pre>
+$$
+</div>
+
 
 <p>The infinitesimal distance from \( \theta \) to \( d\theta \) is:</p>
-<pre>
+<div class="equation-block">
+    $$
 ds^2 = d\theta^T I(\theta) d\theta = \frac{d \gamma(t)}{dt} I(\theta) \frac{d \gamma(t)}{dt} \, dt.
-</pre>
+$$
+</div>
 
 <p>This is the infinitesimal squared distance in Riemannian geometry with the Fisher information matrix as the metric tensor. When \( I(\theta) \) is large, indicating a high likelihood sensitivity of a parameter, the distance in that direction is also large. Moving in directions with high sensitivity (i.e., corresponding to high information content) traverses a larger distance, while moving in directions with low sensitivity does not get us far. If we want to minimize the likelihood, we prefer to move the shortest path from \( \theta_1 \) to \( \theta_2 \), i.e., update the most informative parameters.</p>
 
 <p>The distance between \( \theta_1 \) and \( \theta_2 \) becomes:</p>
-<pre>
+<div class="equation-block">
+    $$
 d_G(\theta_1, \theta_2) = \int_0^1 \sqrt{\frac{d\gamma(t)}{dt}^T I(\gamma(t)) \frac{d\gamma(t)}{dt}} \, dt = \int_0^1 ds,
-</pre>
+$$
+</div>
 
 <p>where \( \gamma(0) = \theta_1 \) and \( \gamma(1) = \theta_2 \).</p>
 
 <p>This geodesic distance allows for the quantification of distribution similarity. Distributions (parameterized by \( \theta \)) are close if the information content is similar and distant otherwise. The geodesic distance is symmetric.</p>
 <h2>Connections to Algorithms</h2>
 <p>Let us connect the concepts mentioned to common machine learning algorithms. In all cases, we assume a data-density:</p>
-<pre>
+<div class="equation-block">
+    $$
 q(x) = \int q(x, z) \, dz = \int q(x | z) q(z) \, dz
-</pre>
+$$
+</div>
 
 <p>where \( z \) corresponds to an unobserved latent variable. In generative models, this latent variable \( z \) might "generate" the sample \( x \). The latent \( z \) can also be connected to the data-sample \( x \) without an explicit generative role, such as an unobserved label. The field of self-supervised learning aims to learn the labels by considering them as latent variables \( z \).</p>
 
 <p>A common complication is that the integral might not be tractable. In this case, a lower bound (the ELBO) is often constructed. Model-parametric approaches use a parameterized description of the data-density of the form:</p>
-<pre>
+<div class="equation-block">
+    $$
 p_{\theta, \phi}(x) = \int p_\theta(x | z) p_\phi(z) \, dz.
-</pre>
+$$
+</div>
 
 <p>An example of a model that adheres to this type of description is the variational autoencoder. The decoder parameterizes \( p_\theta(x | z) \), and the encoder parameterizes \( p_\phi(z) \). The Gaussian Mixture Model also belongs to this class of methods, with some tractability properties for \( p_\phi(z) \).</p>
 
@@ -346,26 +401,34 @@ p_{\theta, \phi}(x) = \int p_\theta(x | z) p_\phi(z) \, dz.
 <p>PCA is a method that calculates the covariance matrix given a number of \( N \) data-samples, each with dimension \( n \). By diagonalizing the matrix, one obtains "directions" within the data-parameters that independently introduce variability into the data. The directions with the highest eigenvalues introduce more variability than those with the lowest. A common dimensionality reduction method expresses the data only in terms of the eigenvectors corresponding to the \( m \) highest eigenvalues, with lower-eigenvalue directions considered as noise.</p>
 
 <p>Given the data \( X \), which can be described as a set of \( n \)-dimensional vectors \( X = \{ \vec{x_i} \} \) with \( i = 1, \dots, N \), the linear covariance matrix \( \Sigma \in \mathcal{R}^{n \times n} \) is computed:</p>
-<pre>
+<div class="equation-block">
+    $$
 \vec{\mu} = \frac{1}{N} \sum_{i=1}^{N} \vec{x_i}
-</pre>
+$$
+</div>
 
-<pre>
+<div class="equation-block">
+    $$
 \Sigma = \frac{1}{N-1} \sum_{i=1}^{N} (\vec{x_i} -  \vec{\mu} ) (\vec{x_i} -  \vec{\mu} )^{T}.
-</pre>
+$$
+</div>
 
 <p>This matrix is symmetric and, therefore, always diagonalizable. It can be written in the form:</p>
-<pre>
+<div class="equation-block">
+    $$
 \Sigma = U D U^{-1}
-</pre>
+$$
+</div>
 
 <p>where \( U = [ \vec{u_{1}}, \dots, \vec{u_{N}} ] \) and \( D \) is a diagonal matrix of eigenvalues.</p>
 
 <h3>Transformation to Gaussian Noise</h3>
 <p>As shown in previous sections, any linear distribution can be obtained by transforming white noise. Thus, we can ask which transformation of white noise corresponds to our data. Following the logic in previous sections, the answer is:</p>
-<pre>
+<div class="equation-block">
+    $$
 x = U^T D^{1/2} z + \mu = Wz + \mu,
-</pre>
+$$
+</div>
 
 <p>where \( z \sim \mathcal{N}(0, I) \) and \( x \sim \mathcal{N}( \mu, \Sigma ) \). The mean is often omitted as it corresponds to a simple shift. In this case, \( W \in \mathcal{R}^{n \times n} \) and \( z \in \mathcal{R}^n \), meaning no dimensionality reduction is performed.</p>
 
@@ -373,53 +436,68 @@ x = U^T D^{1/2} z + \mu = Wz + \mu,
 
 <h3>Singular and Probabilistic PCA</h3>
 <p>The linear transformation of white noise leads to:</p>
-<pre>
+<div class="equation-block">
+    $$
 x = W_m z_m = U_m D_m^{1/2} z_m,
-</pre>
+$$
+</div>
 
 <p>where \( W_m = U_m D_m^{1/2} \in \mathcal{R}^{n \times m} \) is a matrix of scaled eigenvectors for the reduced dimensions. The coordinates \( z_m \sim \mathcal{N}(0, I_m) \) in the lower \( m \)-dimensional space produce the transformed distribution.</p>
 
 <p>Probabilistic PCA extends this model by adding noise:</p>
-<pre>
+<div class="equation-block">
+    $$
 x = W z + \epsilon,
-</pre>
+$$
+</div>
+
 
 <p>where \( \epsilon \sim \mathcal{N}(0, \sigma^2 I) \). Now:</p>
-<pre>
+<div class="equation-block">
+    $$
 x \sim \mathcal{N}(0, WW^T + \sigma^2 I),
-</pre>
+$$
+</div>
 
 <p>which solves the problem of degenerate directions, giving the distribution a full rank of \( n \) in feature space.</p>
 
 <h3>Dual Space (Data-space and Feature-space)</h3>
 <p>In PCA, we can construct a covariance matrix using either data or feature dimensions. The covariance matrix from the feature space:</p>
-<pre>
+<div class="equation-block">
+    $$
 \Sigma = XX^T \in \mathcal{R}^{n \times n},
-</pre>
+$$
+</div>
 
 <p>reflects the variability along the feature dimensions, while the covariance matrix from data-space:</p>
-<pre>
+<div class="equation-block">
+    $$
 K = X^TX \in \mathcal{R}^{N \times N},
-</pre>
+$$
+</div>
 
 <p>represents correlations among data points. If \( N < n \), working with \( X^TX \) is computationally advantageous, as it is only \( N \times N \).</p>
 <h3>Gaussian Processes</h3>
 <p>In a Gaussian Process, the covariance matrix is described via a kernel function \( k(\cdot, \cdot) \). A common choice is the radial basis function (RBF) kernel, which defines a similarity measure between points:</p>
-<pre>
+<div class="equation-block">
+    $$
 k(z, z') = \sigma^2 \exp\left(-\frac{(z - z')^2}{2 l_1^2}\right),
-</pre>
+$$
+</div>
 
 <p>This function attributes a scalar value to pairs of samples \( z \) and \( z' \), similar to an inner product. It creates a structure called a Reproducing Kernel Hilbert Space (RKHS). Here, the hyperparameters are \( \sigma \) and \( l_1 \), which influence the covariance structure, and are chosen based on prior assumptions or optimized during training.</p>
 
 <p>Gaussian Processes (GPs) construct a covariance matrix in data-space as follows:</p>
-<pre>
+<div class="equation-block">
+    $$
 \Sigma_K = \begin{bmatrix}
 k(z_1, z_1) & k(z_1, z_2) & \ldots & k(z_1, z_n) \\
 k(z_2, z_1) & k(z_2, z_2) & \ldots & k(z_2, z_n) \\
 \vdots & \vdots & \ddots & \vdots \\
 k(z_n, z_1) & k(z_n, z_2) & \ldots & k(z_n, z_n)
 \end{bmatrix}.
-</pre>
+$$
+</div>
 
 <p>This matrix is similar to the covariance matrix in dual PCA, as it considers the covariance between data samples rather than features. Gaussian Processes are used to infer the function values \( f(z) \) at unobserved points. Given observed data \( X = ((\tilde{x}_1, z_1), (\tilde{x}_2, z_2), \dots, (\tilde{x}_N, z_N)) \), the centered data \( x_i = \tilde{x}_i - \mu = f(z_i) \) can be analyzed under the GP model.</p>
 
@@ -427,27 +505,36 @@ k(z_n, z_1) & k(z_n, z_2) & \ldots & k(z_n, z_n)
 
 <h3>Estimation in Gaussian Processes</h3>
 <p>Given a new latent \( z^* \), we can relate it to existing latent variables as follows:</p>
-<pre>
+<div class="equation-block">
+    $$
 \begin{pmatrix} x \\ x^* = f(z^*) \end{pmatrix} \sim \mathcal{N} \left( \mu = \begin{pmatrix} 0 \\ m(z) \end{pmatrix}, K = \begin{pmatrix} K(Z, Z) & k(Z, z^*) \\ k(z^*, Z) & k(z^*, z^*) \end{pmatrix} \right).
-</pre>
+$$
+</div>
 
 <p>This distribution enables predictions for new data points \( x^* \) based on existing data. We aim to find the expectation \( \mathbb{E}[x^* | x] \). After some calculations, we obtain:</p>
-<pre>
+<div class="equation-block">
+    $$
 \mathbb{E}[x^* | x] = k(Z, z^*)^T K(Z, Z)^{-1} x
-</pre>
+$$
+</div>
 
 <p>and the variance:</p>
-<pre>
+<div class="equation-block">
+    $$
 \mathbb{Var}[x^* | x] = k(z^*, z^*) - k(Z, z^*)^T K(Z, Z)^{-1} k(Z, z^*).
-</pre>
+$$
+</div>
 
 <p>This gives us a method to estimate \( x^* = f(z^*) \) given observed samples \( (x_i, z_i) \). GPs model the nonlinear relationships in data-space, allowing the covariance matrix \( K \) to capture complex patterns while maintaining computational tractability.</p>
 
 <h3>Gaussian Process Latent Variable Model (GPLVM)</h3>
 <p>The Gaussian Process Latent Variable Model (GPLVM) is a variant of the Gaussian Process where the latent variable \( z \sim \mathcal{N}(0, I_m) \) is unobserved. Here, we only observe \( x_i \in \mathcal{R}^n \) and aim to learn corresponding \( z_i \in \mathcal{R}^m \) values, assuming:</p>
-<pre>
+<div class="equation-block">
+    $$
 x = f(z) + \epsilon
-</pre>
+$$
+</div>
+
 
 <p>where \( \epsilon \sim \mathcal{N}(0, I) \) adds regularization, helping define a full-rank distribution in feature space. Similar to probabilistic PCA, this approach extends the modeling capacity to nonlinear functions without requiring explicit parameterization, making it suitable for dimensionality reduction and capturing complex relationships in the data.</p>
 <h2>Expectation Maximization</h2>
