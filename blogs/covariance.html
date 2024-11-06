@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On the Geometry of the Covariance</title>
+</head>
+<body>
+
+<h1>On the Geometry of the Covariance</h1>
+<p><strong>Author:</strong> vic-bayer</p>
+<p><strong>Date:</strong> October 2024</p>
+
+<h2>On the Geometry of the Covariance</h2>
+<p>As the most informative description of a linear data distribution, the covariance matrix is an interesting object. Here I try to give some intuitions on its geometry.</p>
+
+<p>As a square matrix, the covariance forms a linear vector space. The special case of symmetric matrices is a linear vector subspace of the linear space of square matrices. A matrix is inherently a linear operator and cannot capture non-linear dependencies by itself.</p>
+
+<p>A linear vector-space is a manifold. In this case, the manifold is flat, meaning it has no curvature and can be globally parameterized. A linear vector-space can be equipped with the Euclidean metric, which defines the distance between two points as the length of the straight-line (or "Euclidean") distance. For a flat space, this corresponds to the geodesic distance associated with the metric. A manifold is a topological space that locally resembles Euclidean space. A linear vector-space resembles Euclidean space locally and globally.</p>
+
+<p>The set of symmetric matrices forms a linear vector-space. All open neighborhoods of a manifold are also a manifold. Each positive definite symmetric matrix has another positive definite symmetric matrix in its open neighborhood. Thus, the set of symmetric positive definite matrices forms a manifold. The same does not hold for semi-positive definite matrices.</p>
+
+<p>We say that a covariance matrix induces a regular distribution if it is positive definite and a singular distribution if it is semi-positive definite. If it is semi-positive definite, then there exists a data-dimension along which no data variability occurs. If one measures data with a singular covariance, the singular dimension carries no information on the data-variability and can be omitted without loss of description accuracy. If one were to examine the likelihood of a model for describing data, the singular dimension has no influence on the likelihood.</p>
+
+<p>This gives us a basis for understanding distributions as being located on manifolds (i.e., we can move smoothly from one covariance/mean to another), and a (vector-) directional sense in terms of model parameters/data dimensions with influence on data-variability and model-likelihood.</p>
+
+<p>We start by considering data distributions and extend this to model-distributions. The concepts are transferable. In one case, each sample corresponds to a data-sample (defined by the data dimensions/parameters), in the other case, each sample corresponds to a model-sample (defined by the model dimension/parameters). This can be related to the difference between model parametrizations vs. model-free parametrizations of data-distributions.</p>
+
+<h3>Example: White Noise</h3>
+<p>The simplest distribution is white noise, which in \(2D\) corresponds to a Gaussian with mean at the origin and covariance matrix:</p>
+<pre>
+\[
+\Sigma = \begin{bmatrix}
+1 & 0 \\
+0 & 1
+\end{bmatrix}
+\]
+</pre>
+
+<p>Note that it is regular. White noise can be transformed to another (linear) data-distribution by a linear transformation. Let:</p>
+<pre>
+z \sim \mathcal{N}(0, I)
+</pre>
+
+<p>be sampled from white noise. Then</p>
+<pre>
+x = A z + b
+</pre>
+
+<p>has covariance</p>
+<pre>
+\Sigma_x = A I A^T = A A^T
+</pre>
+
+<p>and mean</p>
+<pre>
+\mu_x = b.
+</pre>
+
+<p>The covariance matrix can be diagonalized. The eigendecomposition of \(\Sigma\) gives:</p>
+<pre>
+\Sigma = U D U^T
+</pre>
+
+<p>where \( U \) is a matrix of eigenvectors, and \( D \) is a diagonal matrix of eigenvalues.</p>
+
+<p>Set \( A = U D^{1/2} \), where \( D^{1/2} \) is the square root of the diagonal eigenvalue matrix. The transformation then becomes:</p>
+<pre>
+x = U D^{1/2} z + b
+</pre>
+
+<p>giving the desired covariance. In the following, the distributions which can be described in this way are visualized.</p>
+<h3>Linear Distributions</h3>
+<p>Let us visualize some distributions.</p>
+
+<div>
+    <figure>
+        <figcaption>Figure 1: Linear Distributions</figcaption>
+        <div style="display: flex; justify-content: space-around;">
+            <figure style="flex: 0 0 45%;">
+                <img src="images/plot_1_white_noise.png" alt="White Noise">
+                <figcaption>White Noise</figcaption>
+            </figure>
+            <figure style="flex: 0 0 45%;">
+                <img src="images/plot_2_specific_covariance.png" alt="Transformation to the same mean, different covariance">
+                <figcaption>Transformation to the same mean, different covariance</figcaption>
+            </figure>
+        </div>
+    </figure>
+</div>
+
+<p>If we want the mean of our transformed distribution to follow the line:</p>
+<pre>
+y = a \cdot x + b.
+</pre>
+
+<p>We introduce noise with variance \( c \) in the normal direction to the line. The line \( y = a \cdot x + b \) has a slope vector \( (1, a) \). The normal direction to this slope is given by:</p>
+<pre>
+\vec{n} = (-a, 1).
+</pre>
+
+<p>The normalized normal vector is:</p>
+<pre>
+\hat{n} = \frac{(-a, 1)}{\sqrt{1 + a^2}}.
+</pre>
+
+<p>Scale the noise to have variance \( c \):</p>
+<pre>
+\sqrt{c} \cdot \epsilon \sim N(0, c).
+</pre>
+
+<p>Project the scaled noise along the normalized normal direction:</p>
+<pre>
+\delta = \sqrt{c} \cdot \epsilon \cdot \hat{n} = \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}.
+</pre>
+
+<p>Combine the mean and the noise to get the final distribution:</p>
+<pre>
+y = a \cdot x + b + \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}.
+</pre>
+
+<p>To shift the distribution from a mean of \( a \cdot x + b \) to a mean of \( c \cdot x + b \) a rotation matrix can be applied. Essentially,</p>
+<pre>
+\mu' = R \mu
+</pre>
+
+<p>and</p>
+<pre>
+\Sigma' = R \Sigma R^T.
+</pre>
+
+<p>For \( c \cdot x + d \), an offset has to be included so that</p>
+<pre>
+y = a \cdot x + b + \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}} + (d - b).
+</pre>
+
+<p>Note that if \( cx + d = 0 \),</p>
+<pre>
+y = \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}
+</pre>
+
+<p>and we return to a distribution with a certain covariance around mean zero. In this case, the covariance matrix is constant.</p>
+
+<p>Another way of representing the distributions along lines is by the mentioned transformation of white noise so that the variance in the desired direction is very high, potentially infinite. Thus, linear distributions (as I call them) are equivalent to a transformation of white noise.</p>
+
+<p>Note that if the mean follows a non-linear function (e.g., a sine), we could still create this distribution, following the reasoning above, by determining the normal vector and applying noise in that direction. However, due to dependencies on \( x \), this is not an affine transformation of white noise. In most cases, we are not interested in transformations of densities but in determining an adequate description given some data-samples.</p>
+
+<h3>Regular and Singular Covariance</h3>
+<p>Figures below show distributions that can be obtained by a rotation. Both can be obtained from white noise. One direction has a very high variance. This variance would potentially be infinite, but in reality, most real-world data is finite.</p>
+
+<div>
+    <figure>
+        <figcaption>Figure 2: Regular Covariance with Linear Mean</figcaption>
+        <div style="display: flex; justify-content: space-around;">
+            <figure style="flex: 0 0 45%;">
+                <img src="images/plot_6_uniform_line_(regular distribution).png" alt="Regular covariance with linear mean">
+                <figcaption>Regular covariance with linear mean</figcaption>
+            </figure>
+            <figure style="flex: 0 0 45%;">
+                <img src="images/plot_7_transformed_uniform_line_(regular distribution).png" alt="Regular covariance with linear mean">
+                <figcaption>Regular covariance with linear mean</figcaption>
+            </figure>
+        </div>
+    </figure>
+</div>
+
+<p>An important example is the distributions in Figures below, where the variance normal to the line is zero. The data is two-dimensional, yet only one dimension varies. The covariance matrix does not have full rank and corresponds to a singular distribution. The data can be represented just as well in a single dimension without loss of accuracy.</p>
+
+<div>
+    <figure>
+        <figcaption>Figure 3: Singular Covariance</figcaption>
+        <div style="display: flex; justify-content: space-around;">
+            <figure style="flex: 0 0 45%;">
+                <img src="images/plot_6_uniform_line_(singular_distribution).png" alt="Singular covariance">
+                <figcaption>Singular covariance</figcaption>
+            </figure>
+            <figure style="flex: 0 0 45%;">
+                <img src="images/plot_7_transformed_uniform_line_(singular_distribution).png" alt="Singular covariance">
+                <figcaption>Singular covariance</figcaption>
+            </figure>
+        </div>
+    </figure>
+</div>
+
+<p>If we measure data with a singular covariance, some directions are degenerate (have zero variance). This is an indication that those directions provide no information, and these dimensions can be omitted without losing description accuracy.</p>
+<h3>Mahalanobis Distance and Covariance Geometry</h3>
+<p>Within the linear space that contains our distribution, one can define the Mahalanobis distance as:</p>
+<pre>
+d_M(x, \mu) = \sqrt{(x - \mu)^T \Sigma^{-1} (x - \mu)}.
+</pre>
+
+<p>In directions where the data has high variance, the Mahalanobis distance will be smaller. Conversely, in directions of low variance, the distance will be larger. This accounts for the fact that outliers in low-variance directions are more significant than in high-variance directions.</p>
+
+<p>In light of this, the covariance might be interpreted as a deformation of the linear space, which stretches some directions (those with low variance) and compresses others (those with high variance). If \(\Sigma = I\) (as for white noise), the Mahalanobis distance coincides with the Euclidean distance, and \(\Sigma = I\) might be interpreted as uniformly "stretched" space. The elements of \(\Sigma^{-1}\) correct for the stretching and compression of space by accounting for the effect of variance and covariance.</p>
+
+<h3>Distributions with Constant Mean</h3>
+<p>The distributions we considered in the figures above have a constant mean. These distributions can be obtained from white noise by linear transformations. All regular distributions can be transformed back to white noise, whereas the two singular distributions cannot.</p>
+
+<p>In some cases, \(\mu(x,y)\) is nonlinear, but the covariance is constant.</p>
+
+<div>
+    <figure>
+        <figcaption>Figure 4: Sinusoidal Mean and Constant Variance</figcaption>
+        <div style="display: flex; justify-content: space-around;">
+            <figure style="flex: 0 0 45%;">
+                <img src="images/Sinusoidal_Mean_and_constant_variance.png" alt="Sinusoidal Mean and constant variance">
+                <figcaption>Sinusoidal Mean and constant variance</figcaption>
+            </figure>
+            <figure style="flex: 0 0 45%;">
+                <img src="images/Circular_Mean_and_constant_variance.png" alt="Circular Mean and constant variance">
+                <figcaption>Circular Mean and constant variance</figcaption>
+            </figure>
+        </div>
+    </figure>
+</div>
+
+<h3>Distributions with Varying Covariance</h3>
+<p>Another interesting case is when the data distribution is not described by a constant covariance matrix. Instead, the covariance is a function of the parameters. We can distinguish between cases where this function is linear vs. non-linear. Since this relationship is not a constant, it requires a parameterized covariance matrix of the form:</p>
+<pre>
+\Sigma(x,y) = \begin{bmatrix}
+f_{x,x}(x,y) & f_{x,y}(x,y) \\
+f_{y,x}(x,y) & f_{y,y}(x,y)
+\end{bmatrix}.
+</pre>
+
+<p>In most cases, we will consider only continuous functions for the elements of \(\Sigma(x,y)\).</p>
+
+<div>
+    <figure>
+        <figcaption>Figure 5: Varying Covariance</figcaption>
+        <div style="display: flex; justify-content: space-around;">
+            <figure style="flex: 0 0 32%;">
+                <img src="images/plot_8_two_variances.png" alt="Discontinuity in covariance">
+                <figcaption>Discontinuity in covariance</figcaption>
+            </figure>
+            <figure style="flex: 0 0 32%;">
+                <img src="images/plot_9_continous_varying_variances.png" alt="Smoothly varying covariance (linear)">
+                <figcaption>Smoothly varying covariance (linear)</figcaption>
+            </figure>
+            <figure style="flex: 0 0 32%;">
+                <img src="images/plot_9_continous_varying_variances_sine.png" alt="Smoothly varying covariance (nonlinear)">
+                <figcaption>Smoothly varying covariance (nonlinear)</figcaption>
+            </figure>
+        </div>
+    </figure>
+</div>
+
+<p>Figure 5a displays a discontinuous variation in covariance. While this can still be stitched together by a fiber bundle, it is not a smooth, differentiable manifold. Discontinuous cases can be considered approximately continuous with some loss of accuracy, and we will ignore discontinuous cases in the following. Figures 5b and 5c display distributions with covariance that varies in linear and non-linear manners, respectively. In both cases, the mean follows a linear parametrization.</p>
+
+<h3>Complex Covariance and Mean Structures</h3>
+<p>More complex cases exist when both the mean \(\mu(x,y)\) and covariance \(\Sigma(x,y)\) are nonlinear. Examples are displayed in Figures below:</p>
+
+<div>
+    <figure>
+        <figcaption>Figure 6: Non-linearly Varying Covariance on a Circle</figcaption>
+        <div style="display: flex; justify-content: space-around;">
+            <figure style="flex: 0 0 45%;">
+                <img src="images/transformed_circle_mean_sine_variance.png" alt="Nonlinear distribution on a circle">
+                <figcaption>Nonlinear distribution on a circle</figcaption>
+            </figure>
+            <figure style="flex: 0 0 45%;">
+                <img src="images/transformed_parabola_mean_sine_variance.png" alt="Nonlinear distribution on a parabola">
+                <figcaption>Nonlinear distribution on a parabola</figcaption>
+            </figure>
+        </div>
+    </figure>
+    <figure>
+        <img src="images/Gaussian_Process_Regression_data.png" alt="Nonlinear covariance distribution with sine-wave mean">
+        <figcaption>Nonlinear covariance distribution with sine-wave mean</figcaption>
+    </figure>
+</div>
+
+<p>These distributions cannot easily be modeled by a simple covariance matrix and a mean. However, locally (if the transitions are continuous and the neighborhood is small enough), they are well behaved and adhere to the linear description. If the distribution is regular in all points, then smooth transitions from one neighborhood to another can be defined by considering a Riemannian geometry on which the data-distribution lives.</p>
+
+<p>Manifold learning exploits this local linearity by determining data-samples that are in linear neighborhoods of each other. Then, the data-distribution of these samples can be assumed to be linear. It is not always trivial to determine which points are close to each other by only looking at the dimensional data representation (e.g., pixel values).</p>
+<h3>Covariance Matrix as a Geometry of Linear Space</h3>
+<p>These examples serve as visualizations to help build an intuition about how a covariance matrix induces a geometry in linear space. Thus, given a covariance matrix, we might think about a stretched/compressed Euclidean space. We have examined how this can be seen as a transformation of Gaussian noise and explored more complex cases, where the data-distribution depends on the parameter. These complex cases, when continuous, can be seen as smooth transitions between linear cases. For singular distributions, problems arise due to the existence of degenerate directions. A singular covariance matrix is related to perfect correlation.</p>
+
+<h3>Fisher Information Matrix</h3>
+<p>An interesting covariance is the Fisher Information Matrix. In machine learning, one aims to maximize a likelihood \( p(x, \theta) \) or log-likelihood \( \log(p(x, \theta)) \) by finding the optimal parameters \( \theta \).</p>
+
+<p>The gradient of the likelihood with respect to the parameters is defined as:</p>
+<pre>
+s(x, \theta) = \frac{\partial \log (p(x, \theta))}{\partial \theta}
+</pre>
+
+<p>and is called the score of the model. It can be shown that, under regularity conditions, the score of the true model \( \tilde{\theta} \) is zero. In general, the score is indicative of the model-parameter sensitivity. The notion of a score-based gradient has been exploited successfully in generative modeling, under the name of score matching.</p>
+
+<p>For each \( \theta \), it is possible to define the Fisher Information Matrix as the covariance of the score:</p>
+<pre>
+\mathbf{I}(\theta) = \mathbb{E}\left[ \left( \frac{\partial \log p(x, \theta)}{\partial \theta} \right) \left( \frac{\partial \log p(x, \theta)}{\partial \theta} \right)^T \right]
+</pre>
+
+<p>which is also expressed as:</p>
+<pre>
+= -\mathbb{E}\left[ \frac{\partial^2 \log p(x|\theta)}{\partial \theta \partial \theta^T} \right]
+= \int_{x} \frac{\partial}{\partial \theta} \log(p(x, \theta)^2) p(x, \theta) \, dx.
+</pre>
+
+<p>Given the previous examples, this should create some intuition of the underlying geometry defined by this matrix. Note that this covariance matrix varies smoothly, depending on the location. Considering the distance induced by a covariance matrix, it can be shown that \( \mathbf{I}(\theta) \) is a Riemannian metric, providing the tangent space of \( \theta \) with an inner product and defining distances between distributions. The geodesic distance is the path-integral of distances induced in each point by the local covariance matrix. The idea is similar to the Mahalanobis distance, but, due to the interpretation in terms of model parameter sensitivity (as opposed to data sensitivity), we do not use the inverse.</p>
+
+<h3>Geodesic Distance in Parameter Space</h3>
+<p>Consider an infinitesimal displacement \( \frac{d\theta }{dt} = \lim_{\Delta \rightarrow 0} = \theta + \Delta \) and a path \( \gamma(t) \) related to the displacement by:</p>
+<pre>
+d \theta = \frac{d \gamma(t)}{dt} \, dt.
+</pre>
+
+<p>The infinitesimal distance from \( \theta \) to \( d\theta \) is:</p>
+<pre>
+ds^2 = d\theta^T I(\theta) d\theta = \frac{d \gamma(t)}{dt} I(\theta) \frac{d \gamma(t)}{dt} \, dt.
+</pre>
+
+<p>This is the infinitesimal squared distance in Riemannian geometry with the Fisher information matrix as the metric tensor. When \( I(\theta) \) is large, indicating a high likelihood sensitivity of a parameter, the distance in that direction is also large. Moving in directions with high sensitivity (i.e., corresponding to high information content) traverses a larger distance, while moving in directions with low sensitivity does not get us far. If we want to minimize the likelihood, we prefer to move the shortest path from \( \theta_1 \) to \( \theta_2 \), i.e., update the most informative parameters.</p>
+
+<p>The distance between \( \theta_1 \) and \( \theta_2 \) becomes:</p>
+<pre>
+d_G(\theta_1, \theta_2) = \int_0^1 \sqrt{\frac{d\gamma(t)}{dt}^T I(\gamma(t)) \frac{d\gamma(t)}{dt}} \, dt = \int_0^1 ds,
+</pre>
+
+<p>where \( \gamma(0) = \theta_1 \) and \( \gamma(1) = \theta_2 \).</p>
+
+<p>This geodesic distance allows for the quantification of distribution similarity. Distributions (parameterized by \( \theta \)) are close if the information content is similar and distant otherwise. The geodesic distance is symmetric.</p>
+<h2>Connections to Algorithms</h2>
+<p>Let us connect the concepts mentioned to common machine learning algorithms. In all cases, we assume a data-density:</p>
+<pre>
+q(x) = \int q(x, z) \, dz = \int q(x | z) q(z) \, dz
+</pre>
+
+<p>where \( z \) corresponds to an unobserved latent variable. In generative models, this latent variable \( z \) might "generate" the sample \( x \). The latent \( z \) can also be connected to the data-sample \( x \) without an explicit generative role, such as an unobserved label. The field of self-supervised learning aims to learn the labels by considering them as latent variables \( z \).</p>
+
+<p>A common complication is that the integral might not be tractable. In this case, a lower bound (the ELBO) is often constructed. Model-parametric approaches use a parameterized description of the data-density of the form:</p>
+<pre>
+p_{\theta, \phi}(x) = \int p_\theta(x | z) p_\phi(z) \, dz.
+</pre>
+
+<p>An example of a model that adheres to this type of description is the variational autoencoder. The decoder parameterizes \( p_\theta(x | z) \), and the encoder parameterizes \( p_\phi(z) \). The Gaussian Mixture Model also belongs to this class of methods, with some tractability properties for \( p_\phi(z) \).</p>
+
+<p>Model-free approaches do not use a model-parameterization. Instead, they aim to extract useful information directly from the data. One might say that each data-sample is a parameter. Common examples include PCA and Gaussian Processes. The extracted information (such as the principal directions for PCA) can be thought of as the unobserved latent variable \( z \) giving rise to the data distribution.</p>
+
+<p>In Gaussian Processes, the covariance structure of the data is "learned" by imposing a prior structure via kernels. These kernels introduce prior assumptions and have some hyperparameters, so they might be understood as a model-parameterization. However, the key difference is that there is no explicit description of \( p_\theta(x | z) \) or \( q_\phi(z) \). Instead, each data-sample contributes to the learned covariance matrix.</p>
+
+<h3>Principal Component Analysis (PCA)</h3>
+<p>PCA is a method that calculates the covariance matrix given a number of \( N \) data-samples, each with dimension \( n \). By diagonalizing the matrix, one obtains "directions" within the data-parameters that independently introduce variability into the data. The directions with the highest eigenvalues introduce more variability than those with the lowest. A common dimensionality reduction method expresses the data only in terms of the eigenvectors corresponding to the \( m \) highest eigenvalues, with lower-eigenvalue directions considered as noise.</p>
+
+<p>Given the data \( X \), which can be described as a set of \( n \)-dimensional vectors \( X = \{ \vec{x_i} \} \) with \( i = 1, \dots, N \), the linear covariance matrix \( \Sigma \in \mathcal{R}^{n \times n} \) is computed:</p>
+<pre>
+\vec{\mu} = \frac{1}{N} \sum_{i=1}^{N} \vec{x_i}
+</pre>
+
+<pre>
+\Sigma = \frac{1}{N-1} \sum_{i=1}^{N} (\vec{x_i} -  \vec{\mu} ) (\vec{x_i} -  \vec{\mu} )^{T}.
+</pre>
+
+<p>This matrix is symmetric and, therefore, always diagonalizable. It can be written in the form:</p>
+<pre>
+\Sigma = U D U^{-1}
+</pre>
+
+<p>where \( U = [ \vec{u_{1}}, \dots, \vec{u_{N}} ] \) and \( D \) is a diagonal matrix of eigenvalues.</p>
+
+<h3>Transformation to Gaussian Noise</h3>
+<p>As shown in previous sections, any linear distribution can be obtained by transforming white noise. Thus, we can ask which transformation of white noise corresponds to our data. Following the logic in previous sections, the answer is:</p>
+<pre>
+x = U^T D^{1/2} z + \mu = Wz + \mu,
+</pre>
+
+<p>where \( z \sim \mathcal{N}(0, I) \) and \( x \sim \mathcal{N}( \mu, \Sigma ) \). The mean is often omitted as it corresponds to a simple shift. In this case, \( W \in \mathcal{R}^{n \times n} \) and \( z \in \mathcal{R}^n \), meaning no dimensionality reduction is performed.</p>
+
+<p>By keeping only the first \( m < n \) components (the \( m \) eigenvectors with the highest eigenvalues), one can describe the data in a lower-dimensional space while still modeling most of the variation. This reduction method helps focus on the principal components of the data with the highest variability, effectively reducing noise.</p>
+
+<h3>Singular and Probabilistic PCA</h3>
+<p>The linear transformation of white noise leads to:</p>
+<pre>
+x = W_m z_m = U_m D_m^{1/2} z_m,
+</pre>
+
+<p>where \( W_m = U_m D_m^{1/2} \in \mathcal{R}^{n \times m} \) is a matrix of scaled eigenvectors for the reduced dimensions. The coordinates \( z_m \sim \mathcal{N}(0, I_m) \) in the lower \( m \)-dimensional space produce the transformed distribution.</p>
+
+<p>Probabilistic PCA extends this model by adding noise:</p>
+<pre>
+x = W z + \epsilon,
+</pre>
+
+<p>where \( \epsilon \sim \mathcal{N}(0, \sigma^2 I) \). Now:</p>
+<pre>
+x \sim \mathcal{N}(0, WW^T + \sigma^2 I),
+</pre>
+
+<p>which solves the problem of degenerate directions, giving the distribution a full rank of \( n \) in feature space.</p>
+
+<h3>Dual Space (Data-space and Feature-space)</h3>
+<p>In PCA, we can construct a covariance matrix using either data or feature dimensions. The covariance matrix from the feature space:</p>
+<pre>
+\Sigma = XX^T \in \mathcal{R}^{n \times n},
+</pre>
+
+<p>reflects the variability along the feature dimensions, while the covariance matrix from data-space:</p>
+<pre>
+K = X^TX \in \mathcal{R}^{N \times N},
+</pre>
+
+<p>represents correlations among data points. If \( N < n \), working with \( X^TX \) is computationally advantageous, as it is only \( N \times N \).</p>
+<h3>Gaussian Processes</h3>
+<p>In a Gaussian Process, the covariance matrix is described via a kernel function \( k(\cdot, \cdot) \). A common choice is the radial basis function (RBF) kernel, which defines a similarity measure between points:</p>
+<pre>
+k(z, z') = \sigma^2 \exp\left(-\frac{(z - z')^2}{2 l_1^2}\right),
+</pre>
+
+<p>This function attributes a scalar value to pairs of samples \( z \) and \( z' \), similar to an inner product. It creates a structure called a Reproducing Kernel Hilbert Space (RKHS). Here, the hyperparameters are \( \sigma \) and \( l_1 \), which influence the covariance structure, and are chosen based on prior assumptions or optimized during training.</p>
+
+<p>Gaussian Processes (GPs) construct a covariance matrix in data-space as follows:</p>
+<pre>
+\Sigma_K = \begin{bmatrix}
+k(z_1, z_1) & k(z_1, z_2) & \ldots & k(z_1, z_n) \\
+k(z_2, z_1) & k(z_2, z_2) & \ldots & k(z_2, z_n) \\
+\vdots & \vdots & \ddots & \vdots \\
+k(z_n, z_1) & k(z_n, z_2) & \ldots & k(z_n, z_n)
+\end{bmatrix}.
+</pre>
+
+<p>This matrix is similar to the covariance matrix in dual PCA, as it considers the covariance between data samples rather than features. Gaussian Processes are used to infer the function values \( f(z) \) at unobserved points. Given observed data \( X = ((\tilde{x}_1, z_1), (\tilde{x}_2, z_2), \dots, (\tilde{x}_N, z_N)) \), the centered data \( x_i = \tilde{x}_i - \mu = f(z_i) \) can be analyzed under the GP model.</p>
+
+<p>Using a kernel, GPs allow for the modeling of nonlinear relationships. The resulting covariance matrix \( K \) defines a geometry in data-space, with directions of compression or stretching determined by the kernel. While GPs assume an elliptical distribution in data-space, the choice of kernel can implicitly define a high-dimensional feature space with directions that capture complex patterns.</p>
+
+<h3>Estimation in Gaussian Processes</h3>
+<p>Given a new latent \( z^* \), we can relate it to existing latent variables as follows:</p>
+<pre>
+\begin{pmatrix} x \\ x^* = f(z^*) \end{pmatrix} \sim \mathcal{N} \left( \mu = \begin{pmatrix} 0 \\ m(z) \end{pmatrix}, K = \begin{pmatrix} K(Z, Z) & k(Z, z^*) \\ k(z^*, Z) & k(z^*, z^*) \end{pmatrix} \right).
+</pre>
+
+<p>This distribution enables predictions for new data points \( x^* \) based on existing data. We aim to find the expectation \( \mathbb{E}[x^* | x] \). After some calculations, we obtain:</p>
+<pre>
+\mathbb{E}[x^* | x] = k(Z, z^*)^T K(Z, Z)^{-1} x
+</pre>
+
+<p>and the variance:</p>
+<pre>
+\mathbb{Var}[x^* | x] = k(z^*, z^*) - k(Z, z^*)^T K(Z, Z)^{-1} k(Z, z^*).
+</pre>
+
+<p>This gives us a method to estimate \( x^* = f(z^*) \) given observed samples \( (x_i, z_i) \). GPs model the nonlinear relationships in data-space, allowing the covariance matrix \( K \) to capture complex patterns while maintaining computational tractability.</p>
+
+<h3>Gaussian Process Latent Variable Model (GPLVM)</h3>
+<p>The Gaussian Process Latent Variable Model (GPLVM) is a variant of the Gaussian Process where the latent variable \( z \sim \mathcal{N}(0, I_m) \) is unobserved. Here, we only observe \( x_i \in \mathcal{R}^n \) and aim to learn corresponding \( z_i \in \mathcal{R}^m \) values, assuming:</p>
+<pre>
+x = f(z) + \epsilon
+</pre>
+
+<p>where \( \epsilon \sim \mathcal{N}(0, I) \) adds regularization, helping define a full-rank distribution in feature space. Similar to probabilistic PCA, this approach extends the modeling capacity to nonlinear functions without requiring explicit parameterization, making it suitable for dimensionality reduction and capturing complex relationships in the data.</p>
+<h2>Expectation Maximization</h2>
+<p>Expectation Maximization (EM) is an iterative optimization algorithm often used when dealing with latent variables. In machine learning, it is particularly useful for maximum likelihood estimation in cases where the model involves unobserved data. EM iteratively optimizes a lower bound on the likelihood, called the Evidence Lower Bound (ELBO), to find parameters that maximize the observed data likelihood.</p>
+
+<p>Consider a model with observed variables \( x \) and latent variables \( z \), where the goal is to estimate parameters \( \theta \) that maximize the likelihood \( p(x | \theta) \). The EM algorithm iteratively updates two steps:</p>
+
+<ol>
+    <li><strong>E-step:</strong> Compute the expected value of the log-likelihood with respect to the current estimate of the distribution of the latent variables, using the posterior \( p(z | x, \theta) \).</li>
+    <li><strong>M-step:</strong> Maximize this expected log-likelihood with respect to \( \theta \), updating the model parameters.</li>
+</ol>
+
+<p>After repeating these steps, the algorithm converges to a local maximum of the likelihood function, providing an estimate of the parameters \( \theta \). This framework applies to a wide range of models, such as Gaussian Mixture Models (GMMs) and Variational Autoencoders (VAEs).</p>
+
+<h3>EM in Gaussian Mixture Models (GMMs)</h3>
+<p>In Gaussian Mixture Models, the data \( x \) is assumed to be generated by a mixture of multiple Gaussian distributions, each representing a cluster. The latent variables represent the assignment of each data point to a specific cluster. EM is used to estimate the parameters of each Gaussian component and the assignment probabilities.</p>
+
+<p>During the E-step, the probability of each data point belonging to each cluster is calculated, given the current parameter estimates. In the M-step, the parameters (mean, covariance, and mixing coefficients) of each Gaussian component are updated to maximize the expected log-likelihood of the observed data. The process repeats until convergence.</p>
+
+<h3>EM in Variational Autoencoders (VAEs)</h3>
+<p>In VAEs, the latent variable \( z \) is typically a low-dimensional representation of the observed variable \( x \). The VAE aims to maximize the likelihood of \( x \) by using a recognition network to approximate the posterior \( p(z | x) \) with a simpler distribution \( q(z | x) \). The objective function, or ELBO, consists of a reconstruction term (likelihood) and a regularization term (KL divergence).</p>
+
+<p>The VAE framework can be seen as an application of EM, where the recognition network performs the E-step, estimating the distribution over \( z \), and the generative network performs the M-step, updating the parameters of the distribution of \( x \) given \( z \). The iterative optimization allows the VAE to learn a latent space representation that captures the underlying structure of the data.</p>
+
+<h2>Conclusion</h2>
+<p>This document has covered various aspects of the geometry of the covariance matrix and its implications in machine learning, particularly in the context of linear and non-linear transformations, Gaussian Processes, and latent variable models. By exploring the Mahalanobis distance, Fisher Information Matrix, and Riemannian geometry, we’ve developed an understanding of how covariance defines a geometry in linear space, with applications in PCA, Gaussian Processes, and Expectation Maximization.</p>
+
+<p>The dual space representation highlights the flexibility of data-space and feature-space perspectives, allowing for efficient computations and interpretations in high-dimensional spaces. In particular, Gaussian Processes extend beyond linear relationships by defining a covariance function that enables complex, nonlinear relationships to be modeled in data-space, ultimately leveraging latent representations to capture intricate data patterns.</p>
+
+<p>With these insights, we see that covariance and distance metrics form a foundational understanding for algorithms in machine learning, allowing for both interpretability and flexibility in capturing data structures. Methods like EM offer optimization techniques that capitalize on these concepts to iteratively maximize likelihoods, making them powerful tools for models involving latent variables and for inferring complex data distributions.</p>
+
+</body>
+</html>
