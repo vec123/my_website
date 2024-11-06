@@ -5,30 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Diffusion Networks</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 20px;
-        }
-        h2, h3 {
-            color: #333;
-        }
-        p {
-            margin: 10px 0;
-        }
-        pre {
-            background: #f0f0f0;
-            padding: 10px;
-            overflow: auto;
-        }
-        .math-display {
-            text-align: center;
-            margin: 20px 0;
-            font-size: 1.2em;
-        }
-    </style>
+       <!-- MathJax for rendering math expressions -->
+       <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+       
+       <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+       <script>
+           MathJax = {
+               tex: {
+                   inlineMath: [['$', '$'], ['\\(', '\\)']],
+                   displayMath: [['$$', '$$'], ['\\[', '\\]']]
+               }
+           };
+       </script>
+
+
 </head>
 <body>
     <section>
