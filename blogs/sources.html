@@ -3,39 +3,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Score Matching</title>
+    <title>Victor's Technical Blog</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Global Styles */
         body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
         }
-        h1, h2, h3, h4, h5, h6 {
-            color: #2c3e50;
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
         }
-        p {
-            line-height: 1.6;
-        }
-        .equation {
+        /* Header Styles */
+        header {
             text-align: center;
-            margin: 20px 0;
+            padding: 2rem 0;
+            background-color: #333;
+            color: #fff;
         }
-        .equation span {
-            font-family: "Courier New", monospace;
-            background-color: #f9f9f9;
-            display: inline-block;
-            padding: 10px;
-            border: 1px solid #ccc;
+        header h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        header p {
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+        /* Navigation Styles */
+        nav {
+            background-color: #fff;
+            padding: 1rem;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        nav a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #333;
+            font-weight: 700;
+        }
+        nav a:hover {
+            color: #0073e6;
+        }
+        /* Blog Content Styles */
+        .intro-text {
+            background-color: #fff;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
             border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            color: #555;
         }
-        .highlight {
-            color: red;
+        .post {
+            background-color: #fff;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
         }
-        .author-date {
-            font-style: italic;
-            margin-bottom: 20px;
+        .post h2 {
+            margin-top: 0;
+            font-size: 1.5rem;
+            color: #333;
+        }
+        .post p {
+            line-height: 1.6;
+            color: #555;
+        }
+        .post a {
+            color: #0073e6;
+            text-decoration: none;
+        }
+        .post a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
+<body>
+
+<header>
+    <h1>Victor's Technical Blog</h1>
+    <p>Mathematics, Machine Learning and Information Theory</p>
+</header>
+
+<nav>
+    <a href="../index.html">Home</a>
+    <a href="../blog">Blog</a>
+    <a href="../about.html">About</a>
+    <a href="../contact.html">Contact</a>
+</nav>
+
 <body>
     <h2>Good sources</h2>
     <h3>The MYRIAD website</h3> 
