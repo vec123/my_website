@@ -494,15 +494,33 @@ Variational GPLVM imposes a variational prior onto the latent variables, similar
 Some approaches connect gaussian processes with auto-encoders by 
 
 
+
+
+
+
+
+
 <h3>Attention</h3>
 
 The attention mechanism, popularized by the transformer model, can be understood as a learned covariance parameterization.
 The mapping of Key and Query pairs to a scalar product (to a reproducing hilbert space) corresponds to learning the covariance of Key-embedding and Query-embedding.
-This scalar product, corresponding to the positive covariance value, can also be understood as inducing a geometry in the reproducing hilbert space,
+This scalar product, corresponding to the covariance value, can also be understood as inducing a geometry in a reproducing hilbert space 
+(infinite dimensional vector space),
 with zero corresponding to orthogonality and one corresponding to perfect correlation. 
 Note, that the covariance matrix stretches and compresses a linear space allowing for learning a distortion. 
 Attention moves close points closer together (higher covariance) and far points further away (lower covariance).
 Compare this intuition to the Mahanalobis distance, which is a distance measure in a stretched and compressed space, where the covariance matrix is learned.
+
+
+
+
+
+
+
+
+
+
+
 
 
 <h3>Reproducing Hilber Space</h3>
