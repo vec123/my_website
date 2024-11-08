@@ -612,46 +612,48 @@ This inner product allows for the notion of orthogonality and correlation.
 By the representer theorem, every function that minimizes an empirical risk functional 
 can be represented as a linear combination of the inner products evaluated at the training points.
 Transfomers and Kernel-covariances map data-sample pairs into this space by defining their inner product.
-The formalization of a reproducing hilbert space is done best my considering the space of functions which are linear combinations of /( m = \infty /) orthonormal bases (basis functions) 
+The formalization of a reproducing hilbert space is done best my considering the space of functions which are linear combinations of /( N = \infty /) orthonormal bases (basis functions) 
 <div class="equation-block">
     $$ 
-        f(x) = \sum_{i=1}^{m} a_i l(x).
+        f(x) = \sum_{n=1}^{N} a_n l(x).
     $$
 </div>
-Let us assume that  /( \sum |a_i|^2 dx \leq 1 /) and  /( -1 \leq a \leq 1/).
+Let us assume that  /( \sum |a_n|^2 dx \leq 1 /) and  /( -1 \leq a \leq 1/).
 Consider 
 <div class="equation-block">
     $$ 
-    \langle f(x)|g(x) \rangle = \langle \sum_{i=1}^{m} \a_i l(x) | \sum_{i=1}^{m} \b_i l(x) \rangle = \sum_{i=1}^{m} a_i b_i
+    \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} \a_n l(x) | \sum_{i=1}^{m} \b_n l(x) \rangle = \sum_{n1}^{N} a_n b_n
     $$
 </div> which defines an inner product of a Hilbert space.
-Let us define  /( k_{z} =  h(z)l(x)  /) which converges for /( h(z)l(x) \leq 1 /) to
+Let us define  /( k_{z} =  h(z)l(x) = \sum_{n=0}^N z^n x^n  /) which converges for /( h(z)l(x) \leq 1 /) to
 <div class="equation-block">
     $$  
-     \sum_{i=1}^{m} a_i b_i = \frac{1}{1 - h(z)l(x) }
+     \sum_{i=1}^{n}  z^n x^n = \frac{1}{1 - z^n x^n <x></x>
+     <n></n> }
     $$.
 </div>
+Here we have chosen the functions /( h(z) = \sum_{n=0}^N z^n /) and  /( l(x) = \sum_{n=0}^N x^n /) as basis functions.
 Note,
 <div class="equation-block">
-    $$ 
-    \langle f(x)|  \frac{1}{1 - h(z)l(x)} \rangle = \sum_{i=1}^{m} a_i h(z) = f(z)
+    $$ N
+    \langle k(z,x) | f(x)\rangle =\langle f(x)| k(z,x) \rangle = \langle f(x)|  \frac{1}{1 - h(z)l(x)} \rangle = \langle f(x)|  \frac{1}{1 - h(z)l(x)} \rangle = \sum_{i=1}^{m} a_i h(z) = f(z) = sum_{n=1}^{N} a_n z^n
     $$.
 </div>
 <br><br>
-For example, consider <div class="equation-block">
+In another example, consider <div class="equation-block">
     $$ 
-    l(x) = \frac{x^m}{\sqrt{m!}} \exp^{\frac{-x^2}{m}} /
+    l(x) = \frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}} /
     $$
 </div> which defines a basis of gaussian functions. As before we obtain
 <div class="equation-block">
     $$ 
-    \langle f(x)|g(x) \rangle = \langle \sum_{i=1}^{m} \a_i l(x) | \sum_{i=1}^{m} \b_i l(x) \rangle = \sum_{i=1}^{m} a_i b_i
+    \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} \a_n l(x) | \sum_{i=1}^{n} \b_n l(x) \rangle = \sum_{n=1}^{N} a_n b_n
     $$
 </div>
 and
 <div class="equation-block">
 $$  
-k_{z} =  h(x)l(x) = \sum_{i=1}^{m} ( \frac{z^m}{\sqrt{m!}} \exp^{\frac{-z^2}{m}} ) (\frac{x^m}{\sqrt{m!}} \exp^{\frac{-x^2}{m}}) 
+k(z,x) =  h(z)l(x) = \sum_{n=1}^{N} ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} ) (\frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}}) 
 $$
 $$
 = \exp^{\frac{-(z-x)^2}{1}}
@@ -660,7 +662,7 @@ $$
 As before 
 <div class="equation-block">
     $$ 
-    \langle f(x) | k(z) \rangle =  \langle k(z) | f(x) \rangle = \sum_{i=1}^{m} a_i h(z) = f(z)
+    \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = \sum_{i=n}^{N} a_i h(z) =  \sum_{n=1}^{N} a_n ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} )
     $$.
 </div>
 
