@@ -510,14 +510,21 @@ with zero corresponding to orthogonality and one corresponding to perfect correl
 Note, that the covariance matrix stretches and compresses a linear space allowing for learning a distortion. 
 Attention moves close points closer together (higher covariance) and far points further away (lower covariance).
 Compare this intuition to the Mahanalobis distance, which is a distance measure in a stretched and compressed space.
-
-
-Start with a sequence of embeddings, or vectors, \( \{e_1, ..., e_n \}$ \), each with dimension $d$. 
-Assume each vector also contains information on its position 
-\( i \in \{ 1, ... , n \} \).
+<br>
+<br>
+To explain the attention mechanism start with a sequence of embeddings, or vectors, \( \{e_1, ..., e_n \}$ \), each with dimension $d$. 
+Assume each vector also contains information on its position \( i \in \{ 1, ... , n \} \).
 An attention block aims to compute an updated version of the embedding so that each contains information of its context. 
+Each input-embedding attends to all other input-embedding. This enables the encoding of global context in the single embedding.
+Global context is just a learned aggregation on the whole data. 
+This contrast many other methods, where the aggregation is restricted to neighbourhoods, such as convolutional filters and RNN's.
+Considering the whole data makes attention powerful but computationally expensive. 
+Because in an attention module all embeddings attend to all others, the context window is global instead of sequential.  
+Thus, the embedding for pronouns can learn to pay attention to the embedding for the sentence subject, while the proposition "to" learns to pay attention 
+to the connected verb "walking" and noun "school". 
+In addition, positional encodings are used, providing information on the embedding location. 
+In some languages the noun is always the first word which can be recognized with positional information. 
 As an example, if the vectors embedding correspond to words, the noun embedding should contain the information of the corresponding adjective. 
-
 Each embedding vector has a query vector, usually of smaller dimension. It is computed by \( W_Q e_i = q_i \).
 The query vector encodes the context. For example the notion that nouns have preceding adjectives. 
 I like imagining that the query matrix asks "what are you?" to the embedding, and the embedding for orange answers "A juicy fruit" or "a color", 
