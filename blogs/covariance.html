@@ -612,7 +612,7 @@ This inner product allows for the notion of orthogonality and correlation.
 By the representer theorem, every function that minimizes an empirical risk functional 
 can be represented as a linear combination of the inner products evaluated at the training points.
 Transfomers and Kernel-covariances map data-sample pairs into this space by defining their inner product.
-The formalization of a reproducing hilbert space is done best my considering functions as linear combinations of /( m = \infty /) orthonormal bases (basis functions) 
+The formalization of a reproducing hilbert space is done best my considering the space of functions which are linear combinations of /( m = \infty /) orthonormal bases (basis functions) 
 <div class="equation-block">
     $$ 
         f(x) = \sum_{i=1}^{m} a_i l(x).
@@ -660,7 +660,7 @@ $$
 As before 
 <div class="equation-block">
     $$ 
-    \langle f(x) | k(z) \rangle =  \langle k(z) | f(x) \rangle =  \langle f(x) |  \frac{1}{1 - h(z)l(x)} \rangle = \sum_{i=1}^{m} a_i h(z) = f(z)
+    \langle f(x) | k(z) \rangle =  \langle k(z) | f(x) \rangle = \sum_{i=1}^{m} a_i h(z) = f(z)
     $$.
 </div>
 
