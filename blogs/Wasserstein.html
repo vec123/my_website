@@ -84,14 +84,21 @@
         For $p=2$, it can be shown that there exists a unique convex function $\phi$ so that $J^*(\cdot) = \nabla \phi $.
         Furthermore, for $p=2$ the metric space $ \{ P(\Omega), W_p \}$ has the structure of a Riemannian manifold.
         This might also hold for other values of $p$.
-        Another important fact is that the computing the Wasserstein is expensive, unless the probabilities $p(x)$ and $q(x)$ are one dimensional.
-        In the one-dimensional case the distance has a closed form solution. 
         Equation <a href="#eq-wasserstein">Wasserstein</a> can be written in a dual formulation as 
-        <div class="equation" id = "eq-wasserstein discrete">
+        <div class="equation" >
             $$
             W_p(P,Q) = (\sup_{\Phi, \Psi} \int_{y} \Phi(y)dQ(y) - \int_{x} \Psi(x)dP(x)),
             $$
         </div>
+        For $p=1$ this can be transformed into 
+        <div class="equation">
+            $$
+            W_p(P,Q) = (\sup_{f} \int_{x} f(x)dQ(x) - \int_{x} f(x)dP(x) ),
+            $$
+        </div> which is the loss-term employed in Wasserstein GANs.
+        Another important fact is that the computing the Wasserstein is expensive, unless the probabilities $p(x)$ and $q(x)$ are one dimensional.
+        In the one-dimensional case the distance has a closed form solution. 
+
     </p>
    
   
