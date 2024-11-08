@@ -465,10 +465,23 @@ This line of research leads towards an understanding of geometrical quantities i
 
 <h3>PCA</h3>
 
+PCA is a popular and well understood algorithm which allows for data-distribution modelling and dimensionality reduction by considering the eigenspace 
+of the covariance matrix. As such, it is a good introduction into the covariance matrix, its meaning and possible manipulations. 
+
+
 
 
 
 <h3>Gaussian Processes and function space</h3>
+
+Gaussian Processes parameterizes a covariance matrix via a kernel-covariance. 
+They can be viewed as a form of PCA with potentially infinite feature-dimensions, created by applying a mapping (kernel) to the feature-space.
+This mapping is implicit in the kernel-covariance parameterization and does not need to be explicitly defined. 
+This allows for infinite-dimensional feature-spaces, also called function spaces.
+Since a covariance matrix in infinite-dimensional feature-spaces is not computable, gaussian processes exploit the data-space and feature-space duality 
+and perform the covariance parameterization in data-space. The parameters are updated via maximum likelihood estimation.
+Given an optimal covariance matrix, a gaussian distribution is defined and by its conditional mean its conditional covariance inference can be done with 
+uncertainty information.
 
 
 
