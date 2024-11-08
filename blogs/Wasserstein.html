@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Matching</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .equation {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .equation span {
+            font-family: "Courier New", monospace;
+            background-color: #f9f9f9;
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .highlight {
+            color: red;
+        }
+        .author-date {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Wasserstein distance and algorithms</h1>
+
+    <h2>Introduction</h2>
+    <p>The Wasserstein distance is a distance between shapes based on optimal transport.
+        Consider two probability densities $p(x)$ and $q(x)$ defining the distributions $P$ and $Q$, 
+        so that $x \sim P$ and $y \sim Q$ with $x,y \in \mathbb{R}^d$.
+        Its original formulation is the Monge-Kantorovich formulation which considers the optimal transport distance as
+        <div class="equation">
+           $$
+        \inf_T \int || x - T(x) ||^p dP(x).
+            $$
+        </div>
+        Here /( dP(x) /) is the probability measure and /( T(x) /) is the transport map. 
+
+        If the minimizer  /( T^*(x) /) exists it is the optimal transport map.
+        However, in this formulation, a solution is not guaranteed to exist. 
+        For example, if $p(x)$ corresponds to a point-mass and $q(x)$ corresponds to multiple point-masses,
+        then, due to the usage of equal probability measure for both distributions, the mass can not be splitted. 
+    </p>
+    <div class="equation">
+        <span>p<sub>θ</sub>(x) = <i>𝑡𝑖𝑙𝑑𝑒</i>(x) / Z<sub>θ</sub></span>
+    </div>
+    <p>where <i>Z<sub>θ</sub> = ∫𝑡𝑖𝑙𝑑𝑒(x) dx</i> is generally intractable normalization. Energy models have promise here, approximating the integral via Langevin.</p>
+
+  
+        
+        </body>
+        </html>
+        
