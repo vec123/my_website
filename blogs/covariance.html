@@ -503,16 +503,93 @@ Some approaches connect gaussian processes with auto-encoders by
 <h3>Attention</h3>
 
 The attention mechanism, popularized by the transformer model, can be understood as a learned covariance parameterization.
-The mapping of Key and Query pairs to a scalar product (to a reproducing hilbert space) corresponds to learning the covariance of Key-embedding and Query-embedding.
-This scalar product, corresponding to the covariance value, can also be understood as inducing a geometry in a reproducing hilbert space 
+The mapping of pairs to a scalar product (to a reproducing hilbert space) corresponds to learning the covariance of both.
+This scalar product can also be understood as inducing a geometry in a reproducing hilbert space 
 (infinite dimensional vector space),
 with zero corresponding to orthogonality and one corresponding to perfect correlation. 
 Note, that the covariance matrix stretches and compresses a linear space allowing for learning a distortion. 
 Attention moves close points closer together (higher covariance) and far points further away (lower covariance).
-Compare this intuition to the Mahanalobis distance, which is a distance measure in a stretched and compressed space, where the covariance matrix is learned.
+Compare this intuition to the Mahanalobis distance, which is a distance measure in a stretched and compressed space.
 
 
+Start with a sequence of embeddings, or vectors, \( \{e_1, ..., e_n \}$ \), each with dimension $d$. 
+Assume each vector also contains information on its position 
+\( i \in \{ 1, ... , n \} \).
+An attention block aims to compute an updated version of the embedding so that each contains information of its context. 
+As an example, if the vectors embedding correspond to words, the noun embedding should contain the information of the corresponding adjective. 
 
+Each embedding vector has a query vector, usually of smaller dimension. It is computed by \( W_Q e_i = q_i \).
+The query vector encodes the context. For example the notion that nouns have preceding adjectives. 
+I like imagining that the query matrix asks "what are you?" to the embedding, and the embedding for orange answers "A juicy fruit" or "a color", 
+depending on its embedding vector (which contains the context that is encoded).
+Additionally a key is computed \( W_k e_i = k_i \) having equal dimension to the query vector. 
+Given an embedding with a specific query vector, the keys which are close to that query should come from embeddings which are conceptually close.
+In essence, when the \textit{dot product} between \( q_i \) and \( k_j \) is large, then \( i \) and \( j \) are conceptually close. 
+For example, the query of the sky embedding could be close to the key of the blue (but not green) embedding. 
+The embedding of \textit{blue} attends to the embedding of sky. 
+The query vector of the orange fruit embedding might be close to the key vector of juice, tree, banana, breakfast. 
+It might be far from petroleum, graphene, lithium.  
+The dot product between query and key vector corresponds to a weight which assigns to each embedding an attention value reflecting how important 
+they are to each other. The \textit{dot product} is passed through a \textit{softmax} layer to create a value range from zero to one.
+This is the attention value. 
+
+Let \( Q =  \{q_i \}= \{ q_1, ... ,q_n \} \) and \( K =  \{k_j \} = \{ k_1, ... ,k_n \} \) be matrices corresponding to the key and query vectors for the 
+\( n \) embeddings.
+Then
+<div class="equation-block">
+    $$
+    \text{softmax}( \frac{QK^T}{\sqrt{n}} )
+    $$
+</div>
+corresponds to the attention values computed column by column creating an attention value matrix. 
+Each entry, denoted by  \( a_{ij} \), reflects the importance of embedding  \( i \) to embedding  \( j \). 
+The division with  \( \sqrt{n} \) happens for numerical reasons. Notice that this matrix has dimension  \( n \times n \).
+This matrix is then used to update the  \( d \) dimensional embedding. 
+This notion of mapping vectors into a inner-product space is similar to kernel methods and reproducing (kernel) hilbert spaces. 
+Usually these methods use parameterized filters which define the inner-product, such as the gaussian kernel. 
+In the attention mechanism, these kernels are learned via the query and value matrix respectively. 
+<a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation<\a> has extended this concept to Gaussian Processes. 
+\newline
+\newline
+Until now, we have explained how to determine contextual closeness via the Query and Key matrix but not how to update embeddings according to this contextual 
+closeness.
+For this consider the value-vector computed by  \( W_v e_i = v_i \), where  \(v_i \) is also  \(d \)-dimensional.
+This results in  \(n \) value-vectors. 
+These value vectors are added to the original embeddings  \(e_i \) to do a contextual the update. For each query  \(q_i \) compute 
+
+<div class="equation-block">
+    $$u_i = \sum_{j=0}^{n}a_{ij}*v_i.$$ 
+</div>
+This essentially is an attention weighted sum of all value vectors  \( v_i \).
+Then 
+<div class="equation-block">
+    $$ e_i^{t+1} = e_i^{t} + u_i $$ 
+</div>
+corresponds to the update of the embedding.
+This process of updating the embeddings  \( e_i \) with the key \( W_k \), query  \( W_q \) and value  \( W_v \) matrices is one head of attention.
+ The three matrices are the tuneable model parameters related to this computation.
+Often the notation is
+<div class="equation-block">
+    $$
+    \text{Attention}(Q,K,V) = \text{softmax}( \frac{QK^T}{\sqrt{n}})V$$
+
+Using multiple key, query and value matrices is called a \textit{multi attention-head}. 
+The computation of parameters for each attention head can be done in parallel. 
+During the embedding update, all attention heads are used to compute the weighted change of the embedding
+<div class="equation-block">
+    $$
+    u_i^{k} = \sum_{j=0}^{n}a_{ij}^{k}*v_i^{k},
+    $$
+</div>
+which is then added to the embedding accordingly
+<div class="equation-block">
+    $$ e_i^{t+1} = \sum_{k} e_i^{t} + u_i^{k}.$$
+</div>
+This operation is the main ingredient in Transformer architectures. 
+While it has been popularized mainly through applications in the language processing domain, 
+many other areas can be included. 
+<a href = "https://www.ecosia.org/search?q=Vision+Transformer&addon=chrome&addonversion=6.0.4&method=topbar">Vision Transformers</a> use attention in a visual context by splitting the Image into patches, 
+and encoding these into a sequence of embeddings. Once the information is available in this for multi-head attention can be applied as described above.
 
 
 
