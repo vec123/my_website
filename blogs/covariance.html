@@ -483,13 +483,15 @@ In this euclidean space, the covariance matrix defines a linear distribution and
 nonlinear basis directions, the expressivity is augmented.
 Since a covariance matrix in infinite-dimensional feature-spaces is not computable, gaussian processes exploit the data-space and feature-space duality 
 and perform the covariance parameterization in data-space. The parameters are updated via maximum likelihood estimation.
-Given an optimal covariance matrix, a gaussian distribution is defined and by its conditional mean its conditional covariance inference can be done with 
+Given an optimal covariance matrix, a gaussian distribution is defined and, by its conditional mean its conditional covariance, inference can be done with 
 uncertainty information.
 
 <br><br>
 Interesting extensions of gaussian processes are gaussian process latent variable models (GPLVM) and variational GPLVM.
 GPLVM is a generative model which allows for dimensionality reduction and data generation, similar to an auto-encoder.
 Variational GPLVM imposes a variational prior onto the latent variables, similar to a variational auto-encoder.
+<br><br>
+Some approaches connect gaussian processes with auto-encoders by 
 
 
 <h3>Attention</h3>
@@ -502,6 +504,12 @@ Note, that the covariance matrix stretches and compresses a linear space allowin
 Attention moves close points closer together (higher covariance) and far points further away (lower covariance).
 Compare this intuition to the Mahanalobis distance, which is a distance measure in a stretched and compressed space, where the covariance matrix is learned.
 
+
+<h3>Reproducing Hilber Space</h3>
+
+The reproducing hilber space is a vector space of functions (infinite dimensional) induced with an inner product. 
+This inner product allows for the notion of orthogonality and correlation. 
+Transfomers and Kernel-covariances map data-sample pairs into this space by defining their inner product.
 
 <!-- 
 <h2>Connections to Algorithms</h2>
