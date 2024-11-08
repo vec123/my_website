@@ -628,15 +628,16 @@ Consider
 Let us define  /( k_{z} =  h(z)l(x) = \sum_{n=0}^N z^n x^n  /) which converges for /( h(z)l(x) \leq 1 /) to
 <div class="equation-block">
     $$  
-     \sum_{i=1}^{n}  z^n x^n = \frac{1}{1 - z^n x^n <x></x>
-     <n></n> }
+     \sum_{i=1}^{n}  z^n x^n = \frac{1}{1 - zx} 
+     <n></n> 
     $$.
 </div>
 Here we have chosen the functions /( h(z) = \sum_{n=0}^N z^n /) and  /( l(x) = \sum_{n=0}^N x^n /) as basis functions.
 Note,
 <div class="equation-block">
     $$ N
-    \langle k(z,x) | f(x)\rangle =\langle f(x)| k(z,x) \rangle = \langle f(x)|  \frac{1}{1 - h(z)l(x)} \rangle = \langle f(x)|  \frac{1}{1 - h(z)l(x)} \rangle = \sum_{i=1}^{m} a_i h(z) = f(z) = sum_{n=1}^{N} a_n z^n
+    \langle k(z,x) | f(x)\rangle =\langle f(x)| k(z,x) \rangle = \langle f(x)|  \frac{1}{1 - h(z)l(x)} \rangle 
+  = \langle f(x)|  \frac{1}{1 - zx} \rangle = \sum_{n=1}^{N} a_n z^n = f(z) = sum_{n=1}^{N} a_n h(z)
     $$.
 </div>
 <br><br>
@@ -662,7 +663,7 @@ $$
 As before 
 <div class="equation-block">
     $$ 
-    \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = \sum_{i=n}^{N} a_i h(z) =  \sum_{n=1}^{N} a_n ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} )
+    \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = = \sum_{n=0}^{N} a_n k(x_n,z)  \sum_{i=n}^{N} a_n h(z) =  \sum_{n=1}^{N} a_n ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} )
     $$.
 </div>
 
