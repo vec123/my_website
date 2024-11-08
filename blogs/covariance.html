@@ -43,7 +43,11 @@
 
 <p>We start by considering data distributions and extend this to model-distributions. The concepts are transferable. In one case, each sample corresponds to a data-sample (defined by the feature dimensions/parameters), in the other case, each sample corresponds to a model-sample (defined by the model dimension/parameters). This can be related to the difference between model parametrizations vs. model-free parametrizations of data-distributions.</p>
 
-<h3>Example: White Noise</h3>
+
+
+
+
+<h3>Some covariances and their distributions </h3>
 <p>The simplest distribution is white noise, which in \(2D\) corresponds to a Gaussian with mean at the origin and covariance matrix:</p>
 
 <div class="equation-block">
@@ -332,6 +336,16 @@ $$
 <p>Manifold learning exploits this local linearity by determining data-samples that are in linear neighborhoods of each other. Then, the data-distribution of these samples can be assumed to be linear. It is not always trivial to determine which points are close to each other by only looking at the dimensional data representation (e.g., pixel values).</p>
 <h3>Covariance Matrix as a Geometry of Linear Space</h3>
 <p>These examples serve as visualizations to help build an intuition about how a covariance matrix induces a geometry in linear space. Thus, given a covariance matrix, we might think about a stretched/compressed Euclidean space. We have examined how this can be seen as a transformation of Gaussian noise and explored more complex cases, where the data-distribution depends on the parameter. These complex cases, when continuous, can be seen as smooth transitions between linear cases. For singular distributions, problems arise due to the existence of degenerate directions. A singular covariance matrix is related to perfect correlation.</p>
+
+
+
+
+
+
+
+
+
+
 
 <h3>Fisher Information Matrix</h3>
 <p>An interesting covariance is the Fisher Information Matrix. In machine learning, one aims to maximize a likelihood \( p(x, \theta) \) or log-likelihood \( \log(p(x, \theta)) \) by finding the optimal parameters \( \theta \).</p>
