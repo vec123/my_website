@@ -56,6 +56,15 @@
         However, in this formulation, a solution is not guaranteed to exist. 
         For example, if $p(x)$ corresponds to a point-mass and $q(x)$ corresponds to multiple point-masses,
         then, due to the usage of equal probability measure for both distributions, the mass can not be splitted. 
+        An alternative formulation is the soft formulation
+        <div class="equation">
+            $$
+            W_p(P,Q) = (\inf_{J\in \mathcal{J}(P,Q)} \int_{x,y} ||x-y||^p dJ(x,y) )^\frac{1}{p}
+             $$
+         </div>
+         so that $\int_y J(x,y) dy = P $ and $\int_x J(x,y) dy = Q $.
+
+
     </p>
     <div class="equation">
         <span>p<sub>θ</sub>(x) = <i>𝑡𝑖𝑙𝑑𝑒</i>(x) / Z<sub>θ</sub></span>
