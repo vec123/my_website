@@ -509,7 +509,7 @@ Attention moves close points closer together (higher covariance) and far points 
 Compare this intuition to the Mahanalobis distance, which is a distance measure in a stretched and compressed space.
 <br>
 <br>
-To explain the attention mechanism start with a sequence of embeddings, or vectors, \( \{e_1, ..., e_n \}$ \), each with dimension $d$. 
+To explain the attention mechanism start with a sequence of embeddings, or vectors, \( \{e_1, ..., e_n \} \), each with dimension \(d\). 
 Assume each vector also contains information on its position \( i \in \{ 1, ... , n \} \).
 An attention block aims to compute an updated version of the embedding so that each contains information of its context. 
 Each input-embedding attends to all other input-embedding. This enables the encoding of global context in the single embedding.
