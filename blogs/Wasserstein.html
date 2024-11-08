@@ -57,20 +57,43 @@
         For example, if $p(x)$ corresponds to a point-mass and $q(x)$ corresponds to multiple point-masses,
         then, due to the usage of equal probability measure for both distributions, the mass can not be splitted. 
         An alternative formulation is the soft formulation
-        <div class="equation">
+        <div class="equation"  id="eq-wasserstein">
             $$
             W_p(P,Q) = (\inf_{J\in \mathcal{J}(P,Q)} \int_{x,y} ||x-y||^p dJ(x,y) )^\frac{1}{p}
              $$
          </div>
-         so that $\int_y J(x,y) dy = P $ and $\int_x J(x,y) dy = Q $.
-
-
+        so that $\int_y J(x,y) dy = P $ and $\int_x J(x,y) dy = Q $.
+        The minimizer $J^*(\cdot)$ is called the optimal transport plan and is guaranteed to exist.
+        If $T: X \rightarrow X$, i.e. no splitting of mass occurs (input and output measure coincide), 
+        it is called the optimal transport map. 
+        For many applications the input and output measures are equal.
+        Note that minimizing the Wasserstein distance returns the minimal cost, as well as a corresponding transport plan. 
+        This makes it a very attractive method for image morphing, image registration and further. 
+        For example, consider two greyscale images in $2D$. 
+        Then the optimal transport map is a $2D$ vector-field, where each point receives a $2D$-vector with the corresponding displacement. 
+        In a discrete setting we have samples $x_i$ and $y_j$ which occur with probability $p_i$ and $q_j$ respectively.
+        Equation <a href="#eq-wasserstein">Wasserstein</a> can be written as
+        <div class="equation" id = "eq-wasserstein discrete">
+        $$
+        W_p(P,Q) = \min_{J\in \mathcal{J}(P,Q)} \sum_i \sum_j ||x_i-y_j||^p J(x_i,y_j)
+        $$
+        </div>
+        so that $ \sum_j J(x_i, y_j) = p_i$, $ \sum_i J(x_i, y_j) = q_j$ and $J(x_i,y_j) \geq 0$.
+        <br><br>
+        Interesting cases are  $p=1$ (also called Earth-Mover distance) and $p=2$.
+        For $p=2$, it can be shown that there exists a unique convex function $\phi$ so that $J^*(\cdot) = \nabla \phi $.
+        Furthermore, for $p=2$ the metric space $ \{ P(\Omega), W_p \}$ has the structure of a Riemannian manifold.
+        This might also hold for other values of $p$.
+        Another important fact is that the computing the Wasserstein is expensive, unless the probabilities $p(x)$ and $q(x)$ are one dimensional.
+        In the one-dimensional case the distance has a closed form solution. 
+        Equation <a href="#eq-wasserstein">Wasserstein</a> can be written in a dual formulation as 
+        <div class="equation" id = "eq-wasserstein discrete">
+            $$
+            W_p(P,Q) = (\sup_{\Phi, \Psi} \int_{y} \Phi(y)dQ(y) - \int_{x} \Psi(x)dP(x)),
+            $$
+        </div>
     </p>
-    <div class="equation">
-        <span>p<sub>θ</sub>(x) = <i>𝑡𝑖𝑙𝑑𝑒</i>(x) / Z<sub>θ</sub></span>
-    </div>
-    <p>where <i>Z<sub>θ</sub> = ∫𝑡𝑖𝑙𝑑𝑒(x) dx</i> is generally intractable normalization. Energy models have promise here, approximating the integral via Langevin.</p>
-
+   
   
         
         </body>
