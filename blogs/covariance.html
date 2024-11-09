@@ -916,12 +916,14 @@ Let us define  \( k_{z} = \sum h_n(z)l_n(x) = \sum_{n=0}^N z^n x^n  \) which con
 Here we have chosen the functions /( h_n(z) = z^n /) and  /( l_n(x) = x^n /) as basis functions.
 The convergence of 
 Note, \( k_{z} = \sum h_n(z)l_n(x)  \) is an important property of reproducing hilbert spaces.
+Note,
 <div class="equation-block">
     $$ 
     \langle k(z,x) | f(x)\rangle =\langle f(x)| k(z,x) \rangle = \langle f(x)|  \frac{1}{1 - h(z)l(x)} \rangle 
   = \langle f(x)|  \frac{1}{1 - zx} \rangle = \sum_{n=1}^{N} a_n z^n ) = \sum_{n=1}^{N} a_n h_n(z) = f(z)
     $$.
 </div>
+This is the reproducing property of the kernel associated to the hilbert space. Thus a hilbert space with such a kernel is called reproducing hilbert space.
 <br><br>
 In another example, consider <div class="equation-block">
     $$ 
