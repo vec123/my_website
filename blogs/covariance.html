@@ -663,10 +663,16 @@ $$
 As before 
 <div class="equation-block">
     $$ 
-    \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z) = f(z)
+    \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z) = f(z).
     $$.
 </div>
-
+The typical formula is 
+<div class="equation-block">
+    $$ 
+    f(z) = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z)
+    $$.
+</div>
+This allows for the representation of functions in the reproducing hilbert space. The kernel-function is a design choice, the parameters /( a_n /) and those of the kernel function are learned by gradient methods.
 <!-- 
 <h2>Connections to Algorithms</h2>
 <p>Let us connect the concepts mentioned to common machine learning algorithms. In all cases, we assume a data-density:</p>
