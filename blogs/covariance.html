@@ -924,18 +924,18 @@ Note, \( k_{z} = \sum h_n(z)l_n(x)  \) is an important property of reproducing h
 <br><br>
 In another example, consider <div class="equation-block">
     $$ 
-    l(x) = \frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}} /
+    l_n(x) = \frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}} /
     $$
 </div> which defines a basis of gaussian functions. As before we obtain
 <div class="equation-block">
     $$ 
-    \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} \a_n l(x) | \sum_{i=1}^{n} \b_n l(x) \rangle = \sum_{n=1}^{N} a_n b_n
+    \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} a_n l(x) | \sum_{i=1}^{n} b_n l(x) \rangle = \sum_{n=1}^{N} a_n b_n
     $$
 </div>
 and
 <div class="equation-block">
 $$  
-k(z,x) =  h(z)l(x) = \sum_{n=1}^{N} ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} ) (\frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}}) 
+k(z,x) =  \sum_{n=1}^{N} h_n(z)l_n(x) = \sum_{n=1}^{N} ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} ) (\frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}}) 
 $$
 $$
 = \exp^{\frac{-(z-x)^2}{1}}
