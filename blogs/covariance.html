@@ -717,17 +717,23 @@ $$
 \text{Var}(x) = \sum_{i=1}^N\mathbb{E}( W\Phi(z_i))\mathbb{E}(W\Phi(z_i))^T  =  \sum_{i=1}^N \Phi(z_i)\mathbb{E}(W)\mathbb{E}(W)^T\Phi(z_i)^T 
 $$
 </div>
-A way of alleviating the issue of an unknown covariance matrix with unspecified feature dimensions, is by considering the covariance $\Sigma = X^TX \in \mathcal{R}^{N \times N}$ which is limited in dimensionality only by the amount of data-samples, but defines a distribution in the feature-space dimensions, as illustrated o the linear case. 
-One chooses a non-linear parameterization of the kernel covariance matrix $\Sigma = K(Z,Z)$, such as the radial basis function kernel. This imposes a form on the corresponding functions $\Phi(z)$. The maximum likelihood estimation from equation \ref{eq: MLE mutivariate covar} with respect to the kernel parameters can be performed for non-linearly parameterized matrices. For some kernel covariances it can the solved analytically. 
+A way of alleviating the issue of an unknown covariance matrix with unspecified feature dimensions, 
+is by considering the covariance $\Sigma = X^TX \in \mathcal{R}^{N \times N}$ which is limited in dimensionality only by the amount of data-samples, 
+but defines a distribution in the feature-space dimensions, as illustrated on the linear case. 
+One chooses a non-linear parameterization of the kernel covariance matrix $\Sigma = K(Z,Z)$, such as the radial basis function kernel. 
+This imposes a form on the corresponding functions $\Phi(z)$. The maximum likelihood estimation from equation \ref{eq: MLE mutivariate covar} with respect to the kernel parameters can be performed for non-linearly parameterized matrices. For some kernel covariances it can the solved analytically. 
 This is the concept behind Gaussian processes.
-Given the covariance matrix which maximizes our likelihood $$p(x) = \int p(x|w)p(w) dw = \mathcal{N}(0, K),$$
+Given the covariance matrix which maximizes our likelihood 
+<div class="equation-block" >
+$$p(x) = \int p(x|w)p(w) dw = \mathcal{N}(0, K),$$
+</div>
 we can consider
 <div class="equation-block" >
 $$
     \begin{bmatrix}
         p(x) \\
         p(x^*)
-    \end{bmatrix}  = \mathcal{N}(\begin{bmatrix} \mu_X, \mu_x^*\end{bmatrix}  ,\begin{bmatrix} K, K(Z,z^*) \\ K(z^*,Z), k(z^*,z^*)\end{bmatrix}.
+    \end{bmatrix}  = \mathcal{N}(\begin{bmatrix} \mu_X, \mu_x^*\end{bmatrix}  ,\begin{bmatrix} K, K(Z,z^*) \\ K(z^*,Z), k(z^*,z^*)\end{bmatrix}).
 $$
 </div>
 The conditional mean and variance of a multi-variate Gaussian is
@@ -871,12 +877,22 @@ and encoding these into a sequence of embeddings. Once the information is availa
 
 <h3>Reproducing Hilbert Space</h3>
 
-The Reproducing Hilbert Space is a vector space of functions (infinite dimensional) induced with an inner product. 
-This inner product allows for the notion of orthogonality and correlation. 
+The Reproducing Hilbert Space is a vector space of functions (infinite dimensional vectors) induced with an inner product. 
+This inner product allows for the notion of orthogonality and correlation. In a reproducing hilbert space it has a reproducing kernel property
+<div class="equation-block">
+    $$ 
+    f(z) = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z)
+    $$.
+</div>
 By the representer theorem, every function that minimizes an empirical risk functional 
 can be represented as a linear combination of the inner products evaluated at the training points.
-Transfomers and Kernel-covariances map data-sample pairs into this space by defining their inner product.
-The formalization of a reproducing hilbert space is done best my considering the space of functions which are linear combinations of /( N = \infty /) orthonormal bases (basis functions) 
+Note the similarity to Kernel-covariances, which can thus be understood as mapping data-sample pairs into this space by defining their inner product.
+Similariy, the attention mechanism can be understood as learning a kernel function by computing an inner product between query and key. 
+However, for a transformer, the  \( \text{softmax}( \frac{QK^T}{\sqrt{n}} ) \) can be asymmetric and thus not ammenable to a reproducting kernel hilbert space. 
+Workarounds exist which allow for asymmetric attention but enable symmetric kernel definitions enabling inference with uncertainty information as in gaussian processes.
+<br><br>
+The formalization of a reproducing hilbert space can be done by
+considering the space of functions which are linear combinations of /( N = \infty /) orthonormal bases (basis functions) 
 <div class="equation-block">
     $$ 
         f(x) = \sum_{n=1}^{N} a_n l(x).
