@@ -684,12 +684,40 @@ There exist mechanisms which enable using attention to learn a kernel function.
 Since the kernel of a reproducing hilbert space needs to be symmetric and positive definite,
 this imposes some restrictions on the attention mechanism.
 <a href="https://arxiv.org/abs/2303.02444">Calibrating Transformers via Sparse Gaussian Processes</a> explors
- a mechanism for learning covariances between key and query pairs, enabling inference in a repoducing hilbert space with uncertainty information.
- The attention mechanism is constrained so that the resulting kernel is symmetric and positive definite.
- <a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation</a>
- proposes a method which avoids these restrictions and constructs a symmetric kernel from two gaussian processes, allowing for asymmetric covariance functions 
- between query and key.  This enables greater flexibility. Intuitively, asymmetry might enable representations where, 
- e.g. the embedding for sky is closer to the embedding to blue than the embedding of blue to the embedding of sky. 
+a mechanism for learning covariances between key and query pairs, enabling inference in a repoducing hilbert space with uncertainty information.
+The attention mechanism is constrained so that the resulting kernel is symmetric and positive definite.
+<a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation</a>
+proposes a method which avoids these restrictions and constructs a symmetric kernel from two gaussian processes, allowing for asymmetric covariance functions 
+between query and key.  This enables greater flexibility. Intuitively, asymmetry might enable representations where, 
+e.g. the embedding for sky is closer to the embedding to blue than the embedding of blue to the embedding of sky. 
+
+
+
+<h3>Reproducing Hilbert Spaces as Latent Spaces of (Variational) Autoencoders</h3>
+Some interesting research in this direction:
+<a href="https://arxiv.org/pdf/2408.01362">Autoencoders in Function Space</a>
+and 
+<a href="https://arxiv.org/abs/1805.11028">Autoencoding any Data through Kernel Autoencoders</a>
+
+
+<h3>KANs and Kernels</h3>
+It should be possible to construct kernels basis splines coefficients since these adhere to the formulation
+<div class="equation-block">
+    $$ 
+        f(x) = \sum_{n=1}^{N} a_n l(x).
+    $$
+</div>
+The kernel function is then
+<div class="equation-block">
+    $$ 
+    k(x,y) = \sum_{n=1}^{N} a_n l(x) l(y).
+    $$
+    $$
+</div> under conditions of convergence on its fourier series with respect to the orthonormal system /( l(x) /).
+Basis splines are interesting since they allow for controlled function approximation. 
+For example, one can learn the basis functions coefficients of numerical simulations while imposing the relevant boundary conditions. 
+Using bayesian inference with kernels allows for uncertainty quantification in the function approximation, which is generally desirable, 
+but especially important when learning real-world properties in-silico.
 
 <!-- 
 <h2>Connections to Algorithms</h2>
