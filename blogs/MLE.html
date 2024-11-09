@@ -64,16 +64,16 @@
 <p>Consider a model, parameterized by $\theta$, so that,</p>
 
 <div class="equation-block">
-$$ z = h(\theta) + \epsilon $$
+$$ x = h(\theta) + \epsilon $$
 </div>
 
-<p>with $ \epsilon \sim \mathcal{N}(0,\sigma^2) $ and $\theta $ deterministic. Then $y \sim \mathcal{N}(h(\theta), \sigma^2)$. </p>
+<p>with $ \epsilon \sim \mathcal{N}(0,\sigma^2) $ and $\theta $ deterministic. Then $x \sim \mathcal{N}( h(\theta), \sigma^2)$. </p>
 
 <p>The probability density function of this Gaussian is defined as</p>
 
 <div class="equation-block">
 $$
-p(y, h(\theta)) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( \frac{-(y - h(\theta))^2}{2\sigma^2} \right).
+p(x,  h(\theta) ) = \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left( \frac{-(y - h(\theta) )^2}{2\sigma^2} \right).
 $$
 </div>
 
@@ -85,7 +85,7 @@ $$
 $$
 </div>
 
-<p>For $N= \infty$, the strong law of large numbers states</p>
+<p>For $N= \infty$, by the strong law of large numbers</p>
 
 <div class="equation-block">
 $$
