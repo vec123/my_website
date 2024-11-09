@@ -706,14 +706,24 @@ The kernel autoencoder does not have the convolutonal inductive bias.
 It would be interesting to see if kernels can be restricted to represent equivariant and invariant functions only, 
 thus replicating the inductive bias of convolutional neural nets and allowing for better generalization.
 For example, using the right kind of basis functions, such as spherical harmonics (which are SO3 equivariant)
-might enable using equivariant functions for inference with uncertainty information. 
-Similariy, using the fourier basis can also be interesting. 
-Another possibility could be the construction of kernels on basis splines since these adhere to the formulation
+might enable using equivariant functions for inference with uncertainty information. I
+t is not clear to me, if the corresponding kernel can be computed in reasonable time.
+Similariy, using the fourier basis might also be interesting. 
+Another possibility could be the construction of kernels on basis splines.
+Basis splines are interesting since they allow for a more controlled function approximation (compared to the exponential basis). 
+For example, one might learn the basis function coefficients employed in numerical simulations while imposing the relevant boundary conditions. 
+Using bayesian inference with kernels allows for uncertainty quantification in the function approximation, which is generally desirable, 
+but especially important when learning real-world properties in-silico.
+In quantum chemistry, the wave function is approximated as linear combination of slater-determinant, potentially also allowing for application of kernel methods.
+A problem can be the high parameter count.
+<br><br>
+Generally, all functions which adher to the formulation 
 <div class="equation-block">
     $$ 
         f(x) = \sum_{n=1}^{N} a_n l(x).
     $$
 </div>
+are amenable to a reproducing hilbert space, kernalized learning and inference with uncertainty information. 
 The kernel function is then
 <div class="equation-block">
     $$ 
@@ -721,13 +731,9 @@ The kernel function is then
     $$
     $$
 </div> under conditions of convergence on its fourier series with respect to the orthonormal system /( l(x) /).
-Basis splines are interesting since they allow for a more controlled function approximation (compared to the exponential basis). 
-For example, one might learn the basis function coefficients employed in numerical simulations while imposing the relevant boundary conditions. 
-Using bayesian inference with kernels allows for uncertainty quantification in the function approximation, which is generally desirable, 
-but especially important when learning real-world properties in-silico.
+It might not be trivial to obtain and compute the right kernel function. 
+If the real functions has component that are orthogonal to the space of basis-functions, this part can not approximated.
 
-In quantum chemistry, the wave function is approximated as linear combination of slater-determinant, potentially also allowing for application of kernel methods.
-A problem can be the high parameter count.
 <!-- 
 <h2>Connections to Algorithms</h2>
 <p>Let us connect the concepts mentioned to common machine learning algorithms. In all cases, we assume a data-density:</p>
