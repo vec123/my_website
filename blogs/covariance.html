@@ -940,10 +940,10 @@ In another example, consider <div class="equation-block">
 and
 <div class="equation-block">
 $$  
-k(z,x) =  \sum_{n=1}^{N} l_n(z)l_n(x) = \sum_{n=1}^{N} ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} ) (\frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}}) 
+k(z,x) =  \sum_{n=1}^{N} c_n l_n(z)l_n(x) = \sum_{n=1}^{N} c_n ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} ) (\frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}}) 
 $$
 $$
-= \exp^{\frac{-(z-x)^2}{1}}
+= c * \exp^{ \frac{ -(z-x)^2 }{ 2 } }
 $$
 </div> which is the gaussian kernel function. So the gaussian kernel function is the inner-product for the reproducing hilbert space of gaussian functions.
 As before 
