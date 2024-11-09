@@ -906,21 +906,21 @@ Consider
     \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} a_n l_n(x) | \sum_{i=1}^{m} b_n l_n(x) \rangle = \sum_{n1}^{N} a_n b_n
     $$
 </div> which defines an inner product of a Hilbert space.
-Let us define  \( k_{z} = \sum h_n(z)l_n(x) = \sum_{n=0}^N z^n x^n  \) which converges for \(zx \leq 1 \) to
+Let us define  \( k_{z} = \sum l_n(z)l_n(x) = \sum_{n=0}^N z^n x^n  \) which converges for \(zx \leq 1 \) to
 <div class="equation-block">
     $$  
      \sum_{i=1}^{n}  z^n x^n = \frac{1}{1 - zx} 
      <n></n> 
     $$.
 </div>
-Here we have chosen the functions /( h_n(z) = z^n /) and  /( l_n(x) = x^n /) as basis functions.
+Here we have chosen the functions /( l_n(z) = z^n /) and  /( l_n(x) = x^n /) as basis functions.
 The convergence of 
-Note, \( k_{z} = \sum h_n(z)l_n(x)  \) is an important property of reproducing hilbert spaces.
+Note, \( k_{z} = \sum l_n(z)l_n(x)  \) is an important property of reproducing hilbert spaces.
 Note,
 <div class="equation-block">
     $$ 
-    \langle k(z,x) | f(x)\rangle =\langle f(x)| k(z,x) \rangle = \langle f(x)|  \frac{1}{1 - h(z)l(x)} \rangle 
-  = \langle f(x)|  \frac{1}{1 - zx} \rangle = \sum_{n=1}^{N} a_n z^n ) = \sum_{n=1}^{N} a_n h_n(z) = f(z)
+    \langle k(z,x) | f(x)\rangle =\langle f(x)| k(z,x) \rangle = \langle f(x)|  \frac{1}{1 - l(z)l(x)} \rangle 
+  = \langle f(x)|  \frac{1}{1 - zx} \rangle = \sum_{n=1}^{N} a_n z^n  = \sum_{n=1}^{N} a_n l_n(z) = f(z)
     $$.
 </div>
 This is the reproducing property of the kernel associated to the hilbert space. Thus a hilbert space with such a kernel is called reproducing hilbert space.
@@ -938,7 +938,7 @@ In another example, consider <div class="equation-block">
 and
 <div class="equation-block">
 $$  
-k(z,x) =  \sum_{n=1}^{N} h_n(z)l_n(x) = \sum_{n=1}^{N} ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} ) (\frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}}) 
+k(z,x) =  \sum_{n=1}^{N} l_n(z)l_n(x) = \sum_{n=1}^{N} ( \frac{z^n}{\sqrt{n!}} \exp^{\frac{-z^2}{n}} ) (\frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}}) 
 $$
 $$
 = \exp^{\frac{-(z-x)^2}{1}}
@@ -947,7 +947,7 @@ $$
 As before 
 <div class="equation-block">
     $$ 
-    \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z) = f(z).
+    \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z) = f(z).
     $$.
 </div>
 The typical formula for reproducing kernels is 
