@@ -693,15 +693,22 @@ e.g. the embedding for sky is closer to the embedding to blue than the embedding
 
 
 
-<h3>Reproducing Hilbert Spaces as Latent Spaces of (Variational) Autoencoders</h3>
-Some interesting research in this direction:
+<h3>More thoughts</h3>
+
+Often the isotropic gaussian prior of variational autoencoders is too restrictive.
+It could be interesting to use a reproducing hilbert space as the latent space of a variational autoencoder or an autoencoder in general.
+Some interesting research in this direction is
 <a href="https://arxiv.org/pdf/2408.01362">Autoencoders in Function Space</a>
 and 
-<a href="https://arxiv.org/abs/1805.11028">Autoencoding any Data through Kernel Autoencoders</a>
-
-
-<h3>KANs and Kernels</h3>
-It should be possible to construct kernels basis splines coefficients since these adhere to the formulation
+<a href="https://arxiv.org/abs/1805.11028">Autoencoding any Data through Kernel Autoencoders</a>.
+The first shows a comparable performance of their architecture to convolutional neural nets. 
+The kernel autoencoder does not have the convolutonal inductive bias.
+It would be interesting to see if kernels can be restricted to represent equivariant and invariant functions only, 
+thus replicating the inductive bias of convolutional neural nets and allowing for better generalization.
+For example, using the right kind of basis functions, such as spherical harmonics (which are SO3 equivariant)
+might enable using equivariant functions for inference with uncertainty information. 
+Similariy, using the fourier basis can also be interesting. 
+Another possibility could be the construction of kernels on basis splines since these adhere to the formulation
 <div class="equation-block">
     $$ 
         f(x) = \sum_{n=1}^{N} a_n l(x).
@@ -714,11 +721,12 @@ The kernel function is then
     $$
     $$
 </div> under conditions of convergence on its fourier series with respect to the orthonormal system /( l(x) /).
-Basis splines are interesting since they allow for controlled function approximation. 
-For example, one can learn the basis functions coefficients of numerical simulations while imposing the relevant boundary conditions. 
+Basis splines are interesting since they allow for a more controlled function approximation (compared to the exponential basis). 
+For example, one might learn the basis function coefficients employed in numerical simulations while imposing the relevant boundary conditions. 
 Using bayesian inference with kernels allows for uncertainty quantification in the function approximation, which is generally desirable, 
 but especially important when learning real-world properties in-silico.
 
+In quantum chemistry, the wave function is approximated as linear combination of slater-determinant, potentially also allowing for application of kernel methods.
 <!-- 
 <h2>Connections to Algorithms</h2>
 <p>Let us connect the concepts mentioned to common machine learning algorithms. In all cases, we assume a data-density:</p>
