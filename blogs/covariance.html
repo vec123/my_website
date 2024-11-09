@@ -903,19 +903,21 @@ Let us assume that  /( \sum |a_n|^2 dx \leq 1 /) and  /( -1 \leq a \leq 1/).
 Consider 
 <div class="equation-block">
     $$ 
-    \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} a_n l_n(x) | \sum_{i=1}^{m} b_n l_n(x) \rangle = \sum_{n1}^{N} a_n b_n
+    k(x,x) = \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} a_n l_n(x) | \sum_{i=1}^{m} b_n l_n(x) \rangle = \sum_{n1}^{N} a_n b_n
     $$
 </div> which defines an inner product of a Hilbert space.
-Let us define  \( k_{z} = \sum l_n(z)l_n(x) = \sum_{n=0}^N z^n x^n  \) which converges for \(zx \leq 1 \) to
+Let us define  \( k(z,x) =  \langle f(z)|g(x) \rangle = \sum c_n l_n(z)l_n(x) = \sum_{n=0}^N c_n z^n x^n  \) 
+which converges (let us assume \(\sum c_n = 1 \), usually one requires \(a_n\) to be square integrable, so that \( \sum a_nb_n\ = \sum c_n\) converges to some value  ) 
+for \(zx \leq 1 \) to
 <div class="equation-block">
     $$  
-     \sum_{i=1}^{n}  z^n x^n = \frac{1}{1 - zx} 
+     \sum_{i=1}^{n} c_n z^n x^n = \frac{1}{1 - zx} 
      <n></n> 
     $$.
 </div>
-Here we have chosen the functions /( l_n(z) = z^n /) and  /( l_n(x) = x^n /) as basis functions.
+Here we have chosen the functions /( l_n(x) = x^n /) as basis functions.
 The convergence of 
-Note, \( k_{z} = \sum l_n(z)l_n(x)  \) is an important property of reproducing hilbert spaces.
+Note, \( k(x,z) = \sum l_n(z)l_n(x)  \)  and of \( \sum c_n = \sum a_nb_n  \) are an important requirements on reproducing hilbert spaces.
 Note,
 <div class="equation-block">
     $$ 
@@ -932,7 +934,7 @@ In another example, consider <div class="equation-block">
 </div> which defines a basis of gaussian functions. As before we obtain
 <div class="equation-block">
     $$ 
-    \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} a_n l(x) | \sum_{i=1}^{n} b_n l(x) \rangle = \sum_{n=1}^{N} a_n b_n
+    k(x,x) =  \langle f(x)|g(x) \rangle = \langle \sum_{n=1}^{N} a_n l(x) | \sum_{i=1}^{n} b_n l(x) \rangle = \sum_{n=1}^{N} a_n b_n
     $$
 </div>
 and
