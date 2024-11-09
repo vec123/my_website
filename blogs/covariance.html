@@ -672,7 +672,24 @@ The typical formula is
     f(z) = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z)
     $$.
 </div>
-This allows for the representation of functions in the reproducing hilbert space. The kernel-function is a design choice, the parameters /( a_n /) and those of the kernel function are learned by gradient methods.
+This allows for the representation of functions in the reproducing hilbert space. 
+The kernel-function is a design choice, the parameters /( a_n /) and those of the kernel function are learned by gradient methods.
+Note, that the reproducing kernel is symmetric and positive definite, thus defining a manifold and allowing for an interpretation 
+as a regular elliptical distribution in the infinite dimensional (functional) Hilbert space.
+
+
+<h3>Kernel Attention</h3>
+
+There exist mechanisms which enable using attention to learn a kernel function. 
+Since the kernel of a reproducing hilbert space needs to be symmetric and positive definite,
+this imposes some restrictions on the attention mechanism.
+<a href="https://arxiv.org/abs/2303.02444">Calibrating Transformers via Sparse Gaussian Processes</a> explors
+ a mechanism for learning covariances between key and query pairs, enabling inference in a repoducing hilbert space with uncertainty information.
+ The attention mechanism is constrained so that the resulting kernel is symmetric and positive definite.
+ <a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation</a>
+ proposes a method which avoids these restrictions and constructs a symmetric kernel from two gaussian processes, allowing for asymmetric covariance functions 
+ between query and key.  This enables greater flexibility. Intuitively, asymmetry might enable representations where, 
+ e.g. the embedding for sky is closer to the embedding to blue than the embedding of blue to the embedding of sky. 
 
 <!-- 
 <h2>Connections to Algorithms</h2>
