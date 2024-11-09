@@ -846,8 +846,9 @@ This process of updating the embeddings  \( e_i \) with the key \( W_k \), query
 Often the notation is
 <div class="equation-block">
     $$
-    \text{Attention}(Q,K,V) = \text{softmax}( \frac{QK^T}{\sqrt{n}})V$$
-
+    \text{Attention}(Q,K,V) = \text{softmax}( \frac{QK^T}{\sqrt{n}})V
+    $$
+</div>
 Using multiple key, query and value matrices is called a \textit{multi attention-head}. 
 The computation of parameters for each attention head can be done in parallel. 
 During the embedding update, all attention heads are used to compute the weighted change of the embedding
@@ -947,7 +948,7 @@ As before
     \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z) = f(z).
     $$.
 </div>
-The typical formula is 
+The typical formula for reproducing kernels is 
 <div class="equation-block">
     $$ 
     f(z) = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z)
@@ -957,7 +958,12 @@ This allows for the representation of functions in the reproducing hilbert space
 The kernel-function is a design choice, the parameters /( a_n /) and those of the kernel function are learned by gradient methods.
 Note, that the reproducing kernel is symmetric and positive definite, thus defining a manifold and allowing for an interpretation 
 as a regular elliptical distribution in the infinite dimensional (functional) Hilbert space.
-
+Note the similarity to gaussian processes where inference is done via
+<div class="equation-block" ></div>
+$$ \label{eq:conditional mean}
+\mathbb{E}[x^* | X ] = \mu_X + K(z^*,Z)  K^{-1}(X)
+$$
+</div>
 
 <h3>Kernel Attention</h3>
 
