@@ -1028,8 +1028,11 @@ The kernel autoencoder does not have the convolutonal inductive bias (i.e. trans
 It would be interesting to see if kernels can be restricted to represent equivariant and invariant functions only, 
 thus replicating the inductive bias of convolutional neural nets and allowing for better generalization.
 For example, using the right kind of basis functions, such as spherical harmonics (which are SO3 equivariant)
-might enable using equivariant functions for inference with uncertainty information. I
-t is not clear to me, if the corresponding kernel can be computed in reasonable time.
+might enable using equivariant functions for inference with uncertainty information. 
+It is not clear to me, if the corresponding kernel can be computed in reasonable time, 
+but i found a <a href="https://www.sciencedirect.com/science/article/pii/S002190451730076X">paper</a>, 
+which provides the reproducing kernel of the space of symplectic harmonics 
+(for many practical application symplectic transformations are desired, although its relation to singular distributions might be relevant).
 Similariy, using the fourier basis might also be interesting. 
 Another possibility could be the construction of kernels on basis splines.
 
