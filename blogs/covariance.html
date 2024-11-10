@@ -952,16 +952,16 @@ As before
     \langle f(x) | k(z,x) \rangle =  \langle k(z,x) | f(x) \rangle = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z) = \sum_{n=0}^{N} a_n l_n(z) = f(z).
     $$.
 </div>
-The typical notation for reproducing kernels is 
+The typical notation for writing functions as linear combinations of reproducing kernels is 
 <div class="equation-block">
     $$ 
     f(z) = \sum_{n=0}^{N} a_n k(x_n,z)  = \sum_{n=0}^{N} a_n k_{x_n}(z)
     $$.
 </div>
 This allows for the representation of functions in the reproducing hilbert space. 
-The kernel-function is a design choice, the parameters /( a_n /) and those of the kernel function are learned by gradient methods.
+The parameters /( a_n /) are learned by gradient methods.
 Note, that the reproducing kernel is symmetric and positive definite, thus defining a manifold and allowing for an interpretation 
-as a regular elliptical distribution in the infinite dimensional (functional) Hilbert space.
+as a regular (or singular) elliptical distribution in the infinite dimensional (functional) Hilbert space.
 Note the similarity to gaussian processes where inference is done via
 <div class="equation-block" ></div>
 $$ \label{eq:conditional mean}
