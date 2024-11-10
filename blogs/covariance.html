@@ -1039,12 +1039,14 @@ is an interesting application of Gaussian Processes with spherical harmonic feat
 This can be compared to 
 <a href="https://arxiv.org/pdf/2205.14276">So3krates</a> and 
 <a href="https://www.science.org/doi/10.1126/sciadv.adf0873">Accurate global machine learning force fields for molecules with hundreds of atoms
-</a>. The first uses spherical harmonics to learn equivariant and global features, the second uses a sparse gaussian process approach.
+</a>. 
+The first uses spherical harmonics to learn equivariant and global features, the second uses a sparse gaussian process approach.
 <a href="https://www.nature.com/articles/s41467-024-50620-6">A Euclidean transformer for fast and stable machine learned force fields</a>
 is the latest publication using spherical harmonic features in a transformer architecture. 
-No uncertainty information is provided by the architecture. Potentially, this could be possible via
+No uncertainty information is provided by the architecture (it seems like the sparse gaussian process was omitted in favour of the sperhical harmonics approach ?). 
+Potentially, both can be combined via
 <a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation</a>.
-Similariy, using the fourier basis might also be interesting. 
+Similariy, using the fourier basis might also be interesting in other settings. 
 
 
 <h4>Kernels on basis splines for learning simulations on meshes</h4>
