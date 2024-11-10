@@ -982,12 +982,18 @@ This allows for the representation of functions in the reproducing hilbert space
 The parameters /( a_n /) are learned by gradient methods.
 Note, that the reproducing kernel is symmetric and positive definite, thus defining a manifold and allowing for an interpretation 
 as a regular (or singular) elliptical distribution in the infinite dimensional (functional) Hilbert space.
+
+
+
+<h3>Reproducting Hilbert Space and Gaussian Process connections</h3>
+
 Note the similarity to gaussian processes where inference is done via
 <div class="equation-block" ></div>
 $$ \label{eq:conditional mean}
 \mathbb{E}[x^* | X ] = \mu_X + K(z^*,Z)  K^{-1}(X)
 $$
 </div>
+
 
 <h3>Kernel Attention</h3>
 
@@ -1002,6 +1008,7 @@ proposes a method which avoids these restrictions and constructs a symmetric ker
 between query and key. This enables greater flexibility. Intuitively, asymmetry might enable representations where, 
 e.g. the embedding for sky is closer to the embedding to blue than the embedding of blue to the embedding of sky. 
 This asymmetric does not adhere anymore to an intuitive description (at least not to mine) as a covariance matrix. 
+
 
 
 
