@@ -1034,10 +1034,21 @@ It is not clear to me, if the corresponding kernel can be computed in reasonable
 but i found a <a href="https://www.sciencedirect.com/science/article/pii/S002190451730076X">paper</a>, 
 which provides the reproducing kernel of the space of symplectic harmonics 
 (for many practical application symplectic transformations are desired, although its relation to singular distributions might be relevant).
+<a href="https://arxiv.org/pdf/2006.16649">Sparse Gaussian Processes with Spherical Harmonic Features</a> 
+is an interesting application of Gaussian Processes with spherical harmonic features.
+This can be compared to 
+<a href="https://arxiv.org/pdf/2205.14276">So3krates</a> and 
+<a href="https://www.science.org/doi/10.1126/sciadv.adf0873">Accurate global machine learning force fields for molecules with hundreds of atoms
+</a>. The first uses spherical harmonics to learn equivariant and global features, the second uses a sparse gaussian process approach.
+<a href="https://www.nature.com/articles/s41467-024-50620-6">A Euclidean transformer for fast and stable machine learned force fields</a>
+is the latest publication using spherical harmonic features in a transformer architecture. 
+No uncertainty information is provided by the architecture. Potentially, this could be possible via
+<a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation</a>.
 Similariy, using the fourier basis might also be interesting. 
-Another possibility could be the construction of kernels on basis splines.
+
 
 <h4>Kernels on basis splines for learning simulations on meshes</h4>
+Another possibility could be the construction of kernels on basis splines.
 Basis splines are interesting since they allow for a more controlled function approximation (compared to the exponential basis). 
 For example, one might learn the basis function coefficients employed in numerical simulations while imposing the relevant boundary conditions. 
 Using bayesian inference with kernels allows for uncertainty quantification in the function approximation, which is generally desirable, 
