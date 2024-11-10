@@ -491,14 +491,14 @@ p(x|z)  = \mathcal{N}(Wz,WW^T) \text{ and } p(x)  = \mathcal{N}(Wz,WW^T + \sigma
 $$ 
 </div>
 
-Consider white Gaussian noise $z \sim \mathcal{N}(0,I)$ and a mean-centered data-distribution $p(x)  = \mathcal{N}(0,\Sigma)$. Let $x,z \in \mathcal{R}^{n}$.
-Given the data-set matrix $X = (x_1,....,x_N) \in \mathcal{R}^{N \times n}$, we can construct the singular value decomposition
+Consider white Gaussian noise  \( z \sim \mathcal{N}(0,I) \) and a mean-centered data-distribution \(p(x)  = \mathcal{N}(0,\Sigma)\) . Let \(x,z \in \mathcal{R}^{n}\) .
+Given the data-set matrix \(X = (x_1,....,x_N) \in \mathcal{R}^{N \times n}\) , we can construct the singular value decomposition
 <div class="equation-block" id = "pca svd">
 $$
 X = U \Delta V^T,
 $$ 
 </div>
-with $U \in \mathcal{R}^{N}$,  $\Delta  \in \mathcal{R}^{N \times N}$ and  $V \in \mathcal{R}^{n}$ (in the complex case we need to consider the conjugate transpose). 
+with \(U \in \mathcal{R}^{N} \),  \( \Delta  \in \mathcal{R}^{N \times N} \) and  \(V \in \mathcal{R}^{n} \) (in the complex case we need to consider the conjugate transpose). 
 We can construct the linear covariance matrices
 
 <div class="equation-block" id = "pca svd">
@@ -512,11 +512,11 @@ $$
     X^TX = U\Delta^2U^T = UDU^T  \in \mathcal{R}^{N\times N}.
 $$
 </div>
-In the real case $U$ and $V$ are guaranteed to be real orthogonal matrices so that $\text{rank}(X^TX ) = \text{rank}(XX^T)$.
+In the real case \( U \) and \( V \) are guaranteed to be real orthogonal matrices so that \( \text{rank}(X^TX ) = \text{rank}(XX^T) \).
 Both covariance matrices have different dimensionality but the same non-zero eigenvalues and equal rank. 
 This equivalent nature of the two covariance matrices and their corresponding distributions has deep consequences in machine learning (especially for
 Gaussian Processes) and is referred to as the data-space and feature-space duality.
-Consider the question, which linear transformation of $z \sim \mathcal{N}(0,I)$ yields the distribution  $p(x)  = \mathcal{N}(0,XX^T)$. 
+Consider the question, which linear transformation of \( z \sim \mathcal{N}(0,I) \) yields the distribution  \( p(x)  = \mathcal{N}(0,XX^T) \). 
 The answer is
 <div class="equation-block" id = "pca solution">
 $$
@@ -524,21 +524,21 @@ x = Wz = U D^{1/2}z
 $$
 </div> 
 as becomes obvious from <a href="pca svd ">equation</a>.
-Note that $U$ is the matrix of eigenvectors of the linear covariance matrix $XX^T$ and that $D^{1/2}$ is the square-root of its eigenvalue matrix.
+Note that $U$ is the matrix of eigenvectors of the linear covariance matrix \( XX^T \) and that \( D^{1/2} \) is the square-root of its eigenvalue matrix.
 Thus the linear transformation relating the data-distribution to white noise is defined by eigen-directions and eigenvalues of the covariance matrix. 
 The eigenvalues are called the principal components, the eigenvectors are called principal directions. 
 <br><br>
 The main application of PCA is in dimensionality reduction. 
 Until now a dimensionality preserving linear map was derived. 
 For dimensionality reduction consider a system as in equation \ref{eq: prob pca linear sys} with 
-$x \in \mathbb{R}^n$, 
-$z \in \mathbb{R}^d$ and consequently
-$W \in \mathbb{R}^{n \times d}$ with $d \leq n$. 
+\( x \in \mathbb{R}^n \) , 
+\( z \in \mathbb{R}^d \) and consequently
+\( W \in \mathbb{R}^{n \times d} \) with \( d \leq n \). 
   
-Consider the distribution $\mathcal{N}(0, WW^T)$ and note that $WW^T$ has rank $d$ but dimension $n$. 
+Consider the distribution \( \mathcal{N}(0, WW^T) \) and note that \( WW^T \) has rank \( d \) but dimension \( n \). 
 Such cases are called singular distributions (some eigenvalues are zero). Singularity indicates the existence of directions in which no variability occurs.   
-Given a dataset $X$, we can perform the PCA decomposition and yield equation \ref{eq: pca solution}. 
-By keeping only the $d$ biggest eigenvectors ($D_{-} \in \mathcal{R}^{d \times d}$) and corresponding eigenvalues ($U_{-} \in \mathcal{R}^{n \times d}$) , a dimensionality reduction is performed. Note, that then 
+Given a dataset \( X \), we can perform the PCA decomposition and yield equation \ref{eq: pca solution}. 
+By keeping only the \( d \) biggest eigenvectors ( \( D_{-} \in \mathcal{R}^{d \times d} \) ) and corresponding eigenvalues (\( U_{-} \in \mathcal{R}^{n \times d}\) ) , a dimensionality reduction is performed. Note, that then 
 <div class="equation-block" id = "pca solution">
 $$W =  U_{-}D_{-}^{1/2}$$
 </div>
@@ -546,7 +546,7 @@ $$W =  U_{-}D_{-}^{1/2}$$
 $$ \Sigma = WW^T = U_{-}D_{-}U^T  \in \mathbb{R}^{n \times n}$$ 
  </div>
 
-is a singular matrix with rank $d$.
+is a singular matrix with rank \(d\).
 Along the directions corresponding to the omitted eigenvectors no variability occurs. 
 Since singular distributions can be hard to work with, a common practice is adding noise. In essence, we consider
 <div class="equation-block" id = "pca solution">
@@ -554,7 +554,7 @@ $$
 x = Wz + \epsilon
 $$ 
 </div>
-with $W \in \mathbb{R}^{n\times d}$, $z \in \mathbb{R}^{d}$ and $\epsilon \sim \mathcal{N}(0, \sigma^2I)$. 
+with \( W \in \mathbb{R}^{n\times d} \), \( z \in \mathbb{R}^{d} \) and  \( \epsilon \sim \mathcal{N}(0, \sigma^2I)\). 
 From this equation, which corresponds to the probabilistic PCA setting (see equation \ref{eq: prob pca linear sys}), we obtain
 <div class="equation-block" id = "pca solution">
 $$
@@ -567,13 +567,15 @@ $$
 p(x)  \sim \mathcal{N}(Wz, \Sigma)
 $$ 
 </div>
-with with $\Sigma = WW^T +  \sigma^2 I \approx XX^T$
-.Consider the mean centered version $
+with with  \( \Sigma = WW^T +  \sigma^2 I \approx XX^T\)
+.Consider the mean centered version 
+\(
 p(x) \sim \mathcal{N}(0, \Sigma) 
-$ and perform MLE,
+\)
+ and perform MLE,
 <div class="equation-block" id = "pca solution">
 $$
-\Sigma_{opt} = \operatorname{argmax}_{\Sigma}  \prod_{i=1}^{N} \log( \frac{1}{\sqrt{\((2\pi)^n |\Sigma|}} \exp  \frac{- x_i \Sigma^{-1} x_i^T}{2} 
+\Sigma_{opt} = \operatorname{argmax}_{\Sigma}  \prod_{i=1}^{N} \log( \frac{1}{\sqrt{(2\pi)^n |\Sigma|}} \exp  \frac{- x_i \Sigma^{-1} x_i^T}{2} )
 $$
 </div>
 <div class="equation-block" id = "pca solution">
@@ -615,7 +617,7 @@ $$
 \frac{N}{2} \Sigma^{-1} + \frac{1}{2} \Sigma^{-1} \sum_{i=1}^N x_i^Tx_i  \Sigma^{-1}= 0.
 $$
 </div>
-Consider $\sum_{i=1}^N x_ix_i^T = XX^T =  UDU^T$, according to the singular value decomposition (see equation \ref{eq: pca svd}) so that
+Consider \( \sum_{i=1}^N x_ix_i^T = XX^T =  UDU^T \), according to the singular value decomposition (see equation \ref{eq: pca svd}) so that
 <div class="equation-block" id = "MLE mutlivar covar">
 $$
 \frac{N}{2} \Sigma^{-1} + \frac{N}{2} \Sigma^{-1} UDU^T \Sigma^{-1} = 0.
@@ -647,14 +649,23 @@ $$
 x = U_{-}(D_{-} - \sigma^2 I)^{1/2}z + \sigma^2 \epsilon.
 $$
 </div>
-If we omit $\epsilon$, this corresponds to a linear projection of the $n$ dimensional data $X$ onto a subspace of $d$ dimension.
+If we omit  \( \epsilon \), this corresponds to a linear projection of the \( n \) dimensional data \( X \) onto a subspace of $d$ dimension.
 <br><br>
-We have shown how PCA can be considered a linear transformation of white noise to a Gaussian distribution. Thus given a data-distribution we can find the transformation $W$ which produces our data given white noise as an input. We have also extended this point of view to a dimensionality reduction setting. Any linear transformation of $d$-dimensional white noise creates a $d$ dimensional subspace in the $n$-dimensional feature space. Considering noise contributions in its orthogonal directions solves the this issue and defines a regular distribution in the whole space. We have shown how solving for the optimal transformation and noise parameters traces back to the eigen decomposition of the linear covariance matrix defined by $X$. Essentially, one keeps the $d$ biggest directions and eigenvalues (which have the biggest contribution to the covariance matrix) and uses the others to construct the noise parameters.
-For this we have performed maximum likelihood estimation with a parameterized $\Sigma$ matrix.
+We have shown how PCA can be considered a linear transformation of white noise to a Gaussian distribution. 
+Thus given a data-distribution we can find the transformation  \(  W \) which produces our data given white noise as an input.
+ We have also extended this point of view to a dimensionality reduction setting. 
+ Any linear transformation of \( d \)-dimensional white noise creates a \( d\)  dimensional subspace in the \( n \)-dimensional feature space. 
+ Considering noise contributions in its orthogonal directions solves the this issue and defines a regular distribution in the whole space. 
+ We have shown how solving for the optimal transformation and noise parameters traces back to the eigen decomposition of the linear covariance matrix defined by \( X \). 
+ Essentially, one keeps the \( d \) biggest directions and eigenvalues 
+ (which have the biggest contribution to the covariance matrix) and uses the others to construct the noise parameters.
+For this we have performed maximum likelihood estimation with a parameterized \( \Sigma \) matrix.
 <br><br>
-We have also hinted at an equivalence between the matrices $XX^T$ and $X^TX$. While living in different spaces, the image of both matrices has equal dimensions. In some sense, both distributions are equivalent.
+We have also hinted at an equivalence between the matrices \( XX^T \)and \( X^TX \). While living in different spaces, the image of both matrices has equal dimensions. 
+In some sense, both distributions are equivalent.
 <br><br>
-PCA is a very well understood and popular method. Being completely linear allows for closed form solutions, good interpretability and analysis. Linearity is at the same time its strength and main limitation. As a linear transformation of white-noise we can not expect to create a model for nonlinear distributions. 
+PCA is a very well understood and popular method. Being completely linear allows for closed form solutions, good interpretability and analysis. 
+Linearity is at the same time its strength and main limitation. As a linear transformation of white-noise we can not expect to create a model for nonlinear distributions. 
 It has been shown \markred{paper} that the variational auto-encoder with a diagonally parameterized covariance matrix pursues the principal directions of PCA.
 Given these results, we might consider PCA as the linear alternative of VAEs and VAEs as its nonlinear counterpart. If our data-distribution is indeed linear, both yield the same results. If our data-distribution is non-linear, PCA will fail to capture it while the VAE still might. 
 
@@ -683,7 +694,7 @@ leads to
 <div class="equation-block" id = "MLE mutlivar covar">
 $$p(x) = \int p(x|z)p(z) dz$$
 </div>
-since $z$ is white noise. If $p(z)$ is Gaussian, then so are $p(x|z)$ and $p(x)$. Remember that $XX^T$ and $X^TX$ define equivalent distributions in different dimensions.
+since \( z \)is white noise. If \( p(z) \) is Gaussian, then so are \( p(x|z) \) and \( p(x) \). Remember that \( XX^T \) and \( X^TX \) define equivalent distributions in different dimensions.
 Consider now an alternative model.
 
 <div class="equation-block" id = "pca to gp">
@@ -691,7 +702,7 @@ Consider now an alternative model.
     x = W\Phi(z) + \epsilon,
     $$
 </div>
-where $\Phi(z)$ is a kernel (some map into lower or higher, potentially infinite dimensions), $z$ deterministic and $w \sim \mathcal{N}(0,I)$ . This leads to
+where \( \Phi(z) \) is a kernel (some map into lower or higher, potentially infinite dimensions), \( z \) deterministic and \( w \sim \mathcal{N}(0,I) \) . This leads to
 <div class="equation-block" >
 $$p(x) = \int p(x|w)p(w) dw.$$ 
 </div>
@@ -703,14 +714,16 @@ where
 <div class="equation-block" >
 $$\Sigma = WW^T + \sigma^2 I$$ 
 </div>
-and has available a set of $N$ data-samples $(x_i,z_i)$.  This direct consideration of $p(x)$ as a Gaussian distribution without concretizing $\Phi(x)$ or $W$ is what is referred to as an integration over the space of all functions (informally: infinite dimensional vectors are functions). However, the covariance matrix still needs to be parametrized, which limits this space of all functions to more concrete, but still very broad types.
-In PCA, the prior was over $z$ and we would just consider $\Sigma \approx XX^T \in \mathcal{R}^{n \times n}$. We can do this because
+and has available a set of \( N\) data-samples \( (x_i,z_i)\).  This direct consideration of \( p(x) \) as a Gaussian distribution without concretizing \( \Phi(x)\) or \( W\) is what is referred to as an 
+integration over the space of all functions (informally: infinite dimensional vectors are functions). 
+However, the covariance matrix still needs to be parametrized, which limits this space of all functions to more concrete, but still very broad types.
+In PCA, the prior was over \( z\) and we would just consider \( \Sigma \approx XX^T \in \mathcal{R}^{n \times n}\). We can do this because
 <div class="equation-block" >
 $$
 \text{Var}(x) = \sum_{i=1}^N \mathbb{E}(Wz_i - \mu)\mathbb{E}(Wz_i - \mu)^T = \sum_{i=1}^N \mathbb{E}(Wz_i)\mathbb{E}(Wz_i )^T  =  W \sum_{i=1}^N\mathbb{E}(z_i)\mathbb{E}(z_i)^T W^T  =  W W^T. 
 $$
 </div>
-However, for equation \ref{eq:pca to gp} we can not do this since the map $\Phi(z)$ is not known (not even its dimensionality). 
+However, for equation \ref{eq:pca to gp} we can not do this since the map \( \Phi(z) \) is not known (not even its dimensionality). 
 We have
 <div class="equation-block" >
 $$
@@ -718,10 +731,11 @@ $$
 $$
 </div>
 A way of alleviating the issue of an unknown covariance matrix with unspecified feature dimensions, 
-is by considering the covariance $\Sigma = X^TX \in \mathcal{R}^{N \times N}$ which is limited in dimensionality only by the amount of data-samples, 
+is by considering the covariance \( \Sigma = X^TX \in \mathcal{R}^{N \times N} \) which is limited in dimensionality only by the amount of data-samples, 
 but defines a distribution in the feature-space dimensions, as illustrated on the linear case. 
-One chooses a non-linear parameterization of the kernel covariance matrix $\Sigma = K(Z,Z)$, such as the radial basis function kernel. 
-This imposes a form on the corresponding functions $\Phi(z)$. The maximum likelihood estimation from equation \ref{eq: MLE mutivariate covar} with respect to the kernel parameters can be performed for non-linearly parameterized matrices. For some kernel covariances it can the solved analytically. 
+One chooses a non-linear parameterization of the kernel covariance matrix \( \Sigma = K(Z,Z) \), such as the radial basis function kernel. 
+This imposes a form on the corresponding functions \( \Phi(z) \). The maximum likelihood estimation from equation \ref{eq: MLE mutivariate covar} 
+with respect to the kernel parameters can be performed for non-linearly parameterized matrices. For some kernel covariances it can the solved analytically. 
 This is the concept behind Gaussian processes.
 Given the covariance matrix which maximizes our likelihood 
 <div class="equation-block" >
@@ -748,9 +762,15 @@ $$ \label{eq:conditional variance}
 \text{Var}(x^* | X) = k(z^*,z^*) - K(z^*,Z) K^{-1} K(Z,z^*).
 $$
 </div>
-These quantities allow for inference with associated uncertainty information. Usually we consider mean centered data, so that $\mu_X = 0$. Note, that in this framework, we assume an available data-set of pairs $x_i,z_i$ and $z_i$ is not associated to a prior distribution.
+These quantities allow for inference with associated uncertainty information. 
+Usually we consider mean centered data, so that \( \mu_X = 0 \). 
+Note, that in this framework, we assume an available data-set of pairs \( x_i,z_i \) and \( z_i \) is not associated to a prior distribution.
 <br><br>
-In an alternative setting, the data consists only of $x_i$ and the maximum likelihood is optimized also with respect to $z_i$. These types of models are called Gaussian process latent variable models (GPLVM). The dimension of $z$ is a hyperparameter, making this model suitable for dimensionality reduction. Similar to the auto-encoder, the latent-space is unrestricted, so that smoothness and continuity of the latent distribution is not necessarily given.  Similar to the variational auto-encoder, a natural extension to bayesian variational gaussian process latent variable models exists.
+In an alternative setting, the data consists only of \(x_i \) and the maximum likelihood is optimized also with respect to \(z_i \). 
+These types of models are called Gaussian process latent variable models (GPLVM). 
+The dimension of \( z \) is a hyperparameter, making this model suitable for dimensionality reduction. 
+Similar to the auto-encoder, the latent-space is unrestricted, so that smoothness and continuity of the latent distribution is not necessarily given. 
+ Similar to the variational auto-encoder, a natural extension to bayesian variational gaussian process latent variable models exists.
 However, within the community, Gaussian Processes are used mainly for regression tasks. 
 
 <br><br>
@@ -907,11 +927,11 @@ Consider
     $$
 </div> which defines an inner product of a Hilbert space.
 Let us define  \( k(z,x) =  \langle f(z)|g(x) \rangle = \sum c_n l_n(z)l_n(x) = \sum_{n=0}^N c_n z^n x^n  \) 
-which converges (let us assume \(\sum c_n = 1 \), usually one requires \(a_n\) to be square integrable, so that \( \sum a_nb_n\ = \sum c_n\) converges to some value  ) 
+which converges (let us assume \(\sum c_n = 1 \), usually one requires \(a_n\) to be square integrable, so that \( \sum a_nb_n\ = \sum c_n\) converges to some value  \(c=1\) ) 
 for \(zx \leq 1 \) to
 <div class="equation-block">
     $$  
-     \sum_{i=1}^{n} c_n z^n x^n = \frac{1}{1 - zx} 
+     \sum_{i=1}^{n} c_n z^n x^n = \frac{c}{1 - zx} 
      <n></n> 
     $$.
 </div>
@@ -921,8 +941,8 @@ The first constrains the basis functions to be square integrable, the second con
 Note,
 <div class="equation-block">
     $$ 
-    \langle k(z,x) | f(x)\rangle =\langle f(x)| k(z,x) \rangle = \langle f(x)|  \frac{1}{1 - l(z)l(x)} \rangle 
-  = \langle f(x)|  \frac{1}{1 - zx} \rangle = \sum_{n=1}^{N} a_n z^n  = \sum_{n=1}^{N} a_n l_n(z) = f(z)
+    \langle k(z,x) | f(x)\rangle =\langle f(x)| k(z,x) \rangle = \langle f(x)|  \frac{c}{1 - l(z)l(x)} \rangle 
+  = \langle f(x)| \frac{1}{1 - zx} \rangle = \sum_{n=1}^{N} a_n k(x,z) = \sum_{n=1}^{N} a_n z^n  = \sum_{n=1}^{N} a_n l_n(z) = f(z)
     $$.
 </div>
 This is the reproducing property of the kernel associated to the hilbert space. Thus a hilbert space with such a kernel is called reproducing hilbert space.
