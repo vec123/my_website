@@ -1055,6 +1055,10 @@ The kernel function is then
 It might not be trivial to obtain and compute the right kernel function. 
 If the real functions has component that are orthogonal to the space of basis-functions, this part can not approximated.
 
+<h4>Learning kernels for basis functions</h4>
+Not every basis function might be amenable to a reproducing hilbert space. Finding the right kernel might be difficult.
+The basis functions and its coefficients must be square integrable (which is a rather mild restriction)
+and the value of converges to must be computable in an efficient way (ideally analytically in closed form). 
 <!-- 
 <h2>Connections to Algorithms</h2>
 <p>Let us connect the concepts mentioned to common machine learning algorithms. In all cases, we assume a data-density:</p>
