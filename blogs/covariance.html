@@ -1016,7 +1016,7 @@ and
 <a href="https://arxiv.org/abs/1805.11028">Autoencoding any Data through Kernel Autoencoders</a>.
 The first shows a comparable performance of their architecture to convolutional neural nets. 
 
-<h4>inductive bias in kernels</h4>
+<h4>Kernels with inductive biases</h4>
 The kernel autoencoder does not have the convolutonal inductive bias.
 It would be interesting to see if kernels can be restricted to represent equivariant and invariant functions only, 
 thus replicating the inductive bias of convolutional neural nets and allowing for better generalization.
@@ -1026,7 +1026,7 @@ t is not clear to me, if the corresponding kernel can be computed in reasonable 
 Similariy, using the fourier basis might also be interesting. 
 Another possibility could be the construction of kernels on basis splines.
 
-<h4>kernels on basis splines for learning simulations on meshes</h4>
+<h4>Kernels on basis splines for learning simulations on meshes</h4>
 Basis splines are interesting since they allow for a more controlled function approximation (compared to the exponential basis). 
 For example, one might learn the basis function coefficients employed in numerical simulations while imposing the relevant boundary conditions. 
 Using bayesian inference with kernels allows for uncertainty quantification in the function approximation, which is generally desirable, 
@@ -1034,7 +1034,7 @@ but especially important when learning real-world properties in-silico.
 
 <br><br>
 
-<h4>kernels on for learning function expansions</h4>
+<h4>Kernels for learning function expansions</h4>
 In quantum chemistry, the wave function is approximated as linear combination of slater-determinant, potentially also allowing for application of kernel methods.
 A problem can be the high parameter count.
 Generally, all functions which adher to the formulation 
