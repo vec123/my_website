@@ -460,6 +460,10 @@ This line of research leads towards an understanding of geometrical quantities i
 
 
 
+
+
+
+
 <h3>PCA</h3>
 
 PCA is a popular and well understood algorithm which allows for data-distribution modelling and dimensionality reduction by considering the eigenspace 
@@ -669,6 +673,13 @@ Linearity is at the same time its strength and main limitation. As a linear tran
 It has been shown \markred{paper} that the variational auto-encoder with a diagonally parameterized covariance matrix pursues the principal directions of PCA.
 Given these results, we might consider PCA as the linear alternative of VAEs and VAEs as its nonlinear counterpart. If our data-distribution is indeed linear, both yield the same results. If our data-distribution is non-linear, PCA will fail to capture it while the VAE still might. 
 
+
+
+
+
+
+
+
 <h3>Gaussian Processes and function space</h3>
 
 Gaussian Processes parameterize a covariance matrix via a kernel-covariance. Starting from PCA they become much easier to understand,
@@ -787,6 +798,9 @@ Some approaches connect gaussian processes with auto-encoders by
 
 
 
+
+
+
 <h3>Attention</h3>
 
 The attention mechanism, popularized by the transformer model, can be understood as a learned covariance parameterization.
@@ -896,6 +910,9 @@ and encoding these into a sequence of embeddings. Once the information is availa
 
 
 
+
+
+
 <h3>Reproducing Hilbert Space</h3>
 
 The Reproducing Hilbert Space is a vector space of functions (infinite dimensional vectors) induced with an inner product. 
@@ -985,6 +1002,9 @@ as a regular (or singular) elliptical distribution in the infinite dimensional (
 
 
 
+
+
+
 <h3>Reproducting Hilbert Space and Gaussian Process connections</h3>
 
 Note the similarity to gaussian processes where inference is done via
@@ -993,6 +1013,10 @@ $$ \label{eq:conditional mean}
 \mathbb{E}[x^* | X ] = \mu_X + K(z^*,Z)  K^{-1}(X)
 $$
 </div>
+
+
+
+
 
 
 <h3>Kernel Attention</h3>
@@ -1042,12 +1066,11 @@ This can be compared to
 </a>. 
 The first uses spherical harmonics to learn equivariant and global features, the second uses a sparse gaussian process approach.
 <a href="https://www.nature.com/articles/s41467-024-50620-6">A Euclidean transformer for fast and stable machine learned force fields</a>
-is the latest publication using spherical harmonic features in a transformer architecture. 
+is the latest publication on learning force fields, using spherical harmonic features in a transformer architecture. 
 No uncertainty information is provided by the architecture (it seems like the sparse gaussian process was omitted in favour of the sperhical harmonics approach ?). 
 Potentially, both can be combined via
 <a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation</a>.
-Similariy, using the fourier basis might also be interesting in other settings. 
-
+Similariy, using the fourier basis might also be interesting in other settings, since they can be understood as a simpler version of harmonics. 
 
 <h4>Kernels on basis splines for learning simulations on meshes</h4>
 Another possibility could be the construction of kernels on basis splines.
@@ -1083,6 +1106,8 @@ If the real functions has component that are orthogonal to the space of basis-fu
 Not every basis function might be amenable to a reproducing hilbert space. Finding the right kernel might be difficult.
 The basis functions and its coefficients must be square integrable (which is a rather mild restriction)
 and the value it converges to must be computable in an efficient way (ideally analytically in closed form). 
+
+
 <!-- 
 <h2>Connections to Algorithms</h2>
 <p>Let us connect the concepts mentioned to common machine learning algorithms. In all cases, we assume a data-density:</p>
