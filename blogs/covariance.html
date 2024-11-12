@@ -1125,13 +1125,14 @@ Potentially, both can be combined via
 <a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation</a>.
 Similariy, using the fourier basis might also be interesting in other settings, since they can be understood as a simpler version of harmonics. 
 
+<!--
 <h4>Kernels on basis splines for learning simulations on meshes</h4>
 Another possibility could be the construction of kernels on basis splines.
 Basis splines are interesting since they allow for a more controlled function approximation (compared to the exponential basis). 
 For example, one might learn the basis function coefficients employed in numerical simulations while imposing the relevant boundary conditions. 
 Using bayesian inference with kernels allows for uncertainty quantification in the function approximation, which is generally desirable, 
 but especially important when learning real-world properties in-silico.
-
+ -->
 <br><br>
 
 <h4>Kernels for learning function expansions</h4>
@@ -1155,7 +1156,7 @@ The kernel function is then
 It might not be trivial to obtain and compute the right kernel function. 
 If the real functions has component that are orthogonal to the space of basis-functions, this part can not approximated.
 
-<h4>Learning kernels for basis functions</h4>
+<h4>Kernels of basis functions</h4>
 Not every basis function might be amenable to a reproducing hilbert space. Finding the right kernel might be difficult.
 The basis functions and its coefficients must be square integrable (which is a rather mild restriction)
 and the value it converges to must be computable in an efficient way (ideally analytically in closed form). 
