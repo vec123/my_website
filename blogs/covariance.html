@@ -416,7 +416,7 @@ called average geometry and average geometry evolution respectively. The quantit
 the trajectoreis of   \( \theta \) during training. It is subject to stoachstisticity by different initalizations, mini-batching
 and randomness in the training procedure.
 The data-covariance is defined as the linear covariance <div class="equation-block">
-    $$
+$$
    s = \sum_{i=1}^{N}x_ix_i^T = XX^T
 $$
 </div>
@@ -445,10 +445,8 @@ Feature directions with low correlation to the inital geometry (eigenvectors wit
 This line of research leads towards an understanding of geometrical quantities in neural networks which formalize well-known properties 
 (such as invariance and equivariance) by eigenspace analysis of the average model geometry.
 <br><br>
-Note, that just as in the case of the Fisher Information Matrix and covariance matrices, 
-the eigenvectors and eigenvalues determine the importance of directions for the distribution.  
+Note, that the eigenvectors and eigenvalues determine the importance of directions for the distribution.  
 Singularity indicates uninformative directions and orthogonal directions are invariant to the distribution.
-
 
 
 <h3>Geodesic Distance in Parameter Space</h3>
@@ -467,7 +465,10 @@ ds^2 = d\theta^T I(\theta) d\theta = \frac{d \gamma(t)}{dt} I(\theta) \frac{d \g
 $$
 </div>
 
-<p>This is the infinitesimal squared distance in Riemannian geometry with the Fisher information matrix as the metric tensor. When \( I(\theta) \) is large, indicating a high likelihood sensitivity of a parameter, the distance in that direction is also large. Moving in directions with high sensitivity (i.e., corresponding to high information content) traverses a larger distance, while moving in directions with low sensitivity does not get us far. If we want to minimize the likelihood, we prefer to move the shortest path from \( \theta_1 \) to \( \theta_2 \), i.e., update the most informative parameters.</p>
+<p>This is the infinitesimal squared distance in Riemannian geometry with the Fisher information matrix as the metric tensor.
+    When \( I(\theta) \) is large, indicating a high likelihood sensitivity of a parameter, the distance in that direction is also large. 
+    Moving in directions with high sensitivity (i.e., corresponding to high information content) traverses a larger distance, 
+    while moving in directions with low sensitivity does not get us far. 
 
 <p>The distance between \( \theta_1 \) and \( \theta_2 \) becomes:</p>
 <div class="equation-block">
