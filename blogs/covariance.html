@@ -370,8 +370,29 @@ $$
 = \int_{x} \frac{\partial}{\partial \theta} \log(p(x, \theta)^2) p(x, \theta) \, dx.
 $$
 </div>
+For a linear system \( y= w \thetha + \epsilon \), the Fisher Information matrix is the inverse of the covariance matrix of the data, i.e 
+<div class="equation-block">
+$$
+\mathbf{I}(\theta) = \frac{1}{\Sigma^2}X^TX.
+$$
+</div>
+This is the linear Gram matrix. It corresponds to a linear kernel. Similarily, for other kernels 
+div class="equation-block">
+$$
+\mathbf{I}(\theta) = \frac{1}{\Sigma^2}K(X,X').
+$$
+</div>
 
-<p>Given the previous examples, this should create some intuition of the underlying geometry defined by this matrix. Note that this covariance matrix varies smoothly, depending on the location. Considering the distance induced by a covariance matrix, it can be shown that \( \mathbf{I}(\theta) \) is a Riemannian metric, providing the tangent space of \( \theta \) with an inner product and defining distances between distributions. The geodesic distance is the path-integral of distances induced in each point by the local covariance matrix. The idea is similar to the Mahalanobis distance, but, due to the interpretation in terms of model parameter sensitivity (as opposed to data sensitivity), we do not use the inverse.</p>
+<p>
+    Given the previous examples, this should create some intuition of the underlying geometry defined by this matrix. 
+    Note that this covariance matrix varies smoothly, depending on the location. 
+    Considering the distance induced by a covariance matrix, it can be shown that \( \mathbf{I}(\theta) \) is a Riemannian metric, providing the tangent space of \( \theta \) with an inner product and defining distances between distributions. 
+    The geodesic distance is the path-integral of distances induced in each point by the local covariance matrix. 
+    The idea is similar to the Mahalanobis distance, but, due to the interpretation in terms of model parameter sensitivity (as opposed to data sensitivity), we do not use the inverse.
+</p>
+
+
+
 
 <h3>Geodesic Distance in Parameter Space</h3>
 <p>Consider an infinitesimal displacement \( \frac{d\theta }{dt} = \lim_{\Delta \rightarrow 0} = \theta + \Delta \) and a path \( \gamma(t) \) related to the displacement by:</p>
