@@ -334,10 +334,62 @@ $$
 <p>These distributions cannot easily be modeled by a simple covariance matrix and a mean. However, locally (if the transitions are continuous and the neighborhood is small enough), they are well behaved and adhere to the linear description. If the distribution is regular in all points, then smooth transitions from one neighborhood to another can be defined by considering a Riemannian geometry on which the data-distribution lives.</p>
 
 <p>Manifold learning exploits this local linearity by determining data-samples that are in linear neighborhoods of each other. Then, the data-distribution of these samples can be assumed to be linear. It is not always trivial to determine which points are close to each other by only looking at the dimensional data representation (e.g., pixel values).</p>
+
+
+
+<h3>Geodesic Distance in Parameter Space</h3>
+<p>Consider an infinitesimal displacement \( \frac{d\theta }{dt} = \lim_{\Delta \rightarrow 0} = \theta + \Delta \) and a path \( \gamma(t) \) related to the displacement by:</p>
+<div class="equation-block">
+    $$
+d \theta = \frac{d \gamma(t)}{dt} \, dt.
+$$
+</div>
+
+
+<p>The infinitesimal distance from \( \theta \) to \( d\theta \) is:</p>
+<div class="equation-block">
+    $$
+ds^2 = d\theta^T I(\theta) d\theta = \frac{d \gamma(t)}{dt} I(\theta) \frac{d \gamma(t)}{dt} \, dt.
+$$
+</div>
+
+<p>This is the infinitesimal squared distance in Riemannian geometry with the Fisher information matrix as the metric tensor. When \( I(\theta) \) is large, indicating a high likelihood sensitivity of a parameter, the distance in that direction is also large. Moving in directions with high sensitivity (i.e., corresponding to high information content) traverses a larger distance, while moving in directions with low sensitivity does not get us far. If we want to minimize the likelihood, we prefer to move the shortest path from \( \theta_1 \) to \( \theta_2 \), i.e., update the most informative parameters.</p>
+
+<p>The distance between \( \theta_1 \) and \( \theta_2 \) becomes:</p>
+<div class="equation-block">
+    $$
+d_G(\theta_1, \theta_2) = \int_0^1 \sqrt{\frac{d\gamma(t)}{dt}^T I(\gamma(t)) \frac{d\gamma(t)}{dt}} \, dt = \int_0^1 ds,
+$$
+</div>
+
+<p>where \( \gamma(0) = \theta_1 \) and \( \gamma(1) = \theta_2 \).</p>
+
+<p>This geodesic distance allows for the quantification of distribution similarity.
+    Distributions (parameterized by \( \theta \)) are close if the information content is similar and distant otherwise. 
+    The geodesic distance is symmetric. 
+    For infinitesimal step sizes it coincides with the KL-divergence</p>
+
+
+
+
+
+
 <h3>Covariance Matrix as a Geometry of Linear Space</h3>
-<p>These examples serve as visualizations to help build an intuition about how a covariance matrix induces a geometry in linear space. Thus, given a covariance matrix, we might think about a stretched/compressed Euclidean space. We have examined how this can be seen as a transformation of Gaussian noise and explored more complex cases, where the data-distribution depends on the parameter. These complex cases, when continuous, can be seen as smooth transitions between linear cases. For singular distributions, problems arise due to the existence of degenerate directions. A singular covariance matrix is related to perfect correlation.</p>
-
-
+<p>These examples serve as visualizations to help build an intuition about how a covariance matrix induces a geometry in linear space.
+    Thus, given a covariance matrix, we might think about a stretched/compressed Euclidean space. 
+    We have examined how this can be seen as a transformation of Gaussian noise and explored more complex cases,
+    where the data-distribution displays non-linear mean-functions and even non-linear covariance functions. 
+    These complex cases, when continuous, can be seen as smooth transitions between linear cases. 
+    For singular distributions, problems arise due to the existence of degenerate directions. 
+    A singular covariance matrix is related to perfect correlation.
+    Additionally, we have seen that the Mahalanobis distance is a measure of distance in the deformed space.
+    As such, learning a covariance is equivalent to learning distances between data-points in the deformed space.
+    These distances are symmetric (since the covariance matrix of a gaussian is symmetric) 
+    and can be used to define a Riemannian geometry on the data-distribution manifold.
+    However, we will see that algorithms, such as self-attention in transformers, can learn asymmetric distances between data-points.
+    We have seen the KL-divergence as an approximation of the Fisher-Information matrix. 
+    It is an important measure of asymmetric "distance" (called divergence) between distributions.
+</p>
 
 
 
@@ -345,7 +397,9 @@ $$
 
 
 <h3>Fisher Information Matrix</h3>
-<p>An interesting covariance is the Fisher Information Matrix. In machine learning, one aims to maximize a likelihood \( p(x, \theta) \) or log-likelihood \( \log(p(x, \theta)) \) by finding the optimal parameters \( \theta \).</p>
+<p>An interesting covariance is the Fisher Information Matrix. 
+    In machine learning, one aims to maximize a likelihood \( p(x, \theta) \) or log-likelihood \( \log(p(x, \theta)) \) 
+    by finding the optimal parameters \( \theta \).</p>
 
 <p>The gradient of the likelihood with respect to the parameters is defined as:</p>
 <div class="equation-block">
@@ -390,41 +444,6 @@ $$
     The geodesic distance is the path-integral of distances induced in each point by the local covariance matrix. 
     The idea is similar to the Mahalanobis distance, but, due to the interpretation in terms of model parameter sensitivity (as opposed to data sensitivity), we do not use the inverse.
 </p>
-
-
-
-
-<h3>Geodesic Distance in Parameter Space</h3>
-<p>Consider an infinitesimal displacement \( \frac{d\theta }{dt} = \lim_{\Delta \rightarrow 0} = \theta + \Delta \) and a path \( \gamma(t) \) related to the displacement by:</p>
-<div class="equation-block">
-    $$
-d \theta = \frac{d \gamma(t)}{dt} \, dt.
-$$
-</div>
-
-
-<p>The infinitesimal distance from \( \theta \) to \( d\theta \) is:</p>
-<div class="equation-block">
-    $$
-ds^2 = d\theta^T I(\theta) d\theta = \frac{d \gamma(t)}{dt} I(\theta) \frac{d \gamma(t)}{dt} \, dt.
-$$
-</div>
-
-<p>This is the infinitesimal squared distance in Riemannian geometry with the Fisher information matrix as the metric tensor. When \( I(\theta) \) is large, indicating a high likelihood sensitivity of a parameter, the distance in that direction is also large. Moving in directions with high sensitivity (i.e., corresponding to high information content) traverses a larger distance, while moving in directions with low sensitivity does not get us far. If we want to minimize the likelihood, we prefer to move the shortest path from \( \theta_1 \) to \( \theta_2 \), i.e., update the most informative parameters.</p>
-
-<p>The distance between \( \theta_1 \) and \( \theta_2 \) becomes:</p>
-<div class="equation-block">
-    $$
-d_G(\theta_1, \theta_2) = \int_0^1 \sqrt{\frac{d\gamma(t)}{dt}^T I(\gamma(t)) \frac{d\gamma(t)}{dt}} \, dt = \int_0^1 ds,
-$$
-</div>
-
-<p>where \( \gamma(0) = \theta_1 \) and \( \gamma(1) = \theta_2 \).</p>
-
-<p>This geodesic distance allows for the quantification of distribution similarity.
-    Distributions (parameterized by \( \theta \)) are close if the information content is similar and distant otherwise. 
-    The geodesic distance is symmetric. 
-    For infinitesimal step sizes it coincides with the KL-divergence</p>
 
 
 
@@ -489,8 +508,6 @@ This line of research leads towards an understanding of geometrical quantities i
 Note, that just as in the case of the Fisher Information Matrix and covariance matrices, 
 the eigenvectors and eigenvalues determine the importance of directions for the distribution.  
 Singularity indicates uninformative directions and orthogonal directions are invariant to the distribution.
-
-
 
 
 
