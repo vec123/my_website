@@ -368,13 +368,13 @@ $$
 For a linear system \( y= w \thetha + \epsilon \), the Fisher Information matrix is the inverse of the covariance matrix of the data, i.e 
 <div class="equation-block">
 $$
-\mathbf{I}(\theta) = \frac{1}{\Sigma^2}X^TX.
+\mathbf{I}(\theta)^{-1} = \frac{1}{N}X^TX.
 $$
 </div>
 This is the linear Gram matrix. It corresponds to a linear kernel. Similarily, for other kernels 
 div class="equation-block">
 $$
-\mathbf{I}(\theta) = \frac{1}{\Sigma^2}K(X,X').
+\mathbf{I}(\theta)^{-1} = \frac{1}{N} K(X,X').
 $$
 </div>
 
@@ -1016,7 +1016,7 @@ This is the reproducing property of the kernel associated to the hilbert space. 
 <br><br>
 In another example, consider <div class="equation-block">
     $$ 
-    l_n(x) = \frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}} /
+    l_n(x) = \frac{x^n}{\sqrt{n!}} \exp^{\frac{-x^2}{n}} 
     $$
 </div> which defines a basis of gaussian functions. As before we obtain
 <div class="equation-block">
