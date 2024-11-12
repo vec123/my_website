@@ -504,8 +504,7 @@ $$
     and can be used to define a Riemannian geometry on a manifold.
     Algorithms, such as self-attention in transformers, can learn asymmetric distances between data-points.
     This asymmetry allows for directional distances which can capture more complex relationships between data-points, 
-    such as dependence, causality and time. 
-    Another an important concept of asymmetric "distances" is called divergence between distributions.
+    such as dependence, causality and time. Another an important concept of asymmetric "distances" is called divergence between distributions.
     We have seen the KL-divergence as an approximation of the Fisher-Information matrix. 
 </p>
 
@@ -513,11 +512,12 @@ $$
 
 <h3>PCA</h3>
 
-PCA is a popular and well understood algorithm which allows for data-distribution modelling and dimensionality reduction 
+PCA is a popular and well understood algorithm which allows for modelling and dimensionality reduction of linear distributions 
 by considering the eigenspace of the covariance matrix. 
 As such, it is a good introduction into the covariance matrix, its meaning, eigenspace and possible manipulations. 
 The intuitions developed here transfer well to more complex models, such as kernel PCA and Gaussian processes, 
-by considering a nonlinear transformation of /( x /).
+by considering a nonlinear transformation /( \Phi(z) \neq Wz /). 
+If the transformation is linear, equivalence to PCA can be shown.
 
 Principal Component Analysis is a popular linear algorithm for systems of the form 
 <div class="equation-block" id="pca linear eq">
