@@ -485,8 +485,10 @@ Feature directions with low correlation to the inital geometry (eigenvectors wit
 <br><br>
 This line of research leads towards an understanding of geometrical quantities in neural networks which formalize well-known properties 
 (such as invariance and equivariance) by eigenspace analysis of the average model geometry.
-
-
+<br><br>
+Note, that just as in the case of the Fisher Information Matrix and covariance matrices, 
+the eigenvectors and eigenvalues determine the importance of directions for the distribution.  
+Singularity indicates uninformative directions and orthogonal directions are invariant to the distribution.
 
 
 
@@ -495,8 +497,11 @@ This line of research leads towards an understanding of geometrical quantities i
 
 <h3>PCA</h3>
 
-PCA is a popular and well understood algorithm which allows for data-distribution modelling and dimensionality reduction by considering the eigenspace 
-of the covariance matrix. As such, it is a good introduction into the covariance matrix, its meaning and possible manipulations. 
+PCA is a popular and well understood algorithm which allows for data-distribution modelling and dimensionality reduction 
+by considering the eigenspace of the covariance matrix. 
+As such, it is a good introduction into the covariance matrix, its meaning, eigenspace and possible manipulations. 
+The intuitions developed here transfer well to more complex models, such as kernel PCA and Gaussian processes, 
+by considering a nonlinear transformation of /( x /).
 
 Principal Component Analysis is a popular linear algorithm for systems of the form 
 <div class="equation-block" id="pca linear eq">
