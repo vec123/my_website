@@ -1057,16 +1057,33 @@ as a regular (or singular) elliptical distribution in the infinite dimensional (
 
 
 <h3>Reproducting Hilbert Space and Gaussian Process connections</h3>
-
 Note the similarity to gaussian processes where inference is done via
 <div class="equation-block" ></div>
 $$ 
-\mathbb{E}[x^* | X ] = \mu_X + K(z^*,Z)  K^{-1}(X)
+\mathbb{E}[x^* | X ] = k(z^*,Z) K(Z)^{-1}X
 $$
+</div>, (we assume /(\mu_X =0 /) for simplicity) and
+whereas in the reproducing hilbert space
+<div class="equation-block" >
+$$ 
+f(z^*) = \sum_{n=0}^{N} a_n k(z_n,z^*)  = \sum_{n=0}^{N} a_n k_{z_n}(z^*)
+$$.
 </div>
-<a href="https://arxiv.org/abs/1807.02582"A Review on Connections and Equivalences></a> provides a good summary. 
-Short, the kernel of a gaussian process is the inner product a reproducing kernel hilbert space. 
-The hyptothesis space of the former is slightly larger than the former, probably due to the probabilistic nature of the prior.
+If /( K = k_{i,j} = k_(z_i,z_j) /) is invertible (i.e. not singular), then /( a = (a_1,...,a_N) = K^{-1}X /), where /( X = (x_1,...,x_N) /) 
+is the vector of observations.
+Thus
+<div class="equation-block" >
+    $$ 
+    f(z^*) = k_{z_n}(z^*)K^{-1}X = k(z^*,Z) K(Z)^{-1}X = \mathbb{E}[x^* | X ]
+    $$.
+</div>
+This shows that the linear combination of reproducing kernels and the posterior mean of a gaussian process are equivalent.
+<a href="https://arxiv.org/abs/1807.02582"A Review on Connections and Equivalences></a> provides a good summary and furthermore 
+relates the uncertainty information of a gaussian process to the worse case error in a reproducing kernel hilbert space. 
+This perspective enables a unification of fisherian (kernel spaces and ridge regression) and bayesian (posterior inference) concepts.
+Short, the kernel of a gaussian process corresponds to the reproducing inner product of a kernel hilbert space. 
+The hyptothesis space of the former is slightly larger than the former, 
+probably due to the probabilistic nature of the prior over the model parameters.
 
 
 
@@ -1077,7 +1094,7 @@ The hyptothesis space of the former is slightly larger than the former, probably
 There exist mechanisms which enable using attention to learn a kernel function. 
 Since the kernel of a reproducing hilbert space needs to be symmetric and positive definite,
 this imposes some restrictions on the attention mechanism.
-<a href="https://arxiv.org/abs/2303.02444">Calibrating Transformers via Sparse Gaussian Processes</a> explors
+<a href="https://arxiv.org/abs/2303.02444">Calibrating Transformers via Sparse Gaussian Processes</a> explores
 a mechanism for learning covariances between key and query pairs, enabling inference in a repoducing hilbert space with uncertainty information.
 The attention mechanism is constrained so that the resulting kernel is symmetric and positive definite.
 <a href="https://tanmnguyen89.github.io/gp_transformer.pdf">Revisiting Kernel Attention with Correlated Gaussian Process Representation</a>
@@ -1087,6 +1104,22 @@ e.g. the embedding for sky is closer to the embedding to blue than the embedding
 This asymmetric does not adhere anymore to an intuitive description (at least not to mine) as a covariance matrix. 
 
 
+
+<h3>Asymmetric Kernels</h3>
+
+The structures we examined up until now are symmetric. This fact is visualized in the figures and represented by a symmetric covariance matrix, 
+which in turn defines symmetric distances. We have seem the KL-divergence as an asymmetric distance measure and highlighted the fact that 
+softmax functions in attention mechanisms are also asymmetric, allowing for a directed distance. 
+This directed distance is useful in many applications, for example in language processing, time dependencies and causality.
+Directed distances can be represented by asymmetric covariances. Intuitively, consider the Mahanalobis distance, 
+but assume an asymmetric covariance matrix. This would allow for a directed distance.
+An example of an asymmetric kernels is the exponential decay kernel, defined as 
+
+<div class="equation-block" >
+    $$ 
+    k(t_i, t_j) = \exp(-\alpha |t_i - t_j|) \cdot \mathbb{1}_{t_i \leq t_j}
+    $$
+</div>, where \( \\mathbb{1}_{t_i \leq t_j} \) ensures that the kernel only considers past influences.
 
 
 <h3>More thoughts: </h3>
