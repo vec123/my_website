@@ -238,7 +238,7 @@ $$
 </div>
 
 <p>If we measure data with a singular covariance, some directions are degenerate (have zero variance). This is an indication that those directions provide no information, and these dimensions can be omitted without losing description accuracy.</p>
-<h3>Mahalanobis Distance and Covariance Geometry</h3>
+<h3>Mahalanobis Distance / covariance induces a geometry</h3>
 <p>Within the linear space that contains our distribution, one can define the Mahalanobis distance as:</p>
 <div class="equation-block">
     $$
@@ -252,7 +252,7 @@ $$
     While it can introduce diagonal relationships, no curvature or torsion can be created by a constant covariance matric.
     If \(\Sigma = I\) (as for white noise), the Mahalanobis distance coincides with the Euclidean distance, and \(\Sigma = I\) might be interpreted as uniformly "stretched" space. The elements of \(\Sigma^{-1}\) correct for the stretching and compression of space by accounting for the effect of variance and covariance.</p>
 
-<h3>Distributions with Constant Mean</h3>
+<h3>Distributions with nonlinear mean</h3>
 <p>The distributions we considered in the figures above have a constant mean. These distributions can be obtained from white noise by linear transformations. All regular distributions can be transformed back to white noise, whereas the two singular distributions cannot.</p>
 
 <p>In some cases, \(\mu(x,y)\) is nonlinear, but the covariance is constant.</p>
@@ -273,7 +273,7 @@ $$
     </figure>
 </div>
 
-<h3>Distributions with Varying Covariance</h3>
+<h3>Distributions with varying covariance</h3>
 <p>Another interesting case is when the data distribution is not described by a constant covariance matrix. Instead, the covariance is a function of the parameters. We can distinguish between cases where this function is linear vs. non-linear. Since this relationship is not a constant, it requires a parameterized covariance matrix of the form:</p>
 <div class="equation-block">
     $$
