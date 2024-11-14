@@ -146,21 +146,21 @@ $$
 $$
 </div>
 
-<p>Scale the noise to have variance \( c \):</p>
+<p>We scale the noise to have variance \( c \):</p>
 <div class="equation-block">
     $$
 \sqrt{c} \cdot \epsilon \sim N(0, c).
 $$
 </div>
 
-<p>Project the scaled noise along the normalized normal direction:</p>
+<p>and then project the scaled noise along the normalized normal direction:</p>
 <div class="equation-block">
     $$
 \delta = \sqrt{c} \cdot \epsilon \cdot \hat{n} = \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}.
 $$
 </div>
 
-<p>Combine the mean and the noise to get the final distribution:</p>
+<p>By combining mean and noise to get the final distribution:</p>
 <div class="equation-block">
     $$
 y = a \cdot x + b + \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}.
@@ -179,7 +179,7 @@ $$
 \Sigma' = R \Sigma R^T.
 $$
 </div>
-
+<!-- 
 <p>For \( c \cdot x + d \), an offset has to be included so that</p>
 <div class="equation-block">
     $$
@@ -193,7 +193,7 @@ $$
 y = \sqrt{c} \cdot \epsilon \cdot \frac{(-a, 1)}{\sqrt{1 + a^2}}
 $$
 </div>
-
+-->
 <p>and we return to a distribution with a certain covariance around mean zero.</p>
 
 <p>Another way of representing the distributions along lines is by the mentioned transformation of white noise so that the variance in the desired direction is very high, potentially infinite. Thus, linear distributions (as I call them) are equivalent to a transformation of white noise.</p>
