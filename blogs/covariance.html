@@ -448,7 +448,7 @@ This line of research leads towards an understanding of geometrical quantities i
 Note, that the eigenvectors and eigenvalues determine the importance of directions for the distribution.  
 Singularity indicates uninformative directions and orthogonal directions are invariant to the distribution.
 <br><br>
-Note, that these results allow for an interpretation in terms of transfer functions and power spectral densities.
+Note, that these results allow for an interpretation in terms of transfer functions and their power spectral densities.
 
 <h3>Geodesic Distance in Parameter Space</h3>
 <p>Consider an infinitesimal displacement \( \frac{d\theta }{dt} = \lim_{\Delta \rightarrow 0} = \theta + \Delta \) and a path \( \gamma(t) \) related to the displacement by:</p>
@@ -735,8 +735,11 @@ Given these results, we might consider PCA as the linear alternative of VAEs and
 
 Gaussian Processes parameterize a covariance matrix via a kernel-covariance. Starting from PCA they become much easier to understand,
 since they can be viewed as a form of PCA in potentially infinite feature-dimensions, 
-created by applying a nonlinear mapping (kernel) to the feature-space.
-This mapping is implicit in the kernel-covariance parameterization and does not need to be explicitly defined. 
+created by applying a nonlinear mapping (kernel) to the feature-space. For a solid introduction i want to recommend the
+<a href "https://thegradient.pub/gaussian-process-not-quite-for-dummies/">Gaussian Processes for Dummies</a> blog-post.
+It has some great visualization as to how a high-dimensional covariance matrix leads to a non-linear regression problem.
+While it does not start from PCA it also offers a great prespective you should not miss out on. 
+The non-linear function is implicit in the kernel-covariance parameterization and does not need to be explicitly defined. 
 This becomes clearer by relation to the reproducting kernel Hilbert space (RKHS), where the basis functions explicitely define the kernel as their inner product.
 Since a function is informally thought of as infinite dimensional vector an infinite-dimensional feature-space is also called function space,. 
 I like to think about euclidean space with directions representing functions and non-linear relationships.  
