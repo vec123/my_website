@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalman Filter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .equation {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .equation span {
+            font-family: "Courier New", monospace;
+            background-color: #f9f9f9;
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .highlight {
+            color: red;
+        }
+        .author-date {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Kalman Filter</h1>
+
+    <h2>Introduction</h2>
+    <p>Let us look at the Kalman filter. 
+        We assume, a noisy linear system with covariance matrix $Q$ and 
+        that noisy measurements with covariance matrix $R$:</p>
+    <div class="equation">
+        $$
+        x_t = F x_{t-1} + Bv_{t-1}
+        $$
+        $$
+        y_t = H x_t + Dw_t
+        $$
+    </div>
+    <p>where <i>v_k</i> and <i> w_k</i> are independent gaussian noise terms with zero mean and isotropic covariance. Consider <i>\mathbb{E}(x_0) = \mu_0</i> 
+        and  <i>\mathbb{Var}(x_0) = \Sigma_0.</i> </p>
+    Let us look at the time evolution of this mean and covariance.</p>
+    <div class="equation">
+        $$
+        \mu_{t+1}  = F mu_{t} 
+        $$
+        $$
+        \Sigma_{t+1} = F \Sigma_{t} F^T + BB^T
+        $$
+    </div>
+    <p>For <i>y</i> the evolution can be obtained analogous. Note that 
+    </p>
+    <div class="equation">
+        $$
+        \lim_{t \rightarrow \infty} \Sigma_{t} =  \lim_{t \rightarrow \infty}  F \Sigma_{t-1} F^T + BB^T
+        $$
+        $$
+        =  \lim_{t \rightarrow \infty} F^t \Sigma_0 F^t^{T} + \sum_{k=0}^{t-1} F^{k} BB^T F^{k}^T
+        $$
+        $$
+        = \lim_{t \rightarrow \infty}  \sum_{k=0}^{t-1} F^{k} BB^T F^{k}^T
+        $$
+    </div>
+    <p> since <i>F</i> is assumed stable (i.e. it has eigenvalues stricly smaller 0). Thus in the limit</p>
+    <div class="equation">
+        $$
+        \Sigma_{\infty} = F  \Sigma_{\infty}  F^T + BB^T
+        $$
+    </div>
+    <p> This equation is stricly positive and can be interpreted as a Lyapunov Equation. If F is stabkle, it has a unique solution <i>\Sigma_{\infty}</i></p>
+    <p>Consider now <i> B = I</i> and <i> D = I</i>, and assume the noise terms are zero mean with covariance </p>
+    </p>
+    <div class="equation">
+        $$
+        \text{VAR} \begin{bmatrix}
+        v \\
+        w
+         \end{bmatrix}
+         =
+         \begin{bmatrix}
+        Q & S \\
+        S^T & R
+         \end{bmatrix}
+        $$
+    </div>
+    <p>The state and measurement noises are uncorrelated at different times but at time <i>t</i> correlation can exist (obviously). 
+        Thus we deconstruct <i>v</i> into a term correlated to <i>w</i> and one uncorrelated to it. We obtain </p>
+    <div class="equation">   
+     \tilde{v}(t) = \mathbb{E}[v(t)|w(t)] = v(t) - S R^{-1} w(t)  = v(t) -  S R^{-1}y(t) +  S R^{-1} C x(t)
+    </div>
+    <p>by the conditional mean of a gaussian. Thus</p>
+    <div class="equation">   
+        $$
+        x(t+1) = (F - S R^{-1} C) x(t) +  S R^{-1}y(t) +  \tilde{v}(t)
+        $$
+        $$
+        y(t) = Cx(t) + w(t)
+        $$
+    </div>
+ <p>with</p>
+    <div class="equation">
+        $$
+        \text{VAR} \begin{bmatrix}
+        \tilde{v} \\
+        w
+        \end{bmatrix}
+        =
+        \begin{bmatrix}
+        \tilde{Q} & 0 \\
+        0 & R
+        \end{bmatrix}
+        $$.
+    </div> 
+    <p>where <i>\tilde{Q} = Q - SR^{-1}S^T</i>. These are the starting equations for the Kalman Filter. 
+    We want to obtain a predictor <i>\hat{x}(t+1|t) = \mathbb{E}(x(t+1)|H_t(y))</i>, filter <i>\hat{x}(t|t)= \mathbb{E}(x(t+1)|H_{t+1}(y))</i>. 
+    The predictor error is  <i>e(t+1|t) = x(t+1) - \hat{x}(t+1|t)</i>
+    and its covariance is
+    <i>
+        P(t+1|t) =\mathbb{E}[e(t+1|t)e(t+1|t)^T]
+    </i>. 
+    Analogues can be obtained for the filter.
+    We call  <i> l(t) = y(t) - C \hat{x}(t|t-1) = y(t) - \hat{y}(t)</i> the innovation. It can be realted to how much we trust the state-predictor given the measurements. 
+    Of course, state and measurements are subject to noise.
+    We have introduced <i>H_{t}(y)</i> which corresponds to an aggregation of th emasurement information at time <i>t</i>.
+    Consider the time update of the predictor mean and its error covariance
+</p>
+    <div class="equation">
+    $$
+    \hat{x}(t+1|t) = F \hat{x}(t) + S R^{-1}y(t)
+    $$
+    $$
+    P(t+1|t) = F P(t|t) F^T + \tilde{Q}
+    $$
+    </div>
+<p> and the measurement update </p>
+    <div class="equation">
+        $$
+        \hat{x}(t+1|t+1) = \hat{x}(t+1|t)  + L(t+1)l(t+1)
+        $$
+        $$
+        l(t+1) = y(t+1)- C \hat{x}(t+1|t)
+        $$
+    </div>
+    <p>
+        where
+    </p>
+    <div class="equation">
+        $$
+        L(t+1) = P(t+1|t)C^T\Delta^{-1}(t+1)
+        $$
+        $$
+        \Delta(t) = \text{VAR l(t)} = CP(t|t-1)C^T +R
+        $$
+        $$
+        P(t+1|t+1) = P(t+1|t) - P(t+1|t)C^T\Delta^{-1}(t+1)CP(t+1|t)
+        $$
+    </div>
+    <p>
+        Find a proof <a href="#proof">here</a>. We can summarize these equations 
+    </p>
+    <div class="equation">
+        $$
+        \hat{x}(t+1|t) = F \hat{x}(t|t-1) + SR^{-1}y(t) + K(t)(y(t) - C \hat{x}(t|t-1))
+        $$
+        $$
+        K(t) = F L(t) = F P(t|t-1)C^T\Delta^{-1}(t)
+        $$
+        $$
+        \Delta^{-1}(t) = \text{VAR}l(t)
+        $$
+        $$
+        P(t+1|t) = F[ P(t|t-1) - P(t|t-1)C^TDelta^{-1}(t)CP/t|t-1]F^T + Q
+        $$
+        $$
+        P(t_0|t_0-1) = P_0
+        $$
+    </div>
+
+    <p> This can be seen as a System with state-feedback which is fed by the innovation.
+        Note, that</p>
+    <div class="equation">
+        $$
+        \hat{x}(t+1|t) = (F - K(t)C)\hat{x}(t|t-1) + (SR^{-1}+K(t))y(t) = \Gamma(t)\hat{x}(t|t-1)+ (SR^{-1}+K(t))y(t)
+        $$
+        $$
+        x(t+1) - \hat{x}(t+1|t) = \Gamma(t)(\hat{x}(t|t-1)) - K(t)w(t) + \tilde{v}(t)
+        $$
+    </div>
+    <p> where <i>\Gamma(t)</i> also determines the error dynamics.</p>
+    <div class="equation">
+        $$
+        P(t+1|t) = \Gamma(t)P(t|t-1)\Gamma(t)^T + K(t)RK(t)^T + \tilde(Q)
+        $$
+        $$
+        P(t_0|t_0-1) = P_0
+        $$
+    </div>
+
+    <p>To simplify we assume no noise correlation.</p>
+
+    <div class="equation">
+        $$
+        L(t+1) = P(t+1|t)C^T\Delta^{-1}(t+1)
+        $$
+        $$
+        \Delta(t) = \text{VAR e(t)} = CP(t|t-1)C^T +R
+        $$
+        $$
+        P(t+1|t+1) = P(t+1|t) - P(t+1|t)C^T\Delta^{-1}(t+1)CP(t+1|t)
+        $$
+    </div>
+    <p> Note that xxxx determines the error evolution in time</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div class="equation">
+        $$
+        x_k = F x_{k-1} + v_{k-1}
+        $$
+        $$
+        y_k = H x_k + w_k
+        $$
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <p>We consider the one-step predictor of the state and its covariance </p>
+    <div class="equation">
+        $$
+        \hat{x}_{k|k-1} = F \hat{x}_{k-1|k-1}
+        $$
+        $$
+        P_{k|k-1} = F P_{k-1|k-1} F' + Q
+        $$
+    </div>
+    <p>where <i>P_{k-1|k-1}</i> vorresponds to the covariance matrix of state  <i>x_{k-1}</i> and is the a-priori covariance matrix before the update.
+    <i>\hat{x}_{k|k-1} </i> is the one-step ahead predictor.
+         After the time update perform the measurement update:   
+    </p>
+    <div class="equation">
+    $$
+    \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k \left( y_k - H \hat{x}_{k|k-1} \right)
+    $$
+    $$
+    P_{k|k} = P_{k|k-1} - K_k H P_{k|k-1}
+    $$
+    $$
+    K_k = P_{k|k-1} H' \left( H P_{k|k-1} H' + R \right)^{-1}
+    $$
+    </div>
+    <p>where <i>K_k</i>, also called the Kalman gain, ensures that the estimator of <i>x_k|k</i> is an minmum variance unbiased estimator.</p>
+    <p>
+        During the Filtering we move between the Prior (at time k-1 and time k) and Posterior Distributions (at time k):
+    </p>
+    <div class="equation">
+        $$
+        p(x_{k-1} \mid y_{1:k-1}) = \mathcal{N}\left( x_{k-1}; \hat{x}_{k-1|k-1}, P_{k-1|k-1} \right)
+        $$
+        $$
+        p(x_k \mid y_{1:k-1}) = \mathcal{N}\left( x_k; \hat{x}_{k|k-1}, P_{k|k-1} \right)
+        $$
+        $$
+        p(x_k \mid y_{1:k}) = \mathcal{N}\left( x_k; \hat{x}_{k|k}, P_{k|k} \right)
+        $$
+    </div>
+
+ 
+        
+        </body>
+        </html>
+        

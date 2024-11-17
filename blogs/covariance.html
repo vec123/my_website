@@ -740,15 +740,21 @@ created by applying a nonlinear mapping (kernel) to the feature-space. For a sol
 It has some great visualization as to how a high-dimensional covariance matrix leads to a non-linear regression problem.
 While it does not start from PCA it also offers a great prespective you should not miss out on. 
 The non-linear function is implicit in the kernel-covariance parameterization and does not need to be explicitly defined. 
-This becomes clearer by relation to the reproducting kernel Hilbert space (RKHS), where the basis functions explicitely define the kernel as their inner product.
-Since a function is informally thought of as infinite dimensional vector an infinite-dimensional feature-space is also called function space,. 
-I like to think about euclidean space with directions representing functions and non-linear relationships.  
-In this euclidean space, the covariance matrix defines a linear distribution and induces a Mahanalobis distance, however, due to the possibility of 
+This becomes clearer by relation to the reproducting kernel Hilbert space (RKHS), 
+where the basis functions explicitely define the kernel as their inner product.
+Since a function is informally thought of as infinite dimensional vector an infinite-dimensional feature-space is 
+also called function space,. 
+I also like to think about euclidean space with directions representing functions and non-linear relationships.  
+For example instead of saying that /(x /) is correlated to /(y /) we can say that the function /(f(x)/) 
+is correlated to the function /(g(y)/).
+In this euclidean space, the covariance matrix defines a linear distribution 
+and induces a Mahanalobis distance, however, due to the possibility of 
 nonlinear basis directions, the expressivity is augmented.
-Since a covariance matrix in infinite-dimensional feature-spaces is not computable, gaussian processes exploit the data-space and feature-space duality 
-and perform the covariance parameterization in data-space. The parameters are updated via maximum likelihood estimation.
-Given an optimal covariance matrix, a gaussian distribution is defined and, by its conditional mean its conditional covariance, inference can be done with 
-uncertainty information.
+Since a covariance matrix in infinite-dimensional feature-spaces is not computable,
+gaussian processes exploit the data-space and feature-space duality and perform the covariance parameterization in data-space. 
+The parameters are updated via maximum likelihood estimation.
+Given an optimal covariance matrix, a gaussian distribution is defined and, 
+by its conditional mean its conditional covariance, inference can be done with uncertainty information.
 Note, that the model
 <div class="equation-block" id = "MLE mutlivar covar">
 $$
@@ -759,15 +765,17 @@ leads to
 <div class="equation-block" id = "MLE mutlivar covar">
 $$p(x) = \int p(x|z)p(z) dz$$
 </div>
-since \( z \)is white noise. If \( p(z) \) is Gaussian, then so are \( p(x|z) \) and \( p(x) \). Remember that \( XX^T \) and \( X^TX \) define equivalent distributions in different dimensions.
+since \( z \)is white noise. If \( p(z) \) is Gaussian, then so are \( p(x|z) \) and \( p(x) \). 
+Remember that \( XX^T \) and \( X^TX \) define equivalent distributions in different dimensions.
 Consider now an alternative model.
-
 <div class="equation-block" id = "pca to gp">
     $$
     x = W\Phi(z) + \epsilon,
     $$
 </div>
-where \( \Phi(z) \) is a kernel (some map into lower or higher, potentially infinite dimensions), \( z \) deterministic and \( w \sim \mathcal{N}(0,I) \) . This leads to
+where \( \Phi(z) \) is a kernel (some map into lower or higher, potentially infinite dimensions), 
+\( z \) deterministic and \( w \sim \mathcal{N}(0,I) \) . 
+This leads to
 <div class="equation-block" >
 $$p(x) = \int p(x|w)p(w) dw.$$ 
 </div>
@@ -779,10 +787,14 @@ where
 <div class="equation-block" >
 $$\Sigma = WW^T + \sigma^2 I$$ 
 </div>
-and has available a set of \( N\) data-samples \( (x_i,z_i)\).  This direct consideration of \( p(x) \) as a Gaussian distribution without concretizing \( \Phi(x)\) or \( W\) is what is referred to as an 
+and has available a set of \( N\) data-samples \( (x_i,z_i)\).  
+This direct consideration of \( p(x) \) as a Gaussian distribution 
+without concretizing \( \Phi(x)\) or \( W\) is what is referred to as an 
 integration over the space of all functions (informally: infinite dimensional vectors are functions). 
-However, the covariance matrix still needs to be parametrized, which limits this space of all functions to more concrete, but still very broad types.
-In PCA, the prior was over \( z\) and we would just consider \( \Sigma \approx XX^T \in \mathcal{R}^{n \times n}\). We can do this because
+However, the covariance matrix still needs to be parametrized, which limits this space of all functions to more concrete, 
+but still fairly broad types.
+In PCA, the prior was over \( z\) and we would just consider \( \Sigma \approx XX^T \in \mathcal{R}^{n \times n}\). 
+We can do this because
 <div class="equation-block" >
 $$
 \text{Var}(x) = \sum_{i=1}^N \mathbb{E}(Wz_i - \mu)\mathbb{E}(Wz_i - \mu)^T = \sum_{i=1}^N \mathbb{E}(Wz_i)\mathbb{E}(Wz_i )^T  =  W \sum_{i=1}^N\mathbb{E}(z_i)\mathbb{E}(z_i)^T W^T  =  W W^T. 
@@ -796,7 +808,8 @@ $$
 $$
 </div>
 A way of alleviating the issue of an unknown covariance matrix with unspecified feature dimensions, 
-is by considering the covariance \( \Sigma = X^TX \in \mathcal{R}^{N \times N} \) which is limited in dimensionality only by the amount of data-samples, 
+is by considering the covariance \( \Sigma = X^TX \in \mathcal{R}^{N \times N} \) 
+which is limited in dimensionality only by the amount of data-samples, 
 but defines a distribution in the feature-space dimensions, as illustrated on the linear case. 
 One chooses a non-linear parameterization of the kernel covariance matrix \( \Sigma = K(Z,Z) \), such as the radial basis function kernel. 
 This imposes a form on the corresponding functions \( \Phi(z) \). The maximum likelihood estimation from equation \ref{eq: MLE mutivariate covar} 
