@@ -733,27 +733,27 @@ $$
 \frac{N}{2} + \frac{N}{2} \Sigma^{-1} UDU^T = 0 \rightarrow  UDU^T = \Sigma
 $$
 </div>
-We only want to keep the $d$ biggest eigenvalues and eigen-directions so that
+We only want keep the $d$ biggest eigenvalues and eigen-directions so that
 <div class="equation-block" id = "MLE mutlivar covar">
 $$
 WW^T + \sigma^2 I \approx  \Sigma = UDU^T  \approx U_{-}D_{-}U_{-}^T + \sigma^2 I.
 $$
 </div>
 $$
-Let, $W = U_{-}(D_{-} - \sigma^2 I)^{1/2}$ so that
+Let, \( W = U_{-}(D_{-} - \sigma^2 I)^{1/2}\) so that
 <div class="equation-block" id = "MLE mutlivar covar"></div>
 $$
 WW^T  =  U_{-}D_{-}U_{-}^T + \sigma^2I \approx \Sigma.
 $$
 </div>
-$D_{-}$ should contain the $d$ biggest eigenvalues and $\sigma =  \frac{1}{n-d}\sum_{j=d+1}^{n} \lambda_j$.
+\(D_{-}\) should contain the \(d\) biggest eigenvalues and \( \sigma =  \frac{1}{n-d}\sum_{j=d+1}^{n} \lambda_j\).
 Thus, the dimensionality reduction results in
 <div class="equation-block" id = "MLE mutlivar covar">
 $$
 x = U_{-}(D_{-} - \sigma^2 I)^{1/2}z + \sigma^2 \epsilon.
 $$
 </div>
-If we omit  \( \epsilon \), this corresponds to a linear projection of the \( n \) dimensional data \( X \) onto a subspace of $d$ dimension.
+If we omit  \( \epsilon \), this corresponds to a linear projection of the \( n \) dimensional data \( X \) onto a subspace of \( d \) dimension.
 <br><br>
 We have shown how PCA can be considered a linear transformation of white noise to a Gaussian distribution. 
 Thus given a data-distribution we can find the transformation  \(  W \) which produces our data given white noise as an input.
