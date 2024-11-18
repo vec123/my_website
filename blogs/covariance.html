@@ -639,9 +639,8 @@ For dimensionality reduction consider
 \( x \in \mathbb{R}^n \) , 
 \( z \in \mathbb{R}^d \) and consequently
 \( W \in \mathbb{R}^{n \times d} \) with \( d \leq n \). 
-  
 Consider the distribution \( \mathcal{N}(0, WW^T) \) and note that \( WW^T \) has rank \( d \) but dimension \( n \). 
-Such cases are called singular distributions (some eigenvalues are zero). Singularity indicates the existence of directions in which no variability occurs.   
+We have a singular distributions (some eigenvalues are zero). Singularity indicates the existence of directions in which no variability occurs.   
 Given a dataset \( X \), we can perform the PCA decomposition and yield equation \ref{eq: pca solution}. 
 By keeping only the \( d \) biggest eigenvectors ( \( D_{-} \in \mathcal{R}^{d \times d} \) ) and corresponding eigenvalues (\( U_{-} \in \mathcal{R}^{n \times d}\) ) , a dimensionality reduction is performed. Note, that then 
 <div class="equation-block" id = "pca solution">
@@ -653,7 +652,7 @@ $$ \Sigma = WW^T = U_{-}D_{-}U^T  \in \mathbb{R}^{n \times n}$$
 
 is a singular matrix with rank \(d\).
 Along the directions corresponding to the omitted eigenvectors no variability occurs. 
-Since singular distributions can be hard to work with, a common practice is adding noise. In essence, we consider
+Since singular distributions can be hard to work with (e.g. non-invertible), a common practice is adding noise. In essence, we consider
 <div class="equation-block" id = "pca solution">
 $$
 x = Wz + \epsilon
