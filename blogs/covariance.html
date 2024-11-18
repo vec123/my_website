@@ -265,6 +265,10 @@ $$
     This is an indication that those directions provide no information, and these dimensions can be omitted without losing description accuracy. 
     If the variables correspond to model parameters, then the singular directions have no influence on the likelihood of the model. 
     Two models are indistingushable in their ability to describe the data with respect to changes in the singular direction.
+    <br><br> 
+    The non-invertability of singular distributions is a problem for some algorithms. 
+    It is common practice to add a small constant to the diagonal of the covariance matrix to make it invertible. 
+    This term reappears in many algorithms as we will see.
 </p>
 <h3>Mahalanobis Distance / covariance induces a geometry</h3>
 <p>Within the linear space that contains our distribution, one can define the Mahalanobis distance as:</p>
@@ -273,15 +277,19 @@ $$
 d_M(x, \mu) = \sqrt{(x - \mu)^T \Sigma^{-1} (x - \mu)}.
 $$
 </div>
-
-<p>In directions where the data has high variance, the Mahalanobis distance will be smaller. Conversely, in directions of low variance, the distance will be larger. This accounts for the fact that outliers in low-variance directions are more significant than in high-variance directions.</p>
-
-<p>In light of this, the covariance might be interpreted as a deformation of the linear space, which stretches some directions (those with low variance) and compresses others (those with high variance). 
+<p>In directions where the data has high variance, the Mahalanobis distance will be smaller. 
+    Conversely, in directions of low variance, the distance will be larger. 
+    This accounts for the fact that outliers in low-variance directions are more significant than in high-variance directions.
+   In light of this, the covariance might be interpreted as a deformation of the linear space, 
+   which stretches some directions (those with low variance) and compresses others (those with high variance). 
     While it can introduce diagonal relationships, no curvature or torsion can be created by a constant covariance matric.
-    If \(\Sigma = I\) (as for white noise), the Mahalanobis distance coincides with the Euclidean distance, and \(\Sigma = I\) might be interpreted as uniformly "stretched" space. The elements of \(\Sigma^{-1}\) correct for the stretching and compression of space by accounting for the effect of variance and covariance.</p>
+    If \(\Sigma = I\) (as for white noise), the Mahalanobis distance coincides with the Euclidean distance, 
+    and \(\Sigma = I\) might be interpreted as uniformly "stretched" space. 
+    The elements of \(\Sigma^{-1}\) correct for the stretching and compression of space by accounting for the effect of variance and covariance.</p>
 
 <h3>Distributions with nonlinear mean</h3>
-<p>The distributions we considered in the figures above have a constant mean. These distributions can be obtained from white noise by linear transformations. All regular distributions can be transformed back to white noise, whereas the two singular distributions cannot.</p>
+<p>The distributions we considered in the figures above have a constant mean. These distributions can be obtained from white noise by linear transformations. 
+    All regular distributions can be transformed back to white noise, whereas the two singular distributions cannot.</p>
 
 <p>In some cases, \(\mu(x,y)\) is nonlinear, but the covariance is constant.</p>
 
