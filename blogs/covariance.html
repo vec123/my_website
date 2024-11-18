@@ -770,7 +770,7 @@ In some sense, both distributions are equivalent.
 <br><br>
 PCA is a very well understood and popular method. Being completely linear allows for closed form solutions, good interpretability and analysis. 
 Linearity is at the same time its strength and main limitation. As a linear transformation of white-noise we can not expect to create a model for nonlinear distributions. 
-It has been shown \markred{paper} that the variational auto-encoder with a diagonally parameterized covariance matrix pursues the principal directions of PCA.
+It has been shown <a href="https://arxiv.org/abs/2102.06822">here</a> that the variational auto-encoder with a diagonally parameterized covariance matrix pursues the principal directions of PCA.
 Given these results, we might consider PCA as the linear alternative of VAEs and VAEs as its nonlinear counterpart. If our data-distribution is indeed linear, both yield the same results. If our data-distribution is non-linear, PCA will fail to capture it while the VAE still might. 
 
 
