@@ -39,8 +39,9 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <h1>Quantum Information Equations</h1>
-    <p>1. State Representation:</p>
+    <h1>Quantum Information Summary</h1>
+
+    <h2>State Representation</h2>
     <p>\[
         |\Psi\rangle = \sum_{k=0}^{d-1} \psi_k |k\rangle
     \]</p>
@@ -50,24 +51,25 @@
     <p>\[
         P_\Phi = |\langle \Phi | \Psi \rangle|^2
     \]</p>
-
-    <p>2. Operators:</p>
     <p>\[
-        \Pi = |\Psi\rangle \langle \Psi| \quad \text{where } \Pi^2 = \Pi
+        \Pi = |\Psi\rangle \langle \Psi| \quad (\Pi^2 = \Pi)
     \]</p>
     <p>\[
         \hat{O} = |\Phi\rangle \langle \Psi|
     \]</p>
 
-    <p>3. Measurement & Observables:</p>
+    <h2>Measurement & Observables</h2>
     <p>\[
         \hat{O} = \sum_{k=0}^{d-1} \lambda_k |k\rangle \langle k|
     \]</p>
     <p>\[
-        \langle \hat{O} \rangle = \sum_{k=0}^{d-1} \lambda_k P_{k,\Phi}
+        \hat{O} |i\rangle = \sum_{k=0}^{d-1} \lambda_k |k\rangle \langle k| |i\rangle = \lambda_k \langle k | i \rangle |i\rangle = \lambda_{O,i} |i\rangle
+    \]</p>
+    <p>\[
+        \langle \hat{O} \rangle = \sum_{k=0}^{d-1} \lambda_k P_{k,\Phi} = \langle \Psi | \lambda | \Psi \rangle
     \]</p>
 
-    <p>4. Observables for Qubits:</p>
+    <h2>Observables for Qubits</h2>
     <p>\[
         \sigma_x = 
         \begin{pmatrix}
@@ -85,24 +87,222 @@
         0 & -1
         \end{pmatrix}
     \]</p>
-
-    <p>5. Mixed States:</p>
+    <p>Eigenvalues and eigenvectors:</p>
     <p>\[
-        \rho = \sum_k p_k |\psi_k\rangle \langle \psi_k|
+        \sigma_x: \{1, |0\rangle; -1, |1\rangle\}, \quad \sigma_y: \{1, |i\rangle; -1, |-i\rangle\}, \quad \sigma_z: \{1, |+\rangle; -1, |-\rangle\}
+    \]</p>
+    <p>The three operators are mutually exclusive. To measure \( \{|0\rangle, |1\rangle\} \), use \( \sigma_x \); the others return random outputs.</p>
+
+    <h2>Pure, Mixed & Separable States</h2>
+    <p>For pure states:</p>
+    <p>\[
+        |\Psi\rangle \text{ is pure (can be mixed, can be entangled)}.
     \]</p>
     <p>\[
-        \text{Tr}(\rho^2) < 1 \quad \text{(Mixed)}, \quad \text{Tr}(\rho^2) = 1 \quad \text{(Pure)}
+        \langle \hat{O} \rangle = \sum_{k=1}^{d-1} p_k \langle \psi_k|\hat{O}|\psi_k\rangle = \text{Tr}\big[\psi_k |\Psi\rangle \langle \Psi| \hat{O}\big]
     \]</p>
-
-    <p>6. Entanglement Criterion:</p>
+    <p>Trace properties:</p>
     <p>\[
-        \rho_{AB} \neq \sum_{x} p_x \rho_{A,x} \otimes \rho_{B,x} \quad \text{(Entangled)}
+        \text{Tr}(\hat{O}) = \sum_{k=0}^{d-1} \langle k|\hat{O}|k\rangle, \quad \hat{O} = \sum_k p_k (|\psi_k\rangle \langle \psi_k|)
+    \]</p>
+    <p>Mixed state ensemble:</p>
+    <p>\[
+        \rho = \sum_k p_k (|\psi_k\rangle \langle \psi_k|)
+    \]</p>
+    <p>Probability:</p>
+    <p>\[
+        P_{sk} = \langle \Psi|\rho|\Psi\rangle
+    \]</p>
+    <p>Pure state criteria:</p>
+    <p>\[
+        \rho^2 = \rho \quad (\text{pure}), \quad \text{Tr}(\rho^2) < 1 \quad (\text{mixed})
+    \]</p>
+    <p>\[
+        \rho = \sum_k p_k |\psi_k\rangle \langle \psi_k| \quad (\text{mixed}), \quad \text{Tr}(\rho) = 1
     \]</p>
 
-    <p>7. Quantum Fourier Transform:</p>
+    <p>Entangled states:</p>
+    <p>\[
+        \rho_{A,B} \neq \sum_{x=0}^N p_x \rho_{A,x} \otimes \rho_{B,x}
+    \]</p>
+    <p>This indicates the state is entangled (not separable). Note that:</p>
+    <ul>
+        <li>An entangled state can be mixed or pure.</li>
+        <li>A mixed state can be separable or entangled.</li>
+        <li>A pure state can be entangled but cannot be mixed.</li>
+    </ul>
+
+    <h2>Generic Hermitian Operators</h2>
+    <p>\[
+        \hat{H} = \frac{1}{2}(r_0 \hat{1} + \vec{r} \cdot \vec{\sigma})
+    \]</p>
+    <p>Properties:</p>
+    <ul>
+        <li>\( r = 1 \): pure state</li>
+        <li>\( r < 1 \): mixed state</li>
+    </ul>
+
+    <h2>Mixed States as Convex Combinations</h2>
+    <p>\[
+        \rho = \sum_{x=0}^N p_x \rho_x, \quad \sum_{x=0}^N p_x = 1
+    \]</p>
+
+    <h2>Multiple Quantum Systems and Non-Classical Correlations</h2>
+    <p>For separable states:</p>
+    <p>\[
+        |\Psi\rangle_{AB} = \sum_{j=0} \psi_{j,k} |j\rangle_A \otimes |k\rangle_B
+    \]</p>
+    <p>For entangled states:</p>
+    <p>\[
+        |\Psi\rangle_{AB} \neq \sum_{j=0} \psi_{j,k} |j\rangle_A \otimes |k\rangle_B
+    \]</p>
+    <p>Examples (Bell states):</p>
+    <p>\[
+        |\Phi^+\rangle_{AB} = \frac{1}{\sqrt{2}}(|01\rangle_{AB} + |10\rangle_{AB})
+    \]</p>
+    <p>\[
+        |\Psi^-\rangle_{AB} = \frac{1}{\sqrt{2}}(|00\rangle_{AB} - |11\rangle_{AB})
+    \]</p>
+
+    <h2>Instantaneous Collapse</h2>
+    <p>\[
+        \rho = \frac{1}{2}|0\rangle\langle0| + \frac{1}{2}|1\rangle\langle1|
+    \]</p>
+    <p>Measurement in system \( A \) results in instantaneous collapse in system \( B \):</p>
+    <p>\[
+        |0\rangle \to |0\rangle_A |0\rangle_B, \quad |1\rangle \to |1\rangle_A |0\rangle_B
+    \]</p>
+    <p>For \( |\Psi^-\rangle \):</p>
+    <p>\[
+        \rho_B = \text{Tr}_A[|\Psi\rangle\langle\Psi|] = \frac{1}{2}\hat{I}_B
+    \]</p>
+    <p>This indicates a completely mixed state in \( B \).</p>
+
+    <h2>Entanglement for Mixed States</h2>
+    <p>Mixed separable state:</p>
+    <p>\[
+        \rho_{AB} = \sum_{n=1}^N p_n \rho_A^n \otimes \rho_B^n
+    \]</p>
+    <p>Mixed entangled state:</p>
+    <p>\[
+        \rho_{AB} \neq \sum_{n=1}^N p_n \sigma_A^n \otimes \sigma_B^n
+    \]</p>
+    <p>Partial trace for separability:</p>
+    <p>\[
+        \rho_{AB}^{T_A} = \sum_{n=1}^N p_n \rho_A^{nT} \otimes \rho_B^n \geq 0
+    \]</p>
+    <p>If \( \text{Tr}(\rho_{AB}^{T_A}) < 0 \), the state is entangled.</p>
+
+    <h2>Werner State</h2>
+    <p>\[
+        \rho_{AB} = (1-p)|\Psi\rangle\langle\Psi| + p\frac{\hat{I}}{4}
+    \]</p>
+    <p>Matrix form:</p>
+    <p>\[
+        \rho_{AB} = 
+        \begin{pmatrix}
+            p & 0 & 0 & 2p-2 \\
+            0 & 2-p & 0 & 0 \\
+            0 & 0 & 2-p & 0 \\
+            2p-2 & 0 & 0 & p
+        \end{pmatrix}
+    \]</p>
+    <p>The state becomes separable for \( p \geq \frac{2}{3} \).</p>
+
+    <h2>Evolution and Krauss Operators</h2>
+    <p>Schrödinger equation:</p>
+    <p>\[
+        i\hbar\frac{d}{dt}|\Psi(t)\rangle = \hat{H}|\Psi(t)\rangle, \quad \hat{H} = \hat{H}^\dagger
+    \]</p>
+    <p>Time evolution operator:</p>
+    <p>\[
+        |\Psi(t)\rangle = e^{-\frac{i}{\hbar}\hat{H}t}|\Psi(0)\rangle
+    \]</p>
+    <p>Krauss operators for non-isolated systems:</p>
+    <p>\[
+        \rho_A = \text{Tr}_E[|\Phi\rangle\langle\Phi|_{AE}]
+    \]</p>
+    <p>\[
+        \rho_A \to \sum_k \hat{E}_k \rho_A \hat{E}_k^\dagger, \quad \sum_k \hat{E}_k^\dagger \hat{E}_k = \hat{I}_A
+    \]</p>
+
+    <h2>Generalized Measurement</h2>
+    <p>Probability of outcome \( k \):</p>
+    <p>\[
+        P_k = \text{Tr}(\hat{M}_k^\dagger \hat{M}_k \rho)
+    \]</p>
+    <p>Post-measurement state:</p>
+    <p>\[
+        \rho \to \frac{\hat{M}_k \rho \hat{M}_k^\dagger}{P_k}
+    \]</p>
+    <p>POVM (positive operator-valued measure):</p>
+    <p>\[
+        F_k = \hat{M}_k^\dagger \hat{M}_k
+    \]</p>
+
+    <h2>Quantum Information & Shannon Theory</h2>
+    <h3>Number of Required Bits</h3>
+    <p>Shannon entropy for a message of \( k \) symbols:</p>
+    <p>\[
+        H = -\sum_{k} p_k \log_2(p_k)
+    \]</p>
+
+    <h3>Von Neumann Entropy</h3>
+    <p>\[
+        S(\rho) = -\text{Tr}(\rho \log(\rho))
+    \]</p>
+    <p>For pure states:</p>
+    <p>\[
+        S(\rho) = 0
+    \]</p>
+    <p>For mixed states:</p>
+    <p>\[
+        S(\rho) = -\sum_k p_k \log_2(p_k)
+    \]</p>
+    <p>Maximal entropy for a maximally mixed state:</p>
+    <p>\[
+        S(\rho) = \log_2(N)
+    \]</p>
+
+    <h2>Quantum Fourier Transform</h2>
     <p>\[
         \text{QFT}|x\rangle = \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} e^{2\pi i \frac{xk}{N}} |k\rangle
     \]</p>
+    <p>The QFT circuit uses Hadamard gates and controlled phase-shift gates.</p>
+
+    <h2>Shor's Algorithm</h2>
+    <h3>Classical Reduction</h3>
+    <p>Steps for factoring \( N \):</p>
+    <ol>
+        <li>Choose \( a \) such that \( 1 < a < N \).</li>
+        <li>Compute \( \text{gcd}(a, N) \).</li>
+        <li>Find the period \( r \) of \( f(x) = a^x \mod N \).</li>
+    </ol>
+    <h3>Quantum Period Finding</h3>
+    <p>Uses the Quantum Fourier Transform to find the period \( r \).</p>
+
+    <h2>Grover's Algorithm</h2>
+    <p>Initial state:</p>
+    <p>\[
+        |\Phi\rangle = \sin\left(\frac{\theta}{2}\right)|\alpha\rangle + \cos\left(\frac{\theta}{2}\right)|\beta\rangle
+    \]</p>
+    <p>The Grover operator:</p>
+    <p>\[
+        G = 2|\Phi\rangle\langle \Phi| - \hat{I}
+    \]</p>
+
+    <h2>Phase Estimation</h2>
+    <p>\[
+        \hat{O}|u\rangle = e^{2\pi i \Phi} |u\rangle
+    \]</p>
+    <p>Uses the Quantum Fourier Transform to estimate the phase \( \Phi \).</p>
+
+    <h2>Quantum Teleportation</h2>
+    <p>Initial state:</p>
+    <p>\[
+        (\alpha|0\rangle_A + \beta|1\rangle_A) \otimes \frac{1}{\sqrt{2}}(|0\rangle_B|1\rangle_C - |1\rangle_B|0\rangle_C)
+    \]</p>
+    <p>Perform a Bell-basis measurement and apply the appropriate unitary transformation to recover the state.</p>
+
 </body>
-        </html>
-        
+</html>
