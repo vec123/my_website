@@ -53,19 +53,19 @@
 
     <h2>Introduction</h2>
     <p>The Wasserstein distance is a distance between shapes based on optimal transport.
-        Consider two probability densities $p(x)$ and $q(x)$ defining the distributions $P$ and $Q$, 
-        so that $x \sim P$ and $y \sim Q$ with $x,y \in \mathbb{R}^d$.
+        Consider two probability densities \(p(x)\) and \(q(x)\) defining the distributions \(P\) and \(Q\), 
+        so that \( x \sim P \) and \( y \sim Q \) with \( x,y \in \mathbb{R}^d \).
         Its original formulation is the Monge-Kantorovich formulation which considers the optimal transport distance as
         <div class="equation">
            $$
         \inf_T \int || x - T(x) ||^p dP(x).
             $$
         </div>
-        Here /( dP(x) /) is the probability measure and /( T(x) /) is the transport map. 
+        Here \( dP(x) /) is the probability measure and \( T(x) \) is the transport map. 
 
-        If the minimizer  /( T^*(x) /) exists it is the optimal transport map.
+        If the minimizer  \( T^*(x) \) exists it is the optimal transport map.
         However, in this formulation, a solution is not guaranteed to exist. 
-        For example, if $p(x)$ corresponds to a point-mass and $q(x)$ corresponds to multiple point-masses,
+        For example, if \(p(x)\) corresponds to a point-mass and \(q(x)\) corresponds to multiple point-masses,
         then, due to the usage of equal probability measure for both distributions, the mass can not be splitted. 
         An alternative formulation is the soft formulation
         <div class="equation"  id="eq-wasserstein">
@@ -73,28 +73,28 @@
             W_p(P,Q) = (\inf_{J\in \mathcal{J}(P,Q)} \int_{x,y} ||x-y||^p dJ(x,y) )^\frac{1}{p}
              $$
          </div>
-        so that $\int_y J(x,y) dy = P $ and $\int_x J(x,y) dy = Q $.
-        The minimizer $J^*(\cdot)$ is called the optimal transport plan and is guaranteed to exist.
-        If $T: X \rightarrow X$, i.e. no splitting of mass occurs (input and output measure coincide), 
+        so that \( \int_y J(x,y) dy = P $ and $\int_x J(x,y) dy = Q \).
+        The minimizer \( J^*(\cdot) \) is called the optimal transport plan and is guaranteed to exist.
+        If \(T: X \rightarrow X\), i.e. no splitting of mass occurs (input and output measure coincide), 
         it is called the optimal transport map. 
         For many applications the input and output measures are equal.
         Note that minimizing the Wasserstein distance returns the minimal cost, as well as a corresponding transport plan. 
         This makes it a very attractive method for image morphing, image registration and further. 
-        For example, consider two greyscale images in $2D$. 
-        Then the optimal transport map is a $2D$ vector-field, where each point receives a $2D$-vector with the corresponding displacement. 
-        In a discrete setting we have samples $x_i$ and $y_j$ which occur with probability $p_i$ and $q_j$ respectively.
+        For example, consider two greyscale images in \(2D\). 
+        Then the optimal transport map is a \(2D\) vector-field, where each point receives a \(2D\)-vector with the corresponding displacement. 
+        In a discrete setting we have samples \( x_i \) and \( y_j \) which occur with probability \( p_i \) and \( q_j \) respectively.
         Equation <a href="#eq-wasserstein">Wasserstein</a> can be written as
         <div class="equation" id = "eq-wasserstein discrete">
         $$
         W_p(P,Q) = \min_{J\in \mathcal{J}(P,Q)} \sum_i \sum_j ||x_i-y_j||^p J(x_i,y_j)
         $$
         </div>
-        so that $ \sum_j J(x_i, y_j) = p_i$, $ \sum_i J(x_i, y_j) = q_j$ and $J(x_i,y_j) \geq 0$.
+        so that \( \sum_j J(x_i, y_j) = p_i \), \() \sum_i J(x_i, y_j) = q_j \) and \( J(x_i,y_j) \geq 0 \).
         <br><br>
-        Interesting cases are  $p=1$ (also called Earth-Mover distance) and $p=2$.
-        For $p=2$, it can be shown that there exists a unique convex function $\phi$ so that $J^*(\cdot) = \nabla \phi $.
-        Furthermore, for $p=2$ the metric space $ \{ P(\Omega), W_p \}$ has the structure of a Riemannian manifold.
-        This might also hold for other values of $p$ 
+        Interesting cases are  \( p=1 \) (also called Earth-Mover distance) and \( p=2 \).
+        For \( p=2 \), it can be shown that there exists a unique convex function \( \phi \) so that \( J^*(\cdot) = \nabla \phi \).
+        Furthermore, for \( p= 2\) the metric space $ \{ P(\Omega), W_p \}$ has the structure of a Riemannian manifold.
+        This might also hold for other values of \( p \) 
         (see more <a href="https://link.springer.com/article/10.1007/s41884-018-0014-4">Wasserstein Riemannian geometry of Gaussian densities
         </a>)
         Equation <a href="#eq-wasserstein">Wasserstein</a> can be written in a dual formulation as 
@@ -103,18 +103,18 @@
             W_p(P,Q) = (\sup_{\Phi, \Psi} \int_{y} \Phi(y)dQ(y) - \int_{x} \Psi(x)dP(x)),
             $$
         </div>
-        For $p=1$ this can be transformed into 
+        For \( p=1 \) this can be transformed into 
         <div class="equation">
             $$
             W_p(P,Q) = (\sup_{f} \int_{x} f(x)dQ(x) - \int_{x} f(x)dP(x) ),
             $$
         </div> which is the loss-term employed in Wasserstein GANs.
-        Another important fact is that the computing the Wasserstein is expensive, unless the probabilities $p(x)$ and $q(x)$ are one dimensional.
+        Another important fact is that the computing the Wasserstein is expensive, unless the probabilities \( p(x) \) and \( q(x) \) are one dimensional.
         In the one-dimensional case the distance has a closed form solution. 
         <br><br>
-        A notational pecularity is  $T_{\#}P$, which corrsponds to a new probability distribution induced by $P$ through the mapping $T$. 
-        Consider the optimal transport map $T:  \mathbb{R}^d \rightarrow  \mathbb{R}^d$, 
-        where the distribution of $T(X)$ is called push-forward ($T_{\#}P $) of $P$, so that
+        A notational pecularity is  \( T_{\#}P \), which corrsponds to a new probability distribution induced by \( P \) through the mapping \( T \). 
+        Consider the optimal transport map \( T:  \mathbb{R}^d \rightarrow  \mathbb{R}^d \), 
+        where the distribution of \( T(X) \) is called push-forward ( \( T_{\#}P \) ) of \(P\), so that
         <div class="equation">
             $$
         T_{\#}P (A) = P(\{ x: T(x) \in A \}) = P(T^{-1}(A)).
