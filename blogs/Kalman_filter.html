@@ -224,19 +224,19 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         $$
         \Delta(t+1)= F L(t) = C P(t+1|t)C^T+R
         $$
-        P(t+1|t+1) = [I - P(t+1|t)C^T\Delta^{-1}(t+1)C]P(t+1|t)
+        P(t+1|t+1) = [I - P(t+1|t)C^T \Delta^{-1} (t+1)C]P(t+1|t)
         $$
     </div>
     <p> Note that </p>
     <div class="equation">
-        P(t+1|t) = FP(t|t-1)F^T -  FP(t|t-1)C^TDelta^{-1}(t)CP(t|t-1)F^T + Q
+        P(t+1|t) = FP(t|t-1)F^T -  FP(t|t-1)C^T Delta^{-1} (t)CP(t|t-1)F^T + Q
     </div>
     <p>and</p>
     <div class="equation">
         \hat{x}(t+1|t) = (F - KC)\hat{x}(t|t-1) + (SR^{-1}+K)y(t) = \Gamma\hat{x}(t|t-1)+ (SR^{-1}+K)y(t)
     </div>
     <p> 
-        is an important equations. They can be used to determine the asymptiotic behaviour of <i>\lim_{t \rightarrow \infty}P(t+1|t)</i>.  
+        is an important equations. They can be used to determine the asymptiotic behaviour of \( \lim_{t \rightarrow \infty}P(t+1|t) \).  
         For example, if <i> F </i> is stable, then <i>x(t)</i> converges to a stationary value and becomes a stationary process. 
         We have seen that the covariance of the process is determined by
         <div class="equation">
