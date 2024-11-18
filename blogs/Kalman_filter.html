@@ -247,13 +247,13 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </div>
     <p> 
         are especially important equations. They can be used to determine the asymptiotic behaviour of \( \lim_{t \rightarrow \infty}P(t+1|t) \) and \( \lim_{t \rightarrow \infty}\hat{x}(t+1|t) \).  
-        If \( F \) is stable, then \( x(t) \) converges to a stationary value and becomes a stationary process. 
-        We have seen that, in the limit, the covariance of the process is determined by
+        Recall that we have seen that, in the limit, the covariance of the process is determined by
         <div class="equation">
             $$
             \Sigma = F \Sigma F^T + Q
             $$
         </div>
+        If \( F \) is stable, then \( x(t) \) converges to a stationary value and becomes a stationary process. 
         If this is the case, then <i>P(t)</i> also converges. For example if <i>K = 0</i> (no measurement data is avaialable),
         <i> \(\lim_{t \rightarrow \infty} \hat{x}(t+1|t) = 0 = \lim_{t \rightarrow \infty}  \mathbb{E}x(t) \)</i> and <i> \( \lim_{t \rightarrow \infty}P(t) = \Sigma \)</i>
         If <i>\( \Gamma \)</i> is unstable, then <i>\( \hat{x} \)</i> is non stationary.  Stability of <i>\( F \)</i> is a sufficient but not a necessary criterion for predictor convergence.
