@@ -133,17 +133,18 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         \end{bmatrix}
         $$.
     </div> 
-    <p>where <i>\tilde{Q} = Q - SR^{-1}S^T</i>. These are the starting equations for the Kalman Filter. 
-    We want to obtain a predictor <i>\hat{x}(t+1|t) = \mathbb{E}(x(t+1)|H_t(y))</i>, filter <i>\hat{x}(t|t)= \mathbb{E}(x(t+1)|H_{t+1}(y))</i>. 
-    The predictor error is  <i>e(t+1|t) = x(t+1) - \hat{x}(t+1|t)</i>
+    <p>where <i>\( \tilde{Q} = Q - SR^{-1}S^T \)</i>. These are the starting equations for the Kalman Filter. 
+    We want to obtain a predictor <i>\( \hat{x}(t+1|t) = \mathbb{E}(x(t+1)|H_t(y)) \)</i>, filter <i>\( \hat{x}(t|t)= \mathbb{E}(x(t+1)|H_{t+1}(y)) \)</i>. 
+    The predictor error is  <i>\( e(t+1|t) = x(t+1) - \hat{x}(t+1|t) \)</i>
     and its covariance is
-    <i>
+    <i>\(
         P(t+1|t) =\mathbb{E}[e(t+1|t)e(t+1|t)^T]
+        \)
     </i>. 
     Analogues can be obtained for the filter.
-    We call  <i> l(t) = y(t) - C \hat{x}(t|t-1) = y(t) - \hat{y}(t)</i> the innovation. It can be realted to how much we trust the state-predictor given the measurements. 
+    We call  <i>\( l(t) = y(t) - C \hat{x}(t|t-1) = y(t) - \hat{y}(t) \)</i> the innovation. It can be realted to how much we trust the state-predictor given the measurements. 
     Of course, state and measurements are subject to noise.
-    We have introduced <i>H_{t}(y)</i> which corresponds to an aggregation of th emasurement information at time <i>t</i>.
+    We have introduced <i>\( H_{t}(y) \)</i> which corresponds to an aggregation of th emasurement information at time <i>t</i>.
     Consider the time update of the predictor mean and its error covariance
 </p>
     <div class="equation">
