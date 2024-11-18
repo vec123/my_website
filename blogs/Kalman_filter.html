@@ -57,8 +57,8 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         y_t = H x_t + Dw_t
         $$
     </div>
-    <p>where <i>v_k</i> and <i> w_k</i> are independent gaussian noise terms with zero mean and isotropic covariance. Consider <i>\mathbb{E}(x_0) = \mu_0</i> 
-        and  <i>\mathbb{Var}(x_0) = \Sigma_0.</i> </p>
+    <p>where <i>v_k</i> and <i> w_k</i> are independent gaussian noise terms with zero mean and isotropic covariance. Consider <i>\( \mathbb{E}(x_0) = \mu_0 \)</i> 
+        and  <i>\( \mathbb{Var}(x_0) = \Sigma_0 \).</i> </p>
     Let us look at the time evolution of this mean and covariance.</p>
     <div class="equation">
         $$
@@ -87,7 +87,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         \Sigma_{\infty} = F  \Sigma_{\infty}  F^T + BB^T
         $$
     </div>
-    <p> This equation is stricly positive and can be interpreted as a Lyapunov Equation. If F is stabkle, it has a unique solution <i>\Sigma_{\infty}</i></p>
+    <p> This equation is stricly positive and can be interpreted as a Lyapunov Equation. If \(F\) is stable, it has a unique solution <i>\( \Sigma_{\infty} \)</i></p>
     <p>Consider now <i> B = I</i> and <i> D = I</i>, and assume the noise terms are zero mean with covariance </p>
     </p>
     <div class="equation">
@@ -106,7 +106,9 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     <p>The state and measurement noises are uncorrelated at different times but at time <i>t</i> correlation can exist (obviously). 
         Thus we deconstruct <i>v</i> into a term correlated to <i>w</i> and one uncorrelated to it. We obtain </p>
     <div class="equation">   
+        $$
      \tilde{v}(t) = \mathbb{E}[v(t)|w(t)] = v(t) - S R^{-1} w(t)  = v(t) -  S R^{-1}y(t) +  S R^{-1} C x(t)
+     $$
     </div>
     <p>by the conditional mean of a gaussian. Thus</p>
     <div class="equation">   
@@ -120,10 +122,10 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
  <p>with</p>
     <div class="equation">
         $$
-        \text{VAR} \begin{bmatrix}
+        \text{Var}( \begin{bmatrix}
         \tilde{v} \\
         w
-        \end{bmatrix}
+        \end{bmatrix})
         =
         \begin{bmatrix}
         \tilde{Q} & 0 \\
@@ -237,16 +239,16 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     </div>
     <p> 
         is an important equations. They can be used to determine the asymptiotic behaviour of \( \lim_{t \rightarrow \infty}P(t+1|t) \).  
-        For example, if <i> F </i> is stable, then <i>x(t)</i> converges to a stationary value and becomes a stationary process. 
+        For example, if \( F \) is stable, then \( x(t) \) converges to a stationary value and becomes a stationary process. 
         We have seen that the covariance of the process is determined by
         <div class="equation">
             \Sigma = F\SigmaF^T + Q
         </div>
         If this is the case, then <i>P(t)</i> also converges. For example if <i>K = 0</i> (no measurement data is avaialable),
-        <i>\lim_{t \rightarrow \infty} \hat{x}(t+1|t) = 0 = \lim_{t \rightarrow \infty}  \mathbb{E}x(t)</i> and <i>\lim_{t \rightarrow \infty}P(t) = \Sigma</i>
-        If <i>\Gamma</i> is unstable, then <i>\hat{x}</i> is non stationary.  Stability of <i>F</i> is a sufficient but not a necessary criterion for predictor convergence.
+        <i> \(\lim_{t \rightarrow \infty} \hat{x}(t+1|t) = 0 = \lim_{t \rightarrow \infty}  \mathbb{E}x(t) \)</i> and <i> \( \lim_{t \rightarrow \infty}P(t) = \Sigma \)</i>
+        If <i>\( \Gamma \)</i> is unstable, then <i>\( \hat{x} \)</i> is non stationary.  Stability of <i>\( F \)</i> is a sufficient but not a necessary criterion for predictor convergence.
         It is also possible to have predictor convergence and/or bounds with an unstable system. 
-        This predictor convergence although the underlying state evolution is non stationary is made possible by an equally non stationary measurement <i>y(t)</i> 
+        This predictor convergence although the underlying state evolution is non stationary is made possible by an equally non stationary measurement <i>\( y(t) \)</i> 
         which feeds the predictor. This can be shown on the simple system 
         <div class="equation">
             $$
@@ -256,14 +258,16 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
             y(t) = \gamma x(t) + v(t)
             $$
         </div>
-        with <i>w(t) \sim \mathcal{N}(0, \beta)</i> and <i>v(t) =  \sim \mathcal{N}(0, 1)</i>.
+        with <i>\( w(t) \sim \mathcal{N}(0, \beta) \)</i> and <i>\( v(t) =  \sim \mathcal{N}(0, 1) \)</i>.
         We obtain 
         <div class="equation">
+            $$
             P(t+1) = \beta^2 + \frac{\alpha^2P(t)}{1 + \gamma^2P(t)}.
+            $$
         </div>
-        This equation has a stable solution if <i>\gamma \geq 0</i>. If <i>\gamma 0 0</i> then <i>P(t)</i> diverges. If <i> \beta = 0</i>,
+        This equation has a stable solution if <i>\( \gamma > 0 \)</i>. If <i>\( \gamma = 0 \)</i> then <i>P(t)</i> diverges. If <i>\( \beta = 0 \)</i>,
         i.e. the state evolution is not noisy, then there exist two solutions. One is stable and one is unstable. The unstable solution is at <i>P(t) = 0</i>.
-        <i>\gamma \neq 0</i>  and <i>\beta \neq 0</i> ensure  the existence of a unique solution satisfying the convergence of <i>P(t)</i> to a stabilizing covariance.
+        <i>\( \gamma \neq 0 \)</i>  and <i>\( \beta \neq 0 \)</i> ensure  the existence of a unique solution satisfying the convergence of <i>P(t)</i> to a stabilizing covariance.
         We have examined a simple system with one dimension only. Translated into a higher dimensional system, the same principles apply. We have
         <div class="equation">
             $$
@@ -273,15 +277,15 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
             y(t) = C x(t) + Dv(t)
             $$
         </div>
-        with <i>w(t) \sim \mathcal{N}(0, I)</i> and <i>v(t) =  \sim \mathcal{N}(0, I)</i> or <i>Bw(t) \sim \mathcal{N}(0, BB^T = Q)</i> 
-        and  <i>Dv(t) \sim \mathcal{N}(0, DD^T = R)</i>.
+        with <i>\( w(t) \sim \mathcal{N}(0, I) \)</i> and <i>\( v(t) =  \sim \mathcal{N}(0, I) \)</i> or <i>\( Bw(t) \sim \mathcal{N}(0, BB^T = Q) \)</i> 
+        and  <i>\( Dv(t) \sim \mathcal{N}(0, DD^T = R) \)</i>.
         If <i>(A,C)</i> is observable (no distinct <i>x(0)</i> generate the same outputs), 
-        then there exists at elast one solution for the covariance <i>\lim_{t \rightarrow \infty} P(t)</i>.
-        There could be more than one solution (as in the case<i> \beta = 0</i> and <i> \gamma \neq 0</i> ).
+        then there exists at elast one solution for the covariance <i>\( \lim_{t \rightarrow \infty} P(t) \)</i>.
+        There could be more than one solution (as in the case <i>\( \beta = 0 \)</i> and <i>\( \gamma \neq 0 \)</i> ).
         If <i>(A,B)</i> is controllable (equivalent to controllable <i>(A,Q)</i>), then the solution is unique and stabilizing.
         These notions can be relaxed to detectability and stabilizability. In essence, if <i>(A,B)</i> is stabilizable and <i>(A,C)</i> is detectable 
         (i.e. all uncontrollable and unobservable modes are asymptotically stable),
-        then there exists a unique stabilizing solution for the covariance <i>\lim_{t\rightarrow \infty}P(t)</i>.
+        then there exists a unique stabilizing solution for the covariance <i>\( \lim_{t\rightarrow \infty}P(t) \)</i>.
         Find the proof <a href="#proofs">here</a>.
     </p>
     <h2 id="proofs">Proofs</h2>
@@ -329,7 +333,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         y(t+) = Cx(t) + \tilde w(t)
         $$
     </div>
-    <p> and note that <i>v(t)</i> is independent from <i>y(t)</i>. Thus <i>\mathbb{E}(x(t+1)|H_{t+1}(y)) = \hat{x}(t+1|t) =  F \hat{x}(t|t) + S R^{-1}y(t)</i> 
+    <p> and note that <i>v(t)</i> is independent from <i>y(t)</i>. Thus <i>\( \mathbb{E}(x(t+1)|H_{t+1}(y)) = \hat{x}(t+1|t) =  F \hat{x}(t|t) + S R^{-1}y(t) \)</i> 
     and therefore
     <div class="equation">
         $$
@@ -346,13 +350,13 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         $$
     </div>
     Furthermore, consider the measurement update and the fact that the space spanned by<i>l(t)</i> is orthogonal to the space spanned by <i>y(t)</i> (by definition).
-    Thus <i>H_{t+1}(y) = H_{t}(y)+ H(l(t+1))</i>. Thus
+    Thus <i>\( H_{t+1}(y) = H_{t}(y)+ H(l(t+1)) \)</i>. Thus
     <div class="equation">
         $$
        \mathbb{E}(x(t+1)|H_t(y)) = \mathbb{E}(x(t+1)|H_t(y)) + \ mathbb{E}(x(t+1)|H(l(t+1))) = \hat{x}(t+1|t) + \text{cov}(x(t+1,l(t+1)))+\text{var}(l(t+1))^{-1}l(t+1)
         $$
         $$
-        =  \hat{x}(t+1|t) + P(t+1|t)C^T(CP(t+1|t)C^T + R)^{-1} l(t+1) =  \hat{x}(t+1|t+1) = \hat{x}(t+1|t)  + L(t+1)l(t+1)
+        = \hat{x}(t+1|t) + P(t+1|t)C^T(CP(t+1|t)C^T + R)^{-1} l(t+1) =  \hat{x}(t+1|t+1) = \hat{x}(t+1|t)  + L(t+1)l(t+1)
         $$
     </div>
     by the conditional of a gaussian. Updating the covariances is analogous:
