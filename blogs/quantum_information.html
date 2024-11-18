@@ -35,96 +35,74 @@
             margin-bottom: 20px;
         }
     </style>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
+    <h1>Quantum Information Equations</h1>
+    <p>1. State Representation:</p>
+    <p>\[
+        |\Psi\rangle = \sum_{k=0}^{d-1} \psi_k |k\rangle
+    \]</p>
+    <p>\[
+        |\Phi\rangle = \sum_{k=0}^{d-1} \phi_k |k\rangle
+    \]</p>
+    <p>\[
+        P_\Phi = |\langle \Phi | \Psi \rangle|^2
+    \]</p>
 
-    <h1>Score Matching</h1>
-    <p class="author-date">vic-bayer, October 2024</p>
+    <p>2. Operators:</p>
+    <p>\[
+        \Pi = |\Psi\rangle \langle \Psi| \quad \text{where } \Pi^2 = \Pi
+    \]</p>
+    <p>\[
+        \hat{O} = |\Phi\rangle \langle \Psi|
+    \]</p>
 
-    <h2>Introduction</h2>
-    <p>Score-matching is a method for likelihood maximization applied to models of the form:</p>
-    <div class="equation">
-        <span>p<sub>θ</sub>(x) = <i>𝑡𝑖𝑙𝑑𝑒</i>(x) / Z<sub>θ</sub></span>
-    </div>
-    <p>where <i>Z<sub>θ</sub> = ∫𝑡𝑖𝑙𝑑𝑒(x) dx</i> is generally intractable normalization. Energy models have promise here, approximating the integral via Langevin.</p>
+    <p>3. Measurement & Observables:</p>
+    <p>\[
+        \hat{O} = \sum_{k=0}^{d-1} \lambda_k |k\rangle \langle k|
+    \]</p>
+    <p>\[
+        \langle \hat{O} \rangle = \sum_{k=0}^{d-1} \lambda_k P_{k,\Phi}
+    \]</p>
 
-    <h2>Problem Setup</h2>
-    <div class="equation">
-        <span>
-            Score refers to <i>∇ log p(x, θ)</i>.
-            Regularity assumptions assume <i>∇ log q→0  |x|_2→∞ </i>.
-        </span>
-    </div>
+    <p>4. Observables for Qubits:</p>
+    <p>\[
+        \sigma_x = 
+        \begin{pmatrix}
+        0 & 1 \\
+        1 & 0
+        \end{pmatrix}, \quad
+        \sigma_y = 
+        \begin{pmatrix}
+        0 & -i \\
+        i & 0
+        \end{pmatrix}, \quad
+        \sigma_z = 
+        \begin{pmatrix}
+        1 & 0 \\
+        0 & -1
+        \end{pmatrix}
+    \]</p>
 
-    <h2>Energy-Based Models</h2>
-    <p>An example of such a model is an energy-based model which enjoys a very flexible parameterization as a Boltzmann distribution (also called Gibbs distribution) with the form:</p>
-    <div class="equation">
-        <span>p<sub>θ</sub>(x) = e<sup>-f<sub>θ</sub>(x)</sup> / ∫ e<sup>-f<sub>θ</sub>(x)</sup> dx</span>
-    </div>
-    <p>Here, <i>f<sub>θ</sub>(x)</i> denotes the energy of the distribution in analogy to the Boltzmann distribution. In the context of energy-based model optimization, <i>∫ e<sup>-f<sub>θ</sub>(x)</sup> dx</i> is often approximated using Monte Carlo methods, or more specifically, Langevin dynamics. This is generally computationally expensive, although in low dimensions, it might be amenable to parallelization via rejection sampling.</p>
+    <p>5. Mixed States:</p>
+    <p>\[
+        \rho = \sum_k p_k |\psi_k\rangle \langle \psi_k|
+    \]</p>
+    <p>\[
+        \text{Tr}(\rho^2) < 1 \quad \text{(Mixed)}, \quad \text{Tr}(\rho^2) = 1 \quad \text{(Pure)}
+    \]</p>
 
-    <h2>Score Matching Methodology</h2>
-    <p>The idea is that:</p>
-    <div class="equation">
-        <span>∇<sub>x</sub> log p(x, θ) = ∇<sub>x</sub> log [e<sup>p<sub>θ</sub>(x)</sup> / ∫ e<sup>p<sub>θ</sub>(x)</sup> dx] = ∇<sub>x</sub> p<sub>θ</sub>(x) - ∇<sub>x</sub> Z<sub>θ</sub> = ∇<sub>x</sub> p<sub>θ</sub>(x)</span>
-    </div>
-    <p>In essence, the score function does not depend on the intractable integral while still containing information about the distribution. As the name suggests, score matching aims at matching the gradient of the empirical data density <i>q(·)</i> with the gradient of the model density <i>p(·, θ)</i>, leading to an optimization of the form:</p>
-    <div class="equation">
-        <span>θ<sub>opt</sub> = argmin<sub>θ</sub> (1/2) E<sub>q</sub> ||∇<sub>x</sub> log q(x) - ∇<sub>x</sub> log p(x, θ)||<sub>2</sub><sup>2</sup></span>
-    </div>
+    <p>6. Entanglement Criterion:</p>
+    <p>\[
+        \rho_{AB} \neq \sum_{x} p_x \rho_{A,x} \otimes \rho_{B,x} \quad \text{(Entangled)}
+    \]</p>
 
-    <h2>Further Analysis</h2>
-    <p>Consider the term:</p>
-    <div class="equation">
-        <span>(1/2) ||∇<sub>x</sub> log q(x) - ∇<sub>x</sub> log p(x, θ)||<sub>2</sub><sup>2</sup> = (1/2) (∇<sub>x</sub> log q(x))<sup>2</sup> +
-            <h2>Energy-Based Models</h2>
-            <p>An example of such a model is an energy-based model which enjoys a very flexible parameterization as a Boltzmann distribution (also called Gibbs distribution) with the form:</p>
-            <div class="equation">
-                <span>p<sub>θ</sub>(x) = e<sup>-f<sub>θ</sub>(x)</sup> / ∫ e<sup>-f<sub>θ</sub>(x)</sup> dx</span>
-            </div>
-            <p>Here, <i>f<sub>θ</sub>(x)</i> denotes the energy of the distribution in analogy to the Boltzmann distribution. In the context of energy-based model optimization, <i>∫ e<sup>-f<sub>θ</sub>(x)</sup> dx</i> is often approximated using Monte Carlo methods, or more specifically, Langevin dynamics. This is generally computationally expensive, although in low dimensions, it might be amenable to parallelization via rejection sampling.</p>
-        
-            <h2>Score Matching Methodology</h2>
-            <p>The idea is that:</p>
-            <div class="equation">
-                <span>∇<sub>x</sub> log p(x, θ) = ∇<sub>x</sub> log [e<sup>p<sub>θ</sub>(x)</sup> / ∫ e<sup>p<sub>θ</sub>(x)</sup> dx] = ∇<sub>x</sub> p<sub>θ</sub>(x) - ∇<sub>x</sub> Z<sub>θ</sub> = ∇<sub>x</sub> p<sub>θ</sub>(x)</span>
-            </div>
-            <p>In essence, the score function does not depend on the intractable integral while still containing information about the distribution. As the name suggests, score matching aims at matching the gradient of the empirical data density <i>q(·)</i> with the gradient of the model density <i>p(·, θ)</i>, leading to an optimization of the form:</p>
-            <div class="equation">
-                <span>θ<sub>opt</sub> = argmin<sub>θ</sub> (1/2) E<sub>q</sub> ||∇<sub>x</sub> log q(x) - ∇<sub>x</sub> log p(x, θ)||<sub>2</sub><sup>2</sup></span>
-            </div>
-        
-            <h2>Further Analysis</h2>
-            <p>Consider the term:</p>
-            <div class="equation">
-                <span>(1/2) ||∇<sub>x</sub> log q(x) - ∇<sub>x</sub> log p(x, θ)||<sub>2</sub><sup>2</sup> = (1/2) (∇<sub>x</sub> log q(x))<sup>2</sup> + (1/2) (∇<sub>x</sub> ∇<sub>x</sub> log p(x, θ))<sup>2</sup> - (1/2) ∇<sub>x</sub> log q(x) ∇<sub>x</sub> log p(x, θ)</span>
-            </div>
-            <p>The first term does not depend on <i>θ</i>, so it is not relevant for the optimization problem.</p>
-        
-            <h2>Expectation of the Cross-Term</h2>
-            <p>Now consider:</p>
-            <div class="equation">
-                <span>E<sub>q</sub> [-∇<sub>x</sub> log q(x) ∇<sub>x</sub> log p(x, θ)] = ∫ -∇<sub>x</sub> log q(x) ∇<sub>x</sub> log p(x, θ) q(x) dx</span>
-            </div>
-            <p>This simplifies using integration by parts to:</p>
-            <div class="equation">
-                <span>∫ -∇<sub>x</sub> q(x) ∇<sub>x</sub> log p(x, θ) dx = -lim<sub>b→∞</sub> ∇<sub>x</sub> log p(b, θ) q(b) + lim<sub>a→-∞</sub> ∇<sub>x</sub> log p(a, θ) q(a) + ∫ ∇<sub>x</sub><sup>2</sup> p(x, θ) q(x) dx</span>
-            </div>
-            <p>The last equality follows from integration by parts. Here, Hyvärinen et al. make the regularity assumptions that:</p>
-            <div class="equation">
-                <span>∇<sub>x</sub> log p(x, θ) q(x) → 0 when ||x||<sub>2</sub> → ∞</span>
-            </div>
-        
-            <h2>Limitations and Regularity Assumptions</h2>
-            <p>These assumptions do not hold for general point processes, such as the Poisson process or Hawkes process, which do not necessarily decay sufficiently fast at the boundary. To alleviate this, a weight function enforcing decay can be introduced, as discussed in <span class="highlight">"Is Score Matching Suitable for Estimating Point Processes?"</span> Furthermore, nominal score matching is not suitable for autoregressive models, which is also addressed in the same work.</p>
-        
-            <h2>Optimization Problem</h2>
-            <p>Assuming the regularity assumptions hold, the optimization problem can be rewritten as:</p>
-            <div class="equation">
-                <span>θ<sub>opt</sub> = argmin<sub>θ</sub> E<sub>q</sub> [Tr(∇<sub>x</sub><sup>2</sup> p(x, θ)) - (1/2) ||∇<sub>x</sub> log p(x, θ)||<sub>2</sub><sup>2</sup>]</span>
-            </div>
-            <p>If the data distribution is in the model class, this optimization yields the optimal value.</p>
-        
-        </body>
+    <p>7. Quantum Fourier Transform:</p>
+    <p>\[
+        \text{QFT}|x\rangle = \frac{1}{\sqrt{N}} \sum_{k=0}^{N-1} e^{2\pi i \frac{xk}{N}} |k\rangle
+    \]</p>
+</body>
         </html>
         
