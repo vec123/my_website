@@ -144,7 +144,8 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     Analogues can be obtained for the filter.
     We call  <i>\( l(t) = y(t) - C \hat{x}(t|t-1) = y(t) - \hat{y}(t) \)</i> the innovation. It can be realted to how much we trust the state-predictor given the measurements. 
     Of course, state and measurements are subject to noise.
-    We have introduced <i>\( H_{t}(y) \)</i> which corresponds to an aggregation of th emasurement information at time <i>t</i>.
+    We have introduced <i>\( H_{t}(y) \)</i> which corresponds to an aggregation of the emasurement information at time <i>t</i>. 
+    This allows a representation in terms of a Markov chain, where the next state only depends on the current observation.
     Consider the time update of the predictor mean and its error covariance
 </p>
     <div class="equation">
