@@ -239,10 +239,12 @@ $$
     </figure>
 </div>
 -->
-<p>An important example is the distribution where the variance normal to the line is zero. 
+<p>
+    An important example is the distribution where the variance normal to the line is zero. 
     The data is two-dimensional, yet only one dimension varies. 
     The covariance matrix does not have full rank and corresponds to a singular distribution. 
-    The data can be represented just as well in a single dimension without loss of accuracy since there is perfect correlation between the two random variables.</p>
+    The data can be represented just as well in a single dimension without loss of accuracy since there is perfect correlation between the two random variables.
+</p>
 <div>
     <figure>
         <figcaption>Figure 3: Singular Covariance</figcaption>
@@ -258,8 +260,12 @@ $$
         </div>
     </figure>
 </div>
-
-<p>If we measure data with a singular covariance, some directions are degenerate (have zero variance). This is an indication that those directions provide no information, and these dimensions can be omitted without losing description accuracy.</p>
+<p>
+    If we measure data with a singular covariance, some directions are degenerate (have zero variance). 
+    This is an indication that those directions provide no information, and these dimensions can be omitted without losing description accuracy. 
+    If the variables correspond to model parameters, then the singular directions have no influence on the likelihood of the model. 
+    Two models are indistingushable in to their ability to describe the data with respect to changes in the singular direction.
+</p>
 <h3>Mahalanobis Distance / covariance induces a geometry</h3>
 <p>Within the linear space that contains our distribution, one can define the Mahalanobis distance as:</p>
 <div class="equation-block">
