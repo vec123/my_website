@@ -618,7 +618,9 @@ $$
 In the real case \( U \) and \( V \) are guaranteed to be real orthogonal matrices so that \( \text{rank}(X^TX ) = \text{rank}(XX^T) \).
 Both covariance matrices have different dimensionality but the same non-zero eigenvalues and equal rank. 
 This equivalent nature of the two covariance matrices and their corresponding distributions has deep consequences in machine learning (especially for
-Gaussian Processes) and is referred to as the data-space and feature-space duality.
+Gaussian Processes) and is referred to as the data-space (or image space) and feature-space duality. 
+Note that both matrices span the same subspace, but have different dimensionality. This enables working in an infinite dimensional feature space by considering
+a \(N\) dimensional data space. But don't worry. For now everything remains finite.
 Consider the question, which linear transformation of \( z \sim \mathcal{N}(0,I) \) yields the distribution  \( p(x)  = \mathcal{N}(0,XX^T) \). 
 The answer is
 <div class="equation-block" id = "pca solution">
