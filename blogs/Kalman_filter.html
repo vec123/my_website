@@ -210,7 +210,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         x(t+1) - \hat{x}(t+1|t) = \Gamma(t)(\hat{x}(t|t-1)) - K(t)w(t) + \tilde{v}(t)
         $$
     </div>
-    <p> where <i>\( \Gamma(t) \)</i> also determines the error dynamics.</p>
+    <p> where <i>\( \Gamma(t) = F - K(t)C \)</i> determines the error dynamics.</p>
     <div class="equation">
         $$
         P(t+1|t) = \Gamma(t)P(t|t-1)\Gamma(t)^T + K(t)RK(t)^T + \tilde(Q)
