@@ -553,7 +553,7 @@ $$
     Algorithms, such as self-attention in transformers, can learn asymmetric distances between data-points.
     This asymmetry allows for directional distances which can capture more complex relationships between data-points, 
     such as dependence, causality and time. Another an important concept of asymmetric "distances" is called divergence between distributions.
-    We have seen the KL-divergence as an approximation of the Fisher-Information matrix. 
+    We mentioned the KL-divergence as an approximation of the Fisher-Information matrix. 
 </p>
 
 
@@ -564,7 +564,7 @@ PCA is a popular and well understood algorithm which allows for modelling and di
 by considering the eigenspace of the covariance matrix. 
 As such, it is a good introduction into the covariance matrix, its meaning, eigenspace and possible manipulations. 
 The intuitions developed here transfer well to more complex models, such as kernel PCA and Gaussian processes, 
-by considering a nonlinear transformation /( \Phi(z) \neq Wz /). 
+by considering a nonlinear transformation \( \Phi(z) \neq Wz \). 
 If the transformation is linear, equivalence to PCA can be shown.
 
 Principal Component Analysis is a popular linear algorithm for systems of the form 
@@ -579,7 +579,7 @@ $$
     x = f(z) + \epsilon = Wz + \sigma^2\epsilon,
 $$
 </div>
-    where $\epsilon \sim \mathcal{N}(0, I)$ and $z \in \mathcal{N}(0,I)$ so that 
+    where \( \epsilon \sim \mathcal{N}(0, I)\) and \(z \in \mathcal{N}(0,I)\) so that 
 
 <div class="equation-block" id = "prob pca linear sys">
 $$
@@ -592,7 +592,8 @@ $$
 p(x|z)  = \mathcal{N}(Wz,WW^T) \text{ and } p(x)  = \mathcal{N}(Wz,WW^T + \sigma^2 I)
 $$ 
 </div>
-
+in the latter case. Note that \( \sigma^2 I \) is an addition of noise in the diagonal direction. 
+It avoids singularity of \( WW^T + \sigma^2 I\) and make the matrix invertible by adding noise in the space orthogonal to \( \text{Im}(W)\). 
 Consider white Gaussian noise  \( z \sim \mathcal{N}(0,I) \) and a mean-centered data-distribution \(p(x)  = \mathcal{N}(0,\Sigma)\) . Let \(x,z \in \mathcal{R}^{n}\) .
 Given the data-set matrix \(X = (x_1,....,x_N) \in \mathcal{R}^{N \times n}\) , we can construct the singular value decomposition
 <div class="equation-block" id = "pca svd">
