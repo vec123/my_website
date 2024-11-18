@@ -171,7 +171,7 @@
         $$
     </div>
     <p>
-        Find a proof <a href="#proof">here</a>. We can summarize these equations 
+        Find a proof <a href="#proofs">here</a>. We can summarize these equations 
     </p>
     <div class="equation">
         $$
@@ -184,14 +184,13 @@
         \Delta^{-1}(t) = \text{VAR}l(t)
         $$
         $$
-        P(t+1|t) = F[ P(t|t-1) - P(t|t-1)C^TDelta^{-1}(t)CP/t|t-1]F^T + Q
+        P(t+1|t) = F[ P(t|t-1) - P(t|t-1)C^TDelta^{-1}(t)CP(t|t-1)]F^T + Q
         $$
         $$
         P(t_0|t_0-1) = P_0
         $$
     </div>
-
-    <p> This can be seen as a System with state-feedback which is fed by the innovation.
+    <p> This can be interpreted as a System with state-feedback which is fed by the innovation.
         Note, that</p>
     <div class="equation">
         $$
@@ -215,98 +214,165 @@
 
     <div class="equation">
         $$
+        \hat{x}(t+1|t+1) = F \hat{x}(t|t) + P(t+1|t)C^T \Delta^{-1}(t+1)(y(t+1) - CF\hat{x}(x|x)) 
+        $$
+        $$
+        \Delta(t+1)= F L(t) = C P(t+1|t)C^T+R
+        $$
+        P(t+1|t+1) = [I - P(t+1|t)C^T\Delta^{-1}(t+1)C]P(t+1|t)
+        $$
+    </div>
+    <p> Note that </p>
+    <div class="equation">
+        P(t+1|t) = FP(t|t-1)F^T -  FP(t|t-1)C^TDelta^{-1}(t)CP(t|t-1)F^T + Q
+    </div>
+    <p>and</p>
+    <div class="equation">
+        \hat{x}(t+1|t) = (F - KC)\hat{x}(t|t-1) + (SR^{-1}+K)y(t) = \Gamma\hat{x}(t|t-1)+ (SR^{-1}+K)y(t)
+    </div>
+    <p> 
+        is an important equations. They can be used to determine the asymptiotic behaviour of <i>\lim_{t \rightarrow \infty}P(t+1|t)</i>.  
+        For example, if <i> F </i> is stable, then <i>x(t)</i> converges to a stationary value and becomes a stationary process. 
+        We have seen that the covariance of the process is determined by
+        <div class="equation">
+            \Sigma = F\SigmaF^T + Q
+        </div>
+        If this is the case, then <i>P(t)</i> also converges. For example if <i>K = 0</i> (no measurement data is avaialable),
+        <i>\lim_{t \rightarrow \infty} \hat{x}(t+1|t) = 0 = \lim_{t \rightarrow \infty}  \mathbb{E}x(t)</i> and <i>\lim_{t \rightarrow \infty}P(t) = \Sigma</i>
+        If <i>\Gamma</i> is unstable, then <i>\hat{x}</i> is non stationary.  Stability of <i>F</i> is a sufficient but not a necessary criterion for predictor convergence.
+        It is also possible to have predictor convergence and/or bounds with an unstable system. 
+        This predictor convergence although the underlying state evolution is non stationary is made possible by an equally non stationary measurement <i>y(t)</i> 
+        which feeds the predictor. This can be shown on the simple system 
+        <div class="equation">
+            $$
+            x(t+1) = \alpha x(t) + w(t)
+            $$
+            $$
+            y(t) = \gamma x(t) + v(t)
+            $$
+        </div>
+        with <i>w(t) \sim \mathcal{N}(0, \beta)</i> and <i>v(t) =  \sim \mathcal{N}(0, 1)</i>.
+        We obtain 
+        <div class="equation">
+            P(t+1) = \beta^2 + \frac{\alpha^2P(t)}{1 + \gamma^2P(t)}.
+        </div>
+        This equation has a stable solution if <i>\gamma \geq 0</i>. If <i>\gamma 0 0</i> then <i>P(t)</i> diverges. If <i> \beta = 0</i>,
+        i.e. the state evolution is not noisy, then there exist two solutions. One is stable and one is unstable. The unstable solution is at <i>P(t) = 0</i>.
+        <i>\gamma \neq 0</i>  and <i>\beta \neq 0</i> ensure  the existence of a unique solution satisfying the convergence of <i>P(t)</i> to a stabilizing covariance.
+        We have examined a simple system with one dimension only. Translated into a higher dimensional system, the same principles apply. We have
+        <div class="equation">
+            $$
+            x(t+1) = A x(t) + Bw(t)
+            $$
+            $$
+            y(t) = C x(t) + Dv(t)
+            $$
+        </div>
+        with <i>w(t) \sim \mathcal{N}(0, I)</i> and <i>v(t) =  \sim \mathcal{N}(0, I)</i> or <i>Bw(t) \sim \mathcal{N}(0, BB^T = Q)</i> 
+        and  <i>Dv(t) \sim \mathcal{N}(0, DD^T = R)</i>.
+        If <i>(A,C)</i> is observable (no distinct <i>x(0)</i> generate the same outputs), 
+        then there exists at elast one solution for the covariance <i>\lim_{t \rightarrow \infty} P(t)</i>.
+        There could be more than one solution (as in the case<i> \beta = 0</i> and <i> \gamma \neq 0</i> ).
+        If <i>(A,B)</i> is controllable (equivalent to controllable <i>(A,Q)</i>), then the solution is unique and stabilizing.
+        These notions can be relaxed to detectability and stabilizability. In essence, if <i>(A,B)</i> is stabilizable and <i>(A,C)</i> is detectable 
+        (i.e. all uncontrollable and unobservable modes are asymptotically stable),
+        then there exists a unique stabilizing solution for the covariance <i>\lim_{t\rightarrow \infty}P(t)</i>.
+        Find the proof <a href="#proofs">here</a>.
+    </p>
+    <h2 id="proofs">Proofs</h2>
+    <h3>Time and Measurement Update</h3>
+    <p>Let us look at the time update of the predictor mean and its error covariance</p>
+</p>
+    <div class="equation">
+    $$
+    \hat{x}(t+1|t) = F \hat{x}(t) + S R^{-1}y(t)
+    $$
+    $$
+    P(t+1|t) = F P(t|t) F^T + \tilde{Q}
+    $$
+    </div>
+    <p> and the measurement update </p>
+    <div class="equation">
+        $$
+        \hat{x}(t+1|t+1) = \hat{x}(t+1|t)  + L(t+1)l(t+1)
+        $$
+        $$
+        l(t+1) = y(t+1)- C \hat{x}(t+1|t)
+        $$
+    </div>
+    <p>
+        where
+    </p>
+    <div class="equation">
+        $$
         L(t+1) = P(t+1|t)C^T\Delta^{-1}(t+1)
         $$
         $$
-        \Delta(t) = \text{VAR e(t)} = CP(t|t-1)C^T +R
+        \Delta(t) = \text{VAR l(t)} = CP(t|t-1)C^T +R
         $$
         $$
         P(t+1|t+1) = P(t+1|t) - P(t+1|t)C^T\Delta^{-1}(t+1)CP(t+1|t)
         $$
     </div>
-    <p> Note that xxxx determines the error evolution in time</p>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <div class="equation">
-        $$
-        x_k = F x_{k-1} + v_{k-1}
-        $$
-        $$
-        y_k = H x_k + w_k
-        $$
-    </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <p>We consider the one-step predictor of the state and its covariance </p>
-    <div class="equation">
-        $$
-        \hat{x}_{k|k-1} = F \hat{x}_{k-1|k-1}
-        $$
-        $$
-        P_{k|k-1} = F P_{k-1|k-1} F' + Q
-        $$
-    </div>
-    <p>where <i>P_{k-1|k-1}</i> vorresponds to the covariance matrix of state  <i>x_{k-1}</i> and is the a-priori covariance matrix before the update.
-    <i>\hat{x}_{k|k-1} </i> is the one-step ahead predictor.
-         After the time update perform the measurement update:   
-    </p>
-    <div class="equation">
-    $$
-    \hat{x}_{k|k} = \hat{x}_{k|k-1} + K_k \left( y_k - H \hat{x}_{k|k-1} \right)
-    $$
-    $$
-    P_{k|k} = P_{k|k-1} - K_k H P_{k|k-1}
-    $$
-    $$
-    K_k = P_{k|k-1} H' \left( H P_{k|k-1} H' + R \right)^{-1}
-    $$
-    </div>
-    <p>where <i>K_k</i>, also called the Kalman gain, ensures that the estimator of <i>x_k|k</i> is an minmum variance unbiased estimator.</p>
-    <p>
-        During the Filtering we move between the Prior (at time k-1 and time k) and Posterior Distributions (at time k):
-    </p>
-    <div class="equation">
-        $$
-        p(x_{k-1} \mid y_{1:k-1}) = \mathcal{N}\left( x_{k-1}; \hat{x}_{k-1|k-1}, P_{k-1|k-1} \right)
-        $$
-        $$
-        p(x_k \mid y_{1:k-1}) = \mathcal{N}\left( x_k; \hat{x}_{k|k-1}, P_{k|k-1} \right)
-        $$
-        $$
-        p(x_k \mid y_{1:k}) = \mathcal{N}\left( x_k; \hat{x}_{k|k}, P_{k|k} \right)
-        $$
-    </div>
-
- 
         
-        </body>
-        </html>
+    <p> Consider </p>
+    <div class="equation">
+        $$
+        x(t+1) = F x(t) + S R^{-1}y(t) + \tilde v(t)
+        $$
+        $$
+        y(t+) = Cx(t) + \tilde w(t)
+        $$
+    </div>
+    <p> and note that <i>v(t)</i> is independent from <i>y(t)</i>. Thus <i>\mathbb{E}(x(t+1)|H_{t+1}(y)) = \hat{x}(t+1|t) =  F \hat{x}(t|t) + S R^{-1}y(t)</i> 
+    and therefore
+    <div class="equation">
+        $$
+        e(t+1|t) = x(t+1) -\hat{x}(t+1|t) = Fx(t) + \tilde{v}(t) + S R^{-1}y(t) - F\hat{x}(t|t) -  S R^{-1}y(t)
+        $$
+        $$
+        = F( x(t) - \hat{x}(t|t) ) +  \tilde{v}(t) = F  e(t+1|t)  +  \tilde{v}(t)
+        $$
+    </div>
+    and
+    <div class="equation">
+        $$
+        P(t+1|t) = F P(t|t)F^T +\tilde{Q} = \text{Var}(e(t+1|t)) = F \text{Var}(e(t|t))F^T + \text{Var}(\tilde(v)(t))
+        $$
+    </div>
+    Furthermore, consider the measurement update and the fact that the space spanned by<i>l(t)</i> is orthogonal to the space spanned by <i>y(t)</i> (by definition).
+    Thus <i>H_{t+1}(y) = H_{t}(y)+ H(l(t+1))</i>. Thus
+    <div class="equation">
+        $$
+       \mathbb{E}(x(t+1)|H_t(y)) = \mathbb{E}(x(t+1)|H_t(y)) + \ mathbb{E}(x(t+1)|H(l(t+1))) = \hat{x}(t+1|t) + \text{cov}(x(t+1,l(t+1)))+\text{var}(l(t+1))^{-1}l(t+1)
+        $$
+        $$
+        =  \hat{x}(t+1|t) + P(t+1|t)C^T(CP(t+1|t)C^T + R)^{-1} l(t+1) =  \hat{x}(t+1|t+1) = \hat{x}(t+1|t)  + L(t+1)l(t+1)
+        $$
+    </div>
+    by the conditional of a gaussian. Updating the covariances is analogous:
+    <div class="equation">
+    $$
+       e(t+1)= x(t+1) - \hat{x}(t+1|t+1) = x(t+1) -  \hat{x}(t+1|t) - L(t+1)l(t+1) = e(t+1) - L(t+1)l(t+1)
+    $$
+    </div>
+    leading to 
+    <div class="equation">
+        $$
+           e(t+1|t+1) +  L(t+1)l(t+1) = e(t+1|t)
+        $$
+    </div>
+    with variance
+    <div class="equation">
+        $$
+           P(t+1|t+1) + L(t+1) \text{var}(l(t+1))^{-1} L(t+1)^T = P(t+1|t) = P(t+1|t+1) + L(t+1) \Delta^{-1} L(t+1)^T
+        $$
+    </div>
+    This concludes the proofs.
+    </p>
+
+    <h3>Convergence and Stability of the predictor</h3>
+
+    </body>
+    </html>
         
