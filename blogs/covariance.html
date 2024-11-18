@@ -784,22 +784,19 @@ If our data-distribution is non-linear, PCA will fail to capture it while the VA
 
 
 
-
-
-
 <h3>Gaussian Processes and function space</h3>
 
-Gaussian Processes parameterize a covariance matrix via a kernel-covariance. Starting from PCA they become much easier to understand,
-since they can be viewed as a form of PCA in potentially infinite feature-dimensions, 
+Gaussian Processes parameterize a covariance matrix via a kernel-covariance. 
+Starting from PCA they become much easier to understand, since they can be viewed as a form of PCA in potentially infinite feature-dimensions, 
 created by applying a nonlinear mapping (kernel) to the feature-space. For a solid introduction i want to recommend the
 <a href "https://thegradient.pub/gaussian-process-not-quite-for-dummies/">Gaussian Processes for Dummies</a> blog-post.
 It has some great visualization as to how a high-dimensional covariance matrix leads to a non-linear regression problem.
-While it does not start from PCA it also offers a great prespective you should not miss out on. 
+While it does not relate to PCA it also offers a great prespective you should not miss out on. 
 The non-linear function is implicit in the kernel-covariance parameterization and does not need to be explicitly defined. 
 This becomes clearer by relation to the reproducting kernel Hilbert space (RKHS), 
 where the basis functions explicitely define the kernel as their inner product.
 Since a function is informally thought of as infinite dimensional vector an infinite-dimensional feature-space is 
-also called function space,. 
+also called function space. 
 I also like to think about euclidean space with directions representing functions and non-linear relationships.  
 For example instead of saying that /(x /) is correlated to /(y /) we can say that the function /(f(x)/) 
 is correlated to the function /(g(y)/).
