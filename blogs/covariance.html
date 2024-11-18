@@ -134,11 +134,11 @@ $$
 \mathbb{Var}(x_1|x_2 = k ) = \Sigma_{x_1} - \Sigma_{x_1 x_2} \Sigma_{x_2}^{-1} \Sigma_{x_2 x_1}
 $$
 </div>
-Note, that if the covariance is zero, the conditional mean is the same as the unconditional mean, meaning /( x_1/) carries no information on /(x_2 /) and vice versa.
-This conditioning can be interpreted as a projection of the distribution onto the line /( x_2 = k/). 
-If the correlation is high (in essence \Sigma_{x_1 x_2} is high), then knwoing /(x_2/) gives a lot of information on /(x_1/). 
-If we consider  /( \mu_1 = \mu_2 = 0/), then, high correlation implies /( x_1 = x_2 /).
-The random variable /(x_1/) might correspond to a non-linear transformation of another random variable /(x_3/), i.e. /(x_1 = \Phi(x_3) = sin(x_3)), or even multiples thereof.
+Note, that if the covariance is zero, the conditional mean is the same as the unconditional mean, meaning \( x_1 \) carries no information on \(x_2 \) and vice versa.
+This conditioning can be interpreted as a projection of the distribution onto the line \( x_2 = k \). 
+If the correlation is high (in essence \( \Sigma_{x_1 x_2} \) is high), then knwoing \(x_2\) gives a lot of information on \(x_1\). 
+If we consider  \( \mu_1 = \mu_2 = 0 \), then, high correlation implies \( x_1 = x_2 \).
+The random variable \(x_1\) might correspond to a non-linear transformation of another random variable \(x_3\), i.e. \(x_1 = \Phi(x_3) = sin(x_3) \), or even multiples thereof.
 This is non-linear transformation is powerful as will be seen in the section on gaussian processes.
 </p>
 <!-- 
@@ -798,8 +798,8 @@ where the basis functions explicitely define the kernel as their inner product.
 Since a function is informally thought of as infinite dimensional vector an infinite-dimensional feature-space is 
 also called function space. 
 I also like to think about euclidean space with directions representing functions and non-linear relationships.  
-For example instead of saying that /(x /) is correlated to /(y /) we can say that the function /(f(x)/) 
-is correlated to the function /(g(y)/).
+For example instead of saying that \(x /) is correlated to \(y \) we can say that the function \(f(x)\) 
+is correlated to the function \(g(y)\).
 In this euclidean space, the covariance matrix defines a linear distribution 
 and induces a Mahanalobis distance, however, due to the possibility of 
 nonlinear basis directions, the expressivity is augmented.
@@ -1050,13 +1050,13 @@ However, for a transformer, the  \( \text{softmax}( \frac{QK^T}{\sqrt{n}} ) \) c
 Workarounds exist which allow for asymmetric attention but enable symmetric kernel definitions enabling inference with uncertainty information as in gaussian processes.
 <br><br>
 The formalization of a reproducing hilbert space can be done by
-considering the space of functions which are linear combinations of /( N = \infty /) orthonormal bases (basis functions) 
+considering the space of functions which are linear combinations of \( N = \infty \) orthonormal bases (basis functions) 
 <div class="equation-block">
     $$ 
         f(x) = \sum_{n=1}^{N} a_n l_n(x).
     $$
 </div>
-Let us assume that  /( \sum |a_n|^2 dx \leq 1 /) and  /( -1 \leq a \leq 1/).
+Let us assume that  \( \sum |a_n|^2 dx \leq 1 \) and \( -1 \leq a \leq 1\).
 Consider 
 <div class="equation-block">
     $$ 
@@ -1072,7 +1072,7 @@ for \(zx \leq 1 \) to
      <n></n> 
     $$.
 </div>
-Here we have chosen the functions /( l_n(x) = x^n /) as basis functions.
+Here we have chosen the functions \( l_n(x) = x^n \) as basis functions.
 The convergence of  \( k(x,z) = \sum l_n(z)l_n(x)  \) and of \( \sum c_n \) are an important requirements on reproducing hilbert spaces. 
 The first constrains the basis functions to be square integrable, the second contrains the coefficients to be square integrable.
 Note,
@@ -1116,7 +1116,7 @@ The typical notation for writing functions as linear combinations of reproducing
     $$.
 </div>
 This allows for the representation of functions in the reproducing hilbert space. 
-The parameters /( a_n /) are learned by gradient methods.
+The parameters \( a_n \) are learned by gradient methods.
 Note, that the reproducing kernel is symmetric and positive definite, thus defining a manifold and allowing for an interpretation 
 as a regular (or singular) elliptical distribution in the infinite dimensional (functional) Hilbert space.
 
@@ -1131,14 +1131,14 @@ Note the similarity to gaussian processes where inference is done via
 $$ 
 \mathbb{E}[x^* | X ] = k(z^*,Z) K(Z)^{-1}X
 $$
-</div>, (we assume /(\mu_X =0 /) for simplicity) and
+</div>, (we assume \(\mu_X =0 \) for simplicity) and
 whereas in the reproducing hilbert space
 <div class="equation-block" >
 $$ 
 f(z^*) = \sum_{n=0}^{N} a_n k(z_n,z^*)  = \sum_{n=0}^{N} a_n k_{z_n}(z^*)
 $$.
 </div>
-If /( K = k_{i,j} = k_(z_i,z_j) /) is invertible (i.e. not singular), then /( a = (a_1,...,a_N) = K^{-1}X /), where /( X = (x_1,...,x_N) /) 
+If \( K = k_{i,j} = k_(z_i,z_j) \) is invertible (i.e. not singular), then \( a = (a_1,...,a_N) = K^{-1}X \), where \( X = (x_1,...,x_N) \) 
 is the vector of observations.
 Thus
 <div class="equation-block" >
@@ -1258,7 +1258,7 @@ The kernel function is then
     k(x,y) = \sum_{n=1}^{N} a_n l(x) l(y).
     $$
     $$
-</div> under conditions of convergence on its fourier series with respect to the orthonormal system /( l(x) /).
+</div> under conditions of convergence on its fourier series with respect to the orthonormal system \( l(x) \).
 It might not be trivial to obtain and compute the right kernel function. 
 If the real functions has component that are orthogonal to the space of basis-functions, this part can not approximated.
 
