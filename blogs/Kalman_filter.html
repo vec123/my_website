@@ -360,7 +360,7 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
     Thus <i>\( H_{t+1}(y) = H_{t}(y)+ H(l(t+1)) \)</i>. Thus
     <div class="equation">
         $$
-       \mathbb{E}(x(t+1)|H_t(y)) = \mathbb{E}(x(t+1)|H_t(y)) + \ mathbb{E}(x(t+1)|H(l(t+1))) = \hat{x}(t+1|t) + \text{cov}(x(t+1,l(t+1)))+\text{var}(l(t+1))^{-1}l(t+1)
+       \mathbb{E}(x(t+1)|H_t(y)) = \mathbb{E}(x(t+1)|H_t(y)) + \mathbb{E}(x(t+1)|H(l(t+1))) = \hat{x}(t+1|t) + \text{cov}(x(t+1,l(t+1)))+\text{var}(l(t+1))^{-1}l(t+1)
         $$
         $$
         = \hat{x}(t+1|t) + P(t+1|t)C^T(CP(t+1|t)C^T + R)^{-1} l(t+1) =  \hat{x}(t+1|t+1) = \hat{x}(t+1|t)  + L(t+1)l(t+1)
