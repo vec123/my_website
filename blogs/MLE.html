@@ -107,7 +107,11 @@ $$
 $$
 </div>
 
-<p>Often $ \text{const.}=\frac{1}{N} $. The $h_{\theta}(x)$, which minimizes this function, maximizes $\prod_{i=1}^{N} p(y_{i}| h_{\theta}(x_{i}) )$. Given a sufficient amount of data-samples, this approximation of the data-density is exact, assuming that a Gaussian parameterization is suitable. The proposed method uses data-samples $(y_{i},x_{i})$ to extract the most likely parameterization of $y=h_\theta(x)$.</p>
+<p>Often $ \text{const.}=\frac{1}{N} $. 
+    The $h_{\theta}$, which minimizes this function, 
+    maximizes $\prod_{i=1}^{N} p(x_{i}| h_{\theta} )$. 
+    Given a sufficient amount of data-samples, this approximation of the data-density is exact, assuming that a Gaussian parameterization is suitable. 
+    The proposed method uses data-samples $(x_{i})$ to extract the most likely parameterization of $x=h(\theta)$.</p>
 
 <p>Note, that:</p>
 
@@ -117,7 +121,10 @@ $$
 $$
 </div>
 
-<p>is often referred to as <em>mean squared error</em>. Minimizing the mean squared error returns optimal model parameters if the data distribution is Gaussian. It can be proven that the estimator $h(\theta_{opt})$, which maximizes $p(x|h(\theta))$, is an unbiased minimum variance estimator (UMVE) for $x = h(\theta) + \epsilon$.</p>
+<p>is often referred to as <em>mean squared error</em>. 
+    Minimizing the mean squared error returns optimal model parameters if the data distribution is Gaussian. 
+    It can be proven that the estimator $h(\theta_{opt})$, which maximizes $p(x|h(\theta))$, 
+    is an unbiased minimum variance estimator (UMVE) for $x = h(\theta) + \epsilon$.</p>
 
 <p>Summarizing, Maximum Likelihood Estimation amounts to computing</p>
 
