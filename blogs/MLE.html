@@ -363,74 +363,106 @@ $$
     $q(z)$ is parameterized by a prior and the KL-divergence is minimized via gradient descent.</p>
 
 <h3 id="from-em-to-gmm-vae">From EM to Gaussian Mixture Models and VAE</h3>
-<p>Gaussian Mixture Models (GMMs) are a popular unsupervised learning model that uses the EM algorithm to find a mixture of $K$ Gaussians that describe the data optimally. In essence, the distribution $p(x,\theta)$ involves a third, unknown variable such that:</p>
-
-<div class="equation-block">
+Gaussian Mixture Models (GMMs) are a popular unsupervised learning model which can be optimized with the EM algorithm to find a mixture of $K$ Gaussian's that describe the data optimally. We will see that the problem can be formulated as a distribution $p(x)$ which involves a third, unknown variable so that 
 $$
-p(x,\theta) = \int p(x,z,\theta)dz,
+    p(x) = \int p(x,z)dz.
 $$
-</div>
-
-<p>where $z$ represents the parameters of the Gaussians. Specifically, the set $ z = \{(\mu_k, \Sigma_k)\}_{k=1}^{K}$ consists of $K$ means and covariances, respectively. This is the same setting as for Expectation Maximization.</p>
-
-<p>Each Gaussian can be written as:</p>
-
-<div class="equation-block">
+This is the same setting as for Expectation Maximization, making the EM-algorithm a popular (but not the only) choice for Gaussian Mixture Models.
+<br><br>
+Consider the probability that $x$ is drawn from the $k$-th Gaussian as 
 $$
-\mathcal{N}(x|\mu_k, \Sigma_k) = \frac{1}{(2\pi)^{D/2}|\Sigma_k|^{1/2}} \exp \left( -\frac{1}{2}(x - \mu_k)^T \Sigma_k^{-1} (x - \mu_k) \right),
+p(x|\mu_k, \Sigma_k) = \frac{1}{\pi^{D/2}|\Sigma_k|^{0.5}}  \exp(-\frac{1}{2}(x- \mu_k)\Sigma^{-1}(x- \mu_k)),
 $$
-</div>
-
-<p>where $x, \mu_k \in \mathbb{R}^D$ and $\Sigma_k \in \mathbb{R}^{D \times D}$.</p>
-
-<p>We can write:</p>
-
-<div class="equation-block">
+where $x, \mu_k \in \mathbb{R}^D$ and $\Sigma_k\in \mathbb{R}^{DxD}$.
+We can write
 $$
-p(x_i) = \sum_{k=1}^{K} \pi_k p(x_i | z_k),
+    p(x) = \sum_{k=1}^{K} \pi_k p(x | \mu_k, \Sigma_k)  = p(x | \mu, \Sigma, \pi)  
 $$
-</div>
-
-<p>where $\sum_{k=1}^{K} \pi_k = 1$. This corresponds to the probability of drawing $x_i$ from the mixture of Gaussians, with each Gaussian being weighted by a probability that states how likely it is that the $k$-th Gaussian generates $x_i$.</p>
-
-<p>Importantly, we can also write:</p>
-
-<div class="equation-block">
+where $\pi_k$ is the probability that $x$ belongs to the $k$-th Gaussian and $\sum_{i=1}^K \pi_i = 1$. Equation \ref{eq: GMM x-prob} corresponds to the probability of drawing $x$ from the mixture of Gaussians, with each Gaussian being weighted by the probability which quantifies how likely it is that $x$ actually belongs to the $k$-th Gaussian generate. This belonging to one of the $K$ Gaussian corresponds to an optimal soft assignment of data-points. 
+We want to maximize 
+\begin{equation}\label{eq:GMM objective 0}
+     \log p(x) =  \sum_{i=1}^{N} \log p(x_i |  \mu, \Sigma, \pi )  =  \sum_{i=1}^{N} \log \sum_{z_i=1}^{K} p(x_i|z_i, \mu, \Sigma)p(z_i|\pi ),
+\end{equation}
+where $\mu = (\mu_1,...,\mu_K) $,  $\Sigma = (\Sigma_1,...,\Sigma_K) $ and $\pi = (\pi,...,\pi_K) $ 
+Here we have introduced a hidden variable $z_i$ which can take values between $1$ and $K$ and whose meaning is the association of each $x_i$ with one of the $K$ clusters (i.e. $x$ belongs to the $k$-th Gaussian).
+The sum within the log makes this difficult to optimize. It is due to the integration of the probability distribution of $z_i$. 
+\iffalse
+If we knew the assignment $z_i$ for every $i$, then 
+\begin{equation}\label{eq: GMM eq}
+     \log p(x) =  \sum_{i=1}^{N} \log  p(x_i|z_i, \mu, \Sigma) + \log p(z_i|\pi)
+\end{equation}
+and the optimal parameters for $\pi_k$, $\mu_k$ and $\Sigma_k$ would be
+\begin{equation}\label{eq: GMM mu update}
+\mu_k = \frac{\sum_{i=1}^N I_{z_i = k}x_i}{\sum_{i=1}^N I_{z_i = k}}
+\end{equation}
+\begin{equation}\label{eq: GMM sigma update}
+\Sigma_k = \frac{\sum_{i=1}^N I_{z_i = k} (x_i -\mu_k)(x_i -\mu_k)^T }{\sum_{i=1}^N I_{z_i = k}}
+\end{equation}
+\begin{equation}\label{eq: GMM weigths update}
+\pi_k =  \frac{1}{N}  \sum_{i=1}^N I_{z_i = k},
+\end{equation}
+where $ I_{z_i = k}  = 1 $ if $z_i = k$ and zero else.
+\fi
+ Although it is not a-priori known which data-sample belongs to which Gaussian, note that
+ \begin{equation} \label{eq: GMM z-prob}
+ p(z_i = k| x_i) = \frac{ p(x_i|z_i = k)p(z_i = k) }{ \sum_{k'=1}^{K} p(x_i | z_i = k') p(z_i = k') } =  \frac{ p(x_i|z_i = k)\pi_k }{ \sum_{k'=1}^{K} p(x_i | z_i = k') \pi_{k'}} ,
+  \end{equation}
+  can be evaluated given $\pi$ and equation \ref{eq: GMM gaussian}.
+  <br><br>
+Denote by $\theta$ the parameter sets $\pi$, $\mu$ and $\Sigma$. 
+Let us consider again the likelihood $\log p_\theta(x)= \log \int p_\theta(x,z)dz$ which we would like to maximize but can not directly due to the integral in the $\log$ (in equation \ref{eq:GMM objective 0} this corresponds to the sum). 
+<br><br>
+For intractable problems of this kind, we often construct the $\text{ELBO}$, as in equation \ref{eq:EM ELBO}, 
+ $$\log p_\theta(x)= \log  \int p_\theta(x,z)dz \geq  \int q(z) \log \frac{p_\theta(x,z)}{q(z)}dz = \text{ELBO}(q(z), p_\theta(x,z)).$$
+Equivalently, we also obtain the gap (see equation \ref{eq:EM gap}).
+ $$ 
+  \log( p_\theta(x )) =  \text{ELBO}(  p_\theta(x,z), q(z) ) - D_{KL}(q(z),p_\theta(z|x))    dz 
+ $$
+The EM-algorithm starts by minimizing the gap from equation \ref{eq:EM gap} by setting $q(z) = p_\theta(z|x)$ at fixed $\theta = \theta_t$. This is equivalent to maximizing the $\text{ELBO}$ with respect to $z$. Since $$ \gamma_k^i = p(z_i = k|x_i,\theta_t)$$ can be evaluated via equation \ref{eq: GMM z-prob} this can be done analytically. This step is called the Expectation-step. It calculates the expected values for $z_i$. Each $x_i$ belongs to the $k$-th Gaussians with probability $\gamma_k^i$. This is similar to the assignment step in k-nearest neighbors.
+<br><br>
+Once we know $p(z_i = k|x_i,\theta_t)$ we can compute the log-likelihood (or Q-function from equation \ref{eq:EM Q}) via
 $$
-p(z_k | x_i) = \frac{ p(x_i | z_k)p(z_k) }{ \sum_{k=1}^{K} p(x_i | z_k)p(z_k) },
+Q(\theta, \theta_t) =  \mathbb{E}_{z \sim p(z | x, \theta_t)} [\log(p(x,z|\theta )]
 $$
-</div>
-
-<p>which corresponds to the probability that the $k$-th Gaussian is responsible for $x_i$. Thus $p(z|x) = \sum_{i=1}^{N}\sum_{k=1}^{K} p(z_k | x_i)$ can be evaluated.</p>
-<p>Now, let us consider the likelihood $p(x,\theta) = \int p(x,z,\theta)dz$ which we would like to maximize.</p>
-
-<p>As in equation (from Expectation Maximization):</p>
-
-<div class="equation-block">
 $$
-\log p(x,\theta) = \log \int p(x,z,\theta)dz \geq \int q(z) \log \frac{p(x,z,\theta)}{q(z)} dz = \text{ELBO}(q(z), p(x,z,\theta)),
+=  \mathbb{E}_{z \sim q(z)} [\log(p(x,z|\theta )] 
 $$
-</div>
-
-<p>Equivalently, we also obtain the gap equation:</p>
-
-<div class="equation-block">
 $$
-\log(p(x,\theta)) - \text{ELBO}(p(x,z,\theta), q(z)) = D_{KL}(q(z), p(z|x,\theta)).
+= \frac{1}{N} \sum_{i=1}^{N} \int_{z} p(z|x_i; \theta_t) \log p(x_i,z|\theta) dz .
 $$
-</div>
-
-<p>The EM algorithm starts by minimizing the gap from the equation above by setting $q(z) = p(z|x,\theta)$. Since $p(z|x,\theta)$ can be evaluated via the Gaussian mixture probabilities, this can be done analytically.</p>
-
-<p>The Maximization step maximizes the Q-function:</p>
-
-<div class="equation-block">
 $$
-Q(\theta, \theta_t) = \frac{1}{n} \sum_{i=1}^{n} \int_{z} p(z|x_i; \theta_t) \log p(x_i, z, \theta) dz.
+= \frac{1}{N} \sum_{i=1}^{N}  \sum_{k=1}^{K} p(z_i = k|x_i; \theta_t)\log p(x_i,z_i = k|\theta) .
 $$
-</div>
+$$
+= \frac{1}{N} \sum_{i=1}^{N}  \sum_{k=1}^{K} \gamma_k^i \log (p(x_i|\mu_k, \Sigma_k)p(z_i = k|\theta)) .
+$$
+$$
+= \frac{1}{N} \sum_{i=1}^{N}  \sum_{k=1}^{K} \gamma_k^i \log p(x_i|\mu_k, \Sigma_k) +  \gamma_k^i \log \pi_k .
+$$
+This can be maximized analytically with
+\begin{equation}\label{eq: GMM mu update}
+\mu_k = \frac{\sum_{i=1}^N \gamma_k^i x_i}{N_k}
+\end{equation}
+\begin{equation}\label{eq: GMM sigma update}
+\Sigma_k = \frac{\sum_{i=1} \gamma_k^i (x_i -\mu_k)(x_i -\mu_k)^T }{N_k}
+\end{equation}
+\begin{equation}\label{eq: GMM weigths update}
+\pi_k =  \frac{N_k}{N}  
+\end{equation}
+where $ N_k = \sum_{i=1}^N  \gamma_k^i $ and $\theta_t = (\mu_t, \Sigma_t)$.
+<br><br>
+The Maximization step, maximizes the log-likelihood (see equation \ref{eq:EM Q}) with respect to $\theta = (\mu,  \Sigma)$. This is equivalent to maximizing the $\text{ELBO}$ with respect to $\theta$. As such, the Gaussian Mixture Model can be optimized with a the EM-algorithm since $p(z|x,\theta)$ can be evaluated, allowing for an analytical minimization of $D_{KL}(q(z),p(z|x,\theta))$ by iteration, which, by equation \ref{eq:EM gap}, is equivalent to maximizing the $\text{ELBO}$ with respect to $z$. The unobserved variables $z$ correspond to the assignment of data-points $x$ to one of the $K$-clusters. It determines from which cluster the data-sample $x$ is drawn. The Gaussian Mixture is in the same dimensional space as $x$.
+<br><br>
+In a variational auto-encoder setting, no expression for $p(z|x,\theta)$ can be evaluated, so no analytical minimization of \ref{eq:EM gap} is possible by setting $q(z) = p(z|x,\theta)$. Instead, one assumes a prior parametric description $p(z) = p(z|x,\theta)$ and maximizes the \text{ELBO} with numerical gradient methods. Often this prior distribution is the isotropic Gaussian. However, for some data this can be too limiting. For example, the rotational symmetry of an isotropic Gaussian latent space is not suited for disentangled representations. Disentangles representation are understood as latent variables which correspond to single principal directions (not linear combinations thereof) in the data variability. 
+<br><br>
+The rest of the procedure is similar in the sense that the same type of objective function is maximized, however with gradient descent methods instead of explicit iterative expectation maximization. Furthermore, $z$ can have arbitrary dimensionality.
+</p>
 
-<p>Thus, the Gaussian Mixture Model is a particular case of the EM algorithm where $p(z|x,\theta)$ can be evaluated, allowing for an analytical minimization of the KL-divergence between $q(z)$ and $p(z|x,\theta)$. The $z$ variables (the set $\{(\mu_k, \Sigma_k)\}_{k=1}^{K}$) can be used as a representation of the available data-distribution.</p>
+
+
+
+
+
 
 <h3 id="vae">Variational Auto-Encoders (VAE)</h3>
 <p>In a variational auto-encoder setting, no expression for $p(z|x,\theta)$ can be evaluated, so no analytical minimization of the gap equation is possible by setting $q(z) = p(z|x,\theta)$. Instead, one assumes a prior parametric description $q(z,\phi)$ and maximizes the ELBO with numerical gradient methods.</p>
