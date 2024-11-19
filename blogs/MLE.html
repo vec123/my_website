@@ -337,17 +337,18 @@ $$
 $$
 </div>
 
-<p>In the Expectation-Maximization (EM) algorithm, one starts by minimizing the gap defined by the KL divergence by finding the $q(z)$ closest to $p(z|y,\theta)$. This is equivalent to maximizing the ELBO.</p>
+<p>In the Expectation-Maximization (EM) algorithm, one starts by minimizing the gap defined by the KL divergence by finding the $q(z)$ closest to $p(z|x,\theta)$. This is equivalent to maximizing the ELBO.</p>
 
-<p>If $p(z|y,\theta_t)$ can be evaluated, then one can directly set:</p>
+<p>If $p(z|x,\theta_t)$ can be evaluated, then one can directly set:</p>
 
 <div class="equation-block">
 $$
-q(z) = p(z|y,\theta_t).
+q(z) = p(z|x,\theta_t).
 $$
 </div>
 
-<p>This step is called the Expectation-step because it requires finding the expectation of $z$ given $x$ and $\theta$. Then one computes the Q-function, which quantifies how well this $q(z)$ fits the log-likelihood:</p>
+<p>This step is called the Expectation-step because it requires finding the expectation of $z$ given $x$ and $\theta$. 
+    Then one computes the log-likelohood under this distribution (called Q-function), which quantifies how well this $q(z)$ fits the data.</p>
 
 <div class="equation-block">
 $$
