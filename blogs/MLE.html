@@ -359,7 +359,10 @@ $$
 <p>In the next step, one aims to find $\theta_{t+1}$ that maximizes $Q(\theta, \theta_t)$. 
     This step is called the Maximization-step because one maximizes the likelihood of the model given the data samples $x_i$ and the estimated $q(z)$.</p>
 
-<p>Repeated iterations of the Expectation and Maximization step are expected to converge. The EM algorithm can also be used for MAP. The evaluation of $p(z|y,\theta_t)$ is not always possible. In the case of a VAE, the ELBO parameterizes the objective to be maximized, however, since $p(z|y,\theta_t)$ cannot be evaluated analytically, $q(z)$ is parameterized by a prior and the KL-divergence is minimized via gradient descent.</p>
+<p>Repeated iterations of the Expectation and Maximization step are expected to converge (altough not necessarily to global optima). 
+    The EM algorithm can also be used for MAP. The evaluation of $p(z|y,\theta_t)$ is not always possible. 
+    In the case of a VAE, the ELBO parameterizes the objective to be maximized, however, since $p(z|y,\theta_t)$ cannot be evaluated analytically, 
+    $q(z)$ is parameterized by a prior and the KL-divergence is minimized via gradient descent.</p>
 
 <h3 id="from-em-to-gmm-vae">From EM to Gaussian Mixture Models and VAE</h3>
 <p>Gaussian Mixture Models (GMMs) are a popular unsupervised learning model that uses the EM algorithm to find a mixture of $K$ Gaussians that describe the data optimally. In essence, the distribution $p(x,\theta)$ involves a third, unknown variable such that:</p>
