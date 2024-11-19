@@ -356,7 +356,8 @@ Q(\theta, \theta_t) = \frac{1}{n} \sum_{i=1}^{n} \int_{z} p(z|x_i; \theta_t) \lo
 $$
 </div>
 
-<p>In the next step, one aims to find $\theta_{t+1}$ that maximizes $Q(\theta, \theta_t)$. This step is called the Maximization-step because one maximizes the likelihood of the model given the data $x$ and the estimated $z$.</p>
+<p>In the next step, one aims to find $\theta_{t+1}$ that maximizes $Q(\theta, \theta_t)$. 
+    This step is called the Maximization-step because one maximizes the likelihood of the model given the data samples $x_i$ and the estimated $q(z)$.</p>
 
 <p>Repeated iterations of the Expectation and Maximization step are expected to converge. The EM algorithm can also be used for MAP. The evaluation of $p(z|y,\theta_t)$ is not always possible. In the case of a VAE, the ELBO parameterizes the objective to be maximized, however, since $p(z|y,\theta_t)$ cannot be evaluated analytically, $q(z)$ is parameterized by a prior and the KL-divergence is minimized via gradient descent.</p>
 
