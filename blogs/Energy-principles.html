@@ -226,12 +226,27 @@
    Advantages over D'Alemberts principle are that the equations of motion do not contain the accelerations, but only the velocities.
    The equations of motion are of first order in time, not second order and completely determined by a scalar function /(L(\cdot)/).
    The principle of least action relates equilibrium to the stationary value of /( \partial \int L(\cdot) dt/).
-   We have seen
+   In the part on variational calculus we have seen
    <div class="equation">
     $$
-    \int L(\cdot) dt = [ \sum_i \frac{ \partial L }{ \partial q_i } \delta q_i ]_{t_1}^{t_2}
-    $$.
-   </div>
+    \delta \int L(\cdot) dt = [ \sum_i \frac{ \partial L }{ \partial q_i } \delta q_i ]_{t_1}^{t_2}
+    $$
+   </div> at the stationary value of the integral. If  \( L(\cdot) \) does not contain the time explicitely,
+   then choosing as variation \( \delta q_i = \epsilon q_i' \) leads to \( \delta L = \epsilon L'\). 
+   In essence, the variation is the acutal displacement which takes time in the infinitesimal time /(dt = \epsilon /).
+   Then
+   <div class="equation">
+    $$
+    \delta \int L(\cdot) dt =   \int \delta L(\cdot) dt =  \int \epsilon L' dt = \epsilon \int L' dt =  \epsilon [L]_{t_1}^{t_2} 	
+    $$
+    </div>
+    and 
+    <div class="equation">
+        $$
+        [ \sum_i \frac{ \partial L }{ \partial q_i } \delta q_i ]_{t_1}^{t_2}
+         = \sum_i \frac{ \partial L }{ \partial q_i } \epsilon q_i' ]_{t_1}^{t_2} 
+        $$
+    </div>
 
 </body>
     </html>
