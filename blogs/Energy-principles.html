@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Energy-Principles</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .equation {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .equation span {
+            font-family: "Courier New", monospace;
+            background-color: #f9f9f9;
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .highlight {
+            color: red;
+        }
+        .author-date {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Energy-Principles</h1>
+    
+    <h2>Introduction</h2>
+    <p> With this post i want so summarize the variational formulation of mechanics and mathematical analysis that arises from it.
+        Upon reading this blog-post, you should have an understanding of how the variational formulation of mechanics in terms 
+        of a scalar function (the lagrangian, hamiltonian, or generating function) arise from (work) principles of newtonian mechanics.
+        This formulation is the basis for Hamiltonian mechanics and the Hamilton-Jacobi theory.
+        It is restricted to the fairly broad class of systems subject to forces, derivable from a single scalar function (monogenic forces).
+        Examples of these forces are known as conservative forces, however, by an extenstion of the state-space also non-conservative
+        forces and time-dependent energy-evolutions can be made monogenic. 
+        The details and intricacies will become clearer in the following.
+    </p>
+
+
+
+    <h2>Newtons equation, virtual work and d'alemberts principle</h2>
+    <p>We will assume that the reader is familiar with the famous equation of motion in newtonian mechanics</p>
+    <div class="equation">
+               F=ma = mv' = mr''
+    </div>
+    where /( F /) is the force, /( m /) is the mass of the particle and /( a = v'= r''/) is the acceleration ins /(3D/) position space.
+    The equation of motion is a second order differential equation, which can be solved by specifying the initial conditions of the system.
+    The solution is the trajectory of the particle in position space. 
+    An important notion that arises is that of an equilibrium point, which is a point in position space
+    where the force (and thus the acceleration) vanishes. Here, we consider a free particle, 
+    i.e. a particle that is not subject to any constraints and can be moved in arbitrary directions. 
+    Assume the particle were constrained to be located on a plane (e.g. a ball on a table). 
+    We denote enforce the plane by the constraint /( f(r) = f(x,y,z) = 0 /).
+    The ball is in equilibrium (no acceleration occurs) eventhough the force of gravity is acting on it. 
+    This is because a reactive force is acting on the ball, which cancels out the force of gravity. 
+    We have
+    <div class="equation">
+        F + R = ma 
+    </div>
+    where /( R /) is the reactive force.
+    Let us introduce the work-function 
+    <div class="equation">
+        \delta w =  F \delta r
+    </div>,
+    where /( \delta r /) is the virtual displacement of the particle. 
+    It corresponds to any arbitrary variation of /( r /). The quantity /(dr/) is but a special type of variation.
+    Thus, whenever /( \delta /) is used, the reader might replace it with /( d /) to obtain the special variation.
+    The difference is that /( \delta /) represents any arbitrary variation not necessarily consistent with the actual motion, 
+    wheras /( d /) is consistent. Intuitively speaking, the virtual displacement is a small displacement that is not necessarily real,
+    and virtual work is the work done by the forces on this virtual displacement but not the real work that is being done. 
+    /( \d w /) is a the work performed by a system on a real infitesimal displacement /(dr/), 
+    /(\delta w ) is a (virtual) work done by (imagined) infitesimal (virtual) displacement /( \delta r/). 
+    Thus the variation is merely a generalization of an infinitesimal change. 
+    Generally speaking, the real displacement is tied to a specific parameterization while the variational displacement is not.
+    In equilibrium we have
+    <div class="equation">
+        \delta w = (F + R - ma) \delta r = 0 
+   </div>
+   We will consider that the reactive forces /(R/) are ideal, in the sense that they do not do any work /(R \delta r = 0 /).
+   If we use the special variation /(dr/), this condition means that the reactive forces are orthogonal to parameterization /(f(r)/) of the plane.
+   This assumption is the assumption of ideal reactive forces. 
+   It holds for many systems, but fails for example for frictional forces, deformations non-holonomic (velcoity dependent) constraints, 
+   contacts with slip-stick conditions and non-equilibrium systems. 
+   Although, this might seem like a big restriction, the method remains very powerful and is used in many applications 
+   (similar to how most mathematical models are friction-free and offer deep insight nontheless).  
+   Under this assumption obtain the following equation of equilibrium
+   <div class="equation">
+    \delta w = (F - ma) \delta r = 0 
+   </div>,
+   which is known as D'Alemberts principle. 
+   This principle makes the remarkable statement that a system is in equilibrium if one adds the inertial forces to the impressed forces.
+   We assume that the work done by the forces corresponds to a scalar function /(U = -V /), 
+   so that  /(\delta w = - \delta V /)  and /(dw = - dV /) and /(F = \frac{dw}{dr} = - \nabla V /). 
+   This is the definition of conservative forces. Conservative forces are derivable from a scalar function and thus monogenic.
+   Under this assumption we can write the equation of motion as
+   <div class="equation">
+    \delta w = F\delta r - ma\delta r  = \delta V -  ma\delta r  
+   </div>,
+  Replacing /(\delta r /) by /(dr/), we obtain the equation of motion in terms of the lagrangian
+  <div class="equation">
+    \delta w =  d V +  madr = d V +  mavdt = d V - \frac{1}{2} \frac{d}{dt} mv^2 = d ( V+T ) = 0
+   </div>
+   , which is the well known theorem of energy conservation for conservative systems.
+   From d'Alemberts principle we also obtain apparent forces in accelerated reference systems.
+   
+
+   <h3>Apparent Forces in accelerated reference systems</h3>
+
+   <h2>D'Alembert to least constrain to Lagrangian</h2>
+   D'Alemberts principle is a powerful tool to derive the equations of motion for a system. 
+   However, it is not in the for of a definite integral.
+   This form is 
+   <div class="equation">
+    I = \int F(y,y',x)dx
+   </div>
+  where /( F(y,y',x) /) is any function of three variables. 
+  By the calculus of variation, one can solve analytically for the stationary value of this integral. 
+  Also if /( F(y,y',y'',x) /) contains /( 4 /) variables including the second derivative. 
+  However, for thevariational principles for mechanics we need not consider this case.
+  The advantage of a formulation as stationary value of an integral lies in the analytical solution which can be obtained.
+  D'Alemberts principle can be transformed into such a definite integral by integration with respect to time.
+  Consider
+  <div class="equation">
+    \int \delta w dt = \int \sum_i (F_i - \frac{d}{dt}(m_iv_i) ) \delta r_i dt.
+   </div>
+   Considering the convervative nature of /(F/) we obtain
+   <div class="equation">
+    \int \sum_i F_i dt = \int - \delta V dt.
+   </div>
+   For the second term we obtain
+   $$
+   <div class="equation">
+    \int \sum_i \frac{d}{dt}(m_iv_i) \delta r_i dt =  -[-m_iv_i \delta r_i]_{t_1}^{t_2} + \int m_i v_i \frac{d}{dt} \delta r_i dt 
+    $$
+    $$
+    = -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \int m_i v_i \delta \frac{d}{dt} r_i dt
+    $$
+    $$
+    = -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \int m_i v_i \delta v_i dt
+    $$
+    $$
+    = -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \int m_i \delta v_i v_i dt
+    $$
+    $$
+    = -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
+    $$.
+</div>
+    Thus we obtain 
+    <div class="equation">
+        $$
+        \int \delta w dt  = \int - \delta V dt  -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
+        $$
+        $$
+        = \delta \int T dt - \delta \int V dt - [-m_iv_i \delta r_i]_{t_1}^{t_2} = \delta \int T-V dt - [-m_iv_i \delta r_i]_{t_1}^{t_2}
+        $$
+        $$
+        =  \delta \int L dt - [-m_iv_i \delta r_i]_{t_1}^{t_2}
+        $$
+   </div>
+   If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero.
+   Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral.
+   <div class="equation">
+    \delta w = (F - ma) \delta r = 0 
+   </div>
+   becomes
+   <div class="equation">
+    \int \delta w dt = \delta \int L dt =  \delta A = 0
+   </div>
+   where /( A /) is called the action functional. This is Hamiltions principle of least action. 
+   Here we have assumed that the work done by the forces is derivable from a single scalar function. The impressed forces must be monogenic.
+   If they are conservative, they are automatically monogenic, however, also non-conservative and time-dependant forces can be monogenic.
+   For polygenic forces the transformation of d'alemberts principle into a definite integral is not possible.
+   We have transformed the equilibrium condition into a stationary condition of a definite integral.
+   The necessary and sufficient condition for the stationary value of a definite integral is the Euler-Lagrange equation:
+   <div class="equation">
+    \frac{d}{dt} \frac{\partial L}{\partial \dot{q}_i} - \frac{\partial L}{\partial q_i} = 0
+   </div>.
+   Advantages over D'Alemberts principle are that the equations of motion do not contain the accelerations, but only the velocities.
+   The equations of motion are of first order in time, not second order and completely determined by a scalar function /(L/). 
+</body>
+    </html>
+        
