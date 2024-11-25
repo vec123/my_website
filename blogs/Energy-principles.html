@@ -169,31 +169,31 @@
 
    <div class="equation">
     $$
-    \int \sum_i \frac{d}{dt}(m_iv_i) \delta r_i dt =  -[-m_iv_i \delta r_i]_{t_1}^{t_2} + \int m_i v_i \frac{d}{dt} \delta r_i dt 
+    \int \sum_i \frac{d}{dt}(m_iv_i) \delta r_i dt =  -[m_iv_i \delta r_i]_{t_1}^{t_2} + \int m_i v_i \frac{d}{dt} \delta r_i dt 
     $$
     $$
-    = -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \int m_i v_i \delta \frac{d}{dt} r_i dt
+    = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \int m_i v_i \delta \frac{d}{dt} r_i dt
     $$
     $$
-    = -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \int m_i v_i \delta v_i dt
+    = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \int m_i v_i \delta v_i dt
     $$
     $$
-    = -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \int m_i \delta v_i v_i dt
+    = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \int m_i \delta v_i v_i dt
     $$
     $$
-    = -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
+    = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
     $$.
 </div>
     Thus we obtain 
     <div class="equation">
         $$
-        \int \delta w dt  = \int - \delta V dt  -[-m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
+        \int \delta w dt  = \int - \delta V dt  -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
         $$
         $$
-        = \delta \int T dt - \delta \int V dt - [-m_iv_i \delta r_i]_{t_1}^{t_2} = \delta \int T-V dt - [-m_iv_i \delta r_i]_{t_1}^{t_2}
+        = \delta \int T dt - \delta \int V dt - [m_iv_i \delta r_i]_{t_1}^{t_2} = \delta \int T-V dt - [m_iv_i \delta r_i]_{t_1}^{t_2}
         $$
         $$
-        =  \delta \int L dt - [-m_iv_i \delta r_i]_{t_1}^{t_2}
+        =  \delta \int L dt - [m_iv_i \delta r_i]_{t_1}^{t_2}
         $$
    </div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero.
@@ -214,6 +214,8 @@
    If they are conservative, they are automatically monogenic, however, also non-conservative and time-dependant forces can be monogenic.
    For polygenic forces the transformation of d'alemberts principle into a definite integral is not possible.
    We have transformed the equilibrium condition into a stationary condition of a definite integral.
+   Up until now we worked in the position coordinates \( r_i \) of all particles. 
+   We can also work in the generalized coordinates \( q = f(r)\).
    The necessary and sufficient condition for the stationary value of a definite integral is the Euler-Lagrange equation:
    <div class="equation">
     $$
@@ -221,7 +223,14 @@
     $$
    </div>.
    Advantages over D'Alemberts principle are that the equations of motion do not contain the accelerations, but only the velocities.
-   The equations of motion are of first order in time, not second order and completely determined by a scalar function /(L/). 
+   The equations of motion are of first order in time, not second order and completely determined by a scalar function /(L(\cdot)/).
+   The principle of least action relates equilibrium to the stationary value of /( \partial \int L(\cdot) dt/).
+   We have seen
+   <div class="equation">
+    $$
+    \partial \int L(\cdot) dt = [ \sum_i \frac{\partial K}{\partial q_i'} \delta q_i]_{t_1}^{t_2}
+    $$
+   </div>.
 </body>
     </html>
         
