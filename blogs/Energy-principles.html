@@ -494,6 +494,20 @@ We can write the equations of motion in the Hamiltonian form
     $$.
 </div> Since /(q_i/) and /(p_i/) are positional variables, the Hamiltonian equations of motion only contain time on the left-hand side. 
 This is opposed to the Lagrangian equations of motion which express velocities (not positions) as functions of time.
+We can write the action integral in the Hamiltonian form
+<div class="equation">
+    \delta A = \int \delta L dt = \int \delta (\sum_i p_i \dot{q}_i  - H) dt
+</div>
+which is minimized by
+<div class="equation">
+    $$
+    \frac{d}{dt} \frac{\partial L}{\partial \dot{q}_i} - \frac{\partial L}{\partial q_i} =  \frac{dp_i}{dt} - \frac{\partial H}{\partial q_i} = 0
+    $$
+    $$
+    \frac{d}{dt} \frac{\partial L}{\partial \dot{p}_i} - \frac{\partial L}{\partial p_i} = 0 - \dot{q}_i + \frac{\partial H}{\partial p_i} = 0
+    $$
+   
+</div>
 </body>
     </html>
         
