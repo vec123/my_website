@@ -470,7 +470,7 @@ We obtain
     G(v_1,...,v_n) \text{ and } F(u_1,...,u_n)
     $$
 </div> 
-This transformation is symmetrical. 
+This transformation is symmetrical. Not all variables need to participate in the transformation.
 Application to the Lagrangian leads to
 <div class="equation">
     $$
@@ -481,8 +481,19 @@ Application to the Lagrangian leads to
     $$
     $$
     H(q_1,...,q_n, p_1,...,p_n;t) \text{ and } L(q_1,...,q_n, \dot{q}_1,...,\dot{q}_n;t)
-    $$
+    $$.
 </div> 
+Note that /(H/) is of first order in all its variables and thus defines a /(2n/)-dimensional hypersurface in the /(2n+1/)-dimensional phase space.
+We can write the equations of motion in the Hamiltonian form
+<div class="equation">
+    $$
+    \dot{q}_i = \frac{\partial H}{\partial p_i} 
+    $$
+    $$
+     \dot{p}_i = - \frac{\partial H}{\partial q_i}
+    $$.
+</div> Since /(q_i/) and /(p_i/) are positional variables, the Hamiltonian equations of motion only contain time on the left-hand side. 
+This is opposed to the Lagrangian equations of motion which express velocities (not positions) as functions of time.
 </body>
     </html>
         
