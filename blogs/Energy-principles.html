@@ -309,6 +309,125 @@ If there is a kinetic coupling between ignorable and non-ignorable variables, we
 gyroscopic energy terms (linear in velocities).
 
 <h3>Principle of least action</h3>
+
+Herewe will consider a Lagrangian which has time as ingorable variable.  
+Up until now we considered the time /(t/) as an independent variable. Now we will consider /(q_i/), /(q_i'/), /(t/) 
+as functions of some parameter /( \tau /).
+Thus
+<div class="equation">
+    $$
+     A = \int_{\tau} L(q_1,...,1_n; \frac{q_1'}{t*},...,\frac{q_n'}{t*}) t* d\tau
+    $$
+</div>
+since we have /( \frac{ dq*}{dt*} = \frac{dq*}{d\tau}\frac{d\tau}{dt*}  /). Then
+<div class="equation">
+    $$
+     p_t = \frac{\partial L t*}{\partial t*} = L - \sum_{i}^{n} \frac{\partial L}{\partial \dot{q_i}} \frac{q_i'}{t*^2}t* 
+     = L - \sum_{i}^{n} p_i \dot{q_i} = -E
+    $$.
+</div>
+If /(t/) is ignorable (i.e. the system is conservative), then /(p_t = const. = -E/).
+The modified lagrangian is 
+<div class="equation">
+    $$
+    \tilde{L} = Lt* - p_t t* = (L - p_t)t* = sum_{i}^{n} p_i \dot{q_i} t*
+    $$.
+</div>
+leading to the action integral
+<div class="equation">
+    $$
+    A = \int_{\tau} \sum_{i}^{n} p_i \dot{q_i} t* d\tau =  \int_{\tau} T t* d\tau 
+    $$.
+</div> The latter equality holds if  /(T/) is quadratic in the velocities and /( V/) is only position dependent. 
+The kinetic energy can also be written as
+leading to the action integral
+<div class="equation">
+    $$
+   T = \frac{1}{2} \frac{\bar{ds}}{dt}^2
+    $$
+</div>
+which due to the parameterization in terms of /( \tau /) is written as
+<div class="equation">
+        $$
+       T = \frac{1}{2} \frac{\bar{ds}}{d\tau}^2 / t*^2
+        $$.
+</div>
+Thus
+<div class="equation">
+    $$
+    t* = \frac{ 1 }{ \sqrt{2(E-V)} } \frac{ \bar{ds}{d\tau} }
+    $$
+</div>
+and by subsitution we obtain
+<div class="equation">
+    $$
+    A =  \int_{\tau} \sqrt{2(E-V)} frac{\bar{ds}}{d\tau} d\tau = \int_{\tau} \sqrt{2(E-V)} \bar{ds}
+    $$.
+</div> Note that the free parameter is /( \tau /). Define /(d\sigma^2 = (E-V) \bar{ds}^2/). 
+Then the action integral becomes /( A = \int_{\tau} d\sigma^2 /), 
+which relates the motion of the particle to the motion along some geodsic of a given Riemannian space. 
+The time does not appear in the equations, but can be solved for by the given relation /( t* = f(\cdot)/).
+The Riemannian line-element might be written as /( \bar{ds}^2 = sum_{j,k} a_{j,k} \dot{q}_j \dot{q}_k /).
+
+<h3>Small Vibrations about a state of equilibrium</h3>
+Consider the kinetic energy 
+<div class="equation">
+    $$ 
+    K = \frac{1}{2} \sum_{i,k} a_{i,k} \dot{q}_i \dot{q}_k = \frac{1}{2} A \dot{q} \dot{q}
+    $$
+</div>
+and a Taylor-expansion of the potential energy about a state of equilibrium
+<div class="equation">
+    $$
+    V = V(q_0) + \sum_{i} \frac{\partial V}{\partial q_i}(q_i - q_{0,i}) + \sum_{i} \frac{1}{2} \frac{\partial^2 V}{\partial q_i^2} (q_i - q_{0,i})^2 + O(|3|)
+    $$.
+</div>
+Since, for monogenic forces derivable from /(V/), at the state of equilibrium /(  \frac{\partial V}{\partial q_i} = 0/) 
+(by the vanishing of the virtual work in directions tangent to the constraint and ideality of constraints) for all /(i/) and /(V(q_0) = const. /), we obtain
+<div class="equation">
+    $$
+    V =   \frac{1}{2} \sum_{i,k} \frac{\partial^2 V}{\partial q_i \partial q_k} q_iq_k = frac{1}{2} \sum_{i,k}b_{i,k}q_i q_k  = \frac{1}{2} q^T B q
+    $$.
+</div>
+We obtain the linearized Lagrangian
+<div class="equation">
+    $$
+    L =    \frac{1}{2} A \dot{q} \dot{q} - \frac{1}{2} q^T B q
+    $$
+</div>
+with equations of motion (i.e. minimum of the action integral)
+<div class="equation">
+    $$
+    A \ddot{q} + B q = 0
+    $$.
+</div>
+These equations are linear homogenous and the superposition principle holds. 
+Since /(A/) is positive definite, it is possible to diagonalize both matrices simultaneously. 
+In fact /(A/) can be diagonalized to the identity. The eigenvalues are the roots of 
+<div class="equation">
+    $$
+    det(B - \lambda A) = 0
+    $$
+</div>
+and the eigenvectors are so that /( u^{(i)} A u^{(j)} = \delta_{i,j} /) and /( (U^T B U)_{i,j} = \lamba_i \delta_{i,j}/).
+We can then write
+<div class="equation">
+    $$
+    \bar{A} \ddot{q} + \bar{B} q = 0
+    $$
+</div>, where /(\bar{A} = I /) and /(\bar{B} = U^T B U = \text{diag}(\lambda_1,...,\lambda_n)/). 
+We know that for the harmonic oscillator of form
+<div class="equation">
+    $$
+    \ddot{x} = -\lambda x
+    $$
+</div>
+the solution is
+<div class="equation">
+    $$
+    x(t) = x_0 \cos(\sqrt{\lambda} t) + \frac{v_0}{\sqrt{\lambda}} \sin(\sqrt{\lambda} t)
+    $$
+</div> where /(\omega = \sqrt{\lambda}/) is the frequency of the oscillator.
 </body>
     </html>
         
