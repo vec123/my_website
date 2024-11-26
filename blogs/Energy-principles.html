@@ -355,7 +355,7 @@ which due to the parameterization in terms of /( \tau /) is written as
 Thus
 <div class="equation">
     $$
-    t* = \frac{ 1 }{ \sqrt{2(E-V)} } \frac{ \bar{ds}{d\tau} }
+    t* = \frac{ 1 }{ \sqrt{2(E-V)} } \frac{ \bar{ds}}{d\tau} 
     $$
 </div>
 and by subsitution we obtain
@@ -373,7 +373,7 @@ The Riemannian line-element might be written as /( \bar{ds}^2 = sum_{j,k} a_{j,k
 Consider the kinetic energy 
 <div class="equation">
     $$ 
-    K = \frac{1}{2} \sum_{i,k} a_{i,k} \dot{q}_i \dot{q}_k = \frac{1}{2} dot{q}^T A \dot{q} \
+    K = \frac{1}{2} \sum_{i,k} a_{i,k} \dot{q}_i \dot{q}_k = \frac{1}{2} \dot{q}^T A \dot{q} \
     $$
 </div>
 and a Taylor-expansion of the potential energy about a state of equilibrium
@@ -386,7 +386,8 @@ Since, for monogenic forces derivable from /(V/), at the state of equilibrium /(
 (by the vanishing of the virtual work in directions tangent to the constraint and ideality of constraints) for all /(i/) and /(V(q_0) = const. /), we obtain
 <div class="equation">
     $$
-    V =   \frac{1}{2} \sum_{i,k} \frac{\partial^2 V}{\partial q_i \partial q_k} q_iq_k = frac{1}{2} \sum_{i,k}b_{i,k}q_i q_k  = \frac{1}{2} q^T B q
+    V =   \frac{1}{2} \sum_{i,k} \frac{\partial^2 V}{\partial q_i \partial q_k} q_iq_k 
+    = \frac{1}{2} \sum_{i,k}b_{i,k}q_i q_k  = \frac{1}{2} q^T B q
     $$.
 </div>
 We obtain the linearized Lagrangian
@@ -496,7 +497,9 @@ We can write the equations of motion in the Hamiltonian form
 This is opposed to the Lagrangian equations of motion which express velocities (not positions) as functions of time.
 Remeber that the coefficient of /(\delta p_i /) is zero due to the legendre transform. Thus we may write
 <div class="equation">
+    $$
     \delta A = \int \delta L dt = \int \delta (\sum_i p_i \dot{q}_i  - H) dt
+    $$
 </div>
 which is minimized by
 <div class="equation">
@@ -549,7 +552,7 @@ so that
 and therefore
 <div class="equation">
     $$
-    A = \int sum_{i=1}^{n+1} frac{\partial L_1}{\partial q_i'} q_i' d\tau = \int sum_{i=1}^{n+1}p_i q_i' d\tau
+    A = \int \sum_{i=1}^{n+1} \frac{\partial L_1}{\partial q_i'} q_i' d\tau = \int sum_{i=1}^{n+1}p_i q_i' d\tau
     $$.
 </div> Here the Hamiltionan vanishes. It is however replaced by an auxiliary condition which captures the relation
  between the /(q_i/) and /(p_i/). We denote this relationship by 
@@ -562,19 +565,19 @@ The integral /(A/) is to be made stationary under this constraint. By adding the
 We can incorporate the constraint into the integral by the /(\lambda/) method and obtain
 <div class="equation">
     $$
-    \bar{A} = \int sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
+    \bar{A} = \int \sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
     $$.
 </div>
 By proper choice of /(\tau/) we can set /( \lambda = 1/) and the form of the form
 <div class="equation"></div>
     $$
-    \bar{A} = \int sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
+    \bar{A} = \int \sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
     $$.
 </div>
 By the stationary value of a definite integral we obtain the equations of motion
 <div class="equation"></div>
     $$
-    q_k' = \frac{partial K}{\partial p_k} 
+    q_k' = \frac{\partial K}{\partial p_k} 
     $$
     $$
     p_k' = - \frac{\partial K}{\partial q_k}
@@ -583,7 +586,7 @@ By the stationary value of a definite integral we obtain the equations of motion
 If /(K = p_{n+1} + H/), then the equations of motion are 
 <div class="equation"></div>
     $$
-    q_k' = \frac{partial H}{\partial p_k} 
+    q_k' = \frac{\partial H}{\partial p_k} 
     $$
     $$
     p_k' = - \frac{\partial H}{\partial q_k}
