@@ -410,24 +410,31 @@ In fact /(A/) can be diagonalized to the identity. The eigenvalues are the roots
     $$
 </div>
 and the eigenvectors are so that /( u^{(i)} A u^{(j)} = \delta_{i,j} /) and /( (U^T B U)_{i,j} = \lamba_i \delta_{i,j}/).
-We can then write
+By a change of coordinates /( \bar{q} = Uq /) we obtain the diagonalized equations of motion
 <div class="equation">
     $$
-    \bar{A} \ddot{q} + \bar{B} q = 0
+    \bar{A} \ddot{\bar{q}} + \bar{B} \bar{q} = 0
     $$
 </div>, where /(\bar{A} = I /) and /(\bar{B} = U^T B U = \text{diag}(\lambda_1,...,\lambda_n)/). 
-We know that for the harmonic oscillator of form
+We know that for a differential equation of form
 <div class="equation">
     $$
-    \ddot{x} = -\lambda x
+    \ddot{x} = - \lambda x
     $$
 </div>
 the solution is
 <div class="equation">
     $$
-    x(t) = x_0 \cos(\sqrt{\lambda} t) + \frac{v_0}{\sqrt{\lambda}} \sin(\sqrt{\lambda} t)
+    x(t) = \cos(\omega*t)
     $$
-</div> where /(\omega = \sqrt{\lambda}/) is the frequency of the oscillator.
+</div> with /(\omega = \sqrt{\lambda}/) since /( \frac{d^2}{dt^2} \alpha*\cos(\omega t + \Phi ) = -  \alpha* \omega^2 \cos(\omega t + \Phi) /).
+Thus, the general solution for the linearized equations of motion is
+<div class="equation">
+    $$
+    \bar{q}_i(t) = \sum_{i} \alpha_i \cos(\omega_i t + \Phi_i)
+    $$,
+</div> in where /( \bar{q}_i(t) /) caputres the time-dependent motion of the system in the direction of the eigenvector /(u_i/).
+We can obtain the general solution for the original coordinates /(q_i(t)/) by the inverse transformation /(q = U^T \bar{q}/).
 </body>
     </html>
         
