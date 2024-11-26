@@ -55,7 +55,11 @@
 
 
 
-    <h2>Newtons equation, virtual work and d'alemberts principle</h2>
+
+
+
+
+    <h2>Newtons equation, virtual work and D'Alemberts principle</h2>
     <p>We will assume that the reader is familiar with the famous equation of motion in newtonian mechanics</p>
     <div class="equation">
         $$
@@ -136,9 +140,23 @@
    From d'Alemberts principle we also obtain apparent forces in accelerated reference systems.
    
 
+
+
+
+
+
    <h3>Apparent Forces in accelerated reference systems</h3>
 
-   <h2>D'Alembert to the Lagrangian</h2>
+
+
+
+
+
+
+
+
+
+   <h2>From D'Alemberts principle to the Lagrangian</h2>
    D'Alemberts principle is a powerful tool to derive the equations of motion for a system. 
    However, it is not in the for of a definite integral.
    This form is 
@@ -250,7 +268,7 @@
    This leads to
    <div class="equation">
     $$
-    [L - \sum_i \\frac{ \partial L }{ \partial q_i }q_i']_{t_1}^{t_2} 	=  [L - \sum_i p_i q_i']_{t_1}^{t_2} = 0
+    [L - \sum_i \frac{ \partial L }{ \partial q_i }q_i']_{t_1}^{t_2} 	=  [L - \sum_i p_i q_i']_{t_1}^{t_2} = 0
     $$.
 </div>
 Here, no special form on /(L/) is required, except for its independence from time. 
@@ -280,7 +298,16 @@ When we encounter gyroscopic terms the potential energy also depends on the velo
 </div> holds even for these systems, if they are time-independent. The interpretation of the constant of motion is the energy of the system.
 For kinetic energies quadratic in the velocities /(\sum_i \p_i q_i'/) is twice the kinetic energy. 
 
-<h3>Elimination of variables</h3>
+
+
+
+
+
+
+
+
+
+<h3>Elimination of variables in the Lagrangian</h3>
 
 We have introduced the quantities /(p_i = \frac{\partial L}{\partial q_i'}/) (called momentum) so that /(p_i' = \frac{\partial L}{\partial q_i}/). 
 If /(q_i/) is an ingorable variable, then /(p_i' = 0 /) and /(p_i = const./). 
@@ -308,6 +335,20 @@ We call
 If there is a kinetic coupling between ignorable and non-ignorable variables, we obtain additional terms which can be interpreted as 
 gyroscopic energy terms (linear in velocities).
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h3>Principle of least action</h3>
 
 Herewe will consider a Lagrangian which has time as ingorable variable.  
@@ -330,7 +371,7 @@ If /(t/) is ignorable (i.e. the system is conservative), then /(p_t = const. = -
 The modified lagrangian is 
 <div class="equation">
     $$
-    \tilde{L} = Lt* - p_t t* = (L - p_t)t* = sum_{i}^{n} p_i \dot{q_i} t*
+    \tilde{L} = Lt* - p_t t* = (L - p_t)t* = \sum_{i}^{n} p_i \dot{q_i} t*
     $$.
 </div>
 leading to the action integral
@@ -368,6 +409,18 @@ Then the action integral becomes /( A = \int_{\tau} d\sigma^2 /),
 which relates the motion of the particle to the motion along some geodsic of a given Riemannian space. 
 The time does not appear in the equations, but can be solved for by the given relation /( t* = f(\cdot)/).
 The Riemannian line-element might be written as /( \bar{ds}^2 = sum_{j,k} a_{j,k} \dot{q}_j \dot{q}_k /).
+
+
+
+
+
+
+
+
+
+
+
+
 
 <h3>Small Vibrations about a state of equilibrium</h3>
 Consider the kinetic energy 
@@ -436,6 +489,19 @@ Thus, the general solution for the linearized equations of motion is
     $$,
 </div> in where /( \bar{q}_i(t) /) caputres the time-dependent motion of the system in the direction of the eigenvector /(u_i/).
 We can obtain the general solution for the original coordinates /(q_i(t)/) by the inverse transformation /(q = U^T \bar{q}/).
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <h2>Canonical transformations and Phase Space</h2>
@@ -526,6 +592,13 @@ In the Hamiltonian form, ignorable variables are handled by replacing /(p_n/) wi
     \delta A =  \int \delta L dt = \int \delta (\sum_{i=^1}^{n-1} p_i \dot{q}_i  - H) dt = 0
     $$
 </div>, since /( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} /) is constant and can be dropped in the variation.
+
+
+
+
+
+
+
 
 <h2>Time as mechanical variable</h2>
 Given the notion of the phase space we can include time as a position variable in the phase space and consider an independent parameter /( \tau /) 
