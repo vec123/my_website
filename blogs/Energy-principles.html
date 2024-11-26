@@ -494,7 +494,7 @@ We can write the equations of motion in the Hamiltonian form
     $$.
 </div> Since /(q_i/) and /(p_i/) are positional variables, the Hamiltonian equations of motion only contain time on the left-hand side. 
 This is opposed to the Lagrangian equations of motion which express velocities (not positions) as functions of time.
-We can write the action integral in the Hamiltonian form
+Remeber that the coefficient of /(\delta p_i /) is zero due to the legendre transform. Thus we may write
 <div class="equation">
     \delta A = \int \delta L dt = \int \delta (\sum_i p_i \dot{q}_i  - H) dt
 </div>
@@ -506,7 +506,94 @@ which is minimized by
     $$
     \frac{d}{dt} \frac{\partial L}{\partial \dot{p}_i} - \frac{\partial L}{\partial p_i} = 0 - \dot{q}_i + \frac{\partial H}{\partial p_i} = 0
     $$
-   
+</div> which gives rise to the equation of motion in Hamiltonian and Lagrangian form. 
+The transformation into /(2n/) positional space is powerful since it allows for the definition of a velocity field in the phase space.
+Contrary to the Lagrangian equations of motion, the Hamiltonian equations of motion are of first order in time 
+and the behavious of the phase space is similar to that of an incompressible fluid. 
+In incompressible fluids, certain integral invaraits are preserved, for example the circulation and the volume.
+If we allow for a variation at the limits we have
+<div class="equation">
+    $$
+    \delta A =  [ \sum_i \delta p_i \delta{q}_i ]_{t_1}^{t_2} 
+    $$
+</div> (recall that the coefficient of /(\delta p_i /) is zero so that this relation holds always). 
+In the Hamiltonian form, ignorable variables are handled by replacing /(p_n/) with a constant. Then the action integral is reduced to
+<div class="equation">
+    $$
+    \delta A =  \int \delta L dt = \int \delta (\sum_{i=^1}^{n-1} p_i \dot{q}_i  - H) dt = 0
+    $$
+</div>, since /( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} /) is constant and can be dropped in the variation.
+
+<h2>Time as mechanical variable</h2>
+Given the notion of the phase space we can include time as a position variable in the phase space and consider an independent parameter /( \tau /) 
+for path parameterization. We call the phase space including time the extended phase space. 
+Time is simply regarded as a positional variable with an associated momentum /( p_t /).
+As before we can write
+<div class="equation">
+    $$
+    A= \int L(q_1,...,q_n, \frac{q_1'}{q_{n+1}'},..., \frac{q_n'}{q_{n+1}'}, q_{n+1}') q_{n+1}' d\tau = \int L_1 d\tau.
+    $$
+</div>
+By Eulers theorem on homogenous functions we have
+<div class="equation">
+    $$
+    \sum_{i=1}^{n+1} \frac{\partial L_1}{\partial q_i'} q_i' = L_1
+    $$
+</div>
+so that 
+<div class="equation">
+    $$
+    \sum_{i=1}^{n+1} \frac{\partial L_1}{\partial q_i'} q_i' -  L_1 = H_1 = 0
+    $$
+</div>
+and therefore
+<div class="equation">
+    $$
+    A = \int sum_{i=1}^{n+1} frac{\partial L_1}{\partial q_i'} q_i' d\tau = \int sum_{i=1}^{n+1}p_i q_i' d\tau
+    $$.
+</div> Here the Hamiltionan vanishes. It is however replaced by an auxiliary condition which captures the relation
+ between the /(q_i/) and /(p_i/). We denote this relationship by 
+ <div class="equation">
+    $$
+   K(q_1,...,q_{n+1}; p_1,....,p_{n+1}) = 0
+    $$.
+</div>
+The integral /(A/) is to be made stationary under this constraint. By adding the time to the phase space, every system becomes conservative.
+We can incorporate the constraint into the integral by the /(\lambda/) method and obtain
+<div class="equation">
+    $$
+    \bar{A} = \int sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
+    $$.
+</div>
+By proper choice of /(\tau/) we can set /( \lambda = 1/) and the form of the form
+<div class="equation"></div>
+    $$
+    \bar{A} = \int sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
+    $$.
+</div>
+By the stationary value of a definite integral we obtain the equations of motion
+<div class="equation"></div>
+    $$
+    q_k' = \frac{partial K}{\partial p_k} 
+    $$
+    $$
+    p_k' = - \frac{\partial K}{\partial q_k}
+    $$.
+</div>
+If /(K = p_{n+1} + H/), then the equations of motion are 
+<div class="equation"></div>
+    $$
+    q_k' = \frac{partial H}{\partial p_k} 
+    $$
+    $$
+    p_k' = - \frac{\partial H}{\partial q_k}
+    $$
+    $$
+    q_{n+1}' = 1
+    $$
+    $$
+    p_{n+1}' = - \frac{\partial H}{\partial q_{n+1}}
+    $$
 </div>
 </body>
     </html>
