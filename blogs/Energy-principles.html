@@ -232,7 +232,7 @@
    For this section we consider two reference systems which give rise to distinct, but equivalent coordinated \( r \) and \( r' \).
    Let \( r \) correspond to a fixed and \( r' \) to a moving system whose origin is denoted by \( c \)  .
    We might equally well use generalized coordinated \(q\) and \(q'\) for the two systems.
-    Consider the relations
+   Consider the relations
     <div class="equation">
         $$
         r = r' + c
@@ -304,7 +304,7 @@ The centrifugal force \(C\) is derivable from the position dependent scalar func
 The term \(B\) corresponds to the corriolis force. 
 It is not derivable from a position dependent scalar function and is thus non-conservative.
 However, it is derivable from a scalar function \( \Phi_B = m v' \times \Omega r' \) which is linear in the velocities as
-/(B = \frac{d}{dt} \frac{\partial  \Phi_B}{\partial \dot{r}} - \frac{\partial  \Phi_B}{\partial r} /).
+\(B = \frac{d}{dt} \frac{\partial  \Phi_B}{\partial \dot{r}} - \frac{\partial  \Phi_B}{\partial r} \).
 Thus it is nonetheless monogenic.
 The term \(K\) is the euler force, it arises only for non-uniform rotations.
 The term \(I'\) is the inertial force in the moving system.
@@ -330,21 +330,65 @@ The total effective force is
   Also if \( F(y,y',y'',x) \) contains \( 4 \) variables including the second derivative. 
   However, for thevariational principles for mechanics we need not consider this case.
   The advantage of a formulation as stationary value of an integral lies in the analytical solution which can be obtained.
-  D'Alemberts principle can be transformed into such a definite integral by integration with respect to time.
-  Consider
+  Consider the integral 
   <div class="equation">
     $$
-    \int \delta w dt = \int \sum_i (F_i - \frac{d}{dt}(m_iv_i) ) \delta r_i dt.
+    I = \int F(y,y',x)dx
     $$
    </div>
-   Considering the convervative nature of \(F\) we obtain
+   for which we want to find \(y = f(x)\) which makes the integral an extremum (or at least stationary) 
+   with boundary conditions \( f(a) = \alpha \) and \( f(b) = \beta \). 
+   Consider \( z_k = \frac{\Delta y}{\Delta x}|_{x=x_k} =\frac{ y_{k+1} - y{k} }{ x_{k+1} - x{k} } \).
+   In this discrete formulation the integral becomes a sum 
+    <div class="equation">
+     $$
+     I = \sum_k F(y_k, z_k, x_k) \Delta x = \sum_k F(y_{k+1}, z_k, x_k) \Delta x
+     $$.
+    </div>
+    The last equality follows from the fact that in the limit \( y_{k+1}=y_{k} \).
+    Partial differentiation w.r.t \(y_{k+1}\) leads to
+    <div class="equation">
+        $$
+        \frac{\partial F}{\partial y} (x_{k+1} - x{k}) + \frac{\partial F}{\partial y'}|_{x=x_{k}} -\frac{\partial F}{\partial y'}|_{x=x_{k+1}} 
+        $$
+        $$
+        =   \frac{\partial I}{\partial y}
+        $$
+    </div>
+    which through multiplication  by  \( \frac{d}{dx} = \lim_{x_{k+1} - x{k} \rightarrow 0} \frac{1}{x_{k+1} - x{k}} \) leads to
+    <div class="equation"> 
+        $$
+        \frac{\partial I}{\partial y} \frac{d}{dx} = \frac{\partial F}{\partial y} - \frac{d}{dx}\frac{\partial F}{\partial y'}
+        $$.
+    </div>
+    Thus the stationary value of a definite integral is found when 
+    <div class="equation"> 
+        $$
+    \frac{\partial F}{\partial y} - \frac{d}{dx}\frac{\partial F}{\partial y'} = 0
+        $$.
+    </div> 
+    This is a necessary and sufficient condition.
+    In this intuitive derivation we have considered \(x\) as the independent variable.
+    In the Lagrangian formulation of mechanics, often the time is the independent variable. 
+    However, extensions where time is considered as a position variable are possible.
+    Here another independent variable \(\tau\) is required. 
+    We find all positional variables (including time) as functions of \(\tau\).
+
+
+    D'Alemberts principle can be transformed into such a definite integral by integration with respect to time.
+    Consider
+    <div class="equation">
+    $$
+    \int \delta w dt = \int \sum_i ( \delta F_i - \frac{d}{dt}(m_iv_i) ) \delta r_i dt.
+    $$
+    </div>
+     Considering a convervative force \(F\) we obtain
    <div class="equation">
     $$
-    \int \sum_i F_i dt = \int - \delta V dt.
+    \int \sum_i F_i dt = \int - \nabla V dt.
     $$
    </div>
    For the second term we obtain
-
    <div class="equation">
     $$
     \int \sum_i \frac{d}{dt}(m_iv_i) \delta r_i dt =  -[m_iv_i \delta r_i]_{t_1}^{t_2} + \int m_i v_i \frac{d}{dt} \delta r_i dt 
@@ -375,7 +419,7 @@ The total effective force is
         $$
    </div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero.
-   Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral.
+   Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral. Through integration
    <div class="equation">
     $$
     \delta w = (F - ma) \delta r = 0 
@@ -431,7 +475,7 @@ The total effective force is
     [L - \sum_i \frac{ \partial L }{ \partial q_i }q_i']_{t_1}^{t_2} 	=  [L - \sum_i p_i q_i']_{t_1}^{t_2} = 0
     $$.
 </div>
-Here, no special form on /(L/) is required, except for its independence from time. 
+Here, no special form on \(L\) is required, except for its independence from time. 
 We can also write
 <div class="equation">
     $$
@@ -446,9 +490,9 @@ The equation above becomes
    2T - ( T - V) = T + V = 0
     $$
 </div>
-which is the law of the conservation of energy. Note that we requires /(L/) to be independent from time 
-and /(V/) to be independent from the velocities /(q_i'/). 
-Furthermore we require /(T/) to be of quadratic form in the velocities. 
+which is the law of the conservation of energy. Note that we requires \(L\) to be independent from time 
+and \(V\) to be independent from the velocities \(q_i'\). 
+Furthermore we require \(T\) to be of quadratic form in the velocities. 
 In general relativity the kinetic energy depends on the velocities in more complicated ways. 
 When we encounter gyroscopic terms the potential energy also depends on the velocities. However the conservation law
 <div class="equation">
@@ -456,7 +500,7 @@ When we encounter gyroscopic terms the potential energy also depends on the velo
     L - \sum_i p_i q_i' = const. = E
     $$
 </div> holds even for these systems, if they are time-independent. The interpretation of the constant of motion is the energy of the system.
-For kinetic energies quadratic in the velocities /(\sum_i \p_i q_i'/) is twice the kinetic energy. 
+For kinetic energies quadratic in the velocities \(\sum_i \p_i q_i'\) is twice the kinetic energy. 
 
 
 
@@ -469,8 +513,8 @@ For kinetic energies quadratic in the velocities /(\sum_i \p_i q_i'/) is twice t
 
 <h3>Elimination of variables in the Lagrangian</h3>
 
-We have introduced the quantities /(p_i = \frac{\partial L}{\partial q_i'}/) (called momentum) so that /(p_i' = \frac{\partial L}{\partial q_i}/). 
-If /(q_i/) is an ingorable variable, then /(p_i' = 0 /) and /(p_i = const./). 
+We have introduced the quantities \(p_i = \frac{\partial L}{\partial q_i'}\) (called momentum) so that \(p_i' = \frac{\partial L}{\partial q_i}\). 
+If \(q_i\) is an ingorable variable, then \(p_i' = 0 \) and \(p_i = const.\). 
 The momentum associated with the ignorable variable is preserved.
 We have 
 <div class="equation">
@@ -512,8 +556,8 @@ gyroscopic energy terms (linear in velocities).
 <h3>Principle of least action</h3>
 
 Herewe will consider a Lagrangian which has time as ingorable variable.  
-Up until now we considered the time /(t/) as an independent variable. Now we will consider /(q_i/), /(q_i'/), /(t/) 
-as functions of some parameter /( \tau /).
+Up until now we considered the time \(t\) as an independent variable. Now we will consider \(q_i\), \(q_i'\), \(t\) 
+as functions of some parameter \( \tau \).
 Thus
 <div class="equation">
     $$
@@ -527,7 +571,7 @@ since we have /( \frac{ dq*}{dt*} = \frac{dq*}{d\tau}\frac{d\tau}{dt*}  /). Then
      = L - \sum_{i}^{n} p_i \dot{q_i} = -E
     $$.
 </div>
-If /(t/) is ignorable (i.e. the system is conservative), then /(p_t = const. = -E/).
+If \(t\) is ignorable (i.e. the system is conservative), then \(p_t = const. = -E\).
 The modified lagrangian is 
 <div class="equation">
     $$
@@ -539,7 +583,7 @@ leading to the action integral
     $$
     A = \int_{\tau} \sum_{i}^{n} p_i \dot{q_i} t* d\tau =  \int_{\tau} T t* d\tau 
     $$.
-</div> The latter equality holds if  /(T/) is quadratic in the velocities and /( V/) is only position dependent. 
+</div> The latter equality holds if \(T\) is quadratic in the velocities and \( V\) is only position dependent. 
 The kinetic energy can also be written as
 leading to the action integral
 <div class="equation">
@@ -564,11 +608,11 @@ and by subsitution we obtain
     $$
     A =  \int_{\tau} \sqrt{2(E-V)} frac{\bar{ds}}{d\tau} d\tau = \int_{\tau} \sqrt{2(E-V)} \bar{ds}
     $$.
-</div> Note that the free parameter is /( \tau /). Define /(d\sigma^2 = (E-V) \bar{ds}^2/). 
-Then the action integral becomes /( A = \int_{\tau} d\sigma^2 /), 
+</div> Note that the free parameter is \( \tau \). Define \(d\sigma^2 = (E-V) \bar{ds}^2\). 
+Then the action integral becomes \( A = \int_{\tau} d\sigma^2 \), 
 which relates the motion of the particle to the motion along some geodsic of a given Riemannian space. 
-The time does not appear in the equations, but can be solved for by the given relation /( t* = f(\cdot)/).
-The Riemannian line-element might be written as /( \bar{ds}^2 = sum_{j,k} a_{j,k} \dot{q}_j \dot{q}_k /).
+The time does not appear in the equations, but can be solved for by the given relation \( t* = f(\cdot)\).
+The Riemannian line-element might be written as \( \bar{ds}^2 = sum_{j,k} a_{j,k} \dot{q}_j \dot{q}_k \).
 
 
 
@@ -595,8 +639,9 @@ and a Taylor-expansion of the potential energy about a state of equilibrium
     V = V(q_0) + \sum_{i} \frac{\partial V}{\partial q_i}(q_i - q_{0,i}) + \sum_{i} \frac{1}{2} \frac{\partial^2 V}{\partial q_i^2} (q_i - q_{0,i})^2 + O(|3|)
     $$.
 </div>
-Since, for monogenic forces derivable from /(V/), at the state of equilibrium /(  \frac{\partial V}{\partial q_i} = 0/) 
-(by the vanishing of the virtual work in directions tangent to the constraint and ideality of constraints) for all /(i/) and /(V(q_0) = const. /), we obtain
+Since, for monogenic forces derivable from \(V\), at the state of equilibrium \(  \frac{\partial V}{\partial q_i} = 0\) 
+(by the vanishing of the virtual work in directions tangent to the constraint and ideality of constraints) for all \(i\) and \(V(q_0) = const. \)
+, we obtain
 <div class="equation">
     $$
     V =   \frac{1}{2} \sum_{i,k} \frac{\partial^2 V}{\partial q_i \partial q_k} q_iq_k 
@@ -616,20 +661,20 @@ with equations of motion (i.e. minimum of the action integral)
     $$.
 </div>
 These equations are linear homogenous and the superposition principle holds. 
-Since /(A/) is positive definite, it is possible to diagonalize both matrices simultaneously. 
-In fact /(A/) can be diagonalized to the identity. The eigenvalues are the roots of 
+Since \(A\) is positive definite, it is possible to diagonalize both matrices simultaneously. 
+In fact \(A\) can be diagonalized to the identity. The eigenvalues are the roots of 
 <div class="equation">
     $$
     det(B - \lambda A) = 0
     $$
 </div>
-and the eigenvectors are so that /( u^{(i)} A u^{(j)} = \delta_{i,j} /) and /( (U^T B U)_{i,j} = \lamba_i \delta_{i,j}/).
-By a change of coordinates /( \bar{q} = Uq /) we obtain the diagonalized equations of motion
+and the eigenvectors are so that \( u^{(i)} A u^{(j)} = \delta_{i,j} \) and \( (U^T B U)_{i,j} = \lamba_i \delta_{i,j}\).
+By a change of coordinates \( \bar{q} = Uq \) we obtain the diagonalized equations of motion
 <div class="equation">
     $$
     \bar{A} \ddot{\bar{q}} + \bar{B} \bar{q} = 0
     $$
-</div>, where /(\bar{A} = I /) and /(\bar{B} = U^T B U = \text{diag}(\lambda_1,...,\lambda_n)/). 
+</div>, where \(\bar{A} = I \) and \(\bar{B} = U^T B U = \text{diag}(\lambda_1,...,\lambda_n)\). 
 We know that for a differential equation of form
 <div class="equation">
     $$
@@ -641,14 +686,14 @@ the solution is
     $$
     x(t) = \cos(\omega*t)
     $$
-</div> with /(\omega = \sqrt{\lambda}/) since /( \frac{d^2}{dt^2} \alpha*\cos(\omega t + \Phi ) = -  \alpha* \omega^2 \cos(\omega t + \Phi) /).
+</div> with \(\omega = \sqrt{\lambda}\) since \( \frac{d^2}{dt^2} \alpha*\cos(\omega t + \Phi ) = -  \alpha* \omega^2 \cos(\omega t + \Phi) \).
 Thus, the general solution for the linearized equations of motion is
 <div class="equation">
     $$
     \bar{q}_i(t) = \sum_{i} \alpha_i \cos(\omega_i t + \Phi_i)
     $$,
-</div> in where /( \bar{q}_i(t) /) caputres the time-dependent motion of the system in the direction of the eigenvector /(u_i/).
-We can obtain the general solution for the original coordinates /(q_i(t)/) by the inverse transformation /(q = U^T \bar{q}/).
+</div> in where \( \bar{q}_i(t) \) caputres the time-dependent motion of the system in the direction of the eigenvector \(u_i\).
+We can obtain the general solution for the original coordinates \(q_i(t)\) by the inverse transformation \(q = U^T \bar{q}\).
 
 
 
@@ -667,9 +712,9 @@ We can obtain the general solution for the original coordinates /(q_i(t)/) by th
 <h2>Canonical transformations and Phase Space</h2>
 
 By applying a Legendre transform to the Lagrangian we can obtain the Hamiltonian.
-A legendre transform assumes as starting point any function /( F(q_1,....,q_n) /) 
-and introduces the new variable /( v_i = \frac{\partial F}{\partial u_i}/).
-The new function is then /( G = \sum_i v_i u_i - F = G(v_1,...,v_n) /).
+A legendre transform assumes as starting point any function \( F(q_1,....,q_n) \) 
+and introduces the new variable \( v_i = \frac{\partial F}{\partial u_i}\).
+The new function is then \( G = \sum_i v_i u_i - F = G(v_1,...,v_n) \).
 Let us examine the variation of the new function
 <div class="equation">
     $$
@@ -684,7 +729,7 @@ Let us examine the variation of the new function
     $$
     = u_i \delta v_i 
     $$
-</div> where the last equality follows from the definition of the new variable /(v_i/).
+</div> where the last equality follows from the definition of the new variable \(v_i\).
 We obtain 
 <div class="equation">
     $$
@@ -710,7 +755,7 @@ Application to the Lagrangian leads to
     H(q_1,...,q_n, p_1,...,p_n;t) \text{ and } L(q_1,...,q_n, \dot{q}_1,...,\dot{q}_n;t)
     $$.
 </div> 
-Note that /(H/) is of first order in all its variables and thus defines a /(2n/)-dimensional hypersurface in the /(2n+1/)-dimensional phase space.
+Note that \(H\) is of first order in all its variables and thus defines a \(2n\)-dimensional hypersurface in the \(2n+1\)-dimensional phase space.
 We can write the equations of motion in the Hamiltonian form
 <div class="equation">
     $$
@@ -719,9 +764,9 @@ We can write the equations of motion in the Hamiltonian form
     $$
      \dot{p}_i = - \frac{\partial H}{\partial q_i}
     $$.
-</div> Since /(q_i/) and /(p_i/) are positional variables, the Hamiltonian equations of motion only contain time on the left-hand side. 
+</div> Since \(q_i\) and \(p_i\) are positional variables, the Hamiltonian equations of motion only contain time on the left-hand side. 
 This is opposed to the Lagrangian equations of motion which express velocities (not positions) as functions of time.
-Remeber that the coefficient of /(\delta p_i /) is zero due to the legendre transform. Thus we may write
+Remeber that the coefficient of \(\delta p_i \) is zero due to the legendre transform. Thus we may write
 <div class="equation">
     $$
     \delta A = \int \delta L dt = \int \delta (\sum_i p_i \dot{q}_i  - H) dt
@@ -736,7 +781,7 @@ which is minimized by
     \frac{d}{dt} \frac{\partial L}{\partial \dot{p}_i} - \frac{\partial L}{\partial p_i} = 0 - \dot{q}_i + \frac{\partial H}{\partial p_i} = 0
     $$
 </div> which gives rise to the equation of motion in Hamiltonian and Lagrangian form. 
-The transformation into /(2n/) positional space is powerful since it allows for the definition of a velocity field in the phase space.
+The transformation into \(2n\) positional space is powerful since it allows for the definition of a velocity field in the phase space.
 Contrary to the Lagrangian equations of motion, the Hamiltonian equations of motion are of first order in time 
 and the behavious of the phase space is similar to that of an incompressible fluid. 
 In incompressible fluids, certain integral invaraits are preserved, for example the circulation and the volume.
@@ -745,13 +790,13 @@ If we allow for a variation at the limits we have
     $$
     \delta A =  [ \sum_i \delta p_i \delta{q}_i ]_{t_1}^{t_2} 
     $$
-</div> (recall that the coefficient of /(\delta p_i /) is zero so that this relation holds always). 
-In the Hamiltonian form, ignorable variables are handled by replacing /(p_n/) with a constant. Then the action integral is reduced to
+</div> (recall that the coefficient of \(\delta p_i \) is zero so that this relation holds always). 
+In the Hamiltonian form, ignorable variables are handled by replacing \(p_n\) with a constant. Then the action integral is reduced to
 <div class="equation">
     $$
     \delta A =  \int \delta L dt = \int \delta (\sum_{i=^1}^{n-1} p_i \dot{q}_i  - H) dt = 0
     $$
-</div>, since /( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} /) is constant and can be dropped in the variation.
+</div>, since \( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} \) is constant and can be dropped in the variation.
 
 
 
@@ -761,9 +806,9 @@ In the Hamiltonian form, ignorable variables are handled by replacing /(p_n/) wi
 
 
 <h2>Time as mechanical variable</h2>
-Given the notion of the phase space we can include time as a position variable in the phase space and consider an independent parameter /( \tau /) 
+Given the notion of the phase space we can include time as a position variable in the phase space and consider an independent parameter \( \tau \) 
 for path parameterization. We call the phase space including time the extended phase space. 
-Time is simply regarded as a positional variable with an associated momentum /( p_t /).
+Time is simply regarded as a positional variable with an associated momentum \( p_t \).
 As before we can write
 <div class="equation">
     $$
@@ -788,20 +833,20 @@ and therefore
     A = \int \sum_{i=1}^{n+1} \frac{\partial L_1}{\partial q_i'} q_i' d\tau = \int sum_{i=1}^{n+1}p_i q_i' d\tau
     $$.
 </div> Here the Hamiltionan vanishes. It is however replaced by an auxiliary condition which captures the relation
- between the /(q_i/) and /(p_i/). We denote this relationship by 
+ between the \(q_i\) and \(p_i\). We denote this relationship by 
  <div class="equation">
     $$
    K(q_1,...,q_{n+1}; p_1,....,p_{n+1}) = 0
     $$.
 </div>
-The integral /(A/) is to be made stationary under this constraint. By adding the time to the phase space, every system becomes conservative.
-We can incorporate the constraint into the integral by the /(\lambda/) method and obtain
+The integral \(A\) is to be made stationary under this constraint. By adding the time to the phase space, every system becomes conservative.
+We can incorporate the constraint into the integral by the \(\lambda\) method and obtain
 <div class="equation">
     $$
     \bar{A} = \int \sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
     $$.
 </div>
-By proper choice of /(\tau/) we can set /( \lambda = 1/) and the form of the form
+By proper choice of \(\tau\) we can set \( \lambda = 1\) and the form of the form
 <div class="equation"></div>
     $$
     \bar{A} = \int \sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
@@ -816,7 +861,7 @@ By the stationary value of a definite integral we obtain the equations of motion
     p_k' = - \frac{\partial K}{\partial q_k}
     $$.
 </div>
-If /(K = p_{n+1} + H = p_t + H/), then the equations of motion are 
+If \(K = p_{n+1} + H = p_t + H\), then the equations of motion are 
 <div class="equation"></div>
     $$
     q_k' = \frac{\partial H}{\partial p_k} 
@@ -842,8 +887,8 @@ The equations of motion
     $$
     \dot{p}_i = - \frac{\partial H}{\partial q_i}
     $$
-</div> are obtained from a Lagranian in canonical form /(L = \sum_i p_i \dot{q}_i - H /). 
-This form is preserved if /( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i /). 
+</div> are obtained from a Lagranian in canonical form \(L = \sum_i p_i \dot{q}_i - H \/). 
+This form is preserved if \( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i \). 
 Just like the Lagrangian, the Hamiltonian is invariant to point-transformations.
 If time is included in the phase space, the Hamiltonian is invariant to point-transformations in the extended phase space. 
 We have
@@ -855,14 +900,14 @@ We have
     \dot{p}_i = - \frac{\partial H}{\partial q_i} + p_\bar{t} \partial \bar{t}
     $$
 </div>
-corresponding to /( K = p_t + H /). In this case /(K/) is invariant to point-transformations, but not /(H/).
-We have /(H' = H + p_t - p_\bar{t} /).
-The invariance principle /( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i /),
-requires at least one additional functional relation /( f(q_1,...,1_n, Q_1,...,Q_n) = 0 /),
- else all the /(p_i/) and /(P_i/) would vanish due to the independent arbitrary variations.
+corresponding to \( K = p_t + H \). In this case \(K\) is invariant to point-transformations, but not \(H\).
+We have \(H' = H + p_t - p_\bar{t} \).
+The invariance principle \( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i \),
+requires at least one additional functional relation \( f(q_1,...,1_n, Q_1,...,Q_n) = 0 \),
+ else all the \(p_i\) and \(P_i\) would vanish due to the independent arbitrary variations.
 Prescription of these constraints classifies a general Mathieu transformation. 
-We can have up to /(n/) such constraints, leading to more or less restricted forms.
-By the Lagrangian /(\lambda/) method we can incorporate the constraints 
+We can have up to \(n\) such constraints, leading to more or less restricted forms.
+By the Lagrangian \(\lambda\) method we can incorporate the constraints 
 <div class="equation"></div>
     $$
     \sum_i p_i \partial q_i - \sum_i P_i \partial Q_i  = \lambda_1 \partial f_1 + ... + \lambda_n \partial f_n
@@ -891,7 +936,7 @@ $$
 $$
 \sum p_i \partial q_i = \sum P_i \partial Q_i + \partial S
 </div>
-where /(S = \lambda_1 f_1 + ... + \lambda_n f_n /) is a differential of a certain function /(S/).
+where \(S = \lambda_1 f_1 + ... + \lambda_n f_n \) is a differential of a certain function \(S\).
 The transformed action integral (we consider time independence and actual displacements) is then
 <div class="equation"></div>
     $$
@@ -904,7 +949,7 @@ We have the relation
     \sum_i p_i  \delta  q_i  - \sum_i P_i  \delta Q_i  = \delta S = \sum ( \frac{\delta S}{\delta q_i} \delta q_i + \frac{\delta S}{\delta Q_i} \delta Q_i)
     $$.
 </div>
-If we inculde /(t/) in the phase space, we obtain
+If we inculde \(t\) in the phase space, we obtain
 <div class="equation"></div>
     $$
     \sum_i p_i  \delta  q_i + p_t \delta t - \sum_i P_i  \delta Q_i  - p_\bar{t} \delta \bar{t}   = \delta S
@@ -926,7 +971,7 @@ Other ways of ensuring a canonical transformation is by properties of the phase-
 As mentioned before, the phase-space behaves like an incompressible fluid. 
 It has integral invariants such as the circulation. This can be related to the Poisson brackets.
 A canoncial transformation leaves the Poisson brackets invariant.
-While the generating function /(S/) gives the transformations only in implicit form, 
+While the generating function \(S\) gives the transformations only in implicit form, 
 the Poisson brackets can be used to test if a transformation is canonical.
 
 
