@@ -63,10 +63,10 @@
     <p>We will assume that the reader is familiar with the famous equation of motion in newtonian mechanics</p>
     <div class="equation">
         $$
-               F=ma = mv' = mr''
+               F=ma = m\dot{v} = m\ddot{r}
         $$
     </div>
-    where \( F \) is the force, \( m \) is the mass of the particle and \( a = v'= r''\) is the acceleration ins \(3D\) position space.
+    where \( F \) is the force, \( m \) is the mass of the particle and \( a =\dot{v}= \ddot{r}\) is the acceleration ins \(3D\) position space.
     The equation of motion is a second order differential equation, which can be solved by specifying the initial conditions of the system.
     The solution is the trajectory of the particle in position space. 
     An important notion that arises is that of an equilibrium point, which is a point in position space
@@ -764,7 +764,17 @@ and
 </div>
 Other ways of ensuring a canonical transformation is by properties of the phase-space. 
 As mentioned before, the phase-space behaves like an incompressible fluid. 
-It has integral invariants such as the circulation. 
+It has integral invariants such as the circulation. This can be related to the Poisson brackets.
+A canoncial transformation leaves the Poisson brackets invariant.
+While the generating function /(S/) gives the transformations only in implicit form, 
+the Poisson brackets can be used to test if a transformation is canonical.
+
+
+
+<h3>Infinitesimal canoncical transformations</h3>
+
+
+
 
 </body>
     </html>
