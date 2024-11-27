@@ -130,10 +130,10 @@
     \delta w = F\delta r - ma\delta r  = \delta V -  ma\delta r 
     $$
    </div>,
-  Replacing \(\delta r \) by \(dr\), we obtain the equation of motion in terms of the lagrangian
+  Replacing \(\delta r \) by \(dr\), we obtain 
   <div class="equation">
     $$
-    dw =  d V +  madr = d V +  mavdt = d V - \frac{1}{2} \frac{d}{dt} mv^2 = d ( V+T ) = 0
+    dw =  d V +  madr = d V +  mav = d V - \frac{1}{2} \frac{d}{dt} mv^2 = d ( V+T ) = 0
     $$
    </div>
    , which is the well known theorem of energy conservation for conservative systems.
@@ -735,16 +735,37 @@ where /(S = \lambda_1 f_1 + ... + \lambda_n f_n /) is a differential of a certai
 The transformed action integral (we consider time independence and actual displacements) is then
 <div class="equation"></div>
     $$
-    A = \int_{t} \sum_i p_i \dq_i - H' dt = \int \sum_i P_i \dQ_i - Hdt + \int_{t} dS
+    A = \int_{t} \sum_i p_i dq_i - H' dt = \int \sum_i P_i dQ_i - Hdt + \int_{t} dS
     $$
 </div>, the addition of the last term is constant and does not change the stationary value of the action integral.
 We have the relation
 <div class="equation"></div>
     $$
-    \sum_i p_i  \partial  q_i  - \sum_i P_i  \partial Q_i  = \partial S = \sum ( \frac{\partial S}{\partial q_i} \partial q_i + \frac{\partial S}{\partial Q_i} \partial Q_i)
+    \sum_i p_i  \delta  q_i  - \sum_i P_i  \delta Q_i  = \delta S = \sum ( \frac{\delta S}{\delta q_i} \delta q_i + \frac{\delta S}{\delta Q_i} \delta Q_i)
+    $$.
+</div>
+If we inculde /(t/) in the phase space, we obtain
+<div class="equation"></div>
+    $$
+    \sum_i p_i  \delta  q_i + p_t \delta t - \sum_i P_i  \delta Q_i  - p_\bar{t} \delta \bar{t}   = \delta S
     $$
 </div>
-which
+so that 
+<div class="equation"></div>
+    $$
+    p_t - p_\bar{t}   = \frac{ \partial S }{ \partial t  }
+    $$
+</div>
+and
+<div class="equation"></div>
+    $$
+    H'   = H + \frac{ \partial S }{ \partial t  }
+    $$.
+</div>
+Other ways of ensuring a canonical transformation is by properties of the phase-space. 
+As mentioned before, the phase-space behaves like an incompressible fluid. 
+It has integral invariants such as the circulation. 
+
 </body>
     </html>
         
