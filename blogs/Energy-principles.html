@@ -68,12 +68,12 @@
     </div>
     where \( F \) is the force, \( m \) is the mass of the particle and \( a =\dot{v}= \ddot{r}\) is the acceleration ins \(3D\) position space.
     The equation of motion is a second order differential equation, which can be solved by specifying the initial conditions of the system.
-    The solution is the trajectory of the particle in position space. 
+    The solution is the trajectory \( r(t) \)  of the particle in position space. 
     An important notion that arises is that of an equilibrium point, which is a point in position space
     where the force (and thus the acceleration) vanishes. Here, we consider a free particle, 
     i.e. a particle that is not subject to any constraints and can be moved in arbitrary directions. 
     Assume the particle were constrained to be located on a plane (e.g. a ball on a table). 
-    We denote enforce the plane by the constraint \( f(r) = f(x,y,z) = 0 \).
+    We enforce the constraint by \( f(r) = f(x,y,z) = 0 \).
     The ball is in equilibrium (no acceleration occurs) eventhough the force of gravity is acting on it. 
     This is because a reactive force is acting on the ball, which cancels out the force of gravity. 
     We have
@@ -107,40 +107,124 @@
         $$
    </div>
    We will consider that the reactive forces \(R\) are ideal, in the sense that they do not do any work \(R \delta r = 0 \).
-   If we use the special variation \(dr\), this condition means that the reactive forces are orthogonal to parameterization \(f(r)\) of the plane.
-   This assumption is the assumption of ideal reactive forces. 
-   It holds for many systems, but fails for example for frictional forces, deformations non-holonomic (velcoity dependent) constraints, 
+   If we use the special variation \(dr\), this condition means that the reactive forces are orthogonal to the movement along the plane. 
+   For more general variations, the ideality states that the reactive forces are orthogonal to all allowed variations.
+   This assumptiom of ideal reactive forces holds for many systems. 
+   It fails for example for frictional forces, deformations, non-holonomic (velocity dependent) constraints, 
    contacts with slip-stick conditions and non-equilibrium systems. 
-   Although, this might seem like a big restriction, the method remains very powerful and is used in many applications 
+   Although, this might seem like a big restriction, assuming ideality is very powerful used in many models 
    (similar to how most mathematical models are friction-free and offer deep insight nontheless).  
    Under this assumption obtain the following equation of equilibrium
    <div class="equation">
     $$
     \delta w = (F - ma) \delta r = 0
-    $$ 
-   </div>,
+    $$,
+   </div>
    which is known as D'Alemberts principle. 
    This principle makes the remarkable statement that a system is in equilibrium if one adds the inertial forces to the impressed forces.
-   We assume that the work done by the forces corresponds to a scalar function \(U = -V \), 
-   so that  \(\delta w = - \delta V \)  and \(dw = - dV \) and \(F = \frac{dw}{dr} = - \nabla V \). 
-   This is the definition of conservative forces. Conservative forces are derivable from a scalar function and thus monogenic.
-   Under this assumption we can write the equation of motion as
+   Let us denote    
    <div class="equation">
     $$
-    \delta w = F\delta r - ma\delta r  = \delta V -  ma\delta r 
+    Q_h \delta q = F  \delta r = 0
+    $$,
+   </div>
+   as the work of the impressed forces describes as displacements in the coordinates \(r\) and \(q\) respectively.
+   The coordinates \(q\) are the generalized coordinates of the system and correspond to its degrees of freedom.
+   We might assume that the work done by the forces corresponds to a scalar function \(U = -V \), 
+   so that  \( Q_h \delta q = F  \delta r = - \delta V \), where \(F = - \frac{\delta V}{\delta r} \) and  \(Q_h = - \frac{\delta V}{\delta q} \). 
+   If we replace \(\delta \) by \(d\), we obtain \(F = - \nabla_r  V \) and  \(Q_h = - \nabla_q  V \). 
+   This is the definition of conservative forces and the corresponding work. 
+   \(Q_h\) is the generalized force and \(F\) is the force in position space.
+   Forces which are derivable from a single scalar function are monogenic. 
+   If they satisfy \(Q_h = - \nabla_q  V \), they are called conservative forces.
+   Under the assumption of conservative we can write the equation of motion as
+   <div class="equation">
     $$
-   </div>,
+    \delta w = F\delta r - ma\delta r  = - \delta V -  ma\delta r 
+    $$.
+   </div>
   Replacing \(\delta r \) by \(dr\), we obtain 
   <div class="equation">
     $$
-    dw =  d V +  madr = d V +  mav = d V - \frac{1}{2} \frac{d}{dt} mv^2 = d ( V+T ) = 0
-    $$
+    dw =  d V +  madr = d V +  m a v dt = d V + \frac{1}{2} \frac{d}{dt} mv^2 dt = d ( V+T ) = 0
+    $$,
    </div>
-   , which is the well known theorem of energy conservation for conservative systems.
+   which is the well known theorem of energy conservation for conservative systems.
+   Consider \(\delta r = \frac{\partial r}{\partial q} \), then
+   <div class="equation">
+    $$
+    \delta w = F\frac{\partial r}{\partial q} - ma\frac{\partial r}{\partial q} 
+    $$,
+   </div>
+   leads to 
+   <div class="equation">
+    $$
+     F\frac{\partial r}{\partial q} = ma\frac{\partial r}{\partial q} = Q_h
+    $$
+   </div> 
+   in equilibrium. 
+   Note, that for conservative forces \(F = - \frac{\delta V}{\delta r} \) and  \(Q_h = - \frac{\delta V}{\delta q} \), 
+   so that \(Q_h = F \frac{\delta r}{\delta q} \) 
+   or (Q_h = F \frac{\partial r}{\partial q} \) in the specific case of actual (vs. virtual displacements).
+   Consider,
+   <div class="equation">
+    $$
+    ma\delta r = m \frac{d}{dt} (v\delta r) = m \frac{d}{dt} (v \delta r ) -   m v \frac{d}{dt} (\delta r)
+    $$
+   </div> 
+   and use actual displacements \(\delta r = \frac{\partial r}{\partial q} \).
+   For these actual displacements we have   
+   <div class="equation">
+    $$
+    \frac{\partial r}{\partial q} = \frac{\partial v}{\partial \dot{q}}
+    $$
+    $$
+    \frac{d}{dt}\frac{\partial r}{\partial q} = \frac{\partial v}{\partial q}
+    $$
+   </div> 
+   which leads to 
+   <div class="equation">
+    $$
+    Q_h = ma \frac{\partial r}{\partial q} = m \frac{d}{dt} (v \frac{\partial r}{\partial q}  ) -   m v \frac{d}{dt} (\frac{\partial r}{\partial q} )
+    $$
+    $$
+    = m \frac{d}{dt} (v \frac{\partial v}{\partial \dot{q}} ) - m v \frac{d}{dt}\frac{\partial v}{\partial q}
+    $$
+    $$
+    =  \frac{d}{dt} \frac{\partial}{\partial \dot{q}} \frac{1}{2} m v^2   - \frac{\partial}{\partial q} \frac{1}{2} m v^2  
+    $$
+    $$
+    =  \frac{d}{dt} \frac{\partial T}{\partial \dot{q}}   - \frac{\partial T}{\partial q} \frac{1}{2}
+    $$.
+   </div>
+   Which are the Lagrange equations of motion in improper form. 
+   \(Q_h \) is conservative, (i.e.  \(Q_h = -\nabla_q V = \frac{\partial V}{\partial q }\) with \(V\) only position dependent), then
+    <div class="equation">
+     $$
+     Q_h = \frac{\partial V}{\partial q } = \frac{d}{dt} \frac{\partial T}{\partial \dot{q}}   - \frac{\partial T}{\partial q} \frac{1}{2}
+     $$
+     = \frac{\partial V}{\partial q } + \frac{d}{dt} \frac{\partial V}{\partial \dot{q}}
+     $$
+    </div>
+    Since \(\frac{\partial V}{\partial \dot{q}} = 0\) for conservative forces.
+    We obtain the Lagrangian 
+    <div class="equation">
+        $$
+        0 = \frac{d}{dt} \frac{\partial T - V}{\partial \dot{q}}   - \frac{\partial T - V}{\partial q} \frac{1}{2}
+        $$
+        $$
+        = \frac{d}{dt} \frac{\partial L }{\partial \dot{q}}   - \frac{\partial L }{\partial q} \frac{1}{2}
+        $$.
+    </div>
+    If  \(Q_h = -\nabla_q V = \frac{\partial V}{\partial q } + Q_h'\), this becomes
+    <div class="equation">
+        $$
+        Q_h' = \frac{d}{dt} \frac{\partial L }{\partial \dot{q}}   - \frac{\partial L }{\partial q} \frac{1}{2}
+        $$,
+    </div>
+    where \(Q_h'\) is the non-conservative part of the generalized force.
    From d'Alemberts principle we also obtain apparent forces in accelerated reference systems.
    
-
-
 
 
 
