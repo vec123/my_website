@@ -176,10 +176,10 @@
    For these actual displacements we have   
    <div class="equation">
     $$
-    \frac{\partial r}{\partial q} = \frac{\partial v}{\partial \dot{q}}
+    \frac{\partial r}{\partial q} = \frac{\partial vdt}{\partial \dot{q}dt} = \frac{\partial v}{\partial \dot{q}}
     $$
     $$
-    \frac{d}{dt}\frac{\partial r}{\partial q} = \frac{\partial v}{\partial q}
+    \frac{d}{dt}\frac{\partial r}{\partial q} =  \frac{d}{dt} \frac{\partial vdt}{\partial \dot{q}dt} = \frac{\partial v}{\partial q}
     $$
    </div> 
    which leads to 
@@ -217,7 +217,7 @@
         = \frac{d}{dt} \frac{\partial L }{\partial \dot{q}}   - \frac{\partial L }{\partial q} \frac{1}{2}
         $$.
     </div>
-    If  \(Q_h = -\nabla_q V = \frac{\partial V}{\partial q } + Q_h'\), this becomes
+    If  \(Q_h = \frac{\partial V}{\partial q } + Q_h'\), this becomes
     <div class="equation">
         $$
         Q_h' = \frac{d}{dt} \frac{\partial L }{\partial \dot{q}}   - \frac{\partial L }{\partial q} \frac{1}{2}
