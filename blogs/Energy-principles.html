@@ -228,20 +228,95 @@
    
 
 
-
-
    <h3>Apparent Forces in accelerated reference systems</h3>
+   For this section we consider two reference systems which give rise to distinct, but equivalent coordinated \( r \) and \( r' \).
+   Let \( r \) correspond to a fixed and \( r' \) to a moving system whose origin is denoted by \( c \)  .
+   We might equally well use generalized coordinated \(q\) and \(q'\) for the two systems.
+    Consider the relations
+    <div class="equation">
+        $$
+        r = r' + c
+        $$,
+        $$
+        \ddot{r} = \ddot{r'} + \ddot{c}
+        $$
+    </div> leading to the newtonian forces
+    <div class="equation">
+        $$
+        F' = ma' = m \ddot{r'} = m \ddot{r} - m \ddot{c}
+        $$.
+    </div> Here \( m \ddot{c} \) corresponds to the inertial forces of the moving system and \( m\ddot{r'} \) 
+    to the inertial forces of a point mass measured from the moving system.  
+    Correspondingly, \( m \ddot{r} \) are the inertial forces measured from the fixed system.
+    The term \( m \ddot{c} \) is called the einstein force.
+    The Einstein force becomes an apparent force because it is present only in the moving system.
+    Consider now that a rotating reference system´whose origin overlaps with the fixed origin.
+    For a vector \(B\) viewed as fixed from the rotating system we have the relations
+    <div class="equation">
+        $$
+        r = r'
+        $$,
+        $$
+        dB = (\Omega \times B) dt
+        $$,
+    </div> where \(\Omega\) is the angular velocity vector of the rotating system.
+    Thus 
+    <div class="equation">
+        $$
+        \frac{dB}{dt} = \Omega \times B 
+        $$,
+    </div>
+    Denote by \( \frac{dB'}{dt} \) the change of \(B\) viewed from the moving system. 
+    Then
+    <div class="equation">
+        $$
+        \frac{dB}{dt} = \Omega \times B + \frac{dB'}{dt}
+        $$.
+    </div>
+So we obtain (since r = r')
+<div class="equation">
+    $$
+    v = \Omega \times r' + v'
+    $$.
+</div>
+and
+<div class="equation">
+    $$
+    \frac{dv}{dt} 
+    $$
+    $$
+    = \frac{dv'}{dt} + \dot{\Omega} \times r' + \Omega \times v' 
+    $$
+    $$
+    = \frac{dv'}{dt} +2 \Omega \times v' +  \Omega \times ( \Omega \times r') +  \dot{\Omega}  \times r'
+    $$.
+</div>
+By multiplication with the mass \(m\) we obtain the inertial forces in the rotating system
+<div class="equation">
+    $$
+    I  = I' + 2m \Omega \times v' +  m\Omega \times ( \Omega \times r') + m\Omega \times r'
+    $$.
+</div>
+We write \( B = 2m \Omega \times v' = 2mv' \times \Omega\) 
+and \( C = m\Omega \times ( \Omega \times r') = m \omega^2 r_{\perp}'\) and \( K = \dot{\Omega}  \times r' \).
+The centrifugal force \(C\) is derivable from the position dependent scalar function \( \Phi_C = \frac{1}{2} m \omega^2 r_{\perp}^2 \)
+ and is thus a conservative force.
+The term \(B\) corresponds to the corriolis force. 
+It is not derivable from a position dependent scalar function and is thus non-conservative.
+However, it is derivable from a scalar function \( \Phi_B = m v' \times \Omega r' \) which is linear in the velocities as
+/(B = \frac{d}{dt} \frac{\partial  \Phi_B}{\partial \dot{r}} - \frac{\partial  \Phi_B}{\partial r} /).
+Thus it is nonetheless monogenic.
+The term \(K\) is the euler force, it arises only for non-uniform rotations.
+The term \(I'\) is the inertial force in the moving system.
+The total effective force is
+<div class="equation">
+    $$
+    F_{total}  = F + I' + C + B + K
+    $$,
+</div> where \(F\) is the impressed force onto the particle.
 
 
-
-
-
-
-
-
-
-
-   <h2>From D'Alemberts principle to the Lagrangian by variational considerations</h2>
+<h2>From D'Alemberts principle to the Lagrangian by variational considerations</h2>
    D'Alemberts principle is a powerful tool to derive the equations of motion for a system. 
    However, it is not in the for of a definite integral.
    This form is 
