@@ -96,7 +96,7 @@
     wheras \( d \) is consistent. Intuitively speaking, the virtual displacement is a small displacement that is not necessarily real,
     and virtual work is the work done by the forces on this virtual displacement. 
     It does not necessarily correspond to the real work that is being done. 
-    \( \d w \) is a the work performed by a system on a real infitesimal displacement \(dr\), 
+    \( dw \) is a the work performed by a system on a real infitesimal displacement \(dr\), 
     \(\delta w \) is a (virtual) work done by (imagined) infitesimal (virtual) displacement \( \delta r \). 
     Thus the variation is merely a generalization of an infinitesimal change. 
     Generally speaking, the real displacement is tied to a specific parameterization while the variational displacement is not.
@@ -656,7 +656,7 @@ By the stationary value of a definite integral we obtain the equations of motion
     p_k' = - \frac{\partial K}{\partial q_k}
     $$.
 </div>
-If /(K = p_{n+1} + H/), then the equations of motion are 
+If /(K = p_{n+1} + H = p_t + H/), then the equations of motion are 
 <div class="equation"></div>
     $$
     q_k' = \frac{\partial H}{\partial p_k} 
@@ -671,6 +671,80 @@ If /(K = p_{n+1} + H/), then the equations of motion are
     p_{n+1}' = - \frac{\partial H}{\partial q_{n+1}}
     $$
 </div>
+<h2>Canonical Transformations</h2>
+The equations derived up until here are not neseccarily easy to solve. Transformations can help to simplify the equations.
+A transformation is called canonical if it preserves the action integral. Then also the equations of motion are preserved.
+The equations of motion  
+<div class="equation"></div>
+    $$
+    \dot{q}_i = \frac{\partial H}{\partial p_i} 
+    $$
+    $$
+    \dot{p}_i = - \frac{\partial H}{\partial q_i}
+    $$
+</div> are obtained from a Lagranian in canonical form /(L = \sum_i p_i \dot{q}_i - H /). 
+This form is preserved if /( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i /). 
+Just like the Lagrangian, the Hamiltonian is invariant to point-transformations.
+If time is included in the phase space, the Hamiltonian is invariant to point-transformations in the extended phase space. 
+We have
+<div class="equation"></div>
+    $$
+    \dot{q}_i = \frac{\partial H}{\partial p_i} + p_t \partial t
+    $$
+    $$
+    \dot{p}_i = - \frac{\partial H}{\partial q_i} + p_\bar{t} \partial \bar{t}
+    $$
+</div>
+corresponding to /( K = p_t + H /). In this case /(K/) is invariant to point-transformations, but not /(H/).
+We have /(H' = H + p_t - p_\bar{t} /).
+The invariance principle /( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i /),
+requires at least one additional functional relation /( f(q_1,...,1_n, Q_1,...,Q_n) = 0 /),
+ else all the /(p_i/) and /(P_i/) would vanish due to the independent arbitrary variations.
+Prescription of these constraints classifies a general Mathieu transformation. 
+We can have up to /(n/) such constraints, leading to more or less restricted forms.
+By the Lagrangian /(\lambda/) method we can incorporate the constraints 
+<div class="equation"></div>
+    $$
+    \sum_i p_i \partial q_i - \sum_i P_i \partial Q_i  = \lambda_1 \partial f_1 + ... + \lambda_n \partial f_n
+    $$
+</div>
+allowing for arbitrary variations of the /(q_i/) and /(Q_i/). 
+We obtain 
+<div class="equation"></div>
+    $$
+     p_i =  \lambda_1 \frac{\partial f_1}{\partial q_i} + ... + \lambda_n \frac{\partial f_n}{\partial q_i}
+    $$
+    $$
+     P_i =  -\lambda_1 \frac{\partial f_1}{\partial Q_i} - ... - \lambda_n \frac{\partial f_n}{\partial Q_i}
+    $$.
+</div>
+These equations characterize the transformation completely. If we add time to the position variables, we obtain one further equation
+<div class="equation"></div>
+    $$
+     p_t - p_\bar{t} =  \lambda_1 \frac{\partial f_1}{\partial t} + ... + \lambda_n \frac{\partial f_n}{\partial t}
+    $$
+</div>
+so that, in extended phase Space
+<div class="equation"></div>
+$$
+ H' =  H + \lambda_1 \frac{\partial f_1}{\partial t} + ... + \lambda_n \frac{\partial f_n}{\partial t}
+$$
+\sum p_i \partial q_i = \sum P_i \partial Q_i + \partial S
+</div>
+where /(S = \lambda_1 f_1 + ... + \lambda_n f_n /) is a differential of a certain function /(S/).
+The transformed action integral (we consider time independence and actual displacements) is then
+<div class="equation"></div>
+    $$
+    A = \int_{t} \sum_i p_i \dq_i - H' dt = \int \sum_i P_i \dQ_i - Hdt + \int_{t} dS
+    $$
+</div>, the addition of the last term is constant and does not change the stationary value of the action integral.
+We have the relation
+<div class="equation"></div>
+    $$
+    \sum_i p_i  \partial  q_i  - \sum_i P_i  \partial Q_i  = \partial S = \sum ( \frac{\partial S}{\partial q_i} \partial q_i + \frac{\partial S}{\partial Q_i} \partial Q_i)
+    $$
+</div>
+which
 </body>
     </html>
         
