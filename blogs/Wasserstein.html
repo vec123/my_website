@@ -72,8 +72,8 @@
             W_p(P,Q) = (\inf_{J\in \mathcal{J}(P,Q)} \int_{x,y} ||x-y||^p dJ(x,y) )^\frac{1}{p}
              $$
          </div>
-        so that \( \int_y J(x,y) dy = P \) and  \(\int_x J(x,y) dy = Q \).
-        The minimizer \( J^*(\cdot) \) is called the optimal transport plan and is guaranteed to exist.
+        so that \( \int_y J(x,y) dy = P(x) \) and  \(\int_x J(x,y) dx = Q(y) \).
+        The minimizer \( J^*(x,y) \) is called the optimal transport plan and is guaranteed to exist.
         If \(T: X \rightarrow X\), i.e. no splitting of mass occurs (input and output measure coincide), 
         it is called the optimal transport map. 
         For many applications the input and output measures are equal.
