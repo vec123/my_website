@@ -469,7 +469,7 @@ The total effective force is
    If they are conservative, they are automatically monogenic. 
    However, also non-conservative and time-dependant forces can be monogenic. 
    For polygenic forces the transformation of d'Alemberts principle into a definite integral is not possible.
-   By the calculus of variation for the stationary value of definite integrals we obtain the necessary and sufficient condition as the Lagrange equations of motion.
+   By the calculus of variation for the stationary value of definite integrals we obtain the necessary and sufficient condition as the Lagrange equations of motion
    <div class="equation">
     $$
     \frac{\partial L}{\partial q_i} - \frac{d}{dt} \frac{\partial L}{\partial q_i'} = 0
@@ -479,8 +479,20 @@ The total effective force is
    Advantages over D'Alemberts principle are that the equations of motion do not contain the accelerations, but only the velocities.
    The equations of motion are of first order in time, not second order and completely determined by a scalar function /(L(q,q')/).
    The principle of least action relates motion to the stationary value of /( \delta \int L(q,q') dt/).
-
-   We can also write
+ 
+   If we consider the secial variation \(\delta q = \epsilon \dot{q} \) can obtain  the condition 
+   <div class="equation">
+    $$
+    \delta \int w dt =   \int \epsilon \dot{L}(q_1,...,q_n; q_1',...,q_n') dt + \epsilon [\frac{\partial L}{\partial \dot{q}_i}  \delta q]_{t_1}^{t_2} = 0
+   $$
+  </div>
+    which leads to
+    <div class="equation">
+    $$
+     [ L(q_1,...,q_n; q_1',...,q_n') ]_{t_1,t_1}  - [\frac{\partial L}{\partial q_i}  \dot{q}]_{t_1}^{t_2} = 0
+   $$.
+    </div>
+Since \(t_1\) and \(t_2\) are arbitrary and independent, we obtain the condition
    <div class="equation">
         $$
         L - \sum_i p_i \dot{q}_i = const.
@@ -488,7 +500,7 @@ The total effective force is
     </div> where /( p_i = \frac{\partial L}{\partial \dot{q}_i} /).
 
     If /( T = \frac{1}{2} \sum_{i,k} a_{i,k} \dot{q}_i \dot{q}_k /) and /(V/) is indepenend from /(\dot{q}_i/), 
-    then /(p_i = \frac{T}{q_i}/) and /( \sum_i pi \dot{q}_i = 2T /).
+    then /(p_i = \frac{ \partial T}{ \partial \dot{q}_i}/) and /( \sum_i p_i \dot{q}_i = 2T /).
     The equation above becomes
     <div class="equation">
         $$
@@ -513,13 +525,9 @@ The total effective force is
 
 
 
-
-
-
-
 <h3>Elimination of variables in the Lagrangian</h3>
 
-We have introduced the quantities \(p_i = \frac{\partial L}{\partial q_i'}\) (called momentum) so that \(p_i' = \frac{\partial L}{\partial q_i}\). 
+We have introduced the quantities \(p_i = \frac{\partial L}{\partial \dot{q}_i}\) (called momentum) so that \(p_i' = \frac{\partial L}{\partial q_i}\). 
 If \(q_i\) is an ingorable variable, then \(p_i' = 0 \) and \(p_i = const.\). 
 The momentum associated with the ignorable variable is preserved.
 We have 
