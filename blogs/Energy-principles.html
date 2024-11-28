@@ -87,8 +87,8 @@
     <div class="equation">
         $$
         \delta w =  F \delta r
-        $$
-    </div>,
+        $$,
+    </div>
     where \( \delta r \) is the virtual displacement of the particle. 
     It corresponds to any arbitrary variation of \( r \). The quantity \(dr\) is but a special type of variation.
     Thus, whenever \( \delta \) is used, the reader might replace it with \( d \) to obtain the special variation.
@@ -104,10 +104,10 @@
     <div class="equation">
         $$
         \delta w = (F + R - ma) \delta r = 0 
-        $$
+        $$.
    </div>
-   We will consider that the reactive forces \(R\) are ideal, in the sense that they do not do any work \(R \delta r = 0 \).
-   If we use the special variation \(dr\), this condition means that the reactive forces are orthogonal to the movement along the plane. 
+   We will consider that the reactive forces \(R\) are ideal, in the sense that they do not do any work, i.e. \(R \delta r = 0 \).
+   If we use the special variation \(\delta r = dr\), this condition means that the reactive forces are orthogonal to the motion. 
    For more general variations, the ideality states that the reactive forces are orthogonal to all allowed variations.
    This assumptiom of ideal reactive forces holds for many systems. 
    It fails for example for frictional forces, deformations, non-holonomic (velocity dependent) constraints, 
@@ -528,12 +528,12 @@ Since \(t_1\) and \(t_2\) are arbitrary and independent, we obtain the condition
 <h3>Elimination of variables in the Lagrangian</h3>
 
 We have introduced the quantities \(p_i = \frac{\partial L}{\partial \dot{q}_i}\) (called momentum) so that \(p_i' = \frac{\partial L}{\partial q_i}\). 
-If \(q_i\) is an ingorable variable, then \(p_i' = 0 \) and \(p_i = const.\). 
+If \(q_i\) is an ingorable variable, then \(\dot{p}_i = 0 \) and \(p_i = const.\). 
 The momentum associated with the ignorable variable is preserved.
 We have 
 <div class="equation">
     $$
-    \delta \int L(\cdot) dt = [ \sum_i \frac{ \partial L }{ \partial q_i } \delta q_i ]_{t_1}^{t_2} =  [ p_n \delta q_n]_{t_1}^{t_2} 
+    \delta \int L(q,\dot{q}) dt = [ \sum_i \frac{ \partial L }{ \partial \dot{q}_i } \delta q_i ]_{t_1}^{t_2} =  [ p_n \delta q_n]_{t_1}^{t_2} 
     = p_n \delta \int q_n' dt =  \delta \int p_n q_n' dt
     $$
 </div>
@@ -567,11 +567,11 @@ gyroscopic energy terms (linear in velocities).
 
 
 
-<h3>Principle of least action</h3>
+<h3>Energy as Momentum associated to Time - Time as ignorable variable</h3>
 
-Herewe will consider a Lagrangian which has time as ingorable variable.  
+Here we will consider a Lagrangian which has time as ingorable variable.  
 Up until now we considered the time \(t\) as an independent variable. Now we will consider \(q_i\), \(q_i'\), \(t\) 
-as functions of some parameter \( \tau \).
+as functions of some independent parameter \( \tau \).
 Thus
 <div class="equation">
     $$
