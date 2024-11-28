@@ -401,19 +401,19 @@ The total effective force is
     </div>
     <br><br>
     D'Alemberts principle can be transformed into such a definite integral by integration with respect to time.
-    Consider
+    Consider the time integrated work function with a conservative force
     <div class="equation">
     $$
-    \int \delta w dt = \int \sum_i ( \delta F_i - \frac{d}{dt}(m_iv_i) ) \delta r_i dt.
+    \delta \int  w dt = \int \sum_i ( \delta F_i - \frac{d}{dt}(m_iv_i) ) \delta r_i dt
     $$
     </div>
-     Considering a convervative force \(F\) we obtain
+    For the term corresponding to the impressed forces we have
    <div class="equation">
     $$
     \int \sum_i F_i dt = \int - \nabla V dt.
     $$
    </div>
-   For the second term we obtain
+   For the term corresponding to the inertial forces we have
    <div class="equation">
     $$
     \int \sum_i \frac{d}{dt}(m_iv_i) \delta r_i dt =  -[m_iv_i \delta r_i]_{t_1}^{t_2} + \int m_i v_i \frac{d}{dt} \delta r_i dt 
@@ -431,8 +431,8 @@ The total effective force is
     = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
     $$.
 </div>
-    Thus we obtain 
-    <div class="equation">
+ Thus we obtain 
+<div class="equation">
         $$
         \int \delta w dt  = \int - \delta V dt  -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
         $$
@@ -442,96 +442,71 @@ The total effective force is
         $$
         =  \delta \int L dt - [m_iv_i \delta r_i]_{t_1}^{t_2}
         $$
-   </div>
+</div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero.
+   In the derivation above we consider a parameterization in the real world position coordinates. 
+   We can also consider a parameterization in the generalized coordinates \(q\), so that \(L(q_1,...,q_n; q_1',...,q_n')\) instead of \(L(r_1,...,r_n; r_1',...,r_n')\), 
+   leading to
    <div class="equation">
      $$
-      \delta \int L dt = \delta \int L(q_1,...,q_n; q_1',...,q_n') dt = 0
-     $$.
+     \delta \int w dt =  \delta \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial q_i} \delta q_i]_{t_1}^{t_2}
+    $$.
    </div>
-
-   Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral. Through integration
-   <div class="equation">
-    $$
-    \delta w = (F - ma) \delta r = 0 
-    $$
-   </div>
-   becomes
+   If \(q\) corresponds to \(r\), this corresponds to \( \delta \int w dt = \delta \int L dt - [m_iv_i \delta r_i]_{t_1}^{t_2} \) obtained by time integration of D'Alemberts principle.
+   Note that the boundary term vanishes if the variation is zero at the limits (which is often the case). 
+   Furthermore, being a constant, it has no effect on the stationary value.
+   Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral.
+   A particle in motion is in equilibrium if
    <div class="equation">
     $$
     \int \delta w dt = \delta \int L dt =  \delta A = 0
     $$
    </div>
-   where \( A \) is called the action functional. This is Hamiltions principle of least action. 
-   Here we have assumed that the work done by the forces is derivable from a single scalar function. The impressed forces must be monogenic.
-   If they are conservative, they are automatically monogenic, however, also non-conservative and time-dependant forces can be monogenic.
-   For polygenic forces the transformation of d'alemberts principle into a definite integral is not possible.
-   We have transformed the equilibrium condition into a stationary condition of a definite integral.
-   Up until now we worked in the position coordinates \( r_i \) of all particles. 
-   We can also work in the generalized coordinates \( q_j \) so that \( x_i = f_{x,i}(q_1 ,...., q_n) \),
-   \( y_i = f_{y,i}(q_1 ,...., q_n) \) and \( z_i = f_{z,i}(q_1 ,...., q_n) \) .
-   The necessary and sufficient condition for the stationary value of a definite integral is the Euler-Lagrange equation:
+   where \( A \) is called the action functional. 
+   This is Hamiltions principle of least action. 
+   Here we have assumed that the work done by the forces is derivable from a single scalar function. 
+   The impressed forces must be monogenic.
+   If they are conservative, they are automatically monogenic. 
+   However, also non-conservative and time-dependant forces can be monogenic. 
+   For polygenic forces the transformation of d'Alemberts principle into a definite integral is not possible.
+   By the calculus of variation for the stationary value of definite integrals we obtain the necessary and sufficient condition as the Lagrange equations of motion.
    <div class="equation">
     $$
-    \frac{d}{dt} \frac{\partial L}{\partial \dot{q}_i} - \frac{\partial L}{\partial q_i} = 0
+    \frac{\partial L}{\partial q_i} - \frac{d}{dt} \frac{\partial L}{\partial q_i'} = 0
     $$.
    </div>
+   <br><br>
    Advantages over D'Alemberts principle are that the equations of motion do not contain the accelerations, but only the velocities.
-   The equations of motion are of first order in time, not second order and completely determined by a scalar function /(L(\cdot)/).
-   The principle of least action relates equilibrium to the stationary value of /( \partial \int L(\cdot) dt/).
-   In the part on variational calculus we have seen
+   The equations of motion are of first order in time, not second order and completely determined by a scalar function /(L(q,q')/).
+   The principle of least action relates motion to the stationary value of /( \delta \int L(q,q') dt/).
+
+   We can also write
    <div class="equation">
-    $$
-    \delta \int L(\cdot) dt = [ \sum_i \frac{ \partial L }{ \partial q_i } \delta q_i ]_{t_1}^{t_2}
-    $$
-   </div> at the stationary value of the integral. If  \( L(\cdot) \) does not contain the time explicitely,
-   then choosing as variation \( \delta q_i = \epsilon q_i' \) leads to \( \delta L = \epsilon L'\). 
-   In essence, the variation is the acutal displacement which takes time in the infinitesimal time /(dt = \epsilon /).
-   Then
-   <div class="equation">
-    $$
-    \delta \int L(\cdot) dt =   \int \delta L(\cdot) dt =  \int \epsilon L' dt = \epsilon \int L' dt =  \epsilon [L]_{t_1}^{t_2} 	
-    $$
-    </div>
-    and 
+        $$
+        L - \sum_i p_i \dot{q}_i = const.
+        $$,
+    </div> where /( p_i = \frac{\partial L}{\partial \dot{q}_i} /).
+
+    If /( T = \frac{1}{2} \sum_{i,k} a_{i,k} \dot{q}_i \dot{q}_k /) and /(V/) is indepenend from /(\dot{q}_i/), 
+    then /(p_i = \frac{T}{q_i}/) and /( \sum_i pi \dot{q}_i = 2T /).
+    The equation above becomes
     <div class="equation">
         $$
-        [ \sum_i \frac{ \partial L }{ \partial q_i } \delta q_i ]_{t_1}^{t_2}
-         = \epsilon [\sum_i \frac{ \partial L }{ \partial q_i }q_i' ]_{t_1}^{t_2} 
-        $$.
+    2T - ( T - V) = T + V = 0
+        $$
     </div>
-   This leads to
-   <div class="equation">
-    $$
-    [L - \sum_i \frac{ \partial L }{ \partial q_i }q_i']_{t_1}^{t_2} 	=  [L - \sum_i p_i q_i']_{t_1}^{t_2} = 0
-    $$.
-</div>
-Here, no special form on \(L\) is required, except for its independence from time. 
-We can also write
-<div class="equation">
-    $$
-    L - \sum_i p_i q_i' = const.
-    $$.
-</div>
-If /( T = \frac{1}{2} \sum_{i,k} a_{i,k} q_i' q_k' /) and /(V/) is indepenend from /(q_i'/), 
-then /(p_i = \frac{T}{q_i}/) and /( \sum_i pi q_i' = 2T /).
-The equation above becomes
-<div class="equation">
-    $$
-   2T - ( T - V) = T + V = 0
-    $$
-</div>
-which is the law of the conservation of energy. Note that we requires \(L\) to be independent from time 
-and \(V\) to be independent from the velocities \(q_i'\). 
-Furthermore we require \(T\) to be of quadratic form in the velocities. 
-In general relativity the kinetic energy depends on the velocities in more complicated ways. 
-When we encounter gyroscopic terms the potential energy also depends on the velocities. However the conservation law
-<div class="equation">
-    $$
-    L - \sum_i p_i q_i' = const. = E
-    $$
-</div> holds even for these systems, if they are time-independent. The interpretation of the constant of motion is the energy of the system.
-For kinetic energies quadratic in the velocities \(\sum_i \p_i q_i'\) is twice the kinetic energy. 
+    which is the law of the conservation of energy. Note that we requires \(L\) to be independent from time 
+    and \(V\) to be independent from the velocities \(\dot{q}_i\). 
+    Furthermore we require \(T\) to be of quadratic form in the velocities. 
+    In general relativity the kinetic energy depends on the velocities in more complicated ways. 
+    When we encounter gyroscopic terms the potential energy also depends on the velocities. However the conservation law
+    <div class="equation">
+        $$
+        L - \sum_i p_i \dot{q}_i = const. = E
+        $$
+    </div> holds even for these systems, if they are time-independent. 
+    The interpretation of the constant of motion is the energy of the system.
+    For kinetic energies quadratic in the velocities \(\sum_i \p_i \dot{q}_i\) is twice the kinetic energy. 
 
 
 
