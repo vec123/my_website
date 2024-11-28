@@ -102,13 +102,13 @@
         and can be written in a dual formulation as 
         <div class="equation" >
             $$
-            W_p(P,Q) = (\sup_{\Phi, \Psi} \int_{y} \Phi(y)dQ(y) - \int_{x} \Psi(x)dP(x)),
+            W_p(P,Q) = \sup_{\Phi, \Psi} \int_{y} \Phi(y)dQ(y) - \int_{x} \Psi(x)dP(x).
             $$
         </div>
         For \( p=1 \) this can be transformed into 
         <div class="equation">
             $$
-            W_p(P,Q) = (\sup_{f} \int_{x} f(x)dQ(x) - \int_{x} f(x)dP(x) ),
+            W_p(P,Q) = \sup_{f} \int_{x} f(x)dQ(x) - \int_{x} f(x)dP(x),
             $$
         </div> which corresponds to the loss-term of Wasserstein GANs.
         Another important fact is that the computing the Wasserstein is expensive, unless the probabilities \( p(x) \) and \( q(x) \) are one dimensional.
