@@ -79,7 +79,8 @@
         For many applications the input and output measures are equal.
         Note that minimizing the Wasserstein distance returns the minimal cost, as well as a corresponding transport plan. 
         This makes it a very attractive method for image morphing, image registration and further. 
-        For example, consider two greyscale images in \(2D\). 
+        For example, consider two greyscale images in \(2D\) 
+        which can be interpreted as probability distributions by normalization of the intensities. 
         Then the optimal transport map is a \(2D\) vector-field, where each point receives a \(2D\)-vector with the corresponding displacement. 
         In a discrete setting we have samples \( x_i \) and \( y_j \) which occur with probability \( p_i \) and \( q_j \) respectively.
         Equation <a href="#eq-wasserstein">Wasserstein</a> can be written as
