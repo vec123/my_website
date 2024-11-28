@@ -62,7 +62,6 @@
             $$.
         </div>
         Here \( dP(x) \) is the probability measure and \( T(x) \) is the transport map. 
-
         If the minimizer  \( T^*(x) \) exists it is the optimal transport map.
         However, in this formulation, a solution is not guaranteed to exist. 
         For example, if \(p(x)\) corresponds to a point-mass and \(q(x)\) corresponds to multiple point-masses,
@@ -73,7 +72,7 @@
             W_p(P,Q) = (\inf_{J\in \mathcal{J}(P,Q)} \int_{x,y} ||x-y||^p dJ(x,y) )^\frac{1}{p}
              $$
          </div>
-        so that \( \int_y J(x,y) dy = P $ and $\int_x J(x,y) dy = Q \).
+        so that \( \int_y J(x,y) dy = P \) and  \(\int_x J(x,y) dy = Q \).
         The minimizer \( J^*(\cdot) \) is called the optimal transport plan and is guaranteed to exist.
         If \(T: X \rightarrow X\), i.e. no splitting of mass occurs (input and output measure coincide), 
         it is called the optimal transport map. 
