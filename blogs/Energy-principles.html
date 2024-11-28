@@ -371,22 +371,35 @@ The total effective force is
     In this intuitive derivation we have considered \(x\) as the independent variable.
     In the Lagrangian formulation of mechanics, often the time is the independent variable. 
     However, extensions where time is considered as a position variable are possible.
-    Here another independent variable \(\tau\) is required. 
-    We find all positional variables (including time) as functions of \(\tau\).
+    Here another independent variable \(\tau\) is required and all positional variables (including time) are considered functions of \(\tau\).
     <br><br>
     Let us consider 
     <div class="equation">
         $$
-        \delta I = \int \delta F(y,y',x) d\tau = \epsilon \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' d\tau
+        \delta I = \int \delta F(y,y',x) d\tau = \epsilon \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' dx
         $$
     </div>
     where \( \delta F(y,y',x) = F(y + \epsilon \Phi,y'+  \epsilon \Phi', x)  - \delta F(y,y',x) = \epsilon  (\frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' ) \)
     and \(\Phi\) is an arbitrary function.
+    Thus
     <div class="equation">
         $$
         \delta \frac{I}{\epsilon} = \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' d\tau
         $$
     </div>
+    and through integration by parts
+    <div class="equation">
+        $$
+         \int  \frac{\partial F}{\partial y'}\Phi' dx = [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2} - \int \frac{d}{d\tau} \frac{\partial F}{\partial y'}\Phi dx
+        $$
+    </div>
+    we obtain
+    <div class="equation">
+        $$
+        \delta \frac{I}{\epsilon} = \int (\frac{\partial F}{\partial y} - \frac{d}{d\tau} \frac{\partial F}{\partial y'}) \Phi dx +  [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2}
+        $$
+    </div>
+    <br><br>
     D'Alemberts principle can be transformed into such a definite integral by integration with respect to time.
     Consider
     <div class="equation">
