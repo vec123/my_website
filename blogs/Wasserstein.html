@@ -84,7 +84,7 @@
         Then the optimal transport map is a \(2D\) vector-field, where each point receives a \(2D\)-vector with the corresponding displacement. 
         <b></b>
         In a discrete setting we might have samples \( \{x_i\}_{i=1,...,N} \) and \( \{y_i\}_{i=1,...,M}\) which occur with probability \( p_i \) and \( q_j \) respectively.
-        Equation <a href="#eq-wasserstein">Wasserstein</a> can be written as
+        The Wasserstein distance between the discretely sampled distributions can be written as
         <div class="equation" id = "eq-wasserstein discrete">
         $$
         W_p(P,Q) = \min_{J\in \mathcal{J}(P,Q)} \sum_i \sum_j ||x_i-y_j||^p J(x_i,y_j)
