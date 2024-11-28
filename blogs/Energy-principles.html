@@ -328,7 +328,7 @@ The total effective force is
   where \( F(y,y',x) \) is any function of three variables. 
   By the calculus of variation, one can solve analytically for the stationary value of this integral. 
   Also if \( F(y,y',y'',x) \) contains \( 4 \) variables including the second derivative. 
-  However, for thevariational principles for mechanics we need not consider this case.
+  However, for we will not consider this case.
   The advantage of a formulation as stationary value of an integral lies in the analytical solution which can be obtained.
   Consider the integral 
   <div class="equation">
@@ -373,8 +373,20 @@ The total effective force is
     However, extensions where time is considered as a position variable are possible.
     Here another independent variable \(\tau\) is required. 
     We find all positional variables (including time) as functions of \(\tau\).
-
-
+    <br><br>
+    Let us consider 
+    <div class="equation">
+        $$
+        \delta I = \int \delta F(y,y',x) d\tau = \epsilon \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' d\tau
+        $$
+    </div>
+    where \( \delta F(y,y',x) = F(y + \epsilon \Phi,y'+  \epsilon \Phi', x)  - \delta F(y,y',x) = \epsilon  (\frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' ) \)
+    and \(\Phi\) is an arbitrary function.
+    <div class="equation">
+        $$
+        \delta \frac{I}{\epsilon} = \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' d\tau
+        $$
+    </div>
     D'Alemberts principle can be transformed into such a definite integral by integration with respect to time.
     Consider
     <div class="equation">
@@ -419,6 +431,12 @@ The total effective force is
         $$
    </div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero.
+   <div class="equation">
+     $$
+      \delta \int L dt = \delta \int L(q_1,...,q_n; q_1',...,q_n') dt = 0
+     $$.
+   </div>
+
    Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral. Through integration
    <div class="equation">
     $$
