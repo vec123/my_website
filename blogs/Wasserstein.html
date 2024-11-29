@@ -54,11 +54,11 @@
     <h2>Introduction</h2>
     <p>The Wasserstein distance is a distance between shapes based on optimal transport.
         Consider two probability densities \(p(x)\) and \(q(x)\) defining the distributions \(P\) and \(Q\), 
-        so that \( x \sim P \) and \( y \sim Q \) with \( x,y \in \mathbb{R}^d \).
-        Its original formulation is the Monge-Kantorovich formulation which considers the optimal transport distance as
+        so that \( x \sim P \) and \( y \sim Q \) with domains \( x \in \Omega_x\) and \( y \in \Omega_y\) .
+        Its original formulation is the Monge-Kantorovich formulation which considers the  distance as
         <div class="equation">
            $$
-        \inf_T \int || x - T(x) ||^p dP(x).
+           W_p(P,Q) = \inf_T \int_{Omega_x} || x - T(x) ||^p dP(x).
             $$.
         </div>
         Here \( dP(x) \) is the probability measure and \( T(x) \) is the transport map. 
@@ -66,55 +66,174 @@
         However, in this formulation, a solution is not guaranteed to exist. 
         For example, if \(p(x)\) corresponds to a point-mass and \(q(x)\) corresponds to multiple point-masses,
         then, due to the usage of equal probability measure for both distributions, the mass can not be splitted. 
-        An alternative formulation is the soft formulation
-        <div class="equation"  id="eq-wasserstein">
+        This formulation is equivalent to an optimal transport problem with cost function \( c(x,y) =  ||x-y||^p\).
+        The optimal transport formulation with a more general cost function is 
+        <div class="equation">
             $$
-            W_p(P,Q) = (\inf_{J\in \mathcal{J}(P,Q)} \int_{x,y} ||x-y||^p dJ(x,y) )^\frac{1}{p}
+            W_p(P,Q) =\inf_T \int_{Omega_x} c(x,T(x)) dp(x) =  \inf_T \int c(x,T(x)) p(x) dx.
              $$
          </div>
-        so that \( \int_y J(x,y) dy = P(x) \) and  \(\int_x J(x,y) dx = Q(y) \).
-        The minimizer \( J^*(x,y) \) is called the optimal transport plan and is guaranteed to exist.
-        If \(T: X \rightarrow X\), i.e. no splitting of mass occurs (input and output measure coincide), 
-        it is called the optimal transport map. 
-        For many applications the input and output measures are equal.
+        An alternative formulation is the soft formulation, leading to the Kantorovich's formulation of the Wasserstein distance.
+        The optimal transport problem might be written as
+        <div class="equation">
+            $$
+            W_p(P,Q) =\inf_{\gamma(x,y) \ in \Gamma } \int_{Omega_x \times Omega_y} c(x,y)d\gamma(x,y),
+             $$
+         </div>
+         where \( \gamma(x,y) \) can be interpreted as the amount of mass that is moved from \(x\) to \(y\) 
+         and \(  \Gamma = \{ \gamma(x,y) : \int_{Omega_x} \gamma(x,y) dx = P(y) \text{and} \int_{Omega_y} \gamma(x,y) dz = P(x)\} \)
+         is the set of all allowed transport plans subject to the constraint.
+         The corresponding Wasserstein distance is then
+        <div class="equation"  id="eq-wasserstein">
+            $$
+            W_p(P,Q) = (\inf_{\gamma(x,y) \ in \Gamma } \int_{Omega_x \times Omega_y} ||x-y||^p \gammaJ(x,y) )^\frac{1}{p}
+             $$
+         </div>
+        under the constraint that \( \int_y \gamma(x,y) dy = P(x) \) and  \(\int_x \gamma(x,y) dx = Q(y) \).
+        The minimizer \( \gamma^*(x,y) \) is called the optimal transport plan and is guaranteed to exist. 
+        If an optimal transport map exists, it can be related to an optimal transport plan by \( \gamma(x,y) = \int_{x \in \mathcal{X}: T(x) in \mathcal{Y}} p(x) dx \), 
+        where \( \mathcal{X} \subset \Omega_{x} \) and \( \mathcal{Y} \subset{\Omega_y} \) are the input and output spaces.
+        If \(\gamma(x,y)) is one-to-one, i.e. no splitting of mass occurs (input and output measure coincide), there exists an optimal transport map. 
+        For many practical applications this is the case.
         Note that minimizing the Wasserstein distance returns the minimal cost, as well as a corresponding transport plan. 
-        The soft formulation is preferred due to its linearity with respect to the cost function \( c(x,y) =  ||x-y||^p\). 
-        It defines a convex optimization problem, which can be solved by linear programming.
-        This makes it a very attractive method for image morphing, image registration and further. 
-        For example, consider two greyscale images in \(2D\) 
-        which can be interpreted as probability distributions by normalization of the intensities. 
+        As an example, consider two greyscale images in \(2D\) which can be interpreted as probability distributions by normalization of the intensities. 
         Then the optimal transport map is a \(2D\) vector-field, where each point receives a \(2D\)-vector with the corresponding displacement. 
         <b></b>
-        In a discrete setting we might have samples \( \{x_i\}_{i=1,...,N} \) and \( \{y_i\}_{i=1,...,M}\) which occur with probability \( p_i \) and \( q_j \) respectively.
+        In a discrete setting we might have samples \( \{x_i\}_{i=1,...,N} \) and \( \{y_i\}_{i=1,...,M}\) which occur with probability \( p_i \) and \( q_j \) respectively, 
+        defining PDFs of the form \(p(x_i) = \sum_{i=1}^N p_i \delta(x -x_i) \) and  \(q(y_i) = \sum_{i=1}^N q_i \delta(y -y_i) \).
         The Wasserstein distance between the discretely sampled distributions can be written as
         <div class="equation" id = "eq-wasserstein discrete">
         $$
-        W_p(P,Q) = \min_{J\in \mathcal{J}(P,Q)} \sum_i \sum_j ||x_i-y_j||^p J(x_i,y_j)
+        W_p(P,Q) = \inf_{\gamma} \sum_i \sum_j ||x_i-y_j||^p \gamma(x_i,y_j)
         $$
         </div>
-        so that \( \sum_j J(x_i, y_j) = p_i \), and \( \sum_i J(x_i, y_j) = q_j \) and \( J(x_i,y_j) \geq 0 \).
+        so that \( \sum_j \gamma(x_i, y_j) = p_i \), and \( \sum_i  \gamma(x_i, y_j) = q_j \) and \( \gamma(x_i,y_j) \geq 0 \).
+        In general, this problem does not have an optimal transport map, but an optimal transport plan. It is a convex (but not strictly convex) optimization problem.
         <br><br>
         Interesting cases are  \( p=1 \) (also called Earth-Mover distance) and \( p=2 \).
-        For \( p=2 \), it can be shown that there exists a unique convex function \( \phi \) so that \( J^*(x,y) = \nabla \phi \).
+        For \( p=2 \), it can be shown that there exists a unique convex function \( \phi \) so that \( \gamma^*(x,y) = \nabla \phi \).
         Furthermore, for \( p= 2\) the metric space  \( P(\Omega), W_p \)$ has the structure of a Riemannian manifold.
-        This might also hold for other values of \( p \) 
+        This might (maybe) also hold for other values of \( p \) 
         (see more <a href="https://link.springer.com/article/10.1007/s41884-018-0014-4">Wasserstein Riemannian geometry of Gaussian densities
         </a>)
-        The Wasserstein distance is a convex optimization problem (linear w.r. transport cost) 
-        and can be written in a dual formulation as 
+        <br><br>
+
+        <h2>Dual Formulation and special cases</h2>
+        The Wasserstein distance is a convex optimization problem (with linear transport cost) 
+        and can be written in a dual formulation.
+        Consider that if \( \gamma \in \Gamma \), then
         <div class="equation" >
             $$
-            W_p(P,Q) = \sup_{\Phi, \Psi} \int_{y} \Phi(y)dQ(y) - \int_{x} \Psi(x)dP(x).
+             \sup_{\Phi, \Psi} \int_{\Omega_x} \Phi(x)dp(x) + \int_{\Omega_y} \Psi(y)dq(y) -  \int_{\Omega_x \times \Omega_y} (\Phi(x) - \Psi(y)) d\gamma(x,y) = 0,
             $$
         </div>
+        whereas the same quanitiy becomes \( \infty \) if \( \gamma \notin \Gamma \) (see <a href="# Optimal Transport for Applied Mathematician">here</a> on duality).
+        By adding this constraint to the objective by the well-known lagrangian \(\lambda\) method in convex optimization, we obtaine
+        <div class="equation">
+            $$
+            W_p(P,Q) = \inf_{\gamma}  \int{\Omega_x \times \Omega_y} c(x,y) d\gamma(x,y)   + \sup_{\Phi, \Psi} \int_{\Omega_x} \Phi(x)dp(x) + \int_{\Omega_y} \Psi(y)dq(y) -  \int_{\Omega_x \times \Omega_y} (\Phi(x) - \Psi(y)) d\gamma(x,y).
+            $$.
+        </div>
+        Exchanging supremum and infimum as commonly done to establish the Dual, we obtain
+        <div class="equation">
+            $$
+            W_p(P,Q) = \sup_{\gamma \in \Gamma}   \inf_{\Phi, \Psi} \int_{\Omega_x} \Phi(x)dp(x) + \int_{\Omega_y} \Psi(y)dq(y) + \inf_{\gamma} \int{\Omega_x \times \Omega_y} c(x,y) -  \int_{\Omega_x \times \Omega_y} (\Phi(x) - \Psi(y)) d\gamma(x,y).
+            $$.
+        </div>
+        In many cases strict duality holds, we refer to <a href="# Optimal Transport for Applied Mathematician">here</a> for more details and proofs.
+       We can rewrite the infimum
+       <div class="equation">
+        $$
+         \inf_{\gamma} \int{\Omega_x \times \Omega_y} c(x,y) -  \int_{\Omega_x \times \Omega_y} (\Phi(x) - \Psi(y)) d\gamma(x,y) = 0.
+        $$
+        </div>
+        if \( \Phi(x) - \Psi(y) \leq c(x,y) \) and \( -\infty \) otherwise.
+        This leads to the dual formulation
+        <div class="equation" >
+            $$
+            W_p(P,Q) = \sup_{\Phi, \Psi} \int_{y} \Phi(y)dQ(y) + \int_{x} \Psi(x)dP(x)
+            $$
+        </div>
+        so that \( \Phi(x) - \Psi(y) \leq c(x,y) \).
         For \( p=1 \) this can be transformed into 
         <div class="equation">
             $$
-            W_p(P,Q) = \sup_{f} \int_{x} f(x)dQ(x) - \int_{x} f(x)dP(x),
+            W_p(P,Q) = \sup_{f} \int_{x} f(x)dq(x) - \int_{x} f(x)dP(x),
             $$
-        </div> which corresponds to the loss-term of Wasserstein GANs.
+        </div> with \(f(x) \in \mathcal{F}:\{ f(x) - f(y)  \leq c(x,y) \}\). This corresponds to the loss-term of Wasserstein GANs.
         Another important fact is that the computing the Wasserstein is expensive, unless the probabilities \( p(x) \) and \( q(x) \) are one dimensional.
-        In the one-dimensional case the distance has a closed form solution. 
+        In the one-dimensional case the distance has a closed form 
+        <div class="equation">
+            $$
+            W_p(P,Q) =  (\int_{\Omega_x }| \mathcal{F}^{-1} - \mathcal{G}^{-1} |^p dx)^{\frac{1}{p}}.
+            $$
+        </div>
+        where \( \mathcal{F} \) and \( \mathcal{G} \) are the cumulative distribution functions of \( P \) and \( Q \) respectively.
+        This result is especially interesting when considering the high computational complexity of the Wasserstein distance in higher dimensions.
+        Sliced Wasserstein approaches approximate distance and transport plan by projection onto \(1D\) distributions 
+        (see <a href ="https://proceedings.neurips.cc/paper_files/paper/2019/file/f0935e4cd5920aa6c7c996a5ee53a70f-Paper.pdf">here</a> and  <a href ="https://arxiv.org/abs/2410.12176">here</a>).
+        <br><br>
+
+
+
+        <h2>Geometry and Geodesics</h2>
+        The Wasserstein distance (remember \( c(x,y) = |x-y|^p \)) is a metric on \( P(\Omega)\), i.e. it satisfies the triangle inequality, symmetry and non-negativity. 
+        Here \( P(\Omega)\) represents the set of probability densities on the domain \( \Omega \). 
+        The metric space ( \( P(\Omega), W_p \) ) is the p-Wasserstein space.
+        Furthermore (see <a href="https://ieeexplore.ieee.org/document/7974883">here</a>) 
+        the metric space \( P(\Omega), W_p \) is a geodesic space, i.e. there exists a continous path between any two points /(p(x), q(y) \in \P(\Omega)/) in the space.
+        When a unique optimal transport map \(T(x)^*) from \( P \) to \( Q \) exists, the geodesic is obtained by moving the mass at constant speed from \(x\) to \(T(x)^* \).
+        For \( t \in [0,1] \) the location of the mass at time \(t\) and position \(x\) is given by \( T_t^*(x) = (1-t)x + t T(x)^* \).
+        Its velocity is given by \( \dot{T}_t^*(x) = T(x)^* - x \).
+        Pushing forward the mass through \( T_t^*(x) \) leads to
+        <div class="equation">
+            $$
+            \int_{x: T_t^*(x) \in \Omega_z } P(x)dx   = \int_{\Omega_z} L(z)dz,
+            $$
+        </div>
+        (where \(P(x)\) and \(L(z)\) are the respective distributions) which can be written in differential form (see <a href="#Optimal Transport for Applied Mathematician">here</a> ) as
+        <div class="equation">
+            $$
+            \det(D T_t^*(x)) L(T_t^*(x)) = P(x)
+            $$
+        </div>
+        (where \(D T_t^*(x)\) is the Jacobian of the transport map) so that
+        <div class="equation">
+            $$
+             L(T_t^*(x)) = \frac{P(x)}{\det(D T_t^*(x))}.
+            $$
+        </div>
+        This defines a path \(T_t^*(x) = I(x,t)\) in the Wasserstein space with tangent vector \( s(x,t) = \frac{ \partial I(x,t) }{ \partial t(x,t) }\).
+        Especially interesting is \( P(\Omega), W_2 \) which is a Riemannian manifold with a formal Riemannian metric 
+        (see <a href ="https://www.tandfonline.com/doi/full/10.1081/PDE-100002243">here</a>).
+        A vector field \(v(x,t)\) can be defined so that
+        <div class="equation">
+            $$
+            s(x,t) = -\nabla (I(x,t)v(x,t)).
+            $$
+        </div>
+        The inner product is defined as 
+        <div class="equation">
+            $$
+            \langle s, s \rangle = \min \int |v(x,t)|^2 I(x,t )dx .
+            $$
+        </div>
+        Utilizing this, the 2-Wasserstein metric can be reformulated as
+        <div class="equation">
+            $$
+            W_2^2 (P,Q) = \inf_{T,v} \int_0^1 \int_{\Omega} |v(x,t)|^2 I(x,t) dx dt.
+            $$
+        </div>
+        so that \( \partial_t T + \nabla(Pv) = 0\) (this is the continuity equation) and \( T(x,0) = P(x)  \) and \( T(x,1) = Q(x)  \) .
+        This formulation is interesting because it allows for interpolation between shapes by moving along a geodesic in the 2-Wasserstein space.
+
+
+        <h2>Linear Embeddings</h2>
+
+
+        <h2>Slicing and expected Transport Plans</h2>
+
+
         <br><br>
         A notational pecularity is  \( T_{\#}P \), which corrsponds to a new probability distribution induced by \( P \) through the mapping \( T \). 
         Consider the optimal transport map \( T:  \mathbb{R}^d \rightarrow  \mathbb{R}^d \), 
@@ -125,11 +244,6 @@
         $$
         </div> This is also called the push-forward /( T_{\#}P /) of /(P/).
         </p>
-        <p> 
-        <a href="https://proceedings.neurips.cc/paper_files/paper/2019/file/f0935e4cd5920aa6c7c996a5ee53a70f-Paper.pdf">Generalized Sliced Wasserstein Distances</a>
-        presents a way of computing the Wasserstein distance in a more efficient way by using a sliced approximation.  
-        <a href="https://arxiv.org/abs/2410.12176">Expected Sliced Transport Plans</a>
-        examines how an expected transport plan can be obtained by the sliced computation.
         This is useful for high-dimensional distributions where exact numerical computation can be too expensive. 
         By representing shapes and images as probability distributions, one can use the Wasserstein distance to compare shapes, compute mean shapes
         and interpolate with transport plans.
@@ -144,9 +258,13 @@
         <br>
         <a href="https://link.springer.com/book/10.1007/978-3-030-38438-8">An Invitation to Statistics in Wasserstein Space</a>,
         <br>
-        <a href="https://link.springer.com/book/10.1007/978-3-319-20828-2">Optimal Transport for Applied Mathematicians</a>,
+        <a href="https://link.springer.com/book/10.1007/978-3-319-20828-2", id ="Optimal Transport for Applied Mathematician">Optimal Transport for Applied Mathematicians</a>,
         <br>
         <a href="https://ieeexplore.ieee.org/document/7780937">Sliced Wasserstein Kernels for Probability Distributions</a>,
+        <br>
+        <a href="https://arxiv.org/abs/1711.05376">Sliced Wasserstein Distance for Learning Gaussian Mixture Models</a>,
+        <br>
+        <a href="https://arxiv.org/abs/1711.05376">Sliced Wasserstein Distance for Learning Gaussian Mixture Models</a>,
         <br>
         <a href="https://arxiv.org/abs/1711.05376">Sliced Wasserstein Distance for Learning Gaussian Mixture Models</a>,
         </p>
