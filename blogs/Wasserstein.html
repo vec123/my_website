@@ -269,16 +269,29 @@
 
 
         <h2>The Cummulative Distribution Transform </h2>
-        Consider the measures \(p \in \Omega_p \subset \mathcal{R} \) and \(q \in \Omega_p \subset \mathcal{R} \) 
+
+        
+        Consider the measures \(p \in \Omega_p \subset \mathcal{R} \) and \(q \in \Omega_q \subset \mathcal{R} \) 
         with probability spaces \( (\mathcal{X}, \Sigma(\mathcal{X}), p) \) and \( (\mathcal{Y}, \Sigma(\mathcal{Y}), q) \) respectively.
-        Denote the density functions \(dp(x) = p(x)dx\) and \(dq(x) = q(x)dx\).
-        A transport map \(T: \mathcal{X} \rightarrow \mathcal{Y}\) that pushes /(p(x)/) onto /(q(x)/) fulfills the following relation
+        Denote the density functions \( dp(x) = p(x)dx \) and \( dq(x) = q(x)dx \).
+        We can write the distribution functions as
         <div class="equation">
             $$
-            \int_{ \inf(\mathcal{X}) }^x dp(x) =   \int_{ \inf(\mathcal{Y}) }^{T(x)} dq(x),
+            P(x) = \int_{ \inf(\mathcal{X}) }^T(x) T( q(x) )  dx.
             $$
         </div>
-        for any (Lebesgue measruable \(A \subset \mathcal{Y}\)).
+        For continous cumulative distribution functions,
+        <div class="equation">
+            $$
+           p(x) = T^{-1}(x)q(T(x)) 
+            $$.
+        </div>
+        A transport map \( T: \mathcal{X} \rightarrow \mathcal{Y} \) that pushes /( p(x) /) onto /( q(x) /) can be expressed as 
+        <div class="equation">
+            $$
+            T(X) = Q^{-1}( P(x)).
+            $$
+        </div>.
         We assume that \(T\) is an element of the \(L^2\) function space, i.e. it is square integrable
         <div class="equation">
             $$
@@ -293,24 +306,10 @@
             $$
         </div>
         This defines the Cumulative Distribution Transform (CDT) of \(p\) with respect to \(q\).
-        Consider the Cumulative Distribution functions of the respective densities 
-        \(P(x) = \int_{\inf(\mathcal{X})}^x p(x)dx\) and \(Q(x) = \int_{\inf(\mathcal{Y})}^x q(x)dx\).
-        We can write the distribution functions as
-        <div class="equation">
-            $$
-            P(x) = \int_{ \inf(\mathcal{X}) }^T(x) T( q(x) )  dx.
-            $$
-        </div>
-        For continous cumulative distribution functions,
-        <div class="equation">
-            $$
-           p(x) = T^{-1}(x)q(T(x)) 
-            $$.
-        </div>
         The inverse of the Cumulative Distribution Transform (CDT) is
         <div class="equation">
             $$
-            q(y) = T^{-1}(y)p(T^{-1}(y)) 
+            q(y) = T^{-1}(y)p( T^{-1}(y) ) 
             $$.
         </div>
         We define 
@@ -319,7 +318,9 @@
             \hat{q}(y) =(T(x) - \mathbb{I}) \sqrt{p(x)}^{0.5}.
             $$.
         </div>
-        The \(L^2\) norm of the $(y)$ is the 2-Wasserstein distance between the densities \(p\) and \(q\).
+        The \(L^2\) norm of the $(\hat{q}(y))$ is the 2-Wasserstein distance between the densities \(p\) and \(q\).
+
+
 
         See <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> 
         for more details and examples on the uniform distribution and gaussian distribution, 
