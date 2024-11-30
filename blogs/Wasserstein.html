@@ -184,12 +184,29 @@
             $$
         </div>
         If an inverse exist the pseudo-inverse is equal to the inverse.
-        Consider again
-        <div class="equation" id = "eq-wasserstein discrete">
+       The optimal transport plan can be obtained from the cumulative distribution functions and their (pseudo-)inverses as 
+        <div class="equation">
             $$
-            W_p(P,Q) = \inf_{\gamma} \sum_i \sum_j |x_i-y_j|^p \gamma(x_i,y_j)
+            T(X) = Q^{-1}( P(x)).
             $$
         </div>
+        This result holds, because in \(1D\) both distributions are supported on the real line \( \Omega_x,  \Omega_y \in \mathcal{R}\).
+        In this case one can state the requirement for the optimal transport map (which exists if a one-to-one mapping is possible) as
+        <div class="equation">
+            $$
+            \int_{x: T_t^*(x) \in \Omega_x } P(x)dx   = \int_{\Omega_y} L(y)dy.
+            $$
+        </div>
+        We will assume that the optimal transport map exists and that it is Lebesque integrable, i.e. \(T(x) \in L^2(\Omega_x)\) with
+        <div class="equation">
+            $$
+            (\int_{\Omega_x} |T(x)|^2 dx)^{0.5} \leq \infty,
+            $$
+        </div> and \( \lambda \) being the Lebesque measure.
+        The optimal transport map in \(1D\) and the \(p-\) Wasserstein distance in \(1D\) are especially interesting because they have a closed form.
+        The section on the cumulative distribution transform shows how projection onto \(1D\) can define embeddings whose euclidean distance corresponds to the wasserstein distance.
+        In general the Wasserstein space is a metric space, with the Wasserstein distance as a metric. 
+        It is furthermore a geodesic space which becomes a Riemannian manifold in the \(2-\) Wasserstein case.
         This result is especially interesting when considering the high computational complexity of the Wasserstein distance in higher dimensions.
         Sliced Wasserstein approximate distance and transport plan by projection onto \(1D\) distributions 
         (see <a href ="https://proceedings.neurips.cc/paper_files/paper/2019/file/f0935e4cd5920aa6c7c996a5ee53a70f-Paper.pdf">here</a> and  <a href ="https://arxiv.org/abs/2410.12176">here</a>).
@@ -251,8 +268,8 @@
 
 
 
-        <h2>The Cummulative Distribution transform and Linear Embeddings by nonlinear transforms</h2>
-        Consider the measures \(p\) and \(q\) 
+        <h2>The Cummulative Distribution Transform </h2>
+        Consider the measures \(p \in \Omega_p \subset \mathcal{R} \) and \(q \in \Omega_p \subset \mathcal{R} \) 
         with probability spaces \( (\mathcal{X}, \Sigma(\mathcal{X}), p) \) and \( (\mathcal{Y}, \Sigma(\mathcal{Y}), q) \) respectively.
         Denote the density functions \(dp(x) = p(x)dx\) and \(dq(x) = q(x)dx\).
         A transport map \(T: \mathcal{X} \rightarrow \mathcal{Y}\) that pushes /(p(x)/) onto /(q(x)/) fulfills the following relation
