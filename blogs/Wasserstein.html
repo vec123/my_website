@@ -93,7 +93,7 @@
         The minimizer \( \gamma^*(x,y) \) is called the optimal transport plan and is guaranteed to exist. 
         If an optimal transport map exists, it can be related to an optimal transport plan by \( \gamma(x,y) = \int_{x \in \mathcal{X}: T(x) in \mathcal{Y}} p(x) dx \), 
         where \( \mathcal{X} \subset \Omega_{x} \) and \( \mathcal{Y} \subset{\Omega_y} \) are the input and output spaces.
-        If \(\gamma(x,y)) is one-to-one, i.e. no splitting of mass occurs (input and output measure coincide), there exists an optimal transport map. 
+        If \(\gamma(x,y) \) is one-to-one, i.e. no splitting of mass occurs (input and output measure coincide), there exists an optimal transport map. 
         For many practical applications this is the case.
         Note that minimizing the Wasserstein distance returns the minimal cost, as well as a corresponding transport plan. 
         As an example, consider two greyscale images in \(2D\) which can be interpreted as probability distributions by normalization of the intensities. 
@@ -169,8 +169,30 @@
             $$
         </div>
         where \( \mathcal{F} \) and \( \mathcal{G} \) are the cumulative distribution functions of \( P \) and \( Q \) respectively.
+        This relation (in \(1D\)) to the cumulative distribution function 
+        is mentioned again the the cumulative distribution transform section on eulcidean embeddings.
+        Consider the cumulative distribution functions of the respective densities
+        <div class="equation">
+            $$
+            P(x) = \int_{\inf(\mathcal{X})}^x p(x)dx.
+            $$
+        </div>
+        The more general pseudo-inverse inverse is defined as
+        <div class="equation">
+            $$
+            P(z)^{-1} = \inf\{ x \in \Omega_x : P(x) \geq z \}.
+            $$
+        </div>
+        If an inverse exist the pseudo-inverse is equal to the inverse.
+        Consider again
+        <div class="equation" id = "eq-wasserstein discrete">
+            $$
+            W_p(P,Q) = \inf_{\gamma} \sum_i \sum_j |x_i-y_j|^p \gamma(x_i,y_j)
+            $$
+        </div>
+        Then the Wasserstein distance can be computed as
         This result is especially interesting when considering the high computational complexity of the Wasserstein distance in higher dimensions.
-        Sliced Wasserstein approaches approximate distance and transport plan by projection onto \(1D\) distributions 
+        Sliced Wasserstein approximate distance and transport plan by projection onto \(1D\) distributions 
         (see <a href ="https://proceedings.neurips.cc/paper_files/paper/2019/file/f0935e4cd5920aa6c7c996a5ee53a70f-Paper.pdf">here</a> and  <a href ="https://arxiv.org/abs/2410.12176">here</a>).
         <br><br>
 
@@ -225,13 +247,14 @@
             W_2^2 (P,Q) = \inf_{T,v} \int_0^1 \int_{\Omega} |v(x,t)|^2 I(x,t) dx dt.
             $$
         </div>
-        so that \( \partial_t T + \nabla(Pv) = 0\) (this is the continuity equation) and \( T(x,0) = p(x)  \) and \( T(x,1) = q(x)  \) .
+        so that \( \partial_t T + \nabla(Pv) = 0\) (this is the continuity equation) and \( T(x,0) = p(x)  \) and \( T(x,1) = q(x)  \).
         This formulation is interesting because it allows for interpolation between shapes by moving along a geodesic in the 2-Wasserstein space.
 
 
 
         <h2>The Cummulative Distribution transform and Linear Embeddings by nonlinear transforms</h2>
-        Consider the measures \(p\) and \(q\) with probability spaces \( (\mathcal{X}, \Sigma(\mathcal{X}), p) \) and \( (\mathcal{Y}, \Sigma(\mathcal{Y}), q) \) respectively.
+        Consider the measures \(p\) and \(q\) 
+        with probability spaces \( (\mathcal{X}, \Sigma(\mathcal{X}), p) \) and \( (\mathcal{Y}, \Sigma(\mathcal{Y}), q) \) respectively.
         Denote the density functions \(dp(x) = p(x)dx\) and \(dq(x) = q(x)dx\).
         A transport map \(T: \mathcal{X} \rightarrow \mathcal{Y}\) that pushes /(p(x)/) onto /(q(x)/) fulfills the following relation
         <div class="equation">
@@ -254,7 +277,8 @@
             $$
         </div>
         This defines the Cumulative Distribution Transform (CDT) of \(p\) with respect to \(q\).
-        Consider the Cumulative Distribution functions of the respective densities \(P(x) = \int_{\inf(\mathcal{X})}^x p(x)dx\) and \(Q(x) = \int_{\inf(\mathcal{Y})}^x q(x)dx\).
+        Consider the Cumulative Distribution functions of the respective densities 
+        \(P(x) = \int_{\inf(\mathcal{X})}^x p(x)dx\) and \(Q(x) = \int_{\inf(\mathcal{Y})}^x q(x)dx\).
         We can write the distribution functions as
         <div class="equation">
             $$
@@ -273,10 +297,22 @@
             q(y) = T^{-1}(y)p(T^{-1}(y)) 
             $$.
         </div>
-        See <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> for more details and examples on the uniform distribution and gaussian distribution, 
+        We define 
+        <div class="equation">
+            $$
+            \hat{q}(y) =(T(x) - \mathbb{I}) \sqrt(p(x))^{0.5}.
+            $$.
+        </div>
+        The \(L^2\) norm of the $(y)$ is the 2-Wasserstein distance between the densities \(p\) and \(q\).
+
+        See <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> 
+        for more details and examples on the uniform distribution and gaussian distribution, 
         defined by \(p(x)\) and \(q(x)\) respectively. 
-        Figure three and five show how overlapping gaussian distributions and non-convex (but disjoint) sets can be seperated linearly after application of the transform.
-        The CDT is a non-linear transformation. Its properties are listed <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> and are not repeated.
+        Figure three and five show how overlapping gaussian distributions and non-convex (but disjoint) sets can 
+        be seperated linearly after application of the transform.
+        The CDT is a non-linear transformation. 
+        Its properties are listed <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> and are not repeated.
+        Find a video <a href="https://www.youtube.com/watch?v=khkSOleeEno">here</a> on the CDT.
 
         
 
