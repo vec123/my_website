@@ -86,7 +86,7 @@
          The corresponding Wasserstein distance is then
         <div class="equation"  id="eq-wasserstein">
             $$
-            W_p(P,Q) = (\inf_{\gamma(x,y) \ in \Gamma } \int_{Omega_x \times Omega_y} ||x-y||^p \gammaJ(x,y) )^\frac{1}{p}
+            W_p(P,Q) = (\inf_{\gamma(x,y) \ in \Gamma } \int_{Omega_x \times Omega_y} ||x-y||^p \gamma(x,y) )^\frac{1}{p}
              $$
          </div>
         under the constraint that \( \int_y \gamma(x,y) dy = P(x) \) and  \(\int_x \gamma(x,y) dx = Q(y) \).
@@ -99,7 +99,8 @@
         As an example, consider two greyscale images in \(2D\) which can be interpreted as probability distributions by normalization of the intensities. 
         Then the optimal transport map is a \(2D\) vector-field, where each point receives a \(2D\)-vector with the corresponding displacement. 
         <b></b>
-        In a discrete setting we might have samples \( \{x_i\}_{i=1,...,N} \) and \( \{y_i\}_{i=1,...,M}\) which occur with probability \( p_i \) and \( q_j \) respectively, 
+        In a discrete setting we might have samples \( \{x_i\}_{i=1,...,N} \) and \( \{y_i\}_{i=1,...,M}\) 
+        which occur with probability \( p_i \) and \( q_j \) respectively, 
         defining PDFs of the form \(p(x_i) = \sum_{i=1}^N p_i \delta(x -x_i) \) and  \(q(y_i) = \sum_{i=1}^N q_i \delta(y -y_i) \).
         The Wasserstein distance between the discretely sampled distributions can be written as
         <div class="equation" id = "eq-wasserstein discrete">
