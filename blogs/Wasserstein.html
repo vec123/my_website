@@ -177,7 +177,7 @@
 
 
         <h2>Geometry and Geodesics</h2>
-        
+
         The Wasserstein distance (remember \( c(x,y) = |x-y|^p \)) is a metric on \( P(\Omega)\), i.e. it satisfies the triangle inequality, symmetry and non-negativity. 
         Here \( P(\Omega)\) represents the set of probability densities on the domain \( \Omega \). 
         The metric space ( \( P(\Omega), W_p \) ) is the p-Wasserstein space.
@@ -225,16 +225,62 @@
             W_2^2 (P,Q) = \inf_{T,v} \int_0^1 \int_{\Omega} |v(x,t)|^2 I(x,t) dx dt.
             $$
         </div>
-        so that \( \partial_t T + \nabla(Pv) = 0\) (this is the continuity equation) and \( T(x,0) = P(x)  \) and \( T(x,1) = Q(x)  \) .
+        so that \( \partial_t T + \nabla(Pv) = 0\) (this is the continuity equation) and \( T(x,0) = p(x)  \) and \( T(x,1) = q(x)  \) .
         This formulation is interesting because it allows for interpolation between shapes by moving along a geodesic in the 2-Wasserstein space.
 
 
 
-        <h2>Linear Embeddings</h2>
+        <h2>The Cummulative Distribution transform and Linear Embeddings by nonlinear transforms</h2>
+        Consider the measures \(p\) and \(q\) with probability spaces \( (\mathcal{X}, \Sigma(\mathcal{X}), p) \) and \( (\mathcal{Y}, \Sigma(\mathcal{Y}), q) \) respectively.
+        Denote the density functions \(dp(x) = p(x)dx\) and \(dq(x) = q(x)dx\).
+        A transport map \(T: \mathcal{X} \rightarrow \mathcal{Y}\) that pushes /(p(x)/) onto /(q(x)/) fulfills the following relation
+        <div class="equation">
+            $$
+            \int_{ \inf(\mathcal{X}) }^x dp(x) =   \int_{ \inf(\mathcal{Y}) }^{T(x)} dq(x),
+            $$
+        </div>
+        for any (Lebesgue measruable \(A \subset \mathcal{Y}\)).
+        We assume that \(T\) is an element of the \(L^2\) function space, i.e. it is square integrable
+        <div class="equation">
+            $$
+            |T|_2 = ( \int_{\mathcal{X} } |T|^2 d\lambda)^{0.5} \leq \infty,
+            $$
+        </div>
+        where \(\lambda\) is the Lebesgue measure in \( \mathcal{X} \).
+        Consider a function \( \hat{p}: \mathcal{X} \rightarrow \mathbb{R} \) as
+        <div class="equation">
+            $$
+            \hat{p}(x) = (T(x) -x)\sqrt{q(x)}.
+            $$
+        </div>
+        This defines the Cumulative Distribution Transform (CDT) of \(p\) with respect to \(q\).
+        Consider the Cumulative Distribution functions of the respective densities \(P(x) = \int_{\inf(\mathcal{X})}^x p(x)dx\) and \(Q(x) = \int_{\inf(\mathcal{Y})}^x q(x)dx\).
+        We can write the distribution functions as
+        <div class="equation">
+            $$
+            P(x) = \int_{ \inf(\mathcal{X}) }^T(x) T( q(x) )  dx.
+            $$
+        </div>
+        For continous cumulative distribution functions,
+        <div class="equation">
+            $$
+           p(x) = T^{-1}(x)q(T(x)) 
+            $$.
+        </div>
+        The inverse of the Cumulative Distribution Transform (CDT) is
+        <div class="equation">
+            $$
+            q(y) = T^{-1}(y)p(T^{-1}(y)) 
+            $$.
+        </div>
+        See <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> for more details and examples on the uniform distribution and gaussian distribution, 
+        defined by \(p(x)\) and \(q(x)\) respectively. 
+        Figure three and five show how overlapping gaussian distributions and non-convex (but disjoint) sets can be seperated linearly after application of the transform.
+        The CDT is a non-linear transformation. Its properties are listed <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> and are not repeated.
 
+        
 
-
-        <h2>Slicing and expected Transport Plans</h2>
+        <h2> Slicing and expected Transport Plans</h2>
 
 
 
@@ -269,9 +315,9 @@
         <br>
         <a href="https://arxiv.org/abs/1711.05376">Sliced Wasserstein Distance for Learning Gaussian Mixture Models</a>,
         <br>
-        <a href="https://arxiv.org/abs/1711.05376">Sliced Wasserstein Distance for Learning Gaussian Mixture Models</a>,
+        <a href="https://www.damtp.cam.ac.uk/research/cia/files/teaching/Optimal_Transport_Notes.pdf">Introduction to Optimal Transport</a>,
         <br>
-        <a href="https://arxiv.org/abs/1711.05376">Sliced Wasserstein Distance for Learning Gaussian Mixture Models</a>,
+        <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">The cumulative distribution transform and linear pattern classification</a>,
         </p>
 
         </body>
