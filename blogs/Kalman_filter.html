@@ -81,13 +81,13 @@ src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
         = \lim_{t \rightarrow \infty}  \sum_{k=0}^{t-1} F^{k} BB^T  \left(F^k\right)^T
         $$
     </div>
-    <p> since <i>F</i> is assumed stable (i.e. it has eigenvalues stricly smaller 0). In the limit we have</p>
+    <p> since <i>F</i> is assumed stable (i.e. it has eigenvalues stricly smaller zero). In the limit we have</p>
     <div class="equation">
         $$
         \Sigma_{\infty} = F  \Sigma_{\infty}  F^T + BB^T
         $$
     </div>
-    <p> This equation is stricly positive and a discrete time Lyapunov Equation. If \(F\) is stable, it has a unique solution <i>\( \Sigma_{\infty} \)</i></p>
+    <p> This equation is stricly positive, convex and a discrete time Lyapunov Equation. If \(F\) is stable, it has a unique solution <i>\( \Sigma_{\infty} \)</i></p>
     <p>Consider now <i> B = I</i> and <i> D = I</i>, and assume the noise terms are zero mean with covariance </p>
     </p>
     <div class="equation">
