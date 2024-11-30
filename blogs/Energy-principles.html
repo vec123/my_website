@@ -396,15 +396,15 @@ The total effective force is
     Let us consider 
     <div class="equation">
         $$
-        \delta I = \int \delta F(y,y',x) d\tau = \epsilon \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' dx
+        \delta I = \int \delta F(y,y',x) d\x = \epsilon \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' dx
         $$
     </div>
     where \( \delta F(y,y',x) = F(y + \epsilon \Phi,y'+  \epsilon \Phi', x)  - \delta F(y,y',x) = \epsilon  (\frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' ) \)
-    and \(\Phi\) is an arbitrary function.
+    and \(\Phi\) is an arbitrary function of \(x\).
     Thus
     <div class="equation">
         $$
-        \delta \frac{I}{\epsilon} = \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' d\tau
+        \delta \frac{I}{\epsilon} = \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' dx
         $$
     </div>
     and through integration by parts
@@ -416,7 +416,7 @@ The total effective force is
     we obtain
     <div class="equation">
         $$
-        \delta \frac{I}{\epsilon} = \int (\frac{\partial F}{\partial y} - \frac{d}{d\tau} \frac{\partial F}{\partial y'}) \Phi dx +  [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2}
+         \frac{\delta I}{\epsilon} = \int (\frac{\partial F}{\partial y} - \frac{d}{d\tau} \frac{\partial F}{\partial y'}) \Phi dx +  [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2}
         $$
     </div>
     <br><br>
