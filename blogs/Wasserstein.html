@@ -118,11 +118,9 @@
         (see more <a href="https://link.springer.com/article/10.1007/s41884-018-0014-4">Wasserstein Riemannian geometry of Gaussian densities
         </a>).
         <br><br>
-
-        <h2>Dual Formulation and special cases</h2>
         The Wasserstein distance is a convex optimization problem (with linear transport cost) 
         and can be written in a dual formulation.
-        Consider that if \( \gamma \in \Gamma \), then
+        Consider that if \( \gamma \in \Gamma \) (as defined above), then
         <div class="equation" >
             $$
              \sup_{\Phi, \Psi} \int_{\Omega_x} \Phi(x)dp(x) + \int_{\Omega_y} \Psi(y)dq(y) -  \int_{\Omega_x \times \Omega_y} (\Phi(x) - \Psi(y)) d\gamma(x,y) = 0,
@@ -162,16 +160,17 @@
             W_p(P,Q) = \sup_{f} \int_{x} f(x)dq(x) - \int_{x} f(x)dP(x),
             $$
         </div> with \(f(x) \in \mathcal{F}:\{ f(x) - f(y)  \leq c(x,y) \}\). This corresponds to the loss-term of Wasserstein GANs.
-        Another important fact is that the computing the Wasserstein is expensive, unless the probabilities \( p(x) \) and \( q(x) \) are one dimensional.
+        Another important fact is that the computing the Wasserstein is expensive, 
+        unless the probabilities \( p(x) \) and \( q(x) \) are one dimensional.
         In the one-dimensional case the distance has a closed form 
         <div class="equation">
             $$
-            W_p(P,Q) =  (\int_{\Omega_x }| \mathcal{F}^{-1} - \mathcal{G}^{-1} |^p dx)^{\frac{1}{p}}.
+            W_p(P,Q) =  (\int_{\Omega_x }| \mathcal{F}^{-1}(x) - \mathcal{G}^{-1}(x) |^p dx)^{\frac{1}{p}}.
             $$
         </div>
         where \( \mathcal{F} \) and \( \mathcal{G} \) are the cumulative distribution functions of \( P \) and \( Q \) respectively.
         This relation (in \(1D\)) to the cumulative distribution function 
-        is mentioned again the the cumulative distribution transform section on eulcidean embeddings.
+        is mentioned again in the cumulative distribution transform section on eulcidean embeddings.
         Consider the cumulative distribution functions of the respective densities
         <div class="equation">
             $$
@@ -191,7 +190,6 @@
             W_p(P,Q) = \inf_{\gamma} \sum_i \sum_j |x_i-y_j|^p \gamma(x_i,y_j)
             $$
         </div>
-        Then the Wasserstein distance can be computed as
         This result is especially interesting when considering the high computational complexity of the Wasserstein distance in higher dimensions.
         Sliced Wasserstein approximate distance and transport plan by projection onto \(1D\) distributions 
         (see <a href ="https://proceedings.neurips.cc/paper_files/paper/2019/file/f0935e4cd5920aa6c7c996a5ee53a70f-Paper.pdf">here</a> and  <a href ="https://arxiv.org/abs/2410.12176">here</a>).
