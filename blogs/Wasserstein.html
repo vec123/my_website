@@ -355,7 +355,40 @@
         
 
 
-        <h2> Slicing and expected Transport Plans</h2>
+        <h2>Slicing, expected Transport Plans, CDT in multiple dimensions</h2>
+
+        Sections above showed that the Wasserstein distance can be expensive to compute, especially in high dimensions. 
+        However the one-dimensional case has a closed form solution and allows for the definition of the cumulative distribution transform.
+        Slicing probability distributions into one-dimensional distributions can be used to approximate the Wasserstein distance, its transport plan and apply the CDF in higher dimensions.
+        For projection the Radon transform is used. The Radon transform is a linear bijective transformation.
+        It is defined by
+        <div class="equation">
+            $$
+            Rf(\theta, t) = \int_{\mathcal{R}^d} f(x) \delta(t - \langle x, \theta \rangle) dx,
+            $$
+        </div>  where \( f(x) \in \mathcal{L_1} \), \( (t,\theta) \in \mathcal{R} \times \mathcal{S}^{d-1}\) (\( \mathcal{S}^{d-1} \) is the unit sphere)
+        and \( \delta \) is the one-dimensional Dirac delta function.
+        A hyperplane can be written as
+        <div class="equation">
+            $$
+            H_{\theta,t} = \{ x \in \mathcal{R}^d : \langle x, \theta \rangle = t \}.
+            $$
+        </div> For a fixed \( \theta \) the Radon transform is a projection of the function \( f(x) \) onto the hyperplane \( H_{\theta,t} \), 
+        so that \( Rf(\theta, \cdot) : \mathcal{R} \rightarrow \mathcal{R} \).
+        Its inverse is defined as 
+        <div class="equation">
+            $$
+            f(x) = R^{-1}(Rf(\theta, t)) = \int_{\mathcal{S}^{d-1}}  Rf(\theta, t) * \nu( \langle x, \theta \rangle) d\theta,
+            $$
+        </div> where \( \nu \) is a one-dimensional high-pass filter and * is the convolutional operator.
+        This inverse is also known as filtered back-projection and used in medical tomography for image reconstruction.
+        The integration of the filtered back-projection is usually replaced by a monte carlo approximation (i.e. a finite sum over projections).
+        This conclueds the introduction on the Radon transform and its inverse. 
+        To gain a more intuitive and visual understanding of the Radon transform, i recommend <a href="https://www.youtube.com/watch?v=f0sxjhGHRPo">this</a> video. 
+        <br><br>
+
+    
+
 
 
 
@@ -395,7 +428,8 @@
         <a href="https://www.damtp.cam.ac.uk/research/cia/files/teaching/Optimal_Transport_Notes.pdf">Introduction to Optimal Transport</a>,
         <br>
         <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">The cumulative distribution transform and linear pattern classification</a>,
-        
+        <br>
+        <a href="https://github.com/skolouri">Github Repo with Implementations</a>,
     </p>
 
 
