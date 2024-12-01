@@ -55,7 +55,13 @@
     <p>The Wasserstein distance is a distance between shapes based on optimal transport.
         Consider two probability densities \(p(x)\) and \(q(x)\) defining the distributions \(P\) and \(Q\), 
         so that \( x \sim P \) and \( y \sim Q \) with domains \( x \in \Omega_x\) and \( y \in \Omega_y\) .
-        Its original formulation is the Monge-Kantorovich formulation which considers the  distance as
+        Its original formulation is the Monge-Kantorovich formulation which considers the optimal transport cost by
+        <div class="equation">
+            $$
+            W_p(P,Q) =\inf_T \int_{Omega_x} c(x,T(x)) dp(x) =  \inf_T \int c(x,T(x)) p(x) dx.
+             $$
+         </div>
+        The \(p\) Waserstein distance is the optimal transport cost with cost function \( c(x,y) =  ||x-y||^p\).
         <div class="equation">
            $$
            W_p(P,Q) = \inf_T \int_{Omega_x} || x - T(x) ||^p dP(x).
@@ -66,13 +72,13 @@
         However, in this formulation, a solution is not guaranteed to exist. 
         For example, if \(p(x)\) corresponds to a point-mass and \(q(x)\) corresponds to multiple point-masses,
         then, due to the usage of equal probability measure for both distributions, the mass can not be splitted. 
-        This formulation is equivalent to an optimal transport problem with cost function \( c(x,y) =  ||x-y||^p\).
-        The optimal transport formulation with a more general cost function is 
-        <div class="equation">
-            $$
-            W_p(P,Q) =\inf_T \int_{Omega_x} c(x,T(x)) dp(x) =  \inf_T \int c(x,T(x)) p(x) dx.
-             $$
-         </div>
+        The non-existance of a solution is resolved by the Kantorovich formulation,
+        which allows for splitting of mass and furthermore enables the usage of a dual formulation for computing the distance.
+        When both probability distributions are continous or an one-to-one mapping exists, then \( T^*(x) \) exists and is unique.
+        Due to the simplicity of the Monge formulation and the explicit transport map, it is often used in practice.
+        In many cases a one-to-one mapping exists, so that the Monge formulation can be used.
+       <br>
+       <br>
         An alternative formulation is the soft formulation, leading to the Kantorovich's formulation of the Wasserstein distance.
         The optimal transport problem might be written as
         <div class="equation">
@@ -83,7 +89,14 @@
          where \( \gamma(x,y) \) can be interpreted as the amount of mass that is moved from \(x\) to \(y\) 
          and \(  \Gamma = \{ \gamma(x,y) : \int_{Omega_x} \gamma(x,y) dx = P(y) \text{and} \int_{Omega_y} \gamma(x,y) dz = P(x)\} \)
          is the set of all allowed transport plans subject to the constraint.
-         The corresponding Wasserstein distance is then
+         This allows for mass splitting and is more general than the Monge formulation. 
+         If an optimal transport map exists, the corresponding optimal transport map can be obtained by 
+         <div class="equation">
+            $$
+            \gamma(\mathcal{A},\mathcal{B}) = \int_{x \in \mathcal{A}: T(x) in \mathcal{B}}  p(x) dx,
+            $$
+        </div> where \( \mathcal{A} \subset \Omega_x \) and \( \mathcal{B} \subset \Omega_y \) are the domain in which the transport map is considered.
+         The Wasserstein distance in the Kantorovich formulation is 
         <div class="equation"  id="eq-wasserstein">
             $$
             W_p(P,Q) = (\inf_{\gamma(x,y) \ in \Gamma } \int_{Omega_x \times Omega_y} ||x-y||^p \gamma(x,y) )^\frac{1}{p}
@@ -109,7 +122,8 @@
         $$
         </div>
         so that \( \sum_j \gamma(x_i, y_j) = p_i \), and \( \sum_i  \gamma(x_i, y_j) = q_j \) and \( \gamma(x_i,y_j) \geq 0 \).
-        In general, this problem does not have an optimal transport map, but an optimal transport plan. It is a convex (but not strictly convex) optimization problem.
+        In general, this problem does not have an optimal transport map, but an optimal transport plan. 
+        It is a convex (but not strictly convex) optimization problem.
         <br><br>
         Interesting cases are  \( p=1 \) (also called Earth-Mover distance) and \( p=2 \).
         For \( p=2 \), it can be shown that there exists a unique convex function \( \phi \) so that \( \gamma^*(x,y) = \nabla \phi \).
@@ -118,7 +132,7 @@
         (see more <a href="https://link.springer.com/article/10.1007/s41884-018-0014-4">Wasserstein Riemannian geometry of Gaussian densities
         </a>).
         <br><br>
-        The Wasserstein distance is a convex optimization problem (with linear transport cost) 
+        Computing the Kantorvich Wasserstein distance is a convex optimization problem (with linear transport cost) 
         and can be written in a dual formulation.
         Consider that if \( \gamma \in \Gamma \) (as defined above), then
         <div class="equation" >
@@ -154,13 +168,14 @@
             $$
         </div>
         so that \( \Phi(x) - \Psi(y) \leq c(x,y) \).
-        For \( p=1 \) this can be transformed into 
+        For \( p = 1 \) this can be transformed into 
         <div class="equation">
             $$
             W_p(P,Q) = \sup_{f} \int_{x} f(x)dq(x) - \int_{x} f(x)dP(x),
             $$
-        </div> with \(f(x) \in \mathcal{F}:\{ f(x) - f(y)  \leq c(x,y) \}\). This corresponds to the loss-term of Wasserstein GANs.
-        Another important fact is that the computing the Wasserstein is expensive, 
+        </div> with \(f(x) \in \mathcal{F}:\{ f(x) - f(y)  \leq c(x,y) \}\). 
+        This corresponds to the loss-term of Wasserstein GANs.
+        Another important fact is that the computing the Wasserstein distance is expensive, 
         unless the probabilities \( p(x) \) and \( q(x) \) are one dimensional.
         In the one-dimensional case the distance has a closed form 
         <div class="equation">
@@ -183,40 +198,52 @@
             P(z)^{-1} = \inf\{ x \in \Omega_x : P(x) \geq z \}.
             $$
         </div>
-        If an inverse exist the pseudo-inverse is equal to the inverse.
-       The optimal transport plan can be obtained from the cumulative distribution functions and their (pseudo-)inverses as 
+       If an inverse exist the pseudo-inverse is equal to the inverse.
+       The optimal transport map (if it exists) can be obtained from the cumulative distribution functions and their (pseudo-)inverses as 
         <div class="equation">
             $$
             T(X) = Q^{-1}( P(x)).
             $$
         </div>
-        This result holds, because in \(1D\) both distributions are supported on the real line \( \Omega_x,  \Omega_y \in \mathcal{R}\).
+        This result holds, because in \(1D\) both distributions are supported on the real line \( \Omega_x,  \Omega_y \in \mathcal{R}\), 
+        allowing for a natural ordering.
         In this case one can state the requirement for the optimal transport map (which exists if a one-to-one mapping is possible) as
         <div class="equation">
             $$
-            \int_{x: T_t^*(x) \in \Omega_x } P(x)dx   = \int_{\Omega_y} L(y)dy.
+            \int_{x: T_t^*(x) \in \Omega_x } P(x)dx   = \int_{\Omega_y} L(y)dy,
             $$
-        </div>
+        </div> i.e. the transport map is so that the cumulative distribution is preserved. 
+        If the mapping is not one-to-one, which can happen for discrete PDFs (whose CDFs are step functions), splitting of mass occurs.
+        i.e. some mass from \(P\) is moved to multiple points \(Q\). 
         We will assume that the optimal transport map exists and that it is Lebesque integrable, i.e. \(T(x) \in L^2(\Omega_x)\) with
         <div class="equation">
             $$
             (\int_{\Omega_x} |T(x)|^2 dx)^{0.5} \leq \infty,
             $$
         </div> and \( \lambda \) being the Lebesque measure.
-        The optimal transport map in \(1D\) and the \(p-\) Wasserstein distance in \(1D\) are especially interesting because they have a closed form.
-        The section on the cumulative distribution transform shows how projection onto \(1D\) can define embeddings whose euclidean distance corresponds to the wasserstein distance.
-        In general the Wasserstein space is a metric space, with the Wasserstein distance as a metric. 
-        It is furthermore a geodesic space which becomes a Riemannian manifold in the \(2-\) Wasserstein case.
+        The optimal transport problem in \(1D\) and correspondingh \(p-\)Wasserstein distance are especially interesting cases because they have a closed form.
         This result is especially interesting when considering the high computational complexity of the Wasserstein distance in higher dimensions.
         Sliced Wasserstein approximate distance and transport plan by projection onto \(1D\) distributions 
         (see <a href ="https://proceedings.neurips.cc/paper_files/paper/2019/file/f0935e4cd5920aa6c7c996a5ee53a70f-Paper.pdf">here</a> and  <a href ="https://arxiv.org/abs/2410.12176">here</a>).
         <br><br>
+        In general the Wasserstein space is a metric space, with the Wasserstein distance as a metric. 
+        It is furthermore a geodesic space which becomes a Riemannian manifold in the \(2-\)Wasserstein case.
+        This allows for the definition of shortest paths between probability distributions and signals which can be interpreted as such (i.e. images).
+        More on this in the section on geometry and geodesics.
+        <br>
+        The section on the cumulative distribution transform shows how projection onto \(1D\) can define embeddings whose euclidean distance (inner product)
+        corresponds to the \(2-\)Wasserstein distance.
+        The cumulative distribution transform is isometric to the \(2-\)Wasserstein distance.
+        Furthermore, certain non-linear transformations (such as scaling, translation and composition) become linear in the transform space, enabling the application of linear methods.
+        Additionally, the transform is invertible. 
+        These results are related to kernel methods, with the transform acting as a kernel. 
+        Contrary to popular kernel methods which work with the inner-product directly nad ignore the underlying transform, the CDT explicitely defines the kernel transform.
 
 
 
         <h2>Geometry and Geodesics</h2>
 
-        The Wasserstein distance (remember \( c(x,y) = |x-y|^p \)) is a metric on \( P(\Omega)\), i.e. it satisfies the triangle inequality, symmetry and non-negativity. 
+        The \(p-)\ Wasserstein distance (remember \( c(x,y) = |x-y|^p \)) is a metric on \( P(\Omega)\), i.e. it satisfies the triangle inequality, symmetry and non-negativity. 
         Here \( P(\Omega)\) represents the set of probability densities on the domain \( \Omega \). 
         The metric space ( \( P(\Omega), W_p \) ) is the p-Wasserstein space.
         Furthermore (see <a href="https://ieeexplore.ieee.org/document/7974883">here</a>) 
@@ -224,7 +251,7 @@
         When a unique optimal transport map \(T(x)^*) from \( P \) to \( Q \) exists, the geodesic is obtained by moving the mass at constant speed from \(x\) to \(T(x)^* \).
         For \( t \in [0,1] \) the location of the mass at time \(t\) and position \(x\) is given by \( T_t^*(x) = (1-t)x + t T(x)^* \).
         Its velocity is given by \( \dot{T}_t^*(x) = T(x)^* - x \).
-        Pushing forward the mass through \( T_t^*(x) \) leads to
+        Pushing forward the mass through \( T_t^*(x) \) is subject to the condition
         <div class="equation">
             $$
             \int_{x: T_t^*(x) \in \Omega_z } P(x)dx   = \int_{\Omega_z} L(z)dz,
@@ -245,13 +272,13 @@
         This defines a path \(T_t^*(x) = I(x,t)\) in the Wasserstein space with tangent vector \( s(x,t) = \frac{ \partial I(x,t) }{ \partial t(x,t) }\).
         Especially interesting is \( P(\Omega), W_2 \) which is a Riemannian manifold with a formal Riemannian metric 
         (see <a href ="https://www.tandfonline.com/doi/full/10.1081/PDE-100002243">here</a>).
-        A vector field \(v(x,t)\) can be defined so that
+        For this case a vector field \(v(x,t)\) can be defined so that
         <div class="equation">
             $$
             s(x,t) = -\nabla (I(x,t)v(x,t)).
             $$
         </div>
-        The inner product is defined as 
+        The inner product of the Riemannian manifold is defined as 
         <div class="equation">
             $$
             \langle s, s \rangle = \min \int |v(x,t)|^2 I(x,t )dx .
@@ -268,30 +295,30 @@
 
 
 
+
         <h2>The Cummulative Distribution Transform </h2>
 
-        
         Consider the measures \(p \in \Omega_p \subset \mathcal{R} \) and \(q \in \Omega_q \subset \mathcal{R} \) 
         with probability spaces \( (\mathcal{X}, \Sigma(\mathcal{X}), p) \) and \( (\mathcal{Y}, \Sigma(\mathcal{Y}), q) \) respectively.
         Denote the density functions \( dp(x) = p(x)dx \) and \( dq(x) = q(x)dx \).
-        We can write the distribution functions as
+        A transport map \( T: \Omega_p \rightarrow\Omega_ \) that pushes /( p(x) /) onto /( q(x) /) can be expressed as 
         <div class="equation">
             $$
-            P(x) = \int_{ \inf(\mathcal{X}) }^T(x) T( q(x) )  dx.
+            T(X) = P^{-1}( Q(x)).
+            $$
+        </div> 
+        and
+        <div class="equation">
+            $$
+            Q(X) = P^(T(x)).
             $$
         </div>
-        For continous cumulative distribution functions,
+        which through the derivative becomes
         <div class="equation">
             $$
-           p(x) = T^{-1}(x)q(T(x)) 
-            $$.
+            q(X) = T(x)' p^(T(x)).
+            $$
         </div>
-        A transport map \( T: \mathcal{X} \rightarrow \mathcal{Y} \) that pushes /( p(x) /) onto /( q(x) /) can be expressed as 
-        <div class="equation">
-            $$
-            T(X) = Q^{-1}( P(x)).
-            $$
-        </div>.
         We assume that \(T\) is an element of the \(L^2\) function space, i.e. it is square integrable
         <div class="equation">
             $$
@@ -302,25 +329,18 @@
         Consider a function \( \hat{p}: \mathcal{X} \rightarrow \mathbb{R} \) as
         <div class="equation">
             $$
-            \hat{p}(x) = (T(x) -x)\sqrt{q(x)}.
+            \hat{q}(x) = (T(x) - x)\sqrt{p(x)}.
             $$
         </div>
-        This defines the Cumulative Distribution Transform (CDT) of \(p\) with respect to \(q\).
-        The inverse of the Cumulative Distribution Transform (CDT) is
+        This defines the Cumulative Distribution Transform (CDT) of \(q\) with respect to \(p\). 
+        Note, that the \(L^2\) norm of the CDT \( \hat{q}(x) \) corresponds to the \(2-\)Wasserstein distance between the densities \(p(x)\) and \(q(x)\).
+        In fact the CDT is isometric to the \(2-\)Wasserstein distance.
+        The inverse of the Cumulative Distribution Transform (CDT) of \( \hat{q}(x) \) is defined as
         <div class="equation">
             $$
-            q(y) = T^{-1}(y)p( T^{-1}(y) ) 
+            q(y) = T^{-1}(y)'p( T^{-1}(y) ) 
             $$.
         </div>
-        We define 
-        <div class="equation">
-            $$
-            \hat{q}(y) =(T(x) - \mathbb{I}) \sqrt{p(x)}^{0.5}.
-            $$.
-        </div>
-        The \(L^2\) norm of the $(\hat{q}(y))$ is the 2-Wasserstein distance between the densities \(p\) and \(q\).
-
-
 
         See <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> 
         for more details and examples on the uniform distribution and gaussian distribution, 
@@ -328,16 +348,20 @@
         Figure three and five show how overlapping gaussian distributions and non-convex (but disjoint) sets can 
         be seperated linearly after application of the transform.
         The CDT is a non-linear transformation. 
-        Its properties are listed <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> and are not repeated.
+        Certain non-linear transformations (such as scaling, translation and composition) become linear in the transform space, enabling the application of linear methods. 
+        These properties are listed <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">here</a> and are not repeated.
         Find a video <a href="https://www.youtube.com/watch?v=khkSOleeEno">here</a> on the CDT.
 
         
+
 
         <h2> Slicing and expected Transport Plans</h2>
 
 
 
 
+
+        <h2> Notation </h2>
         <br><br>
         A notational pecularity is  \( T_{\#}P \), which corrsponds to a new probability distribution induced by \( P \) through the mapping \( T \). 
         Consider the optimal transport map \( T:  \mathbb{R}^d \rightarrow  \mathbb{R}^d \), 
@@ -371,7 +395,18 @@
         <a href="https://www.damtp.cam.ac.uk/research/cia/files/teaching/Optimal_Transport_Notes.pdf">Introduction to Optimal Transport</a>,
         <br>
         <a href="https://www.sciencedirect.com/science/article/pii/S1063520317300076">The cumulative distribution transform and linear pattern classification</a>,
-        </p>
+        
+    </p>
+
+
+
+
+
+
+
+
+
+
 
         </body>
         </html>
