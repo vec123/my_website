@@ -124,9 +124,33 @@
    This principle makes the remarkable statement that a system is in equilibrium if one adds the inertial forces to the impressed forces.
    It can be interpreted as a change of perspective. 
    Instead of considering the acceleration due to an impressed force from the perspective of a fixed observer, we take the perspective of the moving particle.
-   For this moving observer, the particle appears at rest at all times and experiencing impressed forces and inertial forces. 
+   For this moving observer, the particle appears at rest at all times since experiences impressed forces and inertial forces do not perform work. 
+
+
+
 
    <h3>Generalized coordinates, conservative forces and energy conservation</h3>
+   Let us consider a mapping from the position space \(r\) to the generalized coordinates \(q\), i.e. \(r = f(q)\), so that
+   the jacobian matrix
+   <div class="equation">
+    $$
+    \frac{\partial r}{\partial q} = \begin{pmatrix} \frac{\partial x}{\partial q_1} & ... & \frac{\partial x}{\partial q_n} \\ \frac{\partial y}{\partial q_1} & ... & \frac{\partial y}{\partial q_n} \\ \frac{\partial z}{\partial q_1} & ... & \frac{\partial z}{\partial q_n} \end{pmatrix}
+    $$
+   </div>
+   has rank \(n\), i.e defines a regular matrix. This implies that there exists, at least locally, a regular map with a regular inverse. 
+   Such a map is bijective, smooth and differentiable. 
+   It defines a change of coordinates between the position coordinates and the generalized coordinates.
+   Furthermore the vectors \( \frac{\partial r}{\partial q_i} \) form a basis of the tangent space of the position space at the point \(r\).
+   Its direction is corresponds to the coordinate line defined by \(q_i\).
+   The number of generalized coordinates is equal to the number of degrees of freedom of the system.
+   For example, if a system can only move on a \(2d-\)surface, only two generalized coordinates are needed to express all possible values of \(r\) locally.
+   The variation of the position vector \(r\) can be expressed as 
+    <div class="equation">
+     $$
+     \delta r = \sum_i \frac{\partial r}{\partial q_i} \delta q_i = \sum_i \delta r_i \frac{\partial r}{\partial q_i} = \delta q \frac{\partial r}{\partial q}
+     $$
+    </div>
+
    Let us denote    
    <div class="equation">
     $$
@@ -140,7 +164,7 @@
    Important quantities are the kinetic energy \(T\) and potential energy \(V\) in generalized coordinates
     <div class="equation">
      $$
-     T = \frac{1}{2} \sum_i\sum_j a_{i,j}(q,t) \dot{q_i}\dot{q_j} +  \sum_i b_i(q,t) \dot{q_i} + \frac{1}{2} c(q,t)
+     T = \frac{1}{2} \sum_i\sum_j a_{i,j}(q,t) \dot{q_i}\dot{q_j} +  \sum_i b_i(q,t) \dot{q_i} + \frac{1}{2} c(q,t) = T_2 + T_1 + T_0
      $$
     </div>
     and 
@@ -164,7 +188,7 @@
     $$
    </div> 
    where \( \delta V = \nabla V \delta r \).
-  Replacing \(\delta r \) by \(dr\), we obtain 
+   Replacing \(\delta r \) by \(dr\), we obtain 
   <div class="equation">
     $$
     dw =  d V +  madr = d V +  m a v dt = d V + \frac{1}{2} \frac{d}{dt} mv^2 dt = d ( V+T ) = 0,
