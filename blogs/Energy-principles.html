@@ -138,7 +138,7 @@
 
    <h3>Generalized coordinates, conservative forces and energy conservation</h3>
    Let us consider a mapping from the position space \(r\) to the generalized coordinates \(q\), i.e. \(r = f(q)\), so that
-   the jacobian matrix
+   the Jacobian matrix
    <div class="equation">
     $$
     \frac{\partial r}{\partial q} = \begin{pmatrix} \frac{\partial x}{\partial q_1} & ... & \frac{\partial x}{\partial q_n} \\ \frac{\partial y}{\partial q_1} & ... & \frac{\partial y}{\partial q_n} \\ \frac{\partial z}{\partial q_1} & ... & \frac{\partial z}{\partial q_n} \end{pmatrix}
@@ -149,6 +149,10 @@
    It defines a change of coordinates between the position coordinates and the generalized coordinates.
    Furthermore the vectors \( \frac{\partial r}{\partial q_i} \) form a basis of the tangent space of the position space at the point \(r\).
    Its direction is corresponds to the coordinate line defined by \(q_i\).
+   The coordinates \(q\) are the generalized coordinates of the system and correspond to its degrees of freedom.
+   We write \(x_i = f_{x_i}(q_1,...,q_n)\), \(y_i = f_{y_i}(q_1,...,q_n)\) and \(z_i = f_{z_i}(q_1,...,q_n)\) 
+   for the position of the \(i-th\) particle in the generalized coordinates. Or, more generally \(r_i = f_i(q_1,...,q_n)\).
+   <br><br>
    The variation of the position vector \(r\) can be expressed as 
     <div class="equation">
      $$
@@ -163,23 +167,20 @@
     </div>
     The number of generalized coordinates is equal to the number of degrees of freedom of the system.
     For example, if a system can only move on a \(2d-\)surface, only two generalized coordinates are needed to express all possible values of \(r\) locally.
-    The constraint of the system is enforced by the reactive forces \(R\), which are orthogonal to the allowed variations and thus do not enter the work function.
-
-   Let us denote    
-   <div class="equation">
-    $$
-    \sum_h Q_h \delta q_h = \sum_i F_i  \delta r_i = 0,
-    $$
-   </div>
-   as the work of the impressed forces described as displacements in the coordinates \(r\) and \(q\) respectively.
-   The coordinates \(q\) are the generalized coordinates of the system and correspond to its degrees of freedom.
-   We write \(x_i = f_{x_i}(q_1,...,q_n)\), \(y_i = f_{y_i}(q_1,...,q_n)\) and \(z_i = f_{z_i}(q_1,...,q_n)\) 
-   for the position of the \(i-th\) particle in the generalized coordinates.
-   Important quantities are the kinetic energy \(T\) and potential energy \(V\) in generalized coordinates
+    Again, the motion constraint of the system is enforced by the reactive forces \(R\), which are orthogonal to the allowed variations and thus do not enter the work function.
+    Let us denote    
     <div class="equation">
-     $$
-     T = \frac{1}{2} \sum_i\sum_j a_{i,j}(q,t) \dot{q_i}\dot{q_j} +  \sum_i b_i(q,t) \dot{q_i} + \frac{1}{2} c(q,t) = T_2 + T_1 + T_0
-     $$
+    $$
+    \delta w_F  = \sum_i F_i  \delta r_i =  \sum_h Q_h \delta q_h = delta w_Q ,
+    $$
+    </div>
+    as the work of the impressed forces described as displacements in the coordinates \(r\) and \(q\) respectively.
+    <br><br>
+    Important quantities are the kinetic energy \(T\) and potential energy \(V\) expressed in generalized coordinates
+    <div class="equation">
+    $$
+    T = \frac{1}{2} \sum_i\sum_j a_{i,j}(q,t) \dot{q_i}\dot{q_j} +  \sum_i b_i(q,t) \dot{q_i} + \frac{1}{2} c(q,t) = T_2 + T_1 + T_0
+    $$
     </div>
     and 
     <div class="equation">
@@ -187,23 +188,24 @@
     V = \sum_i V_i = \sum_i V_i(q_1,...,q_n, \dot{q}_1,...,\dot{q}_n)
     $$
     </div>
-   We might assume that the real work done by the forces corresponds to the derivative of a scalar function \(U = -V \).
-   This scalar function \(V\) is often position (but not velocity) dependant. 
-   Then it is called the potential energy and corresponds to the negative work that can be done by a particle.  
-   We obtain \(F = -\nabla_r  V \) and  \(Q_h = -\nabla_q V \) by derivation of the scalar function. 
-   This is the definition of conservative forces.
-   \(Q_h\) is the generalized force and \(F\) is the force in position space.
-   Forces which are derivable from a single scalar function are called monogenic. 
-   If the scalar function is only position dependent, they are called conservative. 
-   Under the assumption of monogenic forces we can write the D'Alemberts principle as
-   <div class="equation">
+    <br><br>
+    Often we assume that the  forces are derivativable from a scalar function \(U = -V \).
+    This scalar function \(V\) is often position (but not velocity) dependent. 
+    Then it is called the potential energy and corresponds to the negative work that can be done by a particle.  
+    We obtain \(F = -\nabla_r  V \) and  \(Q_h = -\nabla_q V \) by derivation of the scalar function. 
+    This is the definition of conservative forces.
+    \(Q_h\) is the generalized force and \(F\) is the force in position space.
+    Forces which are derivable from a single scalar function are called monogenic. 
+    If the scalar function is only position dependent, they are called conservative. 
+    Under the assumption of monogenic forces we can write the D'Alemberts principle as
+    <div class="equation">
     $$
     \delta w = F\delta r - ma\delta r  = - \delta V -  ma\delta r = 0, 
     $$
-   </div> 
-   where \( \delta V = \nabla V \delta r \).
-   Replacing \(\delta r \) by \(dr\), we obtain 
-  <div class="equation">
+    </div> 
+    where \( \delta V = \nabla V \delta r \).
+    Replacing \(\delta r \) by \(dr\), we obtain 
+   <div class="equation">
     $$
     dw =  d V +  madr = d V +  m a v dt = d V + \frac{1}{2} \frac{d}{dt} mv^2 dt = d ( V+T ) = 0,
     $$
