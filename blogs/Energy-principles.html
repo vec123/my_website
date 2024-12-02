@@ -243,7 +243,13 @@
    Note, that for conservative forces \(F = - nabla_r V\) and  \(Q_h = - nabla_q V \), 
    and that \(Q = F \frac{\partial r}{\partial q} \).
    <br>
-   Consider the following relationship   
+   Consider,
+   <div class="equation">
+    $$
+    ma\delta r = m \frac{d}{dt} (v\delta r) = m \frac{d}{dt} (v \delta r ) -   m v \frac{d}{dt} (\delta r)
+    $$
+   </div> 
+   and the following relationship   
    <div class="equation">
     $$
     \frac{\partial r}{\partial q} = \frac{\partial vdt}{\partial \dot{q}dt} = \frac{\partial v}{\partial \dot{q}}
@@ -268,10 +274,10 @@
     $$
    </div>
    These are the Lagrange equations of motion in improper form. 
-   If \(Q_h \) is conservative, (i.e.  \(Q_h = -\nabla_q V = \frac{\partial V}{\partial q }\) with \(V\) only position dependent), then
+   If \(Q_h \) is conservative, (i.e.  \(Q = -\nabla_q V = \frac{\partial V}{\partial q }\) with \(V\) only position dependent), then
     <div class="equation">
      $$
-     Q_h = \frac{\partial V}{\partial q } = \frac{d}{dt} \frac{\partial T}{\partial \dot{q}}   - \frac{\partial T}{\partial q} 
+     Q = \frac{\partial V}{\partial q } = \frac{d}{dt} \frac{\partial T}{\partial \dot{q}}   - \frac{\partial T}{\partial q} 
      $$
      $$
      = \frac{\partial V}{\partial q } + \frac{d}{dt} \frac{\partial V}{\partial \dot{q}}
