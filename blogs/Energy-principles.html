@@ -843,7 +843,7 @@ In the Hamiltonian form, ignorable variables are handled by replacing \(p_n\) wi
 Given the notion of the phase space we can include time as a position variable in the phase space and consider an independent parameter \( \tau \) 
 for path parameterization. We call the phase space including time the extended phase space. 
 Time is simply regarded as a positional variable \( t = q_{n+1} \) with an associated momentum \( p_t = p_{n+1} \).
-We can write the action integral
+We can write the extended action integral
 <div class="equation">
     $$
     A= \int L(q_1,...q_n,q_{n+1}, q_1',...,q_{n}') q_{n+1}' d\tau = \int L_1 d\tau
@@ -889,14 +889,14 @@ so that
     p_{n+1} q_[n+1]' = - \sum_{i=1}^{n} \frac{\partial L_1}{\partial q_i'} q_i' +  L_1 =  - \sum_{i=1}^{n} p_i q_i' +  L_1 = - H(q_1,...,q_{n+1}, p_1,...,p_n)
     $$
 </div>
-by considering again the legendre transform. Considering the actual variation \(q_{n+1}' = 1 = dt\) we \( p_{n+1}  = - H(q_1,...,q_{n+1}, p_1,...,p_n) \)
+by considering again the legendre transform. 
+If we choose \(\tau\) so that \(q_{n+1}' = \frac{dq_{n+1}}{d\tau} = 1\) we obtain \( p_{n+1}  = - H(q_1,...,q_{n+1}, p_1,...,p_n) \)
 which inserted into the extended action integral gives
 <div class="equation">
     $$
-    A = \int \sum_{i=1}^{n+1} p_i q_i' d\tau = \int \sum_{i=1}^{n} p_i q_i' - H d\tau = \int \sum_{i=1}^{n} p_i q_i' - H dq_{n+1}
+    A =  \int \sum_{i=1}^{n} p_i q_i' - H(q_1,...,q_{n+1}, p_1,...,p_n) dq_{n+1}.
     $$
 </div>
-
 However, any other functional relationship between the \(q_i\) and \(p_i\) is possible. 
 Thus we use the more general form \(K = 0\).
 The integral \(A\) is to be made stationary under this constraint. By adding the time to the phase space, every system becomes conservative.
@@ -906,7 +906,7 @@ We can incorporate the constraint into the integral by the \(\lambda\) method an
     \bar{A} = \int \sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
     $$.
 </div>
-By proper choice of \(\tau\) we can set \( \lambda = 1\) and the form of the form
+By proper choice of \(\tau\) we can set \( \lambda = 1\) and obtain the form
 <div class="equation"></div>
     $$
     \bar{A} = \int \sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau
@@ -936,9 +936,31 @@ If \(K = p_{n+1} + H = p_t + H\), then the equations of motion are
     p_{n+1}' = - \frac{\partial H}{\partial q_{n+1}}
     $$
 </div>
+
+These are the extended Hamiltonian equations of motion. 
+Time is regarded as a positional variable, so that even time dependent systems can be treated as conservative.
+The derivation of the extended equations of motion is enabled by the introduction of a new independent parameter \(\tau\) which determines the phase-space evolution.
+This independent parameter is chosen so that \(q_{n+1}' = \frac{dq_{n+1}}{d\tau} = 1 \).
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <h2>Canonical Transformations</h2>
-The equations derived up until here are not neseccarily easy to solve. Transformations can help to simplify the equations.
-A transformation is called canonical if it preserves the action integral. Then also the equations of motion are preserved.
+The equations derived up until here are not easy to solve. Transformations can help to simplify the equations.
+A transformation is called canonical if it preserves the action integral. 
+As a consequence also the equations of motion are preserved (which is very important for allowed transformations). 
 The equations of motion  
 <div class="equation"></div>
     $$
@@ -947,11 +969,10 @@ The equations of motion
     $$
     \dot{p}_i = - \frac{\partial H}{\partial q_i}
     $$
-</div> are obtained from a Lagranian in canonical form \(L = \sum_i p_i \dot{q}_i - H \/). 
-This form is preserved if \( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i \). 
+</div> are obtained from a Lagranian in canonical form \(L = \sum_i p_i \dot{q}_i - H /). 
 Just like the Lagrangian, the Hamiltonian is invariant to point-transformations.
-If time is included in the phase space, the Hamiltonian is invariant to point-transformations in the extended phase space. 
-We have
+Therefore, the functional form is preserved if a point-transformation satisfies \( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i \). 
+For the extended phase space we have
 <div class="equation"></div>
     $$
     \dot{q}_i = \frac{\partial H}{\partial p_i} + p_t \partial t
@@ -964,7 +985,7 @@ corresponding to \( K = p_t + H \). In this case \(K\) is invariant to point-tra
 We have \(H' = H + p_t - p_\bar{t} \).
 The invariance principle \( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i \),
 requires at least one additional functional relation \( f(q_1,...,1_n, Q_1,...,Q_n) = 0 \),
- else all the \(p_i\) and \(P_i\) would vanish due to the independent arbitrary variations.
+else all the \(p_i\) and \(P_i\) would vanish due to the independent arbitrary variations.
 Prescription of these constraints classifies a general Mathieu transformation. 
 We can have up to \(n\) such constraints, leading to more or less restricted forms.
 By the Lagrangian \(\lambda\) method we can incorporate the constraints 
