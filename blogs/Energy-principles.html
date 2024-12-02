@@ -171,10 +171,11 @@
     Let us denote    
     <div class="equation">
     $$
-    \delta w_F  = \sum_i F_i  \delta r_i =  \sum_h Q_h \delta q_h = delta w_Q ,
+    \delta w_F  = F \delta r =  \sum_i F_i  \delta r_i =  F \frac{\partial r}{\partial q}\delta q =  \sum_h Q_h \delta q_h =  Q \delta q = delta w_Q ,
     $$
     </div>
-    as the virtual work of the impressed forces described in terms of virtual displacements \(\delta r\) and \(\delta q\) respectively.
+    as the virtual work of the impressed forces described in terms of virtual displacements \(\delta r\) and \(\delta q\) respectively. 
+    From the relation above we have \(Q = F \frac{\partial r}{\partial q} \).
     <br><br>
     Important quantities are the kinetic energy \(T\) and potential energy \(V\) expressed in generalized coordinates
     <div class="equation">
@@ -216,7 +217,7 @@
    In generalitzed coordinates we have
     <div class="equation">
      $$
-     \delta w = F \frac{\partial r}{\partial q}\delta q - ma \frac{\partial r}{\partial q}\delta q =  Q \delta q + \frac{1}{2} \sum_{i,j}\frac{d}{dt} a_ij \dot{q_i}\dot{q_j} dt = 0
+     \delta w = F \frac{\partial r}{\partial q}\delta q - ma \frac{\partial r}{\partial q}\delta q = -\nabla_q V  + \frac{1}{2} \sum_{i,j}\frac{d}{dt} a_ij \dot{q_i}\dot{q_j} dt =  d ( V+T ) =0
      $$
     </div>
 
