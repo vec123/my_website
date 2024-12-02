@@ -109,10 +109,17 @@
    We will consider that the reactive forces \(R\) are ideal, in the sense that they do not do any work, i.e. \(R \delta r = 0 \).
    If we use the special variation \(\delta r = dr\), this condition means that the reactive forces are orthogonal to the motion. 
    For more general variations, the ideality condition states that the reactive forces are orthogonal to all allowed variations.
-   This assumption of ideal reactive forces holds for many systems. 
-   It fails for example for frictional forces, deformations, non-holonomic (velocity dependent) constraints, 
-   contacts with slip-stick conditions and non-equilibrium systems. 
-   Although, this might seem like a big restriction, assuming ideality is very powerful and used in many models 
+   As an example, consider a ball on a table.
+   Any impressed force not orthogonal to the table will perform work.
+   The ball is accelerated, creating an equivalent inertial force. 
+   The reactive force is orthogonal to the table and does not perform work. It reacts to gravity.
+   It is only dependent on the position of the system, not its velocity and enforces a position dependent (holonomic) constraint.
+   This assumption of ideal reactive forces holds for many systems.   
+   The constraints act as scalar functions from which the reactive forces can be derived; i.e. the holonomic constraint causes a conservative reactive force.
+   More general constraints can be velocity dependent (non-holonomic).  
+   These might consider frictional forces, deformations, contacts with slip-stick conditions and non-equilibrium systems.
+   The reactive frictional force is not ideal, it performs work and depends on the velocity of the object.
+   Although the assumption of purely ideal reactive forces might seem like a big restriction, it is used in many models 
    (similar to how most mathematical models are friction-free and offer deep insight nontheless).  
    Under this assumption we obtain the following equation of equilibrium
    <div class="equation">
@@ -124,8 +131,8 @@
    This principle makes the remarkable statement that a system is in equilibrium if one adds the inertial forces to the impressed forces.
    It can be interpreted as a change of perspective. 
    Instead of considering the acceleration due to an impressed force from the perspective of a fixed observer, we take the perspective of the moving particle.
-   For this moving observer, the particle appears at rest at all times since experiences impressed forces and inertial forces do not perform work. 
-
+   For this moving observer, the particle appears at rest at all times since the experienced impressed forces and inertial forces do not perform work. 
+   In essence, they are equal in all directions in which motion is allowed.
 
 
 
@@ -142,14 +149,21 @@
    It defines a change of coordinates between the position coordinates and the generalized coordinates.
    Furthermore the vectors \( \frac{\partial r}{\partial q_i} \) form a basis of the tangent space of the position space at the point \(r\).
    Its direction is corresponds to the coordinate line defined by \(q_i\).
-   The number of generalized coordinates is equal to the number of degrees of freedom of the system.
-   For example, if a system can only move on a \(2d-\)surface, only two generalized coordinates are needed to express all possible values of \(r\) locally.
    The variation of the position vector \(r\) can be expressed as 
     <div class="equation">
      $$
      \delta r = \sum_i \frac{\partial r}{\partial q_i} \delta q_i = \sum_i \delta r_i \frac{\partial r}{\partial q_i} = \delta q \frac{\partial r}{\partial q}
      $$
     </div>
+    D'Alemberts principle, expressed in generalized coordinates, becomes
+    <div class="equation">
+     $$
+     \delta w = (F - ma)\delta r = (F - ma)  \frac{\partial r}{\partial q} \delta q = 0.
+     $$
+    </div>
+    The number of generalized coordinates is equal to the number of degrees of freedom of the system.
+    For example, if a system can only move on a \(2d-\)surface, only two generalized coordinates are needed to express all possible values of \(r\) locally.
+    The constraint of the system is enforced by the reactive forces \(R\), which are orthogonal to the allowed variations and thus do not enter the work function.
 
    Let us denote    
    <div class="equation">
@@ -195,6 +209,11 @@
     $$
    </div>
    which is the well known theorem of energy conservation for conservative systems.
+
+
+
+
+
 
 
    <h3>The Lagrangian in improper and proper form</h3>
