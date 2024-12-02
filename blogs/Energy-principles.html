@@ -125,6 +125,8 @@
    It can be interpreted as a change of perspective. 
    Instead of considering the acceleration due to an impressed force from the perspective of a fixed observer, we take the perspective of the moving particle.
    For this moving observer, the particle appears at rest at all times and experiencing impressed forces and inertial forces. 
+
+   <h3>Generalized coordinates, conservative forces and energy conservation</h3>
    Let us denote    
    <div class="equation">
     $$
@@ -158,7 +160,7 @@
    Under the assumption of monogenic forces we can write the D'Alemberts principle as
    <div class="equation">
     $$
-    \delta w = F\delta r - ma\delta r  = - \deltaV -  ma\delta r = 0, 
+    \delta w = F\delta r - ma\delta r  = - \delta V -  ma\delta r = 0, 
     $$
    </div> 
    where \( \delta V = \nabla V \delta r \).
@@ -169,6 +171,9 @@
     $$
    </div>
    which is the well known theorem of energy conservation for conservative systems.
+
+
+   <h3>The Lagrangian in improper and proper form</h3>
    Consider \(\delta r = \frac{\partial r}{\partial q} \delta q \), then
    <div class="equation">
     $$
@@ -247,7 +252,8 @@
    
 
 
-   <h3>Apparent Forces</h3>
+   <h2>Apparent Forces via D'Alemberts Principle</h2>
+
    For this section we consider two reference systems which give rise to distinct, but equivalent coordinates \( r \) and \( r' \).
    Let \( r \) correspond to a fixed and \( r' \) to a moving system whose origin is denoted by \( c \)  .
    We might equally well use generalized coordinates \(q\) and \(q'\) for the two systems.
@@ -337,7 +343,20 @@ The total effective force is
 </div> where \(F\) is the impressed force onto the particle.
 
 
-<h2>From D'Alemberts principle to the Lagrangian by variational considerations</h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>The stationary value of a definite integral - From D'Alemberts principle to the Lagrangian by variational considerations</h2>
    D'Alemberts principle is a powerful tool to derive the equations of motion for a system. 
    However, it is not in the for of a definite integral.
    This form is 
@@ -421,6 +440,15 @@ The total effective force is
         $$
     </div>
     <br><br>
+
+
+
+
+
+
+
+    <h3>The action functional</h3>  
+
     D'Alemberts principle can be transformed into such a definite integral by integration with respect to time.
     Consider the time integrated work function with a conservative force
     <div class="equation">
@@ -546,6 +574,11 @@ Since \(t_1\) and \(t_2\) are arbitrary and independent, we obtain the condition
 
 
 
+
+
+
+
+
 <h3>Elimination of variables in the Lagrangian</h3>
 
 We have introduced the quantities \(p_i = \frac{\partial L}{\partial \dot{q}_i}\) (called momentum) so that \(p_i' = \frac{\partial L}{\partial q_i}\). 
@@ -588,7 +621,8 @@ gyroscopic energy terms (linear in velocities).
 
 
 
-<h3>Energy as Momentum associated to Time - Time as ignorable variable</h3>
+
+<h3>Time as ignorable variable - Energy as negative momentum associated to time </h3>
 
 Here we will consider a Lagrangian which has time as ingorable variable.  
 Up until now we considered the time \(t\) as an independent variable. Now we will consider \(q_i\), \(q_i'\), \(t\) 
@@ -661,7 +695,8 @@ The Riemannian line-element might be written as \( \bar{ds}^2 = sum_{j,k} a_{j,k
 
 
 
-<h3>Small Vibrations about a state of equilibrium</h3>
+
+<h3>Small Vibrations about a state of equilibrium - Linearization about a stationary point</h3>
 Consider the kinetic energy 
 <div class="equation">
     $$ 
@@ -744,7 +779,7 @@ We can obtain the general solution for the original coordinates \(q_i(t)\) by th
 
 
 
-<h2>Canonical transformations and Phase Space</h2>
+<h2>Towards the Hamiltionian: Canonical transformations and Phase Space</h2>
 
 By applying a Legendre transform to the Lagrangian we can obtain the Hamiltonian.
 A legendre transform assumes as starting point any function \( F(q_1,....,q_n) \) 
@@ -840,7 +875,7 @@ In the Hamiltonian form, ignorable variables are handled by replacing \(p_n\) wi
 
 
 
-<h2>Time as mechanical variable</h2>
+<h2>Extended phase space - time as mechanical variable</h2>
 Given the notion of the phase space we can include time as a position variable in the phase space and consider an independent parameter \( \tau \) 
 for path parameterization. We call the phase space including time the extended phase space. 
 Time is simply regarded as a positional variable \( t = q_{n+1} \) with an associated momentum \( p_t = p_{n+1} \).
@@ -1059,6 +1094,13 @@ the Poisson brackets can be used to test if a transformation is canonical.
 
 
 <h3>Infinitesimal canoncical transformations</h3>
+
+
+
+
+
+
+<h2>Hamilton Jacobi equations</h2>
 
 
 
