@@ -283,7 +283,7 @@
      = \frac{\partial V}{\partial q } + \frac{d}{dt} \frac{\partial V}{\partial \dot{q}}
      $$
     </div>
-    Since \(\frac{\partial V}{\partial \dot{q}} = 0\) for conservative force fields,
+    Since \(\frac{\partial V}{\partial \dot{q}} = 0\) for velocity independent scalar functions fields,
     we obtain the Lagrangian 
     <div class="equation">
         $$
@@ -300,14 +300,24 @@
         $$
     </div>
   where \(Q_h'\) is the non-conservative part of the generalized force.
-   From d'Alemberts principle we also obtain apparent forces in accelerated reference systems.
+  These equations are the Lagrange equations of motion in proper form.
+  We have derived them from the generalized force and D'Alemberts principle which allows for enables expressing the force in terms of the accelerations. 
+  We have shown that the generalized force is related to the kinetic energy of the system, defining by itself the improper form of the Lagrangian equations.
+  If this force can additionally be expressed as the gradient of a position-dependent scalar function, 
+  the system is conservative and we obtain the proper Lagrangian equations of motion.
+  If the force can not be fully expressed as part of a potential energy, then the corresponding force term is considered seperately.
+  From d'Alemberts principle we can also obtain apparent forces in accelerated reference systems. 
+  This will provide some insights into conservative and non-conservative forces.
    
+
+
+
 
 
    <h2>Apparent Forces via D'Alemberts Principle</h2>
 
    For this section we consider two reference systems which give rise to distinct, but equivalent coordinates \( r \) and \( r' \).
-   Let \( r \) correspond to a fixed and \( r' \) to a moving system whose origin is denoted by \( c \)  .
+   Let \( r \) correspond to a fixed system with origin at zero and \( r' \) to a moving system whose origin is denoted by \( c \)  .
    We might equally well use generalized coordinates \(q\) and \(q'\) for the two systems.
    Consider the relations
     <div class="equation">
@@ -317,13 +327,12 @@
         $$
         \ddot{r} = \ddot{r'} + \ddot{c}
         $$
-    </div> leading to the newtonian forces
+    </div> leading to the Newtonian forces
     <div class="equation">
         $$
         F' = ma' = m \ddot{r'} = m \ddot{r} - m \ddot{c}
         $$.
-    </div> Here \( m \ddot{c} \) corresponds to the inertial forces of the moving system and \( m\ddot{r'} \) 
-    to the inertial forces of a point mass measured from the moving system.  
+    </div> Here \( m \ddot{c} \) corresponds to the inertial forces caused by the movement of the system and \( \ddot{r'} \) corresponds to the movement itself.  
     Correspondingly, \( m \ddot{r} \) are the inertial forces measured from the fixed system.
     The term \( m \ddot{c} \) is called the einstein force.
     The Einstein force is an apparent force in the moving system, i.e. its forces are not 'impressed' from its point of view.
