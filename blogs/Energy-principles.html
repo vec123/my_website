@@ -842,37 +842,63 @@ In the Hamiltonian form, ignorable variables are handled by replacing \(p_n\) wi
 <h2>Time as mechanical variable</h2>
 Given the notion of the phase space we can include time as a position variable in the phase space and consider an independent parameter \( \tau \) 
 for path parameterization. We call the phase space including time the extended phase space. 
-Time is simply regarded as a positional variable with an associated momentum \( p_t \).
-As before we can write
+Time is simply regarded as a positional variable \( t = q_{n+1} \) with an associated momentum \( p_t = p_{n+1} \).
+We can write the action integral
 <div class="equation">
     $$
-    A= \int L(q_1,...,q_n, \frac{q_1'}{q_{n+1}'},..., \frac{q_n'}{q_{n+1}'}, q_{n+1}') q_{n+1}' d\tau = \int L_1 d\tau.
+    A= \int L(q_1,...q_n,q_{n+1}, q_1',...,q_{n}') q_{n+1}' d\tau = \int L_1 d\tau
     $$
-</div>
+</div> 
+where  \( q_i' = \frac{q_i}{d \tau} \) so that \(  A = \int L dq_{n+1} = \int L_1 d\tau\).
+We call the Lagrangian \(L_1\) the extended Lagrangian.
+Let \( q_i' \rightarrow \lambda q_i'\) for all \(i = 1,...,n+1\).
+It can be shown that \(L_1 \rightarrow \lambda L_1\) and thus the action integral ishomogenour of first order in the variables \(q_i\).
 By Eulers theorem on homogenous functions we have
 <div class="equation">
     $$
     \sum_{i=1}^{n+1} \frac{\partial L_1}{\partial q_i'} q_i' = L_1
     $$
 </div>
-so that 
+so that (by consideration of the legendre transform) we have
 <div class="equation">
     $$
     \sum_{i=1}^{n+1} \frac{\partial L_1}{\partial q_i'} q_i' -  L_1 = H_1 = 0
     $$
 </div>
-and therefore
+which allows for a representation of the extended action integral as
 <div class="equation">
     $$
     A = \int \sum_{i=1}^{n+1} \frac{\partial L_1}{\partial q_i'} q_i' d\tau = \int sum_{i=1}^{n+1}p_i q_i' d\tau
     $$.
-</div> Here the Hamiltionan vanishes. It is however replaced by an auxiliary condition which captures the relation
+</div> Here the extended Hamiltionan \(H_1\) vanishes. It is however replaced by an auxiliary condition which captures the relation
  between the \(q_i\) and \(p_i\). We denote this relationship by 
  <div class="equation">
     $$
-   K(q_1,...,q_{n+1}; p_1,....,p_{n+1}) = 0
-    $$.
+   K(q_1,...,q_{n+1}; p_1,....,p_{n+1}) = 0.
+    $$
 </div>
+For example, we can consider 
+<div class="equation">
+    $$
+    p_{n+1} q_[n+1]' + \sum_{i=1}^{n} \frac{\partial L_1}{\partial q_i'} q_i' -  L_1 = H_1 = 0
+    $$
+</div>
+so that
+<div class="equation">
+    $$
+    p_{n+1} q_[n+1]' = - \sum_{i=1}^{n} \frac{\partial L_1}{\partial q_i'} q_i' +  L_1 =  - \sum_{i=1}^{n} p_i q_i' +  L_1 = - H(q_1,...,q_{n+1}, p_1,...,p_n)
+    $$
+</div>
+by considering again the legendre transform. Considering the actual variation \(q_{n+1}' = 1 = dt\) we \( p_{n+1}  = - H(q_1,...,q_{n+1}, p_1,...,p_n) \)
+which inserted into the extended action integral gives
+<div class="equation">
+    $$
+    A = \int \sum_{i=1}^{n+1} p_i q_i' d\tau = \int \sum_{i=1}^{n} p_i q_i' - H d\tau = \int \sum_{i=1}^{n} p_i q_i' - H dq_{n+1}
+    $$
+</div>
+
+However, any other functional relationship between the \(q_i\) and \(p_i\) is possible. 
+Thus we use the more general form \(K = 0\).
 The integral \(A\) is to be made stationary under this constraint. By adding the time to the phase space, every system becomes conservative.
 We can incorporate the constraint into the integral by the \(\lambda\) method and obtain
 <div class="equation">
