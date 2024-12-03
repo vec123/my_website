@@ -530,25 +530,25 @@ The advantage of a formulation as stationary value of an integral lies in the an
     \int F dt = \int - \nabla_r V dt = \int Q \frac{\partial q}{\partial r }  dt = \int - \nabla_q V  \frac{\partial q}{\partial r } dt.
     $$
    </div>
-   For the term corresponding to the inertial forces we have
+   For the term corresponding to the inertial forces we have (through integration by parts)
    <div class="equation">
     $$
-    \int \frac{d}{dt}(mv) \delta r dt =  [mv \delta r]_{t_1}^{t_2} + \int m v\frac{d}{dt} \delta r dt 
+    \int \frac{d}{dt}(mv) \delta r dt =  -[mv \delta r]_{t_1}^{t_2} + \int m v\frac{d}{dt} \delta r dt 
     $$
     $$
-    = [mv \delta r]_{t_1}^{t_2} +  \int m v \delta \frac{d}{dt} r dt
+    = -[mv \delta r]_{t_1}^{t_2} +  \int m v \delta \frac{d}{dt} r dt
     $$
     $$
-    = [mv \delta r]_{t_1}^{t_2} +  \int m v \delta v dt
+    = -[mv \delta r]_{t_1}^{t_2} +  \int m v \delta v dt
     $$
     $$
-    = [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \int m \delta v^2  dt
+    = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \int m \delta v^2  dt
     $$
     $$
-    = [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
+    = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
     $$
     $$
-    = ( [m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2 dt) \frac{\partial r}{\partial q}.
+    = ( -[m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2 dt) \frac{\partial r}{\partial q}.
     $$
 </div>
 Thus we obtain 
@@ -557,19 +557,25 @@ Thus we obtain
         \int \delta w dt 
         $$
         $$
-        = \int - \delta r V dt  + [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt 
+        = \int - \delta r V dt  - [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt 
         $$
         $$
-        =  (\int -\delta_q V dt + [m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2)\frac{\partial r}{\partial q} dt
+        =  (\int -\delta_q V dt - [m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2)\frac{\partial r}{\partial q} dt
         $$
         $$
-        = \delta r \int T dt + \delta \int V dt + [mv \delta r]_{t_1}^{t_2} = \delta r ( \int T-V dt + [mv]_{t_1}^{t_2} )
+        = \delta r \int T dt - \delta \int V dt + [mv \delta r]_{t_1}^{t_2} = \delta r ( \int T-V dt - [mv]_{t_1}^{t_2} )
         $$
         $$
-        = ( \int L dt + [ m \dot{q} ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
+        = ( \int L dt - [ m \dot{q} ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
         $$
         $$
-        =  ( \int L dt + [\frac{ \partial L }{ \partial \dot{q} } ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
+        =  ( \int L dt - [\frac{ \partial L }{ \partial \dot{q} } ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
+        $$
+        $$
+        = \int L dt \delta r - [\frac{ \partial L }{ \partial \dot{r} } ]_{t_1}^{t_2} \delta r 
+        $$
+        $$
+        = \int L dt  \frac{\partial r}{\partial q} \delta q - [\frac{ \partial L }{ \partial \dot{r} } ]_{t_1}^{t_2}  \frac{\partial r}{\partial q}\delta q 
         $$
 </div>
    Summarizing, we have 
