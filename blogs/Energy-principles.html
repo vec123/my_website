@@ -418,19 +418,19 @@ The total effective force is
 
 
 <h2>The stationary value of a definite integral - From D'Alemberts principle to the Lagrangian by variational considerations</h2>
-   D'Alemberts principle is a powerful tool to derive the equations of motion for a system. 
+   D'Alemberts principle is a powerful statement which determines the equations of motion for a system. 
    However, it is not in the for of a definite integral.
+   The advantage of a formulation as stationary value of an integral lies in the analytical solution which can be obtained.
    This form is 
    <div class="equation">
     $$
     I = \int F(y,y',x)dx
     $$
    </div>
-  where \( F(y,y',x) \) is any function of three variables. 
+  where \( F(y,y',x) \) is any function of the three variables \( y,y',x \). 
   By the calculus of variation, one can solve analytically for the stationary value of this integral. 
-  Also if \( F(y,y',y'',x) \) contains \( 4 \) variables including the second derivative. 
-  However, for we will not consider this case.
-  The advantage of a formulation as stationary value of an integral lies in the analytical solution which can be obtained.
+  It is also possible if \( F(y,y',y'',x) \) contains \( 4 \) variables including the second derivative. 
+  However, we will not consider this case.
   Consider the integral 
   <div class="equation">
     $$
@@ -439,6 +439,7 @@ The total effective force is
    </div>
    for which we want to find \(y = f(x)\) which makes the integral an extremum (or at least stationary) 
    with boundary conditions \( f(a) = \alpha \) and \( f(b) = \beta \). 
+   For problems of this kind variational calculus is a powerful tool.
    Consider \( z_k = \frac{\Delta y}{\Delta x}|_{x=x_k} =\frac{ y_{k+1} - y_{k} }{ x_{k+1} - x_{k} } \).
    In this discrete formulation the integral becomes a sum 
     <div class="equation">
@@ -453,7 +454,7 @@ The total effective force is
         \frac{\partial F}{\partial y} (x_{k+1} - x_{k}) + \frac{\partial F}{\partial y'}|_{x=x_{k}} -\frac{\partial F}{\partial y'}|_{x=x_{k+1}} 
         $$
         $$
-        =   \frac{\partial I}{\partial y}
+        =  \frac{\partial I}{\partial y}
         $$
     </div>
     which through multiplication  by  \( \frac{d}{dx} = \lim_{x_{k+1} - x{k} \rightarrow 0} \frac{1}{x_{k+1} - x{k}} \) leads to
@@ -469,15 +470,15 @@ The total effective force is
         $$.
     </div> 
     This is a necessary and sufficient condition.
-    In this intuitive derivation we have considered \(x\) as the independent variable.
+    In this intuitive (not rigorous) derivation we have considered \(x\) as the independent variable.
     In the Lagrangian formulation of mechanics, often the time is the independent variable. 
     However, extensions where time is considered as a position variable are possible.
-    Here another independent variable \(\tau\) is required and all positional variables (including time) are considered functions of \(\tau\).
+    In these cases another independent variable \(\tau\) is required and all positional variables (including time) are considered functions of \(\tau\).
     <br><br>
     Let us consider 
     <div class="equation">
         $$
-        \delta I = \int \delta F(y,y',x) d\x = \epsilon \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' dx
+        \delta I = \int \delta F(y,y',x) dx = \epsilon \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' dx
         $$
     </div>
     where \( \delta F(y,y',x) = F(y + \epsilon \Phi,y'+  \epsilon \Phi', x)  - \delta F(y,y',x) = \epsilon  (\frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' ) \)
@@ -497,9 +498,11 @@ The total effective force is
     we obtain
     <div class="equation">
         $$
-         \frac{\delta I}{\epsilon} = \int (\frac{\partial F}{\partial y} - \frac{d}{d\tau} \frac{\partial F}{\partial y'}) \Phi dx +  [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2}
+         \frac{\delta I}{\epsilon} = 
+         \int (\frac{\partial F}{\partial y} - \frac{d}{d\tau} \frac{\partial F}{\partial y'}) \Phi dx +  [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2}
         $$
     </div>
+    Th
     <br><br>
 
 
