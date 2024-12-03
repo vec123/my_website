@@ -767,12 +767,17 @@ leading to the action integral
     A =  \int_{\tau} \sqrt{2(E-V)} \frac{\bar{ds}}{d\tau} d\tau = \int_{\tau} \sqrt{2(E-V)} \bar{ds} .
     $$
 </div> Note that the free parameter is \( \tau \). Define \(d\sigma^2 = (E-V) \bar{ds}^2\). 
-Then the action integral becomes \( A = \int_{\tau} d\sigma^2 \), 
-which relates the motion of the particle to the motion along some geodsic of a given Riemannian space. 
+Then the action integral becomes \( A = \int_{\tau} d\sigma^2 \).
+Choosing a stationary action relates the motion of the particle to the motion along some geodsic of a given Riemannian space. 
 The time does not appear in the equations, but can be solved for by the given relation \( t' = f(\tau)\).
-The Riemannian line-element might be written as \( \bar{ds}^2 = sum_{j,k} a_{j,k} dq_j dq_k \) so that \(T =  \frac{1}{2} \sum_{j,k} a_{j,k} \frac{dq_j}{dt} \frac{dq_k}{dt} \).
-
-
+In generalized coordinates,
+the Riemannian line-element can be written as \( \bar{ds}^2 = sum_{j,k} a_{j,k} dq_j dq_k \),
+so that \(T =  \frac{1}{2} \frac{d\bar{s}}{dt}^2 = \frac{1}{2} \sum_{j,k} a_{j,k} \frac{dq_j}{dt} \frac{dq_k}{dt} \).
+<br><br>
+The relationships in this section relate the action integral to the motion of a particle along a geodesic in a Riemannian space.
+This is a powerful tool in the study of the motion of particles in conservative systems.
+The derivations have assumed a conservative system, where the kinetic energy is quadratic in the velocities and the potential energy is only position dependent.
+However, time independence is not required.
 
 
 
@@ -957,17 +962,17 @@ The elimination of ignorable variables is particularily simple in the Hamiltonia
 If we allow for a variation at the limits we have
 <div class="equation">
     $$
-    \delta A = \int \delta L dt = [ \sum_i \delta p_i \delta{q}_i ]_{t_1}^{t_2} .
+    \delta A = \int \delta L dt = [ \sum_i p_i \delta{q}_i ]_{t_1}^{t_2} .
     $$
 </div>
-Recall that the coefficient of \(\delta p_i \) is zero so that this variation does not contribute to boundary terms. 
-In the Hamiltonian form, ignorable variables are handled by replacing \(p_n\) with a constant. Then the action integral is reduced to
+Recall that the coefficient of \(\delta p_i \) is zero (by definition of the legendre transfrom) so that its variation does not contribute to boundary terms. 
+In the Hamiltonian form, ignorable variables are handled by replacing \(p_n\) with a constant.
+Then the action integral is reduced to
 <div class="equation">
     $$
     \delta A =  \int \delta L dt = \int \delta (\sum_{i=^1}^{n-1} p_i \dot{q}_i  - H) dt = 0,
     $$
-</div> since \( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} \) is constant and can be dropped in the variation.
-
+</div> since \( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} \) is constant.
 
 
 
@@ -985,7 +990,7 @@ We can write the extended action integral
     A= \int L(q_1,...q_n,q_{n+1}, q_1',...,q_{n}') q_{n+1}' d\tau = \int L_1 d\tau
     $$
 </div> 
-where  \( q_i' = \frac{q_i}{d \tau} \) so that \(  A = \int L dq_{n+1} = \int L_1 d\tau\).
+where  \( q_i' = \frac{q_i}{d \tau} \) so that \(  A = \int L dt = \int L_1 d\tau\).
 We call the Lagrangian \(L_1\) the extended Lagrangian.
 Let \( q_i' \rightarrow \lambda q_i'\) for all \(i = 1,...,n+1\).
 It can be shown that \(L_1 \rightarrow \lambda L_1\) and thus the action integral is homogenous of first order in the variables \(q_i\).
