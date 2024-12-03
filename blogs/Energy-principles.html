@@ -1019,7 +1019,7 @@ which allows for a representation of the extended action integral as
    K(q_1,...,q_{n+1}; p_1,....,p_{n+1}) = 0.
     $$
 </div>
-For example, we can consider 
+For example, we single out the variable \(p_{n+1}\) and obtain
 <div class="equation">
     $$
     p_{n+1} q_{n+1}' + \sum_{i=1}^{n} \frac{\partial L_1}{\partial q_i'} q_i' -  L_1 = H_1 = 0
@@ -1041,7 +1041,9 @@ which inserted into the extended action integral gives
 </div>
 However, any other functional relationship between the \(q_i\) and \(p_i\) is possible. 
 Thus we use the more general form \(K = 0\).
-The integral \(A\) is to be made stationary under this constraint. By adding the time to the phase space, every system becomes conservative.
+The integral \(A\) is to be made stationary under this constraint. 
+Since the constraint depends only on the position variables, it can be incorporated by the \(\lambda\) method, giving rise to additional potentials with corresponding conservative forces. 
+By adding the time to the phase space, every system becomes conservative.
 We can incorporate the constraint into the integral by the \(\lambda\) method and obtain
 <div class="equation">
     $$
@@ -1051,7 +1053,7 @@ We can incorporate the constraint into the integral by the \(\lambda\) method an
 By proper choice of \(\tau\) we can set \( \lambda = 1\) and obtain the form
 <div class="equation"></div>
     $$
-    \bar{A} = \int \sum_{i=1}^{n+1}p_i q_i' - \lambda K d\tau.
+    \bar{A} = \int \sum_{i=1}^{n+1}p_i q_i' -  K d\tau.
     $$
 </div>
 By the stationary value of a definite integral we obtain the equations of motion
