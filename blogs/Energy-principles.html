@@ -415,13 +415,14 @@ The total effective force is
 
 
 
+<h2>From D'Alemberts principle to the Lagrangian by variational considerations</h2>
+D'Alemberts principle is a powerful statement which determines the equations of motion for a system. 
+However, it is not in the for of a definite integral.
+The advantage of a formulation as stationary value of an integral lies in the analytical solution which can be obtained.
 
+<h3>The stationary value of a definite integral </h3>
 
-<h2>The stationary value of a definite integral - From D'Alemberts principle to the Lagrangian by variational considerations</h2>
-   D'Alemberts principle is a powerful statement which determines the equations of motion for a system. 
-   However, it is not in the for of a definite integral.
-   The advantage of a formulation as stationary value of an integral lies in the analytical solution which can be obtained.
-   This form is 
+   The mathematical form of a definite integral is 
    <div class="equation">
     $$
     I = \int F(y,y',x)dx
@@ -520,43 +521,43 @@ The total effective force is
     Consider the time integrated work function with a conservative force
     <div class="equation">
     $$
-    \delta \int  w dt = \int \sum_i ( \delta F_i - \frac{d}{dt}(m_iv_i) ) \delta r_i dt
+    \delta \int  w dt = \int ( \delta F- \frac{d}{dt}(mv) ) \delta r dt = \int  ( \delta Q - \frac{d}{dt}(mv) ) \frac{\partial r}{\partial q }\delta q dt 
     $$
     </div>
     For the term corresponding to the impressed forces we have
    <div class="equation">
     $$
-    \int \sum_i F_i dt = \int - \nabla V dt.
+    \int F dt = \int - \nabla_r V dt = \int Q \frac{\partial q}{\partial r }  dt = \int - \nabla_q V dt \frac{\partial q}{\partial r } dt  .
     $$
    </div>
    For the term corresponding to the inertial forces we have
    <div class="equation">
     $$
-    \int \sum_i \frac{d}{dt}(m_iv_i) \delta r_i dt =  -[m_iv_i \delta r_i]_{t_1}^{t_2} + \int m_i v_i \frac{d}{dt} \delta r_i dt 
+    \int \frac{d}{dt}(mv) \delta r dt =  -[mv \delta r]_{t_1}^{t_2} + \int m v\frac{d}{dt} \delta r dt 
     $$
     $$
-    = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \int m_i v_i \delta \frac{d}{dt} r_i dt
+    = -[mv \delta r]_{t_1}^{t_2} +  \int m v \delta \frac{d}{dt} r dt
     $$
     $$
-    = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \int m_i v_i \delta v_i dt
+    = -[mv \delta r]_{t_1}^{t_2} +  \int m v \delta v dt
     $$
     $$
-    = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \int m_i \delta v_i v_i dt
+    = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \int m \delta v^2  dt
     $$
     $$
-    = -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
+    = -[mv \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
     $$.
 </div>
  Thus we obtain 
 <div class="equation">
         $$
-        \int \delta w dt  = \int - \delta V dt  -[m_iv_i \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m_i v_i^2 dt
+        \int \delta w dt  = \int - \delta V dt  -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
         $$
         $$
-        = \delta \int T dt - \delta \int V dt - [m_iv_i \delta r_i]_{t_1}^{t_2} = \delta \int T-V dt - [m_iv_i \delta r_i]_{t_1}^{t_2}
+        = \delta \int T dt - \delta \int V dt - [mv \delta r]_{t_1}^{t_2} = \delta \int T-V dt - [mv \delta r]_{t_1}^{t_2}
         $$
         $$
-        =  \delta \int L dt - [m_iv_i \delta r_i]_{t_1}^{t_2}
+        =  \delta \int L dt - [mv \delta r]_{t_1}^{t_2}
         $$
 </div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero.
@@ -565,7 +566,7 @@ The total effective force is
    leading to
    <div class="equation">
      $$
-     \delta \int w dt =  \delta \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial q_i} \delta q_i]_{t_1}^{t_2}
+     \delta \int w dt =  \delta \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial q} \delta q_i]_{t_1}^{t_2}
     $$.
    </div>
    If \(q\) corresponds to \(r\), this corresponds to \( \delta \int w dt = \delta \int L dt - [m_iv_i \delta r_i]_{t_1}^{t_2} \) obtained by time integration of D'Alemberts principle.
