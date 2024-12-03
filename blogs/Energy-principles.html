@@ -551,7 +551,7 @@ The advantage of a formulation as stationary value of an integral lies in the an
     = ( [m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2 dt) \frac{\partial r}{\partial q}.
     $$
 </div>
- Thus we obtain 
+Thus we obtain 
 <div class="equation">
         $$
         \int \delta w dt 
@@ -572,17 +572,13 @@ The advantage of a formulation as stationary value of an integral lies in the an
         =  ( \int L dt + [\frac{ \partial L }{ \partial \dot{q} } ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
         $$
 </div>
-   If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero.
-   In the derivation above we consider a parameterization in the real world position coordinates. 
-   We can also consider a parameterization in the generalized coordinates \(q\), so that \(L(q_1,...,q_n; q_1',...,q_n')\) instead of \(L(r_1,...,r_n; r_1',...,r_n')\), 
-   leading to
+   Summarizing, we have 
    <div class="equation">
      $$
-     \delta \int w dt =  \delta \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial q} \delta q]_{t_1}^{t_2}
+     \delta \int w dt =  \delta \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial \dot{q}} \delta q]_{t_1}^{t_2}
     $$.
    </div>
-   If \(q\) corresponds to \(r\), this corresponds to \( \delta \int w dt = \delta \int L dt - [m_iv_i \delta r_i]_{t_1}^{t_2} \) obtained by time integration of D'Alemberts principle.
-   Note that the boundary term vanishes if the variation is zero at the limits (which is often the case). 
+   If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero. 
    Furthermore, being a constant, it has no effect on the stationary value.
    Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral.
    A particle in motion is in equilibrium if
@@ -593,10 +589,9 @@ The advantage of a formulation as stationary value of an integral lies in the an
    </div>
    where \( A \) is called the action functional. 
    This is Hamiltions principle of least action. 
-   Here we have assumed that the work done by the forces is derivable from a single scalar function. 
-   The impressed forces must be monogenic.
-   If they are conservative, they are automatically monogenic. 
-   However, also non-conservative and time-dependant forces can be monogenic. 
+   Here we have assumed that the work done by the forces is derivable from a single scalar function which is only positon dependent. 
+   The impressed forces must be monogenic and even conservative.
+   Note, that also non-conservative and time-dependant forces can be monogenic. 
    For polygenic forces the transformation of d'Alemberts principle into a definite integral is not possible.
    By the calculus of variation for the stationary value of definite integrals we obtain the necessary and sufficient condition as the Lagrange equations of motion
    <div class="equation">
@@ -604,15 +599,17 @@ The advantage of a formulation as stationary value of an integral lies in the an
     \frac{\partial L}{\partial q_i} - \frac{d}{dt} \frac{\partial L}{\partial q_i'} = 0
     $$.
    </div>
-   <br><br>
-   Advantages over D'Alemberts principle are that the equations of motion do not contain the accelerations, but only the velocities.
+   These are the Lagrangian equations of motion, obtained from time integration of d'Alemberts principle and the stationary value of a definite integral.
+   A strong advantage of this form over D'Alemberts principle is that the equations of motion do not contain the accelerations, but only the velocities.
    The equations of motion are of first order in time, not second order and completely determined by a scalar function /(L(q,q')/).
-   The principle of least action relates motion to the stationary value of /( \delta \int L(q,q') dt/).
- 
+   The principle of least action relates motion to the stationary value of /( \delta A = \int \delta w dt = \delta \int L(q,q') dt/).
+
+   <br><br>
+
    If we consider the secial variation \(\delta q = \epsilon \dot{q} \) can obtain  the condition 
    <div class="equation">
     $$
-    \delta \int w dt =   \int \epsilon \dot{L}(q_1,...,q_n; q_1',...,q_n') dt + \epsilon [\frac{\partial L}{\partial \dot{q}_i}  \delta q]_{t_1}^{t_2} = 0
+    \delta \int w dt =   \int \epsilon \dot{L}(q_1,...,q_n; q_1',...,q_n') dt + \epsilon [\frac{\partial L}{\partial \dot{q}}  \delta q]_{t_1}^{t_2} = 0
    $$
   </div>
     which leads to
@@ -627,6 +624,8 @@ Since \(t_1\) and \(t_2\) are arbitrary and independent, we obtain the condition
         L - \sum_i p_i \dot{q}_i = const.
         $$,
     </div> where /( p_i = \frac{\partial L}{\partial \dot{q}_i} /).
+
+    <br><br>
 
     If /( T = \frac{1}{2} \sum_{i,k} a_{i,k} \dot{q}_i \dot{q}_k /) and /(V/) is indepenend from /(\dot{q}_i/), 
     then /(p_i = \frac{ \partial T}{ \partial \dot{q}_i}/) and /( \sum_i p_i \dot{q}_i = 2T /).
