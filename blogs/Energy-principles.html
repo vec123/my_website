@@ -310,10 +310,6 @@
   This will provide some insights into conservative and non-conservative forces.
    
 
-
-
-
-
    <h2>Apparent Forces via D'Alemberts Principle</h2>
 
    For this section we consider two reference systems which give rise to distinct, but equivalent coordinates \( r \) and \( r' \).
@@ -605,8 +601,41 @@ Thus we obtain
 
 
   
+   <h3>Constrained motion</h3>
 
+   Often we consider systems which are constrained in their motion. 
+   This constraint is enforced by the reactive forces \(R\), which are assumed to be ideal w.r.t allowed variations (i.e. orthogonal to all possible motions).
+   Ideal reactive forces are conservative and can be derived from a scalar function \(U\), which is only position dependent.
+   They can only represent holonomic constraints, i.e. constraints which are only dependent on the position of the system.
+   To show how the reactive forces can be derived from a scalar function, consider the constraint \(f(q) = 0\), representing a surface or line on which the motion occurs. 
+   Due to the constrain, \(\delta q \) is not arbitrary, but must satisfy the constraint, i.e. we can not freely vary \(q\).
+  Consider
+    <div class="equation">
+     $$
+    \delta f(q) = \frac{\partial f(q_1)}{partial q_1} \delta q_1 + ... + \frac{\partial f(q_n)}{partial q_n} \delta q_n = 0,
+     $$
+    </div> which holds always due to \( f(q) = 0 \).
+    We write the new action as
+    <div class="equation">
+        $$
+       \delta A =  \delta \int L dt + \int \lambda \delta f(q) dt ,
+        $$
+    </div> which is permissible since  \( \delta f(q) = 0 \).
+    By the variational calculus, the stationary value of \(A\) is found when
+    <div class="equation">
+        $$
+        \frac{\partial L}{\partial q_i} - \frac{d}{dt} \frac{\partial L}{\partial q_i'} + \lambda \frac{\partial f}{\partial q_i} = 0
+        $$
+    </div>
+    for all \(i\).   We have an additional parameter \(\lambda\) which corresponds to the motion constraint. 
+    If there is \(m\) constraints, we have more than \(m\) \(\lambda\) values. 
+    These can be choosen so that the coefficients of \(m\) position coordinates \(q_i\) vanish. 
+    Then the variations \(\delta q \) can be chosen freely and the equations of motion fulfill the constraints.
+    The physical interpretation of  \( \lambda \frac{\partial f}{\partial q_i} \) is that of the reactive force enforcing the constraint.
+    Note, that this force is indeed orthogonal to the motion constrained on \(f(q) = 0 \). 
+    The terms \( \lambda_l f_l(q) \) correspond to potential energies which give rise to the conservative and ideal reactive forces that enforce the kinematical constraints.
 
+    
    <h4>Conservation of energy in special cases</h4>
    If we consider the secial variation \(\delta q = \epsilon \dot{q} \), allowing for variations at the limits, we obtain the relation 
    <div class="equation">
@@ -910,7 +939,7 @@ This transformation is symmetrical. Not all variables need to participate in the
 For variables which do not participate, we have
 <div class="equation">
     $$
-\frac{\partial F}{\partial w_i} = -\frac{\partial G}{partial w_i}
+\frac{\partial F}{\partial w_i} = -\frac{\partial G}{\partial w_i}
     $$
 </div>.
 Application to the Lagrangian leads to
@@ -959,21 +988,7 @@ In incompressible fluids, certain integral invaraits are preserved, for example 
 <br>
 <h3>Ignorale variables</h3>
 The elimination of ignorable variables is particularily simple in the Hamiltonian form.
-If we allow for a variation at the limits we have
-<div class="equation">
-    $$
-    \delta A = \int \delta L dt = [ \sum_i p_i \delta{q}_i ]_{t_1}^{t_2} .
-    $$
-</div>
-Recall that the coefficient of \(\delta p_i \) is zero (by definition of the legendre transfrom) so that its variation does not contribute to boundary terms. 
-In the Hamiltonian form, ignorable variables are handled by replacing \(p_n\) with a constant.
-Then the action integral is reduced to
-<div class="equation">
-    $$
-    \delta A =  \int \delta L dt = \int \delta (\sum_{i=^1}^{n-1} p_i \dot{q}_i  - H) dt = 0,
-    $$
-</div> since \( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} \) is constant.
-
+By consideration of the adapted Lagrangian and the definition of the Legendre transform, it becomes apparent that ignorable variables are simply dropped from the Hamiltonian.
 
 
 
