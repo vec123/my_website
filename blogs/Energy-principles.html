@@ -533,22 +533,22 @@ The advantage of a formulation as stationary value of an integral lies in the an
    For the term corresponding to the inertial forces we have
    <div class="equation">
     $$
-    \int \frac{d}{dt}(mv) \delta r dt =  -[mv \delta r]_{t_1}^{t_2} + \int m v\frac{d}{dt} \delta r dt 
+    \int \frac{d}{dt}(mv) \delta r dt =  [mv \delta r]_{t_1}^{t_2} + \int m v\frac{d}{dt} \delta r dt 
     $$
     $$
-    = -[mv \delta r]_{t_1}^{t_2} +  \int m v \delta \frac{d}{dt} r dt
+    = [mv \delta r]_{t_1}^{t_2} +  \int m v \delta \frac{d}{dt} r dt
     $$
     $$
-    = -[mv \delta r]_{t_1}^{t_2} +  \int m v \delta v dt
+    = [mv \delta r]_{t_1}^{t_2} +  \int m v \delta v dt
     $$
     $$
-    = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \int m \delta v^2  dt
+    = [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \int m \delta v^2  dt
     $$
     $$
-    = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
+    = [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
     $$
     $$
-    = ( -[m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2 dt) \frac{\partial r}{\partial q}.
+    = ( [m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2 dt) \frac{\partial r}{\partial q}.
     $$
 </div>
  Thus we obtain 
@@ -557,16 +557,19 @@ The advantage of a formulation as stationary value of an integral lies in the an
         \int \delta w dt 
         $$
         $$
-        = \int - \delta_r V dt  -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt 
+        = \int - \delta r V dt  + [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt 
         $$
         $$
-        =  (\int -\delta_q V dt - [m\dot{q} \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2)\frac{\partial r}{\partial q} dt
+        =  (\int -\delta_q V dt + [m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2)\frac{\partial r}{\partial q} dt
         $$
         $$
-        = \delta \int T dt - \delta \int V dt - [mv \delta r]_{t_1}^{t_2} = \delta \int T-V dt - [mv \delta r]_{t_1}^{t_2}
+        = \delta r \int T dt + \delta \int V dt + [mv \delta r]_{t_1}^{t_2} = \delta r ( \int T-V dt + [mv]_{t_1}^{t_2} )
         $$
         $$
-        =  \delta \int L dt - [mv \delta r]_{t_1}^{t_2}
+        = ( \int L dt + [ m \dot{q} ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
+        $$
+        $$
+        =  ( \int L dt + [\frac{ \partial L }{ \partial \dot{q} } ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
         $$
 </div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero.
@@ -575,7 +578,7 @@ The advantage of a formulation as stationary value of an integral lies in the an
    leading to
    <div class="equation">
      $$
-     \delta \int w dt =  \delta \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial q} \delta q_i]_{t_1}^{t_2}
+     \delta \int w dt =  \delta \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial q} \delta q]_{t_1}^{t_2}
     $$.
    </div>
    If \(q\) corresponds to \(r\), this corresponds to \( \delta \int w dt = \delta \int L dt - [m_iv_i \delta r_i]_{t_1}^{t_2} \) obtained by time integration of D'Alemberts principle.
