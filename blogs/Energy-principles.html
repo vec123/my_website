@@ -575,7 +575,7 @@ Thus we obtain
    Summarizing, we have 
    <div class="equation">
      $$
-     \delta \int w dt =   \delta r \int L(r,r') dt + [mv \delta r]_{t_1}^{t_2} = ( \int L(q; q') dt \delta q + [\frac{\partial L}{\partial \dot{q}}  \delta q  ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q}.
+     \delta \int w dt =   \delta r \int L(r,r') dt + [mv \delta r]_{t_1}^{t_2} = ( \delta \int L(q; q') dt + [\frac{\partial L}{\partial \dot{q}}  \delta q  ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q}.
     $$
    </div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero. 
@@ -895,11 +895,17 @@ We obtain
     G(v_1,...,v_n) \text{ and } F(u_1,...,u_n)
     $$
 </div> 
-This transformation is symmetrical. Not all variables need to participate in the transformation.
+This transformation is symmetrical. Not all variables need to participate in the transformation. 
+For variables which do not participate, we have
+<div class="equation">
+    $$
+\frac{\partial F}{\partial w_i} = -\frac{\partial G}{partial w_i}
+    $$
+</div>.
 Application to the Lagrangian leads to
 <div class="equation">
     $$
-    p_i = \frac{\partial L}{\partial \dot{q}_i} \text{ and }   \dot{q}_i = \frac{\partial F}{\partial p_i}
+    p_i = \frac{\partial L}{\partial \dot{q}_i} \text{ and }   \dot{q}_i = \frac{\partial H}{\partial p_i}
     $$
     $$
     H = \sum_i p_i \dot{q}_i - L \text{ and } L = \sum_i p_i \dot{q}_i  - H
@@ -908,16 +914,16 @@ Application to the Lagrangian leads to
     H(q_1,...,q_n, p_1,...,p_n;t) \text{ and } L(q_1,...,q_n, \dot{q}_1,...,\dot{q}_n;t)
     $$.
 </div> 
-Note that \(H\) is of first order in all its variables and thus defines a \(2n\)-dimensional hypersurface in the \(2n+1\)-dimensional phase space.
+Note that \(H\) is of first order in all its variables, we can regard \(p\) and \(q\) as position variables.
 We can write the equations of motion in the Hamiltonian form
 <div class="equation">
     $$
     \dot{q}_i = \frac{\partial H}{\partial p_i} 
     $$
     $$
-     \dot{p}_i = - \frac{\partial H}{\partial q_i}
-    $$.
-</div> Since \(q_i\) and \(p_i\) are positional variables, the Hamiltonian equations of motion only contain time on the left-hand side. 
+     \dot{p}_i = - \frac{\partial H}{\partial q_i},
+    $$
+</div> with the equations arising from the properties of the legendre transform. Since \(q_i\) and \(p_i\) are positional variables, the Hamiltonian equations of motion only contain time on the left-hand side. 
 This is opposed to the Lagrangian equations of motion which express velocities (not positions) as functions of time.
 Remeber that the coefficient of \(\delta p_i \) is zero due to the legendre transform. Thus we may write
 <div class="equation">
