@@ -566,22 +566,22 @@ Thus we obtain
         = \delta r \int T dt - \delta \int V dt + [mv \delta r]_{t_1}^{t_2} = \delta r ( \int T-V dt - [mv]_{t_1}^{t_2} )
         $$
         $$
-        = ( \int L dt - [ m \dot{q} ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
+        =  \int L dt \frac{\partial r}{\partial q} \delta  - [ m \dot{q} \frac{\partial r}{\partial q} \delta q  ]_{t_1}^{t_2} 
         $$
         $$
-        =  ( \int L dt - [\frac{ \partial L }{ \partial \dot{q} } ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q} \delta q 
+        =   \int L dt \frac{\partial r}{\partial q} \delta  - [\frac{ \partial L }{ \partial \dot{q} } \frac{\partial r}{\partial q} \delta q  ]_{t_1}^{t_2} 
         $$
         $$
         = \int L dt \delta r - [\frac{ \partial L }{ \partial \dot{r} } ]_{t_1}^{t_2} \delta r 
         $$
         $$
-        = \int L dt  \frac{\partial r}{\partial q} \delta q - [\frac{ \partial L }{ \partial \dot{r} } ]_{t_1}^{t_2}  \frac{\partial r}{\partial q}\delta q 
+        = \int L dt  \frac{\partial r}{\partial q} \delta q - [\frac{ \partial L }{ \partial \dot{r} } \frac{\partial r}{\partial q}\delta q  ]_{t_1}^{t_2}  
         $$
 </div>
    Summarizing, we have 
    <div class="equation">
      $$
-     \delta \int w dt =  \delta q \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial \dot{q}}]_{t_1}^{t_2}  \delta q
+     \delta \int w dt =  \int L(q_1,...,q_n; q_1',...,q_n') dt  \frac{\partial r}{\partial q}\delta q + [\frac{\partial L}{\partial \dot{q}}    \frac{\partial r}{\partial q}\delta q  ]_{t_1}^{t_2} 
     $$.
    </div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero. 
