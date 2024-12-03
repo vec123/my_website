@@ -527,7 +527,7 @@ The advantage of a formulation as stationary value of an integral lies in the an
     For the term corresponding to the impressed forces we have
    <div class="equation">
     $$
-    \int F dt = \int - \nabla_r V dt = \int Q \frac{\partial q}{\partial r }  dt = \int - \nabla_q V dt \frac{\partial q}{\partial r } dt  .
+    \int F dt = \int - \nabla_r V dt = \int Q \frac{\partial q}{\partial r }  dt = \int - \nabla_q V dt \frac{\partial q}{\partial r } dt.
     $$
    </div>
    For the term corresponding to the inertial forces we have
@@ -545,13 +545,19 @@ The advantage of a formulation as stationary value of an integral lies in the an
     = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \int m \delta v^2  dt
     $$
     $$
-    = -[mv \delta r_i]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
-    $$.
+    = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
+    $$
+    $$
+    = -[mv \frac{\partial r}{\partial q}\delta q]_{t_1}^{t_2} +  \frac{1}{2} \frac{\partial v}{\partial \dot{q}} \delta \int m v^2 dt
+    $$
+    $$
+    = -[m\dot{q} \frac{\partial r}{\partial q}\delta q]_{t_1}^{t_2} +  \frac{1}{2} \frac{\partial v}{\partial \dot{q}} \delta \int m \dot{q}^2 dt.
+    $$
 </div>
  Thus we obtain 
 <div class="equation">
         $$
-        \int \delta w dt  = \int - \delta V dt  -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
+        \int \delta w dt  = \int - \delta_r V dt  -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt =  (\int -\delta_q V dt - [m\dot{q} \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2)\frac{\partial r}{\partial q} dt
         $$
         $$
         = \delta \int T dt - \delta \int V dt - [mv \delta r]_{t_1}^{t_2} = \delta \int T-V dt - [mv \delta r]_{t_1}^{t_2}
