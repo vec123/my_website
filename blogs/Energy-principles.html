@@ -133,6 +133,10 @@
    Instead of considering the acceleration due to an impressed force from the perspective of a fixed observer, we take the perspective of the moving particle.
    For this moving observer, the particle appears at rest at all times since the experienced impressed forces and inertial forces do not perform work. 
    In essence, they are equal in all directions in which motion is allowed.
+   For now we will consider free unconstrained particles. 
+   In a few sections we explain how kinematical constraints can be included in the formulation as additional potential energy terms.
+
+
 
 
 
@@ -226,6 +230,7 @@
 
 
 
+
    <h3>The Lagrangian in improper and proper form</h3>
    Consider \(\delta r = \frac{\partial r}{\partial q} \delta q \), then
    <div class="equation">
@@ -309,6 +314,8 @@
   From d'Alemberts principle we can also obtain apparent forces in accelerated reference systems. 
   This will provide some insights into conservative and non-conservative forces.
    
+
+
 
    <h2>Apparent Forces via D'Alemberts Principle</h2>
 
@@ -567,13 +574,13 @@ Thus we obtain
         $$
         =  \delta \int L dt  - [\frac{ \partial L }{ \partial \dot{q} } \delta q]_{t_1}^{t_2} 
         $$
-</div>
-   Summarizing, we have 
-   <div class="equation">
+    </div>
+    Summarizing, we have 
+    <div class="equation">
      $$
      \delta \int w dt =   \delta r \int L(r,r') dt + [mv \delta r]_{t_1}^{t_2} = ( \delta \int L(q; q') dt + [\frac{\partial L}{\partial \dot{q}}  \delta q  ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q}.
     $$
-   </div>
+    </div>
    In the following we vary between definite limits, so that the boundary term vanishes because at the limits the variation is zero. 
    Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral.
    A particle in motion is in equilibrium if
@@ -601,7 +608,7 @@ Thus we obtain
 
 
   
-   <h3>Constrained motion</h3>
+   <h3>Motion constrains as potential energies</h3>
 
    Often we consider systems which are constrained in their motion. 
    This constraint is enforced by the reactive forces \(R\), which are assumed to be ideal w.r.t allowed variations (i.e. orthogonal to all possible motions).
@@ -634,9 +641,10 @@ Thus we obtain
     The physical interpretation of  \( \lambda \frac{\partial f}{\partial q_i} \) is that of the reactive force enforcing the constraint.
     Note, that this force is indeed orthogonal to the motion constrained on \(f(q) = 0 \). 
     The terms \( \lambda_l f_l(q) \) correspond to potential energies which give rise to the conservative and ideal reactive forces that enforce the kinematical constraints.
+    <br><br>
+    This shows how positional constrains can be incorporated into the action integral as potential energies.
 
-    
-   <h4>Conservation of energy in special cases</h4>
+   <h3>Conservation of energy in special cases</h3>
    If we consider the secial variation \(\delta q = \epsilon \dot{q} \), allowing for variations at the limits, we obtain the relation 
    <div class="equation">
     $$
