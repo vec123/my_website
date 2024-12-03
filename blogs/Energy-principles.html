@@ -578,8 +578,7 @@ Thus we obtain
      \delta \int w dt =   \delta r \int L(r,r') dt + [mv \delta r]_{t_1}^{t_2} = ( \delta \int L(q; q') dt + [\frac{\partial L}{\partial \dot{q}}  \delta q  ]_{t_1}^{t_2} ) \frac{\partial r}{\partial q}.
     $$
    </div>
-   If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero. 
-   Furthermore, being a constant, it has no effect on the stationary value.
+   In the following we vary between definite limits, so that the boundary term vanishes because at the limits the variation is zero. 
    Now we can reformulate the principle of d'Alembert as the stationary value of a definite integral.
    A particle in motion is in equilibrium if
    <div class="equation">
@@ -940,22 +939,27 @@ which is minimized by
     \frac{d}{dt} \frac{\partial L}{\partial \dot{p}_i} - \frac{\partial L}{\partial p_i} = 0 - \dot{q}_i + \frac{\partial H}{\partial p_i} = 0
     $$
 </div> which gives rise to the equation of motion in Hamiltonian and Lagrangian form. 
-The transformation into \(2n\) positional space is powerful since it allows for the definition of a velocity field in the phase space.
-Contrary to the Lagrangian equations of motion, the Hamiltonian equations of motion are of first order in time 
-and the behavious of the phase space is similar to that of an incompressible fluid. 
+The transformation into \(2n\) positional space is powerful since the equations of motion define a velocity field in the phase space.
+Contrary to the Lagrangian equations of motion, the Hamiltonian equations of motion are of first order in time.
+The behaviour of the motion in phase space is similar to that of an incompressible fluid. 
 In incompressible fluids, certain integral invaraits are preserved, for example the circulation and the volume.
+<br>
+<br>
+<h3>Ignorale variables</h3>
+The elimination of ignorable variables is particularily simple in the Hamiltonian form.
 If we allow for a variation at the limits we have
 <div class="equation">
     $$
-    \delta A =  [ \sum_i \delta p_i \delta{q}_i ]_{t_1}^{t_2} 
+    \delta A = \int \delta L dt = [ \sum_i \delta p_i \delta{q}_i ]_{t_1}^{t_2} .
     $$
-</div> (recall that the coefficient of \(\delta p_i \) is zero so that this relation holds always). 
+</div>
+Recall that the coefficient of \(\delta p_i \) is zero so that this variation does not contribute to boundary terms. 
 In the Hamiltonian form, ignorable variables are handled by replacing \(p_n\) with a constant. Then the action integral is reduced to
 <div class="equation">
     $$
-    \delta A =  \int \delta L dt = \int \delta (\sum_{i=^1}^{n-1} p_i \dot{q}_i  - H) dt = 0
+    \delta A =  \int \delta L dt = \int \delta (\sum_{i=^1}^{n-1} p_i \dot{q}_i  - H) dt = 0,
     $$
-</div>, since \( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} \) is constant and can be dropped in the variation.
+</div> since \( \int \ p_n  \dot{q}_n  dt = C_n [q_n]_{t_1}^{t_2} \) is constant and can be dropped in the variation.
 
 
 
