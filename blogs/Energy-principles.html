@@ -581,7 +581,7 @@ Thus we obtain
    Summarizing, we have 
    <div class="equation">
      $$
-     \delta \int w dt =  \delta \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial \dot{q}} \delta q]_{t_1}^{t_2}
+     \delta \int w dt =  \delta q \int L(q_1,...,q_n; q_1',...,q_n') dt + [\frac{\partial L}{\partial \dot{q}}]_{t_1}^{t_2}  \delta q
     $$.
    </div>
    If we vary between definite limits, the boundary term vanishes because at the limits the variation is zero. 
@@ -611,11 +611,11 @@ Thus we obtain
    The principle of least action relates motion to the stationary value of /( \delta A = \int \delta w dt = \delta \int L(q,q') dt/).
 
    <br><br>
-
-   If we consider the secial variation \(\delta q = \epsilon \dot{q} \) can obtain  the condition 
+   <h4>Conservation of energy in special cases</h4>
+   If we consider the secial variation \(\delta q = \epsilon \dot{q} \), allowing for variations at the limits can obtain  the condition 
    <div class="equation">
     $$
-    \delta \int w dt =   \int \epsilon \dot{L}(q_1,...,q_n; q_1',...,q_n') dt + \epsilon [\frac{\partial L}{\partial \dot{q}}  \delta q]_{t_1}^{t_2} = 0
+    \delta \int w dt =   \int \epsilon \dot{L}(q_1,...,q_n; q_1',...,q_n') dt - \epsilon [\frac{\partial L}{\partial \dot{q}} \dot{q}]_{t_1}^{t_2} = 0
    $$
   </div>
     which leads to
@@ -630,9 +630,7 @@ Since \(t_1\) and \(t_2\) are arbitrary and independent, we obtain the condition
         L - \sum_i p_i \dot{q}_i = const.
         $$,
     </div> where /( p_i = \frac{\partial L}{\partial \dot{q}_i} /).
-
     <br><br>
-
     If /( T = \frac{1}{2} \sum_{i,k} a_{i,k} \dot{q}_i \dot{q}_k /) and /(V/) is indepenend from /(\dot{q}_i/), 
     then /(p_i = \frac{ \partial T}{ \partial \dot{q}_i}/) and /( \sum_i p_i \dot{q}_i = 2T /).
     The equation above becomes
@@ -709,7 +707,8 @@ gyroscopic energy terms (linear in velocities).
 
 <h3>Time as ignorable variable - Energy as negative momentum associated to time </h3>
 
-Here we will consider a Lagrangian which has time as ingorable variable.  
+Up until now we have considered the Lagrangian to be independent from time. 
+Here we will consider a Lagrangian which has time as ingnorable variable.  
 Up until now we considered the time \(t\) as an independent variable. Now we will consider \(q_i\), \(q_i'\), \(t\) 
 as functions of some independent parameter \( \tau \).
 Thus
