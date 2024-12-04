@@ -364,22 +364,25 @@
         \frac{dB}{dt} = \Omega \times B + \frac{dB'}{dt}.
         $$
     </div>
-So we obtain (since \( r = r' \) )
+So we obtain 
 <div class="equation">
     $$
-    v = \Omega \times r + v'.
+    v = \Omega \times r + v' = \Omega \times r' + v' .
     $$
 </div>
-and
+Now carfeully consider the acceleration
 <div class="equation">
     $$
-    \frac{dv}{dt}  = \frac{dv'}{dt} + \dot{\Omega} \times r' + \Omega \times v 
+    \frac{dv}{dt} = \Omega \times v  + \frac{d \Omega \times r' + v'}{dt}
     $$
-</div>
-leading, by substitution, to
-<div>
     $$
-    = \frac{dv'}{dt} +2 \Omega \times v' +  \Omega \times ( \Omega \times r') +  \dot{\Omega}  \times r'.
+    = \Omega \times v + \dot{\Omega} \times r' + \Omega \times \frac{dr'}{dt} + \frac{dv'}{dt} 
+    $$
+    $$
+    = \Omega \times (\Omega \times r') + \Omega \times v' + \dot{\Omega} \times r' + \Omega \times v'+ \frac{dv'}{dt}
+    $$
+    $$
+    = \Omega \times (\Omega \times r')  + 2 \Omega \times v' + \dot{\Omega} \times r' + \frac{dv'}{dt}.
     $$
 </div>
 By multiplication with the mass \(m\) we obtain the inertial forces in the rotating system
