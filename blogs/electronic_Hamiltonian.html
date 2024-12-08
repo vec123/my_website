@@ -150,19 +150,24 @@
             (i.e. by energy minimization).
             <br><br>
             The only nobel prize in computation was rewarded for the Kohn–Sham approximation
-             which showed that the probabiliy density of the electrons can be approximated 
-             by function which depends only on the three position coordinates.
+            which showed that the probabiliy density of the electrons can be approximated 
+            by function which depends only on the three position coordinates.
             This is a huge simplification from (\N + n \) parameters to only three parameters.
-            It paved the way for the widely used density functional theory. 
+            It paved the way for the widely used density functional theory (DFT). 
             As the name already suggests, density functional theory ignores the wave function and directly computes
             the probability density. 
             <br><br>
             Another widely used method are Hartree-Fock methods which is based on variatonal methods.
             It considers a set of basis functions for the electron orbitals and parameterizes the wave function as a Slater determinant.
-            This parameterization is antisymmetric and fulfills the Pauli exclusion principle.
-            By using variational methods, the energy is minimized and the wave function is obtained.
+            This parameterization is anti-symmetric and fulfills the Pauli exclusion principle.
+            By using variational methods, the energy is minimized and the wave function can obtained.
             <br><br>
-
+            A molecular system is not necessarily at its minimum-energy state. The presented methods, DFT and Hartree-Fock,
+            both consider the ground state of the system. 
+            Extensions for excited states are possible but more complex.
+            In this blog, I will attempt to describe density functional theory and the Hartree-Fock methods in more detail.
+            I will present some algorithms and point towards exciting research which uses machine learning 
+            to solve the electronic Hamiltonian.
 
 
         </body>
