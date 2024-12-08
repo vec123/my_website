@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>electronic Hamiltonian</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            color: #2c3e50;
+        }
+        p {
+            line-height: 1.6;
+        }
+        .equation {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .equation span {
+            font-family: "Courier New", monospace;
+            background-color: #f9f9f9;
+            display: inline-block;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .highlight {
+            color: red;
+        }
+        .author-date {
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Electronic Hamiltonian</h1>
+
+    <h2>Introduction</h2>
+    <p>The electronic Hamiltonian is the mathematical description for molecular systems. 
+        Application of physical first principles allow for the construction of an energy function which
+        determines all the properties of the system.
+        A molecular system consists of atoms and electrons. 
+        From quantum physics it is known that all matter is subject to the laws of quantum mechanics.
+        However, with increasing scale, the laws of quantum mechanics converge to the laws of classical physics.
+        Generally, speaking protons and neutrons (i.e. nucleons) are considered particles. 
+        They have a mass thousand times greater than that of an electron. 
+        The atomic properties are mostly determined by the electrons. 
+        Being fermions, electrons obey the Pauli exclusion principle which has some interesting consequences. 
+        Without going into detail, no two electrons can occupy the same quantum state.
+        Due to the stron quantum nature of electrons, they can not be considered point particles, nor waves.
+        Instead, the behavious of a quantum particle is described by a wave function, 
+        which is physically interpretable only as its quadratic absolute value.
+        The quadratic absolute value of the wave function is the probability density of the particle.
+    </p>
+    <h2>Building the Energy function</h2>
+    <p>It is clear that the nucleons and electrons of a molecule contribute to its energy. 
+    From elementary physics, the energy of a system is the sum of the kinetic and potential energy.
+    Positive and negative charges attract each other, 
+    while equal charges repel each other, contributing to a potential energy.
+    The respective forces are also called coulomb forces.They depend on the distance between the charges.
+    Nucleons and electrons can be in a state of movement, contributing to kinetic energy.
+    An important approximation we can make is that the kinetic energy of the nucleons is much smaller than that of the electrons.
+    In fact, if we consider a time-scale sensible for the electrons, the nucleons can be considered stationary.
+    This is called the Born-Oppenheimer approximation.
+    Additionally, the mass of the nucleons is much greater than that of the electrons. +
+    Let us write the energy terms of the electronic Hamiltonian:
+    </p>
+    <p> 
+        The total energy is
+            <div class="equation">
+                $$
+                    H = T + V
+                $$
+            </div>
+           where T is the kinetic energy and V is the potential energy.
+            The kinetic energy of the electrons is given by
+            <div class="equation">
+                $$
+                    T_e = - \sum_i \frac{h}{2 m_i} \nabla_{r_i}^2
+                $$
+            </div>
+            and, for the nucleons
+            <div class="equation">
+                $$
+                    T_n = - \sum_i \frac{h}{2 M_i} \nabla_{R_i}^2
+                $$
+            </div>
+            The potential energy due to electron-electron interactions is given by
+            <div class="equation">
+                $$
+                    V_{ee} = - \sum_i\sum_{j \neq i} \frac{e^2}{4 \pi \epsilon_0} \sum_{j \neq i} \frac{1}{|r_i - r_j|}.
+                $$
+            </div>
+            The potential energy due to nucelus-nucelus interactionss is given by 
+            <div class="equation">
+                $$
+                    V_{nn} = - \sum_i\sum_{j \neq i} \frac{Z_i Z_j e^2}{4 \pi \epsilon_0} \sum_{j \neq i} \frac{1}{|R_i - R_j|}.
+                $$
+            </div>
+            The potential energy due to nucleon-electron interactionss is given by 
+            <div class="equation">
+                $$
+                    V_{en} = - \sum_i\sum_{j \neq i} \frac{Z_i e^2}{4 \pi \epsilon_0} \sum_{j \neq i} \frac{1}{|R_i - r_j|}.
+                $$
+            </div>
+        The total energy is written as \(H = T_e + T_n + V_{ee} + V_{nn} + V_{en}\).
+        By the Born-Oppenheimer approximation, 
+        the kinetic energy of the nucleons is neglected so that  \(H = T_e + V_{ee} + V_{nn} + V_{en}\).
+        Thus, the electronic Hamiltonian is given by
+        <div class="equation">
+            $$
+                H_e = - \sum_i \frac{h}{2 m_i} \nabla_{r_i}^2 - \sum_i\sum_{j \neq i} \frac{e^2}{4 \pi \epsilon_0} \sum_{j \neq i} \frac{1}{|r_i - r_j|} - \sum_i\sum_{j \neq i} \frac{Z_i Z_j e^2}{4 \pi \epsilon_0} \sum_{j \neq i} \frac{1}{|R_i - R_j|} - \sum_i\sum_{j \neq i} \frac{Z_i e^2}{4 \pi \epsilon_0} \sum_{j \neq i} \frac{1}{|R_i - r_j|}.
+            $$
+        </div>
+        Note, that the nucleus positions are now fixed parameters and so are their distances and therefore also the arising coulomb forces.
+        Considering the Schrödinger equation, the evolution of an (eigen-)quantum state is described by 
+        <div>
+            $$
+            H_e(r,R) \Phi(r,R) = E(r,R) \Phi(r,R)
+            $$
+        </div>
+        where \(\Phi\) is the wave function and E is an eigenvalue associated with the Hamiltonian and eigen-state \Phi.
+        The function \(E(\cdot,R) \) is called the potential energy surface. It depends only on \(R\). 
+        It is obtained by varying the nucleus positions and recomputing the eigenstate problem.
+        To obtain the actual quantum evolution, the potential energy is added again and
+        <div>
+            $$
+            [ T_n + E(R)] \Phi(R) = E\Phi(R)
+            $$
+        </div>
+        is solved. \(H = H_e + T_n \) is called the molecular Hamiltonian.
+        </p>
+
+        <h2>Computational Complexities</h2>
+        
+            Note, that the electronic Hamiltonian is a many-body problem. 
+            Already in classical phyiscs, many-body problems are hard to solve and generally subject to chaotic complexity.
+            In quantum physics, the situation is even more complex due to quantum mechanical superposition, state collapse and entanglement.
+            The electon-electron interactions require a computational complexity of \(O(N_e^2)\) where \(N_e\) is the number of electrons.
+            The electron-nucleus interactions require a computational complexity of \(O(N_e N_n)\) where \(N_n\) is the number of nucleons.
+            The nucleus-nucleus interactions require a computational complexity of \(O(N_n^2)\).
+            The total computational complexity is \(O(N_e^2 + N_e N_n + N_n^2)\).
+            This makes the electronic Hamiltonian a hard problem to solve. 
+            Given a set of nuclei and electrons it is hard to determine the actual state of the system from first principles
+            (i.e. by energy minimization).
+            <br><br>
+            The only nobel prize in computation was rewarded for the Kohn–Sham approximation
+             which showed that the probabiliy density of the electrons can be approximated 
+             by function which depends only on the three position coordinates.
+            This is a huge simplification from (\N + n \) parameters to only three parameters.
+            It paved the way for the widely used density functional theory. 
+            As the name already suggests, density functional theory ignores the wave function and directly computes
+            the probability density. 
+            <br><br>
+            Another widely used method are Hartree-Fock methods which is based on variatonal methods.
+            It considers a set of basis functions for the electron orbitals and parameterizes the wave function as a Slater determinant.
+            This parameterization is antisymmetric and fulfills the Pauli exclusion principle.
+            By using variational methods, the energy is minimized and the wave function is obtained.
+            <br><br>
+
+
+
+        </body>
+        </html>
+        
