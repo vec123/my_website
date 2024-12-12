@@ -539,7 +539,7 @@ The advantage of a formulation as stationary value of a definite (bounded) integ
     For the term corresponding to the impressed forces we have
    <div class="equation">
     $$
-    \int F dt = \int - \nabla_r V dt = \int Q \frac{\partial q}{\partial r }  dt = \int - \nabla_q V  \frac{\partial q}{\partial r } dt.
+    \delta \int F dt =  \delta \int - \nabla_r V dt = \delta \int Q \frac{\partial q}{\partial r }  dt =  \delta \int - \nabla_q V  \frac{\partial q}{\partial r } dt.
     $$
    </div>
    For the term corresponding to the inertial forces we have (through integration by parts)
@@ -569,13 +569,13 @@ Thus we obtain
         \int \delta w dt 
         $$
         $$
-        = \int - \delta r V dt  - [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt 
+        = \int - \delta \nabla_r V dt  - [mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt 
         $$
         $$
-        =  (\int -\delta_q V dt - [m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2)\frac{\partial r}{\partial q} dt
+        =  (-  \delta \int \nabla_q V dt - [m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2)\frac{\partial r}{\partial q} dt
         $$
         $$
-        = \delta r \int T dt - \delta \int V dt + [mv \delta r]_{t_1}^{t_2} = \delta  \int T-V dt - [mv \delta r]_{t_1}^{t_2} 
+        =  - \delta \int V dt + [mv \delta r]_{t_1}^{t_2} + \delta \int T dt = \delta  \int T-V dt - [mv \delta r]_{t_1}^{t_2} 
         $$
         $$
         =  \delta \int L dt   - [ m \dot{q} \frac{\partial r}{\partial q} \delta q  ]_{t_1}^{t_2} 
@@ -587,7 +587,9 @@ Thus we obtain
     Summarizing, we have 
     <div class="equation">
      $$
-     \delta \int w dt =   \delta r \int L(r,r') dt + [mv \delta r]_{t_1}^{t_2} = ( \delta \int L(q; q') dt + [\frac{\partial L}{\partial \dot{q}}  \frac{\partial r}{\partial q}\delta q  ]_{t_1}^{t_2} ) .
+     \delta \int w dt =   \delta r \int L(r,r') dt + [mv \delta r]_{t_1}^{t_2} 
+     =  \delta \int L(q; q') dt 
+     + [\frac{\partial L}{\partial \dot{q}}  \frac{\partial r}{\partial q}\delta q  ]_{t_1}^{t_2}  .
     $$
     </div>
    In the following we vary between definite limits, so that the boundary term vanishes because at the limits the variation is zero. 
