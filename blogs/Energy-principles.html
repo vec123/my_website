@@ -48,8 +48,8 @@
         of a scalar function (the lagrangian, hamiltonian, or generating function) arise from (work) principles of newtonian mechanics.
         This formulation is the basis for Hamiltonian mechanics and the Hamilton-Jacobi theory.
         It is restricted to the fairly broad class of systems subject to forces, derivable from a single scalar function (monogenic forces).
-        Examples of these forces are known as conservative forces, however, by an extenstion of the state-space also non-conservative
-        forces and time-dependent energy-evolutions can be made monogenic. 
+        Examples of these forces are known as conservative forces, 
+        however, by an extension of the state-space even time and velocity dependent forces can be made monogenic. 
         The details and intricacies will become clearer in the following.
     </p>
 
@@ -66,15 +66,18 @@
                F=ma = m\dot{v} = m\ddot{r}
         $$
     </div>
-    where \( F \) is the force, \( m \) is the mass of the particle and \( a =\dot{v}= \ddot{r}\) is the acceleration ins \(3D\) position space.
+    where \( F \) is the force, \( m \) is the mass of the particle and \( a =\dot{v}= \ddot{r}\) is the acceleration in \(3D\) position space.
     The equation of motion is a second order differential equation, which can be solved by specifying the initial conditions of the system.
     The solution is the trajectory \( r(t) \)  of the particle in position space. 
     An important notion that arises is that of an equilibrium point, which is a point in position space
-    where the force (and thus the acceleration) vanishes. Here, we consider a free particle, 
-    i.e. a particle that is not subject to any constraints and can be moved in arbitrary directions. 
+    where the force (and thus the acceleration) vanishes. 
+    If the velocity is also zero, the particle remains at rest. 
+    This is a stable equilibrium point. 
+    We differ between free particles, 
+    i.e. a particle that is not subject to any constraints and can be moved in arbitrary directions, and constrained particles. 
     Assume the particle were constrained to be located on a plane (e.g. a ball on a table). 
-    We enforce the constraint by \( f(r) = f(x,y,z) = 0 \).
-    The ball is in equilibrium (no acceleration occurs) eventhough the force of gravity is acting on it. 
+    Such a constraint is described by \( f(r) = f(x,y,z) = 0 \).
+    Such a ball is in equilibrium (no acceleration occurs) eventhough the force of gravity is acting on it. 
     This is because a reactive force is acting on the ball, which cancels out the force of gravity. 
     We have
     <div class="equation">
@@ -83,7 +86,7 @@
         $$
     </div>
     where \( R \) is the reactive force.
-    Let us introduce the work-function 
+    Let us introduce the variation of the work-function 
     <div class="equation">
         $$
         \delta w =  F \delta r,
@@ -94,12 +97,10 @@
     Thus, whenever \( \delta \) is used, the reader might replace it with \( d \) to obtain the special variation.
     The difference is that \( \delta \) represents any arbitrary variation not necessarily consistent with the actual motion, 
     wheras \( d \) is consistent. Intuitively speaking, the virtual displacement is a small displacement that is not necessarily real,
-    and virtual work is the work done by the forces on this virtual displacement. 
+    and virtual work  \(\delta w \) is the work done by the forces on this virtual displacement \( \delta r \). 
     It does not necessarily correspond to the real work that is being done. 
-    \( dw \) is a the work performed by a system on a real infitesimal displacement \(dr\), 
-    \(\delta w \) is a (virtual) work done by (imagined) infitesimal (virtual) displacement \( \delta r \). 
+    \( dw \) is a the work performed by a system on a real infinitesimal displacement \(dr\), 
     Thus the variation is merely a generalization of an infinitesimal change. 
-    Generally speaking, the real displacement is tied to a specific parameterization while the variational displacement is not.
     In equilibrium we have
     <div class="equation">
         $$
@@ -1113,6 +1114,9 @@ and conservative forces arising from the motion constraint defined by \(K\).
 This constraint is only position dependant and thus interpretable as a potential energy.
 The derivation of the extended equations of motion is enabled by the introduction of a new independent parameter \(\tau\) which determines the phase-space evolution.
 This independent parameter can be chosen so that \(q_{n+1}' = \frac{dq_{n+1}}{d\tau} = 1 \).
+
+
+
 
 
 
