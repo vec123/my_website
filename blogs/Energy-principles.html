@@ -640,17 +640,17 @@ Thus we obtain
         $$
     </div>
     for all \(i\).   We have an additional parameter \(\lambda\) which corresponds to the motion constraint. 
-    If there is \(m\) constraints, we have more than \(m\) \(\lambda\) values. 
-    These can be choosen so that the coefficients of \(m\) position coordinates \(q_i\) vanish. 
+    For each of the \(m\) constraints, we have one \(\lambda\) value. 
+    The  \(\lambda\) are choosen so that the coefficients of \(m\) position coordinates \(q_i\) vanish. 
     Then the variations \(\delta q \) can be chosen freely and the equations of motion fulfill the constraints.
     The physical interpretation of  \( \lambda \frac{\partial f}{\partial q_i} \) is that of the reactive force enforcing the constraint.
-    Note, that this force is indeed orthogonal to the motion constrained on \(f(q) = 0 \). 
+    Note, that this force is indeed orthogonal to the motion surface \(f(q) = 0 \). 
     The terms \( \lambda_l f_l(q) \) correspond to potential energies which give rise to the conservative and ideal reactive forces that enforce the kinematical constraints.
     <br><br>
     This shows how positional constrains can be incorporated into the action integral as potential energies.
 
    <h3>Conservation of energy in special cases</h3>
-   If we consider the secial variation \(\delta q = \epsilon \dot{q} \), allowing for variations at the limits, we obtain the relation 
+   If we consider the special variation \(\delta q = \epsilon \dot{q} \), allowing for variations at the limits, we obtain the relation 
    <div class="equation">
     $$
     \delta \int w dt =   \int \epsilon \dot{L}(q_1,...,q_n; q_1',...,q_n') dt - \epsilon [ \sum_i \frac{\partial L}{\partial \dot{q_i}} \dot{q_i}]_{t_1}^{t_2} =  0
@@ -665,7 +665,7 @@ Thus we obtain
     and
     <div class="equation">
     $$
-     [ L(q_1,...,q_n; q_1',...,q_n') ]_{t_1}^{t_2}  - [\frac{\partial L}{\partial \dot{q}_i}  \dot{q}]_{t_1}^{t_2} = 0.
+     [ L(q_1,...,q_n; q_1',...,q_n') ]_{t_1}^{t_2}  - [\frac{\partial L}{\partial \dot{q}}  \dot{q}]_{t_1}^{t_2} = 0.
     $$
     </div>
     
@@ -731,7 +731,7 @@ We call
     $$
     \tilde{L} = L - p_n q_n' = L - c_n q_n'
     $$
-</div> the modified lagrangian. The new action integral is /(A = /int \tilde{L} dt /).
+</div> the modified lagrangian. The new action integral is \(A = \int \tilde{L} dt \).
 If there is a kinetic coupling between ignorable and non-ignorable variables, we obtain additional terms which can be interpreted as 
 gyroscopic energy terms (linear in velocities).
 
