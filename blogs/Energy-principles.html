@@ -748,7 +748,7 @@ gyroscopic energy terms (linear in velocities).
 <h3>Time as ignorable variable - Energy as negative momentum associated to time </h3>
 
 Up until now we have considered the Lagrangian to be independent from time. 
-Here we will consider a Lagrangian which has time as an ingnorable variable.  
+Here we will consider a Lagrangian which has time as an ignorable variable.  
 Up until now we considered the time \(t\) as the independent variable. Now we will consider \(q_i\), \(q_i'\), \(t\) 
 as functions of some independent parameter \( \tau \). In essence \(t\) becomes one of the position variables.
 The notation \(q_i'\) denotes the derivative with respect to \( \tau \). Then we have
@@ -808,7 +808,7 @@ Then the action integral becomes \( A = \int_{\tau} d\sigma^2 \).
 Choosing a stationary action relates the motion of the particle to the motion along some geodsic of a given Riemannian space. 
 The time does not appear in the equations, but can be solved for by the given relation \( t' = f(\tau)\).
 In generalized coordinates,
-the Riemannian line-element can be written as \( \bar{ds}^2 = sum_{j,k} a_{j,k} dq_j dq_k \),
+the Riemannian line-element can be written as \( \bar{ds}^2 = \sum_{j,k} a_{j,k} dq_j dq_k \),
 so that \(T =  \frac{1}{2} \frac{d\bar{s}}{dt}^2 = \frac{1}{2} \sum_{j,k} a_{j,k} \frac{dq_j}{dt} \frac{dq_k}{dt} \).
 <br><br>
 The relationships in this section relate the action integral to the motion of a particle along a geodesic in a Riemannian space.
@@ -885,15 +885,15 @@ We know that for a differential equation of form
 the solution is
 <div class="equation">
     $$
-    x(t) = \cos(\omega*t)
-    $$
-</div> with \(\omega = \sqrt{\lambda}\) since \( \frac{d^2}{dt^2} \alpha*\cos(\omega t + \Phi ) = -  \alpha* \omega^2 \cos(\omega t + \Phi) \).
+    x(t) = \cos(\omega t + \Phi)
+    $$ 
+</div> with \(\omega = \sqrt{\lambda}\) since \( \frac{d^2}{dt^2} \alpha\cos(\omega t + \Phi ) = -  \alpha \omega^2 \cos(\omega t + \Phi) \).
 Thus, the general solution for the linearized equations of motion is
 <div class="equation">
     $$
-    \bar{q}_i(t) = \sum_{i} \alpha_i \cos(\omega_i t + \Phi_i)
+    \bar{q}_i(t) = \sum_{i} \alpha_i \cos(\omega_i t + \Phi_i) u_i
     $$,
-</div> in where \( \bar{q}_i(t) \) caputres the time-dependent motion of the system in the direction of the eigenvector \(u_i\).
+</div> where \( \bar{q}_i(t) \) caputres the time-dependent motion of the system in the direction of the eigenvector \(u_i\) with eigenvalue \(\lambda_i = \sqrt(\omega_i)\).
 We can obtain the general solution for the original coordinates \(q_i(t)\) by the inverse transformation \(q = U^T \bar{q}\).
 
 
@@ -997,7 +997,7 @@ In incompressible fluids, certain integral invaraits are preserved, for example 
 
 
 
-<h3>Ignorale variables</h3>
+<h3>Ignorable variables</h3>
 The elimination of ignorable variables is particularily simple in the Hamiltonian form.
 By consideration of the adapted Lagrangian and the definition of the Legendre transform, it becomes apparent that ignorable variables are simply dropped from the Hamiltonian.
 
