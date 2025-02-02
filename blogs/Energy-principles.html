@@ -44,8 +44,6 @@
     
     <h2>Introduction</h2>
     <p> With this post i want so summarize the variational formulation of mechanics and mathematical analysis that arises from it.
-        Upon reading this blog-post, you should have an understanding of how the variational formulation of mechanics in terms 
-        of a scalar function (the lagrangian, hamiltonian, or generating function) arise from (work) principles of newtonian mechanics.
         This formulation is the basis for Hamiltonian mechanics and the Hamilton-Jacobi theory.
         It is restricted to the fairly broad class of systems subject to forces, derivable from a single scalar function (monogenic forces).
         Examples of these forces are known as conservative forces, 
@@ -60,26 +58,26 @@
 
 
     <h2>Newtons equation, virtual work and D'Alemberts principle</h2>
-    <p>We will assume that the reader is familiar with the famous equation of motion in newtonian mechanics</p>
+    <p>Consider the famous equation of motion in newtonian mechanics</p>
     <div class="equation">
         $$
                F=ma = m\dot{v} = m\ddot{r}
         $$
     </div>
     where \( F \) is the force, \( m \) is the mass of the particle and \( a =\dot{v}= \ddot{r}\) is the acceleration in \(3D\) position space.
-    The equation of motion is a second order differential equation, which can be solved by specifying the initial conditions of the system.
+    This equation of motion is a second order differential equation, which can be solved by specifying the initial conditions of the system.
     The solution is the trajectory \( r(t) \)  of the particle in position space. 
     An important notion that arises is that of an equilibrium point, which is a point in position space
     where the force (and thus the acceleration) vanishes. 
     If the velocity is also zero, the particle remains at rest. 
-    This is a stable equilibrium point. 
-    We differ between free particles, 
+    This is a stable, but not necessarily asymptotically stable, equilibrium point. 
+    One can differentiate between free particles, 
     i.e. a particle that is not subject to any constraints and can be moved in arbitrary directions, and constrained particles. 
-    Assume the particle were constrained to be located on a plane (e.g. a ball on a table). 
-    Such a constraint is described by \( f(r) = f(x,y,z) = 0 \).
-    Such a ball is in equilibrium (no acceleration occurs) eventhough the force of gravity is acting on it. 
+    Assume a particle constrained to a plane (e.g. a ball on a table). 
+    Such a constraint can be described by \( f(r) = f(x,y,z) = 0 \).
+    This ball is in equilibrium (no acceleration occurs) eventhough the force of gravity is acting on it. 
     This is because a reactive force is acting on the ball, which cancels out the force of gravity. 
-    We have
+    Considering this reactive force, we can write the equation of motion as
     <div class="equation">
         $$
         F + R = ma
@@ -95,53 +93,46 @@
     where \( \delta r \) is the virtual displacement of the particle. 
     It corresponds to any arbitrary variation of \( r \). The quantity \(dr\) is but a special type of variation.
     Thus, whenever \( \delta \) is used, the reader might replace it with \( d \) to obtain the special variation.
-    The difference is that \( \delta \) represents any arbitrary variation not necessarily consistent with the actual motion, 
-    wheras \( d \) is consistent. Intuitively speaking, the virtual displacement is a small displacement that is not necessarily real,
-    and virtual work  \(\delta w \) is the work done by the forces on this virtual displacement \( \delta r \). 
-    It does not necessarily correspond to the real work that is being done. 
-    \( dw \) is a the work performed by a system on a real infinitesimal displacement \(dr\), 
-    Thus the variation is merely a generalization of an infinitesimal change. 
-    We take on the perspective of a particle in motion (e.g. a person sitting in a train).
-    From this perspective, the particle is at rest. 
-    i.e. all impressed forces cancel when considering the inertial force.
-    We can write the work as 
+    The difference is that \( \delta \) represents any arbitrary variation, wheras \( d \) corresponds to the acutal displacement in time. 
+    Intuitively speaking, the virtual displacement is a small displacement that is not necessarily real.
+    Thus the virtual work  \(\delta w \) does not necessarily correspond to the real work that is being done. 
+    However, \( dw \) is a the work performed by a system on a real infinitesimal displacement \(dr\).
+    Summarizing, the variation \( \delta r \) is any infinitesimal change, while \(dr\) is the "true" infinitesimal change 
+    occuring in time. 
+    <br><br>
+    Taking on the perspective of an observer moving together with particle in motion (e.g. a people sitting in a train),
+    the particle appears at rest. 
+    From this perspective, the impressed forces cancel with the inertial forces.
+    The work can be written 
     <div class="equation">
         $$
         \delta w = (F + R - ma) \delta r = 0.
         $$
    </div>
-   We will consider that the reactive forces \(R\) are ideal, in the sense that they do not do any work, i.e. \(R \delta r = 0 \).
-   If we use the special variation \(\delta r = dr\), this condition means that the reactive forces are orthogonal to the motion. 
-   For more general variations, the ideality condition states that the reactive forces are orthogonal to all allowed variations.
-   As an example, consider a ball on a table.
-   Any impressed force not orthogonal to the table will perform work.
+   A common assumption is that the reactive forces \(R\) are ideal, in the sense that they act orthogonally to the motion.
+   Then they do not perform any work  i.e. \(R \delta r = 0 \). 
+   As an example, consider a ball on a table. Any impressed force not orthogonal to the table will perform work.
    The ball is accelerated, creating an equivalent inertial force. 
-   The reactive force is orthogonal to the table and does not perform work. It reacts to gravity.
-   It is only dependent on the position of the system, not its velocity and enforces a position dependent (holonomic) constraint.
+   However, the reactive force is orthogonal to the table and does not perform work.
+   Furthermore, it is only dependent on the position of the system, not its velocity, 
+   enforcing a position dependent (holonomic) constraint.
    This assumption of ideal reactive forces holds for many systems.   
-   The constraints act as scalar functions from which the reactive forces can be derived; i.e. the holonomic constraint causes a conservative reactive force.
-   More general constraints can be velocity dependent (non-holonomic).  
-   These might consider frictional forces, deformations, contacts with slip-stick conditions and non-equilibrium systems.
-   The reactive frictional force is not ideal, it performs work and depends on the velocity of the object.
-   Although the assumption of purely ideal reactive forces might seem like a big restriction, it is used in many models 
+   More general constraints might be velocity dependent (non-holonomic).  
+   These include frictional forces, deformations, contacts with slip-stick conditions and non-equilibrium systems.
+   Although the assumption of purely ideal reactive forces might seem restrictive, it is very common 
    (similar to how most mathematical models are friction-free and offer deep insight nontheless).  
-   Under this assumption we obtain the following equation of equilibrium
+   Under the assumption of ideality we obtain the following equation of equilibrium
    <div class="equation">
     $$
     \delta w = (F - ma) \delta r = 0,
     $$
    </div>
    which is known as D'Alemberts principle. 
-   This principle makes the remarkable statement that a system is in equilibrium if one adds the inertial forces to the impressed forces.
-   It can be interpreted as a change of perspective. 
-   Instead of considering the acceleration due to an impressed force from the perspective of a fixed observer, we take the perspective of the moving particle.
+   This principle makes the  statement that a system is in equilibrium if one adds the inertial forces to the impressed forces.
+   It can be interpreted as the change from a static observer to an observer moving with the particle. 
    For this moving observer, the particle appears at rest at all times. 
-   The experienced impressed forces and inertial forces cancel out and no work is performed for any virual displacement in accordance with the motion constrains. 
-   In essence, they are equal in all directions in which motion is allowed.
-   In the following we will consider unconstrained particles so that the variations \(\delta r\) can be chosen freely. 
-   In a few sections we explain how kinematical constraints can be included in the formulation as additional potential energy terms.
-
-
+   The experienced impressed forces and inertial forces cancel out 
+   and no work is performed for any virual displacement in accordance (!) with the motion constrains. 
 
 
    <h3>Generalized coordinates, conservative forces and energy conservation</h3>
@@ -152,10 +143,12 @@
     \frac{\partial r}{\partial q} = \begin{pmatrix} \frac{\partial x}{\partial q_1} & ... & \frac{\partial x}{\partial q_n} \\ \frac{\partial y}{\partial q_1} & ... & \frac{\partial y}{\partial q_n} \\ \frac{\partial z}{\partial q_1} & ... & \frac{\partial z}{\partial q_n} \end{pmatrix}
     $$
    </div>
-   has rank \(n\), i.e defines a regular matrix. This implies that there exists, at least locally, a regular map with a regular inverse. 
+   has rank \(n\), i.e defines a regular matrix. 
+   This implies that there exists, at least locally, a regular map with a regular inverse. 
    Such a map is bijective, smooth and differentiable. 
    It defines a change of coordinates between the position coordinates and the generalized coordinates.
-   Furthermore the vectors \( \frac{\partial r}{\partial q_i} \) form a basis of the tangent space of the position space at the point \(r\).
+   Furthermore, the vectors \( \frac{\partial r}{\partial q_i} \) form a basis of the tangent space of 
+   the position space at the point \(r\).
    Its direction is corresponds to the coordinate line defined by \(q_i\).
    The coordinates \(q\) are the generalized coordinates of the system and correspond to its degrees of freedom.
    We write \(x_i = f_{x_i}(q_1,...,q_n)\), \(y_i = f_{y_i}(q_1,...,q_n)\) and \(z_i = f_{z_i}(q_1,...,q_n)\) 
@@ -174,15 +167,16 @@
      $$
     </div>
     The number of generalized coordinates is equal to the number of degrees of freedom of the system.
-    For example, if a system can only move on a \(2d-\)surface, only two generalized coordinates are needed to express all possible values of \(r\) locally.
-    Again, the motion constraint of the system is enforced by the reactive forces \(R\), which are orthogonal to the allowed variations and thus do not enter the work function.
+    For example, if a system can only move on a \(2d-\)surface, 
+    only two generalized coordinates are needed to locally express all possible values of \(r\).
     Let us denote    
     <div class="equation">
     $$
     \delta w_F  = F \delta r =  \sum_i F_i  \delta r_i =  F \frac{\partial r}{\partial q}\delta q =  \sum_h Q_h \delta q_h =  Q \delta q = \delta w_Q ,
     $$
     </div>
-    as the virtual work of the impressed forces described in terms of virtual displacements \(\delta r\) and \(\delta q\) respectively. 
+    as the virtual work of the impressed forces described in terms of virtual displacements \(\delta r\) 
+    and \(\delta q\) respectively. 
     From the relation above we have \(Q = F \frac{\partial r}{\partial q} \).
     <br><br>
     Important quantities are the kinetic energy \(T\) and potential energy \(V\) expressed in generalized coordinates
@@ -197,23 +191,23 @@
     V = \sum_i V_i = \sum_i V_i(q_1,...,q_n, \dot{q}_1,...,\dot{q}_n)
     $$
     </div>
-    Often, but not always we consider only position dependent potential energies and only the \(T_2\) term of the kinetic energy.
-    In position space we have \(T_2 = \frac{1}{2} \sum_i m_i v_i^2\), where \(v_i\) is the velocity of the \(i\)-th particle.
-    It is possible to describe the kinetic energy \(T_2 \)in configuration space as 
+    Often we consider only position dependent potential energies \(V = = V(q_1,...,q_n) \) and only the \(T_2\) term of the kinetic energy.
+    Systems where only these two energy components are considered give rise to special conservation laws.
+    In position space we write \(T_2 = \frac{1}{2} \sum_i m_i v_i^2\), where \(v_i\) is the velocity of the \(i\)-th particle.
+    It is possible to describe the kinetic energy \(T_2 \) space as 
     <div class="equation">
     $$
     T_2 = \frac{1}{2} \frac{d\bar{s}}{dt}^2
     $$
     </div>
-    where \(\bar{s}^2 = 2Tdt^2 = \sum_i m_i (dx_i +dy_i+dz_i) = \sum_j,k a_{j,k} dq_j dq_j\). The elements \(a_{i,j}\) define the mass matrix.
-    This formulation related kinetic energy to a Riemanian line elements.
+    where \(\bar{s}^2 = 2Tdt^2 = \sum_i m_i (dx_i + dy_i + dz_i) = \sum_{j,k} a_{j,k} dq_j dq_j\).
+    The elements \(a_{i,j}\) define the mass matrix.
+    This formulation relates the kinetic energy to Riemanian line elements with the mass matrix as metric tensor.
     <br><br>
-    Often we assume that the forces are derivativable from a scalar function \( U = -V \).
-    This scalar function \(V\) is often position (but not velocity) dependent. 
-    Then it is called the potential energy and corresponds to the negative work that can be done by a particle.  
-    We obtain \(F = -\nabla_r  V \) and  \(Q = -\nabla_q V \) by derivation of the scalar function. 
-    This is the definition of conservative forces.
-    \(Q\) is the generalized force and \(F\) is the force in position space.
+    Often the forces are derivativable from a scalar function \( U = -V \).
+    Frequently scalar function \(V\) is position (but not velocity) dependent. 
+    Then it is called a potential energy giving rise to conservative forces.  
+    For conservative forces we have \(F = -\nabla_r  V \) and  \(Q = -\nabla_q V \) by derivation of the scalar function. 
     Forces which are derivable from a single scalar function are called monogenic. 
     If the scalar function is only position dependent, they are called conservative. 
     Under the assumption of conservative forces we can write the D'Alemberts principle as
@@ -222,22 +216,20 @@
     \delta w = F\delta r - ma\delta r  = - \delta V -  ma\delta r = 0, 
     $$
     </div> 
-    where \( \delta V = \nabla V \delta r \).
+    where \( \delta_r V = \nabla V \delta r \).
     Replacing \(\delta r \) by \(dr\), we obtain 
    <div class="equation">
     $$
-    dw =  -d V -  madr = -d V -  m a v dt =- d V - \frac{1}{2} \frac{d}{dt} mv^2 dt = d ( -V-T ) = 0,
+    dw =  -d V -  madr = -d V -  m a v dt =- d V - \frac{1}{2} \frac{d}{dt} mv^2 dt = d ( -V - T ) = 0,
     $$
    </div>
    which is the well known theorem of energy conservation for conservative systems.
    In generalitzed coordinates we have
     <div class="equation">
      $$
-     \delta w = F \frac{\partial r}{\partial q}\delta q - ma \frac{\partial r}{\partial q}\delta q = -\nabla_q V  - \frac{1}{2} \sum_{i,j}\frac{d}{dt} a_ij \dot{q_i}\dot{q_j} dt = - d ( V+T ) =0
+     \delta w = F \frac{\partial r}{\partial q}\delta q - ma \frac{\partial r}{\partial q}\delta q = -d V  - \frac{1}{2} \sum_{i,j}\frac{d}{dt} a_{ij} \dot{q_i}\dot{q_j} dt = - d ( V + T ) = 0.
      $$
     </div>
-
-
 
 
 
@@ -257,16 +249,14 @@
     $$
    </div> 
    in equilibrium. 
-   Note, that for conservative forces \(F = - nabla_r V\) and  \(Q_h = - nabla_q V \), 
-   and that \(Q = F \frac{\partial r}{\partial q} \).
    <br>
-   Consider,
+   Note,,
    <div class="equation">
     $$
     ma\delta r = m \frac{d}{dt} (v\delta r) = m \frac{d}{dt} (v \delta r ) -   m v \frac{d}{dt} (\delta r)
     $$
    </div> 
-   and the following relationship   
+   and   
    <div class="equation">
     $$
     \frac{\partial r}{\partial q} = \frac{\partial vdt}{\partial \dot{q}dt} = \frac{\partial v}{\partial \dot{q}}
@@ -278,7 +268,7 @@
    which leads to 
    <div class="equation">
     $$
-    Q_h = ma \frac{\partial r}{\partial q} = m \frac{d}{dt} (v \frac{\partial r}{\partial q}  ) -   m v \frac{d}{dt} (\frac{\partial r}{\partial q} )
+    Q = ma \frac{\partial r}{\partial q} = m \frac{d}{dt} (v \frac{\partial r}{\partial q}  ) -   m v \frac{d}{dt} (\frac{\partial r}{\partial q} )
     $$
     $$
     = m \frac{d}{dt} (v \frac{\partial v}{\partial \dot{q}} ) - m v \frac{d}{dt}\frac{\partial v}{\partial q}
@@ -291,13 +281,10 @@
     $$
    </div>
    These are the Lagrange equations of motion in improper form. 
-   If \(Q_h \) is conservative, (i.e.  \(Q = -\nabla_q V = \frac{\partial V}{\partial q }\) with \(V\) only position dependent), then
+   If \(Q \) is conservative, (i.e.  \(Q = -\nabla_q V = \frac{\partial V}{\partial q }\) with \(V\) only position dependent), then
     <div class="equation">
      $$
-     Q = \frac{\partial V}{\partial q } = \frac{d}{dt} \frac{\partial T}{\partial \dot{q}}   - \frac{\partial T}{\partial q} 
-     $$
-     $$
-     = \frac{\partial V}{\partial q } + \frac{d}{dt} \frac{\partial V}{\partial \dot{q}}
+     Q = \frac{\partial V}{\partial q } = \frac{d}{dt} \frac{\partial T}{\partial \dot{q}}   - \frac{\partial T}{\partial q} = \frac{\partial V}{\partial q } + \frac{d}{dt} \frac{\partial V}{\partial \dot{q}}
      $$
     </div>
     Since \(\frac{\partial V}{\partial \dot{q}} = 0\) for velocity independent scalar functions fields,
@@ -310,19 +297,21 @@
         = \frac{d}{dt} \frac{\partial L }{\partial \dot{q}}   - \frac{\partial L }{\partial q}.
         $$
     </div>
-    If  \(Q_h = \frac{\partial V}{\partial q } + Q_h'\), this becomes
+    If  \(Q = \frac{\partial V}{\partial q } + Q'\) (i.e. it can not be described as a conservative force), this becomes
     <div class="equation">
         $$
-        Q_h' = \frac{d}{dt} \frac{\partial L }{\partial \dot{q}}   - \frac{\partial L }{\partial q} \frac{1}{2},
+        Q' = \frac{d}{dt} \frac{\partial L }{\partial \dot{q}}   - \frac{\partial L }{\partial q} \frac{1}{2},
         $$
     </div>
-  where \(Q_h'\) is the non-conservative part of the generalized force.
+  where \(Q'\) is the non-conservative part of the generalized force.
+  <br><br>
   These equations are the Lagrange equations of motion in proper form.
-  We have derived them from the generalized force and D'Alemberts principle which allows for enables expressing the force in terms of the accelerations. 
-  We have shown that the generalized force is related to the kinetic energy of the system, defining by itself the improper form of the Lagrangian equations.
-  If this force can additionally be expressed as the gradient of a position-dependent scalar function, 
+  They have been derived from the generalized force and D'Alemberts principle. 
+  The generalized force is related to the kinetic energy of the system, through the improper form of the Lagrangian equations.
+  If this force can be expressed as the gradient of a position-dependent scalar function, 
   the system is conservative and we obtain the proper Lagrangian equations of motion.
-  If the force can not be fully expressed as part of a potential energy, then the corresponding force term is considered seperately.
+  If the force can not be expressed fully as part of a potential energy, 
+  then the non-conservative force term is considered seperately.
   From d'Alemberts principle we can also obtain apparent forces in accelerated reference systems. 
   This will provide some insights into conservative and non-conservative forces.
    
@@ -417,8 +406,8 @@ The term \( I' \) is the inertial force in the moving system.
 The total effective force is
 <div class="equation">
     $$
-    $$,
     F_{total}  = F + I' + C + B + K
+    $$
 </div> where \(F\) is the impressed force onto the particle.
 
 
