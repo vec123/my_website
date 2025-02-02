@@ -181,13 +181,13 @@
     Important quantities are the kinetic energy \(T\) and potential energy \(V\) 
     <div class="equation">
     $$
-    T = \frac{1}{2} \sum_i\sum_j m(r,t) \dot{r_i}\dot{r_j}  + \sum_i f_i(r,t) \dot{r_i} + + \frac{1}{2} g(r,t) 
+    T = \frac{1}{2} \sum_i\sum_j m(r,t) \dot{r_i}\dot{r_j}  + \sum_i f_i(r,t) \dot{r_i} + \frac{1}{2} g(r,t) 
     $$
     $$
     = \frac{1}{2} \sum_i\sum_j m(r,t) \frac{d}{dt} r_i \frac{d}{dt} r_j  + \sum_i f_i(r,t) \frac{d}{dt} r_i + \frac{1}{2} g(r,t)
     $$
     $$
-    = \frac{1}{2} \sum_i\sum_j m(r,t) \frac{d}{dt} \sum_k \frac{\partial r_i}{\partial q_k} \sum_l \frac{d}{dt} \frac{\partial r_i}{\partial q_l}  + \sum_l \sum_i f_i(r,t) \frac{d}{dt} \frac{\partial r_i}{\partial q_l} + \frac{1}{2} g(r,t)     
+    = \frac{1}{2} \sum_i\sum_j m(r,t) \frac{d}{dt} \sum_k \frac{\partial r_i}{\partial q_k} \sum_l \frac{d}{dt} \frac{\partial r_i}{\partial q_l}q_k q_l  + \sum_l \sum_i f_i(r,t) \frac{d}{dt} \frac{\partial r_i}{\partial q_l} + \frac{1}{2} g(r,t)     
     $$
     $$
     = \frac{1}{2} \sum_k\sum_l \sum_i\sum_j m(r,t) \frac{\partial r_i}{\partial q_k} \frac{\partial r_j}{\partial q_l} \dot{q_l} \dot{q_k} + \sum_l \sum_i f_i(r,t) \frac{\partial r_i}{\partial q_l} \dot{q_l} + \frac{1}{2} g(r,t)
