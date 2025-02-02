@@ -435,22 +435,23 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     I = \int F(y,y',x)dx
     $$
    </div>
-  where \( F(y,y',x) \) is any function of the three variables \( y,y',x \). 
+  where \( F(y,y',x) \) is any function of the three variables \( y,y',x \) and \(y = f(x)\). 
   By the calculus of variation, one can solve analytically for the stationary value of this integral. 
   It is also possible if \( F(y,y',y'',x) \) contains \( 4 \) variables including the second derivative. 
   However, we will not consider this case.
    We want to find \(y = f(x)\) which makes the integral an extremum (or at least stationary) 
    with boundary conditions \( f(a) = \alpha \) and \( f(b) = \beta \). 
    For problems of this kind variational calculus is a powerful tool.
-   Consider \( z_k = \frac{\Delta y}{\Delta x}|_{x=x_k} =\frac{ y_{k+1} - y_{k} }{ x_{k+1} - x_{k} } \).
+   <br><br>
+   Consider \( z_j = \frac{\Delta y}{\Delta x}|_{x=x_j} =\frac{ y_{j+1} - y_{j} }{ x_{j+1} - x_{j} } \).
    In this discrete formulation the integral becomes a sum 
     <div class="equation">
      $$
-     I = \sum_k F(y_k, z_k, x_k) \Delta x = \sum_k F(y_{k+1}, z_k, x_k) \Delta x
+     I = \sum_j F(y_j, z_j, x_j) \Delta x_j = \sum_j F(y_{j+1}, z_j, x_j) \Delta x_j
      $$.
     </div>
-    The last equality follows from the fact that in the limit \( y_{k+1}=y_{k} \).
-    Partial differentiation w.r.t \(y_{k+1}\) leads to
+    The last equality follows from the fact that in the limit \( y_{j+1}=y_{j} \).
+    Partial differentiation w.r.t \(y_{k+1}\) (Note that \(y_{k+1}\) appears with coefficient  \Delta \Delta x_{k} and  \Delta x_{k+1}\ )leads to
     <div class="equation">
         $$
         \frac{\partial F}{\partial y} (x_{k+1} - x_{k}) + \frac{\partial F}{\partial y'}|_{x=x_{k}} -\frac{\partial F}{\partial y'}|_{x=x_{k+1}} 
@@ -472,19 +473,19 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
         $$.
     </div> 
     This is a necessary and sufficient condition.
-    In this intuitive (not rigorous) derivation we have considered \(x\) as the independent variable.
+    In this explanation we have considered \(x\) as the independent variable.
     In the Lagrangian formulation of mechanics, often time is the independent variable. 
     However, extensions where time is considered as a position variable are possible.
     In these cases another independent variable \(\tau\) is required and all positional variables (including time) are considered functions of \(\tau\).
     <br><br>
-    Let us consider 
+    Consider 
     <div class="equation">
         $$
-        \delta I = \int \delta F(y,y',x) dx = \epsilon \int \frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' dx
+        \delta I = \int \delta F(y,y',x) dx = \epsilon \int \frac{\partial F}{\partial y}\Phi(x) + \frac{\partial F}{\partial y'}\Phi'(x) dx
         $$
     </div>
     where \( \delta F(y,y',x) = F(y + \epsilon \Phi,y'+  \epsilon \Phi', x)  - \delta F(y,y',x) = \epsilon  (\frac{\partial F}{\partial y}\Phi + \frac{\partial F}{\partial y'}\Phi' ) \)
-    and \(\Phi\) is any arbitrary function of \(x\).
+    and \(\Phi = \Phi(x)\) is any arbitrary function of \(x\).
     Thus
     <div class="equation">
         $$
@@ -494,20 +495,19 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     and through integration by parts
     <div class="equation">
         $$
-         \int  \frac{\partial F}{\partial y'}\Phi' dx = [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2} - \int \frac{d}{d\tau} \frac{\partial F}{\partial y'}\Phi dx
+         \int  \frac{\partial F}{\partial y'}\Phi' dx = [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2} - \int \frac{d}{dx} \frac{\partial F}{\partial y'}\Phi dx
         $$
     </div>
     we obtain
     <div class="equation">
     \[ 
          \frac{\delta I}{\epsilon} = 
-         \int ( \frac{\partial F}{\partial y} - \frac{d}{d\tau} \frac{\partial F}{\partial y'} ) \Phi dx +  [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2}
+         \int ( \frac{\partial F}{\partial y} - \frac{d}{dx} \frac{\partial F}{\partial y'} ) \Phi dx +  [ \frac{\partial F}{\partial y'}\Phi]_{t_1}^{t_2}
     \]
     </div>
-    This equation gives the variation of the integral for arbitrary variations of form \( \delta f(x) = \epsilon \Phi \). 
+    This equation gives the variation of the integral for arbitrary variations of form \( \delta f(x) = \epsilon \Phi(x) \). 
     The boundary term depends only on the end-points. Often, one considers the variation to be zero at the end-points.
-    The term in the integral must vanish for all variations \( \Phi \). This is the necessary and sufficient condition for a stationary integral value, 
-    i.e. upon first order variations of \( f(x) \) the integral does not change, indicating an extremum or saddle-point.
+    Vanishing of \[  \frac{\delta I}{\epsilon} \] for all variations is a necessary and sufficient condition for a stationary value, indicating an extremum or saddle-point.
     <br><br>
 
 
