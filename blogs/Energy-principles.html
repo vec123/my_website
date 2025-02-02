@@ -158,6 +158,7 @@
     <div class="equation">
      $$
      \delta r = \sum_i \frac{\partial r}{\partial q_i} \delta q_i 
+     $$
     </div>
     D'Alemberts principle, expressed in generalized coordinates, becomes
     <div class="equation">
@@ -204,7 +205,7 @@
     </div>
     Often we consider only position dependent potential energies \(V = V(q_1,...,q_n) \) and only the \(T_2\) term of the kinetic energy.
     Systems where only these two energy components are considered give rise to special conservation laws.
-    In position space we write \(T_2 = \frac{1}{2} \sum_i m_i v_i^2\), where \(v_i\) is the velocity of the \(i\)-th particle.
+    In position space we can write \(T_2 = \frac{1}{2} \sum_i m_i v_i^2\), where \(v_i\) is the velocity of the \(i\)-th particle.
     It is possible to describe the kinetic energy \(T_2 \) space as 
     <div class="equation">
     $$
@@ -212,13 +213,13 @@
     $$
     </div>
     where \(\bar{s}^2 = 2Tdt^2 = \sum_i m_i (dx_i + dy_i + dz_i) = \sum_{l,k} a_{l,k} dq_l dq_k\).
-    The elements \(a_{i,j}\) define the mass matrix.
-    This formulation relates the kinetic energy to Riemanian line elements with the mass matrix as metric tensor.
+    This formulation relates the kinetic energy to Riemanian line elements with the mass matrix \(a_{l,k}\) as metric tensor.
     <br><br>
     Often the forces are derivativable from a scalar function \( U = -V \).
-    Frequently scalar function \(V\) is position (but not velocity) dependent. 
-    Then it is called a potential energy giving rise to conservative forces.  
-    For conservative forces we have \(F = -\nabla_r  V \) and  \(Q = -\nabla_q V \) by derivation of the scalar function. 
+    Frequently this scalar function \(V\) is position (but not velocity) dependent. 
+    Then it is called a potential energy.  
+    Potential energies give rise to conservative forces via \(F = -\nabla_r  V \) and \(Q = -\nabla_q V \) 
+    by derivation of the scalar function. 
     Forces which are derivable from a single scalar function are called monogenic. 
     If the scalar function is only position dependent, they are called conservative. 
     Under the assumption of conservative forces we can write the work as
