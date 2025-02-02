@@ -171,12 +171,12 @@
     Let us denote    
     <div class="equation">
     $$
-    \delta w_F  = F \delta r =   \sum_i F \frac{\partial r}{\partial q_i} \delta q_i   =  \sum_i Q_i \delta q_i =  Q \delta q = \delta w_Q ,
+    \delta w_F  = \sum_j F_j \delta r_j =   \sum_j \sum_i F \frac{\partial r_j}{\partial q_i} \delta q_i   =  \sum_i Q_i \delta q_i = \delta w_Q ,
     $$
     </div>
     as the virtual work of the impressed forces described in terms of virtual displacements \(\delta r\) 
     and \(\delta q\) respectively. 
-    From the relation above we have \(Q = F \frac{\partial r}{\partial q} \).
+    From the relation above we obtain the generalized forces \(Q_i = \sum_j F_j \frac{\partial r_j}{\partial q_i} \).
     <br><br>
     Important quantities are the kinetic energy \(T\) and potential energy \(V\) 
     <div class="equation">
@@ -200,7 +200,7 @@
     V = \sum_i V_i = \sum_i V_i(q_1,...,q_n, \dot{q}_1,...,\dot{q}_n)
     $$
     </div>
-    Often we consider only position dependent potential energies \(V = = V(q_1,...,q_n) \) and only the \(T_2\) term of the kinetic energy.
+    Often we consider only position dependent potential energies \(V = V(q_1,...,q_n) \) and only the \(T_2\) term of the kinetic energy.
     Systems where only these two energy components are considered give rise to special conservation laws.
     In position space we write \(T_2 = \frac{1}{2} \sum_i m_i v_i^2\), where \(v_i\) is the velocity of the \(i\)-th particle.
     It is possible to describe the kinetic energy \(T_2 \) space as 
