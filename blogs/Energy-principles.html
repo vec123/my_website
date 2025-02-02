@@ -209,7 +209,7 @@
     T_2 = \frac{1}{2} \frac{d\bar{s}}{dt}^2
     $$
     </div>
-    where \(\bar{s}^2 = 2Tdt^2 = \sum_i m_i (dx_i + dy_i + dz_i) = \sum_{j,k} a_{j,k} dq_j dq_j\).
+    where \(\bar{s}^2 = 2Tdt^2 = \sum_i m_i (dx_i + dy_i + dz_i) = \sum_{l,k} a_{l,k} dq_l dq_k\).
     The elements \(a_{i,j}\) define the mass matrix.
     This formulation relates the kinetic energy to Riemanian line elements with the mass matrix as metric tensor.
     <br><br>
@@ -225,7 +225,7 @@
     \delta w = F\delta r - ma\delta r  = - \delta V -  ma\delta r = 0, 
     $$
     </div> 
-    where \( \delta_r V = \nabla V \delta r \).
+    where \( \delta V = \nabla_r V \delta r = \nabla_q V \delta q \).
     Replacing \(\delta r \) by \(dr\), we obtain 
    <div class="equation">
     $$
@@ -236,7 +236,7 @@
    In generalitzed coordinates we have
     <div class="equation">
      $$
-     \delta w = F \frac{\partial r}{\partial q}\delta q - ma \frac{\partial r}{\partial q}\delta q = -d V  - \frac{1}{2} \sum_{i,j}\frac{d}{dt} a_{ij} \dot{q_i}\dot{q_j} dt = - d ( V + T ) = 0.
+     d w = F \frac{\partial r}{\partial q}dq - ma \frac{\partial r}{\partial q}dq = -dV  - \frac{1}{2} \sum_{i,j}\frac{d}{dt} a_{ij} \dot{q_i}\dot{q_j} dt = - d ( V + T ) = 0.
      $$
     </div>
 
