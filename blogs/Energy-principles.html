@@ -527,13 +527,13 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     Consider the time integrated work function with a conservative force
     <div class="equation">
     $$
-    \delta \int  w dt = \int ( \delta F- \frac{d}{dt}(mv)\delta r )  dt = \int  ( \delta Q - \frac{d}{dt}(mv)\frac{\partial r}{\partial q }\delta q )  dt 
+    \delta \int  w dt = \int (  F\deltar- m\frac{d}{dt}v\delta r )  dt 
     $$
     </div>
     For the term corresponding to the impressed forces we have
    <div class="equation">
     $$
-    \delta \int F dt =  \delta \int - \nabla_r V dt = \delta \int Q \frac{\partial q}{\partial r }  dt =  \delta \int - \nabla_q V  \frac{\partial q}{\partial r } dt.
+   \int F \delta r dt = \int -\nabla_r V \delta r = \int \delta V dt 
     $$
    </div>
    For the term corresponding to the inertial forces we have (through integration by parts)
@@ -554,7 +554,7 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
     $$
     $$
-    = ( -[m\dot{q} \delta q]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m \dot{q}^2 dt) \frac{\partial r}{\partial q}.
+    =\frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
     $$
 </div>
 Thus we obtain 
