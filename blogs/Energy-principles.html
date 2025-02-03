@@ -664,11 +664,11 @@ Thus we obtain
     <br><br>
     This shows how positional constrains can be incorporated into the action integral as potential energies.
 
-   <h3>Conservation of energy in special cases</h3>
+   <h3>Conservation of energy</h3>
    If we consider the special variation \(\delta q = \epsilon \dot{q} \), allowing for variations at the limits, we obtain the relation 
    <div class="equation">
     $$
-    \delta \int w dt =   \int \epsilon \dot{L}(q_1,...,q_n; q_1',...,q_n') dt - \epsilon [ \sum_i \frac{\partial L}{\partial \dot{q_i}} \dot{q_i}]_{t_1}^{t_2} =  0
+    \delta \int w dt =   \int \epsilon \dot{L}(q_1,...,q_n; \dot{q_1},...,\dot{q_n}) dt - \epsilon [ \sum_i \frac{\partial L}{\partial \dot{q_i}} \dot{q_i}]_{t_1}^{t_2} =  0
    $$
   </div>
     which leads to
@@ -680,7 +680,7 @@ Thus we obtain
     and
     <div class="equation">
     $$
-     [ L(q_1,...,q_n; q_1',...,q_n') ]_{t_1}^{t_2}  - [\frac{\partial L}{\partial \dot{q}}  \dot{q}]_{t_1}^{t_2} = 0.
+     [ L(q_1,...,q_n; \dot{q_!},...,\dot{q_n}) ]_{t_1}^{t_2}  - [\frac{\partial L}{\partial \dot{q}}  \dot{q}]_{t_1}^{t_2} = 0.
     $$
     </div>
     
@@ -722,21 +722,20 @@ Since \(t_1\) and \(t_2\) are arbitrary and independent, we obtain the condition
 <h3>Elimination of variables in the Lagrangian</h3>
 
 We have introduced the quantities \(p_i = \frac{\partial L}{\partial \dot{q}_i}\) (called momentum) 
-so that \(p_i' = \frac{\partial L}{\partial q_i}\). 
+so that \(\dot{p_i} = \frac{\partial L}{\partial q_i}\). 
 If \(q_i\) is an ingorable variable, then \(\dot{p}_i = 0 \) and \(p_i = const.\). 
 The momentum associated with the ignorable variable is preserved.
-We have 
+Consider the lagrangian, where only the variation of non-ignorable variables is zero at the limits
 <div class="equation">
     $$
     \delta \int L(q,\dot{q}) dt = [ \sum_i \frac{ \partial L }{ \partial \dot{q}_i } \delta q_i ]_{t_1}^{t_2} =  [ p_n \delta q_n]_{t_1}^{t_2} 
-    = p_n \delta \int q_n' dt =  \delta \int p_n q_n' dt
-    $$
+    = p_n \delta \int \dot{q_n} dt =  \delta \int p_n \ ot{q_n} dt
+    $$.
 </div>
-where we consider the variation of all non-ignorable variables to be zero at the limits.
 This leads to 
 <div class="equation">
     $$
-    \delta \int (L - p_n q_n') dt = 0 .
+    \delta \int (L - p_n q_n') dt = 0.
     $$
 </div>
 We call 
@@ -744,7 +743,7 @@ We call
     $$
     \tilde{L} = L - p_n q_n' = L - c_n q_n'
     $$
-</div> the modified lagrangian. The new action integral is \(A = \int \tilde{L} dt \).
+</div> the modified lagrangian. The modified action integral is \(A = \int \tilde{L} dt \).
 If there is a kinetic coupling between ignorable and non-ignorable variables, we obtain additional terms which can be interpreted as 
 gyroscopic energy terms (linear in velocities).
 
@@ -764,7 +763,7 @@ Up until now we have considered the Lagrangian to be independent from time.
 Here we will consider a Lagrangian which has time as an ignorable variable.  
 Up until now we considered the time \(t\) as the independent variable. Now we will consider \(q_i\), \(q_i'\), \(t\) 
 as functions of some independent parameter \( \tau \). In essence \(t\) becomes one of the position variables.
-The notation \(q_i'\) denotes the derivative with respect to \( \tau \). Then we have
+The notation \(q_i' = \frac{dq_i}{d \tau}\) denotes the derivative with respect to \( \tau \). Then we have
 <div class="equation">
     $$
      A = \int_{t} L(q_1,...,q_n; \dot{q}_1, ..., \dot{q}_n) dt = \int_{\tau} L(q_1,...,q_n; \frac{q_1'}{t'},...,\frac{q_n'}{t'}) t' d\tau .
@@ -774,7 +773,7 @@ It follows
 <div class="equation">
     $$
      p_t = \frac{\partial L t'}{\partial t'} = L - \sum_{i}^{n} \frac{\partial L}{\partial \dot{q_i}} \frac{q_i'}{t'^2}t'
-     = L - \sum_{i}^{n} p_i \dot{q_i}  .
+     = L - \sum_{i}^{n} p_i \dot{q_i} .
     $$ 
 </div>
 If \(t\) is ignorable (i.e. the system is conservative), then \(p_t = const. = -E\).
@@ -800,22 +799,23 @@ with \( \bar{s}^2 = 2T dt^2 =  \sum_i m_i (dx_i^2 + dy_i^2 + dz_i^2) \),
 which, by introduction of \(\tau\) as independent variable leads to
 <div class="equation">
     $$
-    T = \frac{1}{2} \frac{d\bar{s}}{d\tau}^2 \frac{1}{t'^2}.
+    T = \frac{1}{2} \left( \frac{d\bar{s}}{d\tau} \right)^2 \frac{1}{t'^2}.
     $$
 </div>
 From this we obtain 
 <div class="equation">
     $$
-    t' = \frac{1}{\sqrt{1(E-V)}} \frac{d\bar{s}}{d\tau} .
+    t' = \frac{1}{\sqrt{2(E-V)}} \frac{d\bar{s}}{d\tau} = \frac{1}{\sqrt{2(T)}} \frac{d\bar{s}}{d\tau} .
     $$
 </div>
 leading to the action integral
 <div class="equation">
     $$
-    A =  \int_{\tau} \sqrt{2(E-V)} \frac{\bar{ds}}{d\tau} d\tau = \int_{\tau} \sqrt{2(E-V)} \bar{ds} .
+    A =  \int_{\tau} \sqrt{2(E-V)} \frac{d\bar{s}}{d\tau} d\tau = \int_{\tau} \sqrt{2(E-V)} d\bar{s} .
     $$
-</div> Note that the free parameter is \( \tau \). Define \(d\sigma^2 = (E-V) \bar{ds}^2\). 
-Then the action integral becomes \( A = \int_{\tau} d\sigma^2 \).
+</div> Note that the free parameter is \( \tau \) (and not \( \bar{s} \) )  Define \(d\sigma^2 = (E-V) d\bar{s}^2\). 
+Then the action integral becomes \( A = \int_{\tau} d\sigma^2 \). 
+Minimization of this integral to find the path of the particle is Jacobi's principle.
 Choosing a stationary action relates the motion of the particle to the motion along some geodsic of a given Riemannian space. 
 The time does not appear in the equations, but can be solved for by the given relation \( t' = f(\tau)\).
 In generalized coordinates,
