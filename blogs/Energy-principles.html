@@ -557,7 +557,22 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
     $$
     $$
-    =- -[m \frac{d}{dt} \frac{\partial r}{\partial q} \delta q] \frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
+    =-[m \frac{d}{dt} r \delta r] + \delta \frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
+    $$
+    $$
+    =-[   \sum_l m \frac{\partial r}{\partial q_l} \frac{d}{dt} q_l \delta r] + \delta \frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
+    $$
+    $$
+    =-[   \sum_l m \dot{q_l}  \sum_k \frac{\partial r}{\partial q_k} \delta q_k ] + \delta \frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
+    $$
+    $$
+    = -[   \sum_l \sum_k m \frac{\partial r}{\partial q_l}\frac{\partial r}{\partial q_k} \dot{q_l} \delta q_k ] + \delta T
+    $$
+    $$
+    = -[ \sum_k \sum_l a_{k,l} \dot{q_l} \delta q_k ] + \delta T
+    $$
+    $$
+    = -[ \sum_k \frac{\partial T} {\dot{q_k}} \delta q_k] + \delta T
     $$
 </div>
 Thus we obtain 
