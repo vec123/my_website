@@ -813,20 +813,22 @@ leading to the action integral
     $$
     A =  \int_{\tau} \sqrt{2(E-V)} \frac{d\bar{s}}{d\tau} d\tau = \int_{\tau} \sqrt{2(E-V)} d\bar{s} .
     $$
-</div> Note that the free parameter is \( \tau \) (and not \( \bar{s} \) )  Define \(d\sigma^2 = (E-V) d\bar{s}^2\). 
-Then the action integral becomes \( A = \int_{\tau} d\sigma^2 \). 
+</div> Note that the free parameter is \( \tau \) (and not \( \bar{s} \) ). 
+It might be chose as \( q_n \), giving all other \( q_i \) as functions of \( q_n \). 
 Minimization of this integral to find the path of the particle is Jacobi's principle.
-Choosing a stationary action relates the motion of the particle to the motion along some geodsic of a given Riemannian space. 
+It relates the stationary action functional to the motion along some geodsic of a given Riemannian space. 
 The time does not appear in the equations, but can be solved for by the given relation \( t' = f(\tau)\).
-In generalized coordinates,
-the Riemannian line-element can be written as \( \bar{ds}^2 = \sum_{j,k} a_{j,k} dq_j dq_k \),
-so that \(T =  \frac{1}{2} \frac{d\bar{s}}{dt}^2 = \frac{1}{2} \sum_{j,k} a_{j,k} \frac{dq_j}{dt} \frac{dq_k}{dt} \).
-<br><br>
-The relationships in this section relate the action integral to the motion of a particle along a geodesic in a Riemannian space.
-This is a powerful tool in the study of the motion of particles in conservative systems.
-The derivations have assumed a conservative system, where the kinetic energy is quadratic in the velocities and the potential energy is only position dependent.
-However, time independence is not required.
-
+If we restrict ourselves to a single particle, then \( d\bar{s} \) is the (curvi-linear) 
+line element of ordinary three-dimensional space.
+Jacobi's principle thenrepresents a notable analogy to Fermats principle of least time in optics which minimizes
+<div class="equation">
+    $$
+    I = \int_{\tau} n d\bar{s} 
+    $$
+</div> 
+. Here \(n\) is the refractive index of the medium which, much like \( \sqrt{2(E-V)} \), can change at different spatial positions.
+This unifying principle between optics and mechanics was first introduced by Pierre Louis Maupertuis in 1740 
+and further developed by Hamilton in his optico-mechaical theory.
 
 
 
