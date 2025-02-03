@@ -182,16 +182,16 @@
     Important quantities are the kinetic energy \(T\) and potential energy \(V\) 
     <div class="equation">
     $$
-    T = \frac{1}{2} \sum_i\sum_j m(r,t) \dot{r_i}\dot{r_j}  + \sum_i f_i(r,t) \dot{r_i} + \frac{1}{2} g(r,t) 
+    T = \frac{1}{2}  m(r,t) \dot{r}^2  +  f_(r,t) \dot{r} + \frac{1}{2} g(r,t) 
     $$
     $$
-    = \frac{1}{2} \sum_i\sum_j m(r,t) \frac{d}{dt} r_i \frac{d}{dt} r_j  + \sum_i f_i(r,t) \frac{d}{dt} r_i + \frac{1}{2} g(r,t)
+    = \frac{1}{2} m(r,t) \frac{d}{dt} r \frac{d}{dt} r  + \sum f(r,t) \frac{d}{dt} r + \frac{1}{2} g(r,t)
     $$
     $$
-    = \frac{1}{2} \sum_i\sum_j m(r,t) \frac{d}{dt} \sum_k \frac{\partial r_i}{\partial q_k} \sum_l \frac{d}{dt} \frac{\partial r_i}{\partial q_l}q_k q_l  + \sum_l \sum_i f_i(r,t) \frac{d}{dt} \frac{\partial r_i}{\partial q_l} + \frac{1}{2} g(r,t)     
+    = \frac{1}{2}  m(r,t) \frac{d}{dt} \sum_k \frac{\partial r}{\partial q_k} \sum_l \frac{d}{dt} \frac{\partial r}{\partial q_l}q_k q_l  + \sum_l f(r,t) \frac{d}{dt} \frac{\partial r_i}{\partial q_l} q_l + \frac{1}{2} g(r,t)     
     $$
     $$
-    = \frac{1}{2} \sum_k\sum_l \sum_i\sum_j m(r,t) \frac{\partial r_i}{\partial q_k} \frac{\partial r_j}{\partial q_l} \dot{q_l} \dot{q_k} + \sum_l \sum_i f_i(r,t) \frac{\partial r_i}{\partial q_l} \dot{q_l} + \frac{1}{2} g(r,t)
+    = \frac{1}{2} \sum_k\sum_l m(r,t) \frac{\partial r}{\partial q_k} \frac{\partial r}{\partial q_l} \dot{q_l} \dot{q_k} + \sum_l (r,t) \frac{\partial }{\partial q_l} \dot{q_l} + \frac{1}{2} g(r,t)
     $$
     $$
     =\frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} +  \sum_l b_l(q,t) \dot{q_l} + \frac{1}{2} c(q,t) = T_2 + T_1 + T_0
@@ -545,7 +545,7 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     \int \frac{d}{dt}(mv) \delta r dt =  -[mv \delta r]_{t_1}^{t_2} + \int m v\frac{d}{dt} \delta r dt 
     $$
     $$
-    = -[mv \delta r]_{t_1}^{t_2} +  \int m v \delta \frac{d}{dt} r dt
+    = -[mv r]_{t_1}^{t_2} +  \int m v \delta \frac{d}{dt} r dt
     $$
     $$
     = -[mv \delta r]_{t_1}^{t_2} +  \int m v \delta v dt
@@ -557,7 +557,7 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     = -[mv \delta r]_{t_1}^{t_2} +  \frac{1}{2} \delta \int m v^2 dt
     $$
     $$
-    =\frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
+    =- -[m \frac{d}{dt} \frac{\partial r}{\partial q} \delta q] \frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
     $$
 </div>
 Thus we obtain 
