@@ -214,14 +214,18 @@
     </div>
     where \(\bar{s}^2 = 2Tdt^2 = \sum_i m_i (dx_i + dy_i + dz_i) = \sum_{l,k} a_{l,k} dq_l dq_k\).
     This formulation relates the kinetic energy to Riemanian line elements with the mass matrix \(a_{l,k}\) as metric tensor.
+    Note that the kinetic energy is a quadratic form in the velocities and that the force field is conservative 
+    (only depends on positions). Furthermore, both terms are independent from time. 
+    For more general systems, the conservative and time-independence does not hold.
+    For these systems the line element \( d\bar{s} \) is defined in a more general manner than the Riemannian line element. 
     <br><br>
     Often the forces are derivativable from a scalar function \( U = -V \).
     Frequently this scalar function \(V\) is position (but not velocity) dependent. 
-    Then it is called a potential energy.  
-    Potential energies give rise to conservative forces via \(F = -\nabla_r  V \) and \(Q = -\nabla_q V \) 
+    Then it is called a conservative potential energy.  
+    Conservative potential energies give rise to conservative forces via \(F = -\nabla_r  V \) and \(Q = -\nabla_q V \) 
     by derivation of the scalar function. 
     Forces which are derivable from a single scalar function are called monogenic. 
-    If the scalar function is only position dependent, they are called conservative. 
+    Furthermore, if the scalar function is only position dependent, they are called conservative. 
     Under the assumption of conservative forces we can write the work as
     <div class="equation">
     $$
@@ -229,13 +233,14 @@
     $$
     </div> 
    which is the well known theorem of energy conservation for conservative systems.
+   <!--
    In generalitzed coordinates we have
     <div class="equation">
      $$
      d w = F \frac{\partial r}{\partial q}dq - ma \frac{\partial r}{\partial q}dq = -dV  - \frac{1}{2} \sum_{i,j}\frac{d}{dt} a_{ij} \dot{q_i}\dot{q_j} dt = - d (V + T) = 0.
      $$
     </div>
-
+    -->
 
 
 
@@ -978,10 +983,11 @@ Application to the Lagrangian leads to
 with
 <div class="equation">
     $$
-    p\frac{\partial H}{\partial q_i} = -\frac{\partial L}{\partial q_i}.
+    p\frac{\partial H}{\partial q_i} = -\frac{\partial L}{\partial q_i} = -\dot{p_i}.
     $$
 </div> 
-Note that \(H\) is of first order in all its variables. We can regard \(p\) and \(q\) as position variables.
+Note that \(H\) is of first order in all its variables, which allows for the interpretation of
+ \(p\) and \(q\) as position variables.
 We can write the equations of motion in the Hamiltonian form
 <div class="equation">
     $$
@@ -991,7 +997,9 @@ We can write the equations of motion in the Hamiltonian form
      \dot{p}_i = - \frac{\partial H}{\partial q_i},
     $$
 </div> with the equations arising from the properties of the legendre transform. Since \(q_i\) and \(p_i\) are positional variables, the Hamiltonian equations of motion only contain time on the left-hand side. 
-This is opposed to the Lagrangian equations of motion which express velocities (not positions) as functions of time.
+This is opposed to the Lagrangian equations of motion which also contain velocities \(\dot{q}_i\).
+Similar to how the dependency on velocities might be seen as an improvement to the dependency on accelerations in a Newtonian formalism.
+the dependency on positions in a Hamiltonian formalism can be considered an improvement to the dependency on velocities in a Lagrangian formalism.
 Remember that the coefficient of \(\delta p_i \) is zero due to the legendre transform. Thus we may write
 <div class="equation">
     $$
@@ -1007,13 +1015,11 @@ which is minimized by
     \frac{d}{dt} \frac{\partial L}{\partial \dot{p}_i} - \frac{\partial L}{\partial p_i} = 0 - \dot{q}_i + \frac{\partial H}{\partial p_i} = 0
     $$
 </div> which gives rise to the equation of motion in Hamiltonian and Lagrangian form. 
-The transformation into \(2n\) positional space is powerful since the equations of motion define a velocity field in the phase space.
-Contrary to the Lagrangian equations of motion, the Hamiltonian equations of motion are of first order in time.
-The behaviour of the motion in phase space is similar to that of an incompressible fluid. 
+The transformation into \(2n\) positional space is powerful since the equations of motion define a velocity field in phase space.
+The behaviour of the motion in this space is similar to that of an incompressible fluid. 
 In incompressible fluids, certain integral invaraits are preserved, for example the circulation and the volume.
 <br>
 <br>
-
 
 
 <h3>Ignorable variables</h3>
@@ -1037,7 +1043,7 @@ We can write the extended action integral
     A= \int L(q_1,...q_n,q_{n+1}, q_1',...,q_{n}') q_{n+1}' d\tau = \int L_1 d\tau
     $$
 </div> 
-where  \( q_i' = \frac{q_i}{d \tau} \) so that \(  A = \int L dt = \int L_1 d\tau\) (but \(L_1\) is time dependant).
+where  \( q_i' = \frac{q_i}{d \tau} \) so that \(  A = \int L dt = \int L_1 d\tau\).
 We call the Lagrangian \(L_1\) the extended Lagrangian.
 <br>
 Let \( q_i' \rightarrow \lambda q_i'\) for all \(i = 1,...,n+1\). For this transformation it can be shown that \(L_1 \rightarrow \lambda L_1\) and thus the action integral is homogenous of first order in the variables \(q_i\).
@@ -1089,8 +1095,9 @@ which inserted into the extended action integral gives
 However, any other functional relationship between the \(q_i\) and \(p_i\) is possible. 
 Thus we use the more general form \(K = 0\).
 The integral \(A\) is to be made stationary under this constraint. 
-Since the constraint depends only on the position variables, it can be incorporated by the \(\lambda\) method, giving rise to additional potentials with corresponding conservative forces. 
-By adding the time to the phase space, every system becomes conservative.
+Since the constraint depends only on the position variables (i.e. it is a holonomic constraint), 
+it can be incorporated by the \(\lambda\) method, giving rise to additional potentials with corresponding conservative forces. 
+By adding the time to the phase space, even time-dependant systems can be considered conservative systems.
 We can incorporate the constraint into the integral by the \(\lambda\) method and obtain
 <div class="equation">
     $$
@@ -1156,8 +1163,8 @@ This independent parameter can be chosen so that \(q_{n+1}' = \frac{dq_{n+1}}{d\
 <h2>Canonical Transformations</h2>
 The equations derived up until here are not necessarily easy to solve. 
 Transformations can help to simplify the equations.
-A transformation is called canonical if it preserves the action integral. 
-As a consequence also the equations of motion are preserved (obviously very important). 
+A transformation is called canonical if it preserves the action integral.
+This is required, so that the equations of motion are also preserved.
 The equations of motion  
 <div class="equation"></div>
     $$
