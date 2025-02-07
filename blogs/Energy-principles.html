@@ -681,12 +681,6 @@ Thus we obtain
   </div>
     which leads to
     <div class="equation">
-        $$
-        \delta A  = [\frac{\partial L}{\partial \dot{q}_i}  \dot{q}]_{t_1}^{t_2}
-       $$
-    </div>
-    and
-    <div class="equation">
     $$
      [ L(q_1,...,q_n; \dot{q_!},...,\dot{q_n}) ]_{t_1}^{t_2}  - [\frac{\partial L}{\partial \dot{q}}  \dot{q}]_{t_1}^{t_2} = 0.
     $$
@@ -813,7 +807,7 @@ which, by introduction of \(\tau\) as independent variable leads to
 From this we obtain 
 <div class="equation">
     $$
-    t' = \frac{1}{\sqrt{2(E-V)}} \frac{d\bar{s}}{d\tau} = \frac{1}{\sqrt{2(T)}} \frac{d\bar{s}}{d\tau} .
+    t' = \frac{1}{\sqrt{2(E-V)}} \frac{d\bar{s}}{d\tau} = \frac{1}{\sqrt{2T}} \frac{d\bar{s}}{d\tau} .
     $$
 </div>
 leading to the action integral
@@ -822,25 +816,25 @@ leading to the action integral
     A =  \int_{\tau} \sqrt{2(E-V)} \frac{d\bar{s}}{d\tau} d\tau = \int_{\tau} \sqrt{2(E-V)} d\bar{s} .
     $$
 </div> Note that the free parameter is \( \tau \) (and not \( \bar{s} \) ). 
-It might be chose as \( q_n \), giving all other \( q_i \) as functions of \( q_n \). 
+Some parameter must be chosen as free parameter. 
+For example it might correspond to \( q_n \), giving all other \( q_i \) as functions of \( q_n \). 
 Minimization of this integral to find the path of the particle is Jacobi's principle.
-It relates the stationary action functional to the motion along some geodsic of a given Riemannian space. 
+It relates the stationary action functional to the motion along some geodesic of a given Riemannian space. 
+Here we considered a time-dependent work function.
 The time does not appear in the equations, but can be solved for by the given relation \( t' = f(\tau)\).
 If we restrict ourselves to a single particle, then \( d\bar{s} \) is the (curvi-linear) 
 line element of ordinary three-dimensional space.
-Jacobi's principle thenrepresents a notable analogy to Fermats principle of least time in optics which minimizes
+Jacobi's principle then represents a notable analogy to Fermats principle of least time in optics which minimizes
 <div class="equation">
     $$
-    I = \int_{\tau} n d\bar{s} 
+    I = \int_{\tau} n d\bar{s}.
     $$
 </div> 
-. Here \(n\) is the refractive index of the medium which, much like \( \sqrt{2(E-V)} \), can change at different spatial positions.
+ Here \(n\) is the refractive index of the medium which, much like \( \sqrt{2(E-V)} \), can change at different spatial positions.
 This unifying principle between optics and mechanics was first introduced by Pierre Louis Maupertuis in 1740 
-and further developed by Hamilton in his optico-mechaical theory.
-
-
-
-
+and further developed by Hamilton in his optico-mechanical theory.
+Remarkably, both principles solve for paths in space by minimization of an integral quantity.
+In mechanics this integral quantity is the action, in optics it is the travel time.
 
 
 
@@ -1021,6 +1015,7 @@ which is minimized by
 The transformation into \(2n\) positional space is powerful since the equations of motion define a velocity field in phase space.
 The behaviour of the motion in this space is similar to that of an incompressible fluid. 
 In incompressible fluids, certain integral invaraits are preserved, for example the circulation and the volume.
+It is a property of the phase space that trajectories do not cross. They can be considered rays.
 <br>
 <br>
 
@@ -1037,8 +1032,13 @@ it becomes apparent that ignorable variables and their momenta are simply droppe
 
 
 <h2>Extended phase space - time as mechanical variable</h2>
-Given the notion of the phase space we can include time as a position variable in the phase space and consider an independent parameter \( \tau \) 
-for path parameterization. We call the phase space including time the extended phase space. 
+Given the notion of the phase space we can include time as a position variable in the phase space 
+and consider an independent parameter \( \tau \) 
+for path parameterization. 
+We have done something similar above when considering the time-dependent Lagrangian.
+Some free parameter \( \tau \) was chosen to be the independent variable.
+All other variables, including time, were considered as functions of \( \tau \).
+We call the phase space including time the extended phase space. 
 Time is simply regarded as a positional variable \( t = q_{n+1} \) with an associated momentum \( p_t = p_{n+1} \).
 We can write the extended action integral
 <div class="equation">
@@ -1047,7 +1047,8 @@ We can write the extended action integral
     $$
 </div> 
 where  \( q_i' = \frac{q_i}{d \tau} \) so that \(  A = \int L dt = \int L_1 d\tau\).
-We call the Lagrangian \(L_1\) the extended Lagrangian.
+We call the Lagrangian \(L_1\) the extended Lagrangian. Often \( \tau \) is chosen so that
+\( q_{n+1}' = \frac{dq_{n+1}}{d \tau} = \frac{dt}{d \tau}\).
 <br>
 Let \( q_i' \rightarrow \lambda q_i'\) for all \(i = 1,...,n+1\). For this transformation it can be shown that \(L_1 \rightarrow \lambda L_1\) and thus the action integral is homogenous of first order in the variables \(q_i\).
 By Eulers theorem on homogenous functions we have
@@ -1084,7 +1085,7 @@ For example, we can single out the variable \(p_{n+1}\) and obtain
 so that
 <div class="equation">
     $$
-    p_{n+1} q_{n+1}' = - \sum_{i=1}^{n} \frac{\partial L_1}{\partial q_i'} q_i' +  L_1 =  - \sum_{i=1}^{n} p_i q_i' +  L_1 = - H(q_1,...,q_{n+1}, p_1,...,p_n)
+    p_{n+1} q_{n+1}' = - \sum_{i=1}^{n} \frac{\partial L_1}{\partial q_i'} q_i' +  L_1 =  - \sum_{i=1}^{n} p_i \dot{q_i} +  L_1 = - H(q_1,...,q_{n+1}, p_1,...,p_n)
     $$
 </div>
 (by considering the legendre transform). 
@@ -1092,7 +1093,7 @@ If we choose \(\tau\) so that \(q_{n+1}' = \frac{dq_{n+1}}{d\tau} = 1\) we obtai
 which inserted into the extended action integral gives
 <div class="equation">
     $$
-    A =  \int \sum_{i=1}^{n} p_i q_i' - H(q_1,...,q_{n+1}, p_1,...,p_n) dq_{n+1}.
+    A =  \int \sum_{i=1}^{n} p_i \dot{q_i} - H(q_1,...,q_{n+1}, p_1,...,p_n) dq_{n+1}.
     $$
 </div>
 However, any other functional relationship between the \(q_i\) and \(p_i\) is possible. 
