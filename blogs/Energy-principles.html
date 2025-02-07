@@ -1169,19 +1169,22 @@ The equations derived up until here are not necessarily easy to solve.
 Transformations can help to simplify the equations.
 A transformation is called canonical if it preserves the action integral.
 This is required, so that the equations of motion are also preserved.
-The equations of motion  
-<div class="equation"></div>
+Consider the extended action integral
+<div class="equation">
     $$
-    \dot{q}_i = \frac{\partial H}{\partial p_i} 
+    A = \int \sum_{i=1}^{n+1} \frac{\partial L_1}{\partial q_i'} q_i' d\tau = \int \sum_{i=1}^{n+1}p_i q_i' d\tau.
     $$
+</div>
+which is to be minimized under the constraint \(K = 0\).    
+The action is preserved if a point-transformation satisfies \( \sum__{i=1}^{n+1} p_i \partial q_i = \sum__{i=1}^{n+1} P_i \partial Q_i \). 
+We can express the constraint as
+<div class="equation">
     $$
-    \dot{p}_i = - \frac{\partial H}{\partial q_i}
-    $$
-</div> are obtained from a Lagranian in canonical form \(L = \sum_i p_i \dot{q}_i - H \). 
-Just like the Lagrangian, the Hamiltonian is invariant to point-transformations.
-Therefore, the functional form is preserved if a point-transformation satisfies \( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i \). 
+    p_{n+1} + H = P_{n+1} + H' = K = 0
+    $$.
+</div>   
 For the extended phase space we have
-<div class="equation"></div>
+<div class="equation">
     $$
     \dot{q}_i = \frac{\partial H}{\partial p_i} + p_t \partial t
     $$
@@ -1189,20 +1192,21 @@ For the extended phase space we have
     \dot{p}_i = - \frac{\partial H}{\partial q_i} + p_\bar{t} \partial \bar{t}
     $$
 </div>
-corresponding to \( K = p_t + H \). In this case \(K\) is invariant to point-transformations, but not \(H\).
-We have \(H' = H + p_t - p_\bar{t} \).
+and
+<div class="equation">
+    $$ H' = H + p_t - p_\bar{t} $$
+</div>.
 The invariance principle \( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i \),
 requires at least one additional functional relation \( f(q_1,...,1_n, Q_1,...,Q_n) = 0 \),
 else all the \(p_i\) and \(P_i\) would vanish due to the independent arbitrary variations.
-Prescription of these constraints classifies a general Mathieu transformation. 
 We can have up to \(n\) such constraints, leading to more or less restricted forms.
 By the Lagrangian \(\lambda\) method we can incorporate the constraints 
-<div class="equation"></div>
+<div class="equation">
     $$
     \sum_i p_i \partial q_i - \sum_i P_i \partial Q_i  = \lambda_1 \partial f_1 + ... + \lambda_n \partial f_n
     $$
 </div>
-allowing for arbitrary variations of the /(q_i/) and /(Q_i/). 
+allowing for arbitrary variations of the \(q_i\) and \(Q_i\). 
 We obtain 
 <div class="equation"></div>
     $$
