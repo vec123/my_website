@@ -568,7 +568,7 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     =-[   \sum_l m \frac{\partial r}{\partial q_l} \frac{d}{dt} q_l \delta r] + \delta \frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
     $$
     $$
-    =-[   \sum_l m \dot{q_l}  \sum_k \frac{\partial r}{\partial q_k} \delta q_k ] + \delta \frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
+    =-[   \sum_l m \dot{q_l} \frac{\partial r}{\partial q_l}  \sum_k \frac{\partial r}{\partial q_k} \delta q_k ] + \delta \frac{1}{2} \sum_k\sum_l a_{k,l}(q,t) \dot{q_k}\dot{q_l} 
     $$
     $$
     = -[   \sum_l \sum_k m \frac{\partial r}{\partial q_l}\frac{\partial r}{\partial q_k} \dot{q_l} \delta q_k ] + \delta T
@@ -577,13 +577,13 @@ The advantage of a formulation as stationary value of a definite (meaning a boun
     = -[ \sum_k \sum_l a_{k,l} \dot{q_l} \delta q_k ] + \delta T
     $$
     $$
-    = -[ \sum_k \frac{\partial T} {\dot{q_k}} \delta q_k] + \delta T
+    = -[ \sum_k \frac{\partial T} {\partial  \dot{q_k}} \delta q_k] + \delta T
     $$
     $$
-    = -[ \sum_k \frac{\partial L} {\dot{q_k}} \delta q_k] + \delta T
+    = -[ \sum_k \frac{\partial L} {\partial  \dot{q_k}} \delta q_k] + \delta T
     $$
     $$
-    = -[ \frac{\partial L} {\dot{q}} \delta q] + \delta T
+    = -[ \frac{\partial L} {\partial  \dot{q}} \delta q] + \delta T
     $$
 </div>
 Thus we obtain 
@@ -601,7 +601,7 @@ Thus we obtain
     Summarizing, we have 
     <div class="equation">
      $$
-     \delta \int w dt =   \delta \int L(r,r') dt + [mv \delta r]_{t_1}^{t_2} 
+     \delta \int w dt =   \delta \int L(r,r') dt - [mv \delta r]_{t_1}^{t_2} 
      =  \delta \int L dt 
      + [\frac{\partial L}{\partial \dot{q}} \delta q  ]_{t_1}^{t_2}  .
     $$
@@ -631,9 +631,12 @@ Thus we obtain
    by imposing stationarity on the action functional.
    A strong side of these equations is that they do not contain the accelerations, but only the velocities.
    The equations of motion are of first order in time, not second order and completely determined by a scalar function \(L(q,q')\).
-
+   In the more general case where variations at the limits are allowed, the boundary term must be considered and we have  
+   <div class="equation">
+    $$ \delta \int L dt = [\frac{\partial L}{\partial \dot{q}} \delta q  ]_{t_1}^{t_2}  .$$
+   </div>
   
-   <h3>Motion constrains as potential energies</h3>
+   <h3>Lagrangian multipliers - Motion constrains as potential energies </h3>
 
    Often we consider systems which are constrained in their motion. 
    This constraint is enforced by the reactive forces \(R\), which are assumed to be ideal w.r.t allowed variations (i.e. orthogonal to all possible motions).
