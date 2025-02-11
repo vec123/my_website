@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Language Model</title>
+</head>
+<body>
+    <h1>Ask a Question</h1>
+    <input type="text" id="question" placeholder="Enter your question">
+    <button onclick="askQuestion()">Ask</button>
+    <p id="answer"></p>
+
+    <script>
+        async function askQuestion() {
+            const question = document.getElementById("question").value;
+            const response = await fetch(`https://your-backend-api.com/query?question=${encodeURIComponent(question)}`);
+            const data = await response.json();
+            document.getElementById("answer").innerText = data.answer;
+        }
+    </script>
+</body>
+</html>
