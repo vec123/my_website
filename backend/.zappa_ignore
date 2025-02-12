@@ -1,0 +1,35 @@
+# Exclude virtual environment directories
+chroma_db/
+handler_venv/
+images/
+markdown/
+zappa_env/
+
+# Exclude compiled Python files
+*.pyc
+*.pyo
+__pycache__/
+
+# Exclude IDE/editor-specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Exclude large files like models or datasets (if applicable)
+models/
+data/
+
+# Exclude logs and temporary files
+*.log
+*.bak
+*.swp
+
+# Optionally, exclude documentation or other non-essential files
+docs/
+README.md
+create_data.py
+html_2_markdown.py
+html2markdown.py
+zappa_settings_old.json
+zappa_settings.json

@@ -1,5 +1,4 @@
 from flask import Flask, request, jsonify
-import chromadb
 
 # Initialize Flask
 app = Flask(__name__)
