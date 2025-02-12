@@ -14,6 +14,19 @@ def query():
 
     return jsonify({'response': response})
 
+# Function to handle CORS in preflight (OPTIONS) requests
+def _build_cors_preflight_response():
+    response = jsonify()
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    response.headers.add("Access-Control-Allow-Methods", "POST, OPTIONS")
+    response.headers.add("Access-Control-Allow-Headers", "Content-Type")
+    return response
+
+# Function to attach CORS headers to all responses
+def _build_cors_response(response):
+    response.headers.add("Access-Control-Allow-Origin", "*")
+    return response
+
 # AWS Lambda Handler
 def lambda_handler(event, context):
     return handle_request(app, event, context)
