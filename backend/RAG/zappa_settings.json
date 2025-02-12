@@ -12,6 +12,8 @@
         "profile_name": "default",
         "project_name": "rag",
         "runtime": "python3.11",
-        "s3_bucket": "zappa-3mhxte3qf"
+        "s3_bucket": "zappa-3mhxte3qf",
+        "api_gateway_enabled": true,
+        "lambda_handler": "handler.lambda_handler"
     }
 }

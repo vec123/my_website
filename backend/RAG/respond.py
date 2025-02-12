@@ -1,20 +1,19 @@
 from flask import Flask, request, jsonify
+from serverless_wsgi import handle_request  # Converts Flask requests for API Gateway
 
 # Initialize Flask
 app = Flask(__name__)
 
-# Simple Query Processing Logic
+# Query Processing Logic
 @app.route('/query', methods=['POST'])
 def query():
     """Handles user queries and returns predefined responses"""
-    user_query = request.json.get('question', '').strip().lower()
+    user_query = request.json.get('question', '').strip().lower() if request.json else ""
 
-    if user_query == "test":
-        response = "hello world"
-    else:
-        response = "I do not understand"
+    response = "hello world" if user_query == "test" else "I do not understand"
 
     return jsonify({'response': response})
 
-if __name__ == '__main__':
-    app.run(host="0.0.0.0", port=5000, debug=True)
+# AWS Lambda Handler
+def lambda_handler(event, context):
+    return handle_request(app, event, context)
