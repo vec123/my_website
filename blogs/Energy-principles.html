@@ -1183,6 +1183,7 @@ We can express the constraint as
     p_{n+1} + H = P_{n+1} + H' = K = 0
     $$.
 </div>   
+Note, that if time is ignorable \( p_{n+1} = 0 = P_{n+1}\).
 For the extended phase space we have
 <div class="equation">
     $$
@@ -1197,9 +1198,9 @@ and
     $$ H' = H + p_t - p_\bar{t} $$
 </div>.
 The invariance principle \( \sum_i p_i \partial q_i = \sum_i P_i \partial Q_i \),
-requires at least one additional functional relation \( f(q_1,...,1_n, Q_1,...,Q_n) = 0 \),
+requires at least one additional functional constraint \( f(q_1,...,1_n, Q_1,...,Q_n) = 0 \),
 else all the \(p_i\) and \(P_i\) would vanish due to the independent arbitrary variations.
-We can have up to \(n\) such constraints, leading to more or less restricted forms.
+We can have up to \(n\) such constraints, leading to more or less restricted forms. 
 By the Lagrangian \(\lambda\) method we can incorporate the constraints 
 <div class="equation">
     $$
@@ -1233,20 +1234,40 @@ so that, in extended phase space
 $$
  H' =  H + \lambda_1 \frac{\partial f_1}{\partial t} + ... + \lambda_n \frac{\partial f_n}{\partial t}
 $$
+$$
 \sum p_i \partial q_i = \sum P_i \partial Q_i + \partial S
+$$
 </div>
-where \(S = \lambda_1 f_1 + ... + \lambda_n f_n \) is a differential of a certain function \(S\).
+where \(S(q_i,Q_i) = \lambda_1 f_1 + ... + \lambda_n f_n \).
 The transformed action integral (we consider time independence and actual displacements) is then
 <div class="equation"></div>
     $$
-    A = \int_{t} \sum_i p_i dq_i - H' dt = \int \sum_i P_i dQ_i - Hdt + \int_{t} dS
+    A = \int_{t} \sum_i p_i dq_i - H' dt = \int \sum_i P_i dQ_i - Hdt  + \int_t dS
     $$
-</div>, the addition of the last term is constant and does not change the stationary value of the action integral.
+</div>.
+We may consider an additional term which is zero at the boundaries and thus without influence on the action integral
+<div class="equation"></div>
+    $$
+    \bar{S} = S + \tilde{S}
+    $$
+    $$
+    A = \int_{t} \sum_i p_i dq_i - H' dt = \int \sum_i P_i dQ_i - Hdt  + \int_t d\bar{S} 
+    $$.
+</div>
 We have the relation
 <div class="equation"></div>
     $$
     \sum_i p_i  \delta  q_i  - \sum_i P_i  \delta Q_i  = \delta S = \sum ( \frac{\delta S}{\delta q_i} \delta q_i + \frac{\delta S}{\delta Q_i} \delta Q_i)
-    $$.
+    $$
+</div>
+from which we can read
+<div class="equation"></div>
+    $$
+    p_i  = \frac{\delta S}{\delta q_i}
+    $$
+    $$
+    q_i  = -\frac{\delta S}{\delta Q_i}
+    $$
 </div>
 If we inculde \(t\) in the phase space, we obtain
 <div class="equation"></div>
@@ -1266,27 +1287,96 @@ and
     H'   = H + \frac{ \partial S }{ \partial t  }
     $$.
 </div>
-Other ways of ensuring a canonical transformation is by properties of the phase-space. 
-As mentioned before, the phase-space behaves like an incompressible fluid. 
-It has integral invariants such as the circulation. This can be related to the Poisson brackets.
-A canoncial transformation leaves the Poisson brackets invariant.
-While the generating function \(S\) gives the transformations only in implicit form, 
-the Poisson brackets can be used to test if a transformation is canonical.
-
-
-
-<h3>Infinitesimal canoncical transformations</h3>
-
-
-
-
-
-
-<h2>Hamilton Jacobi equations</h2>
-
-
-
-
+This last equation is the Hamilton-Jacobi equation.
+Often, one aims to find a generating function \(S\) so that  \( H' = 0\).
+This leads to a particularily convenient form from which \(Q_i\) and  \(P_i\) can be obtained.
+The relation to the old variable \(q_i\) and \(p_i\) can then be obtained by differentiation of the generating function.
+<br>
+<br>
+Assume we find a transformation from \(q_i\), \(p_i\) to \(Q_i\), \(P_i\) so that \(H = Q_n\).
+It is immediate that all other variables are ignorable. 
+Thus
+<div class="equation"></div>
+    $$
+    \dot{Q_i}  = \frac{ \partial H }{ \partial P_i  } = 0
+    $$
+</div>
+leading to  \(Q_i =  \alpha_i = const. \) and 
+<div class="equation"></div>
+    $$
+    \dot{P_i}  = -\frac{ \partial H }{ \partial Q_i  } = 0
+    $$
+</div> leading to  \(P_i =  \beta_i = const. \).
+For the momentum related to \(Q_n = H \) we obtain
+<div class="equation"></div>
+    $$
+    \dot{P_n}  = \tau - t.
+    $$
+</div>
+Since \(p_i = \frac{\partial S}{\partial q_i} \) we can write this transformation
+<div class="equation"></div>
+    $$
+    Q_n  = H(q_1,...,q_n; \frac{\partial S}{\partial q_1}, ..., \frac{\partial S}{\partial q_n}).
+    $$
+</div>
+Note, that \(S\) must be a generating function satisfying action invariance. 
+It has form \( S(q_1,...,q_n; \alpha_1,...\alpha_{n-1}; Q_n ) =  S(q_1,...,q_n; \alpha_1,...\alpha_{n-1}; H )\).
+By considering 
+<div class="equation"></div>
+    $$
+    p_i  =  \frac{\partial S}{\partial q_i}, 
+    $$
+    $$
+    P_i = - \frac{\partial S}{\partial Q_i}
+    $$
+</div>
+we may write 
+<div class="equation">
+    $$
+    q_i  =  f_i(Q_1,...,Q_n; -P_1,...,-P_n) = f_i(\alpha_1,...,\alpha_n; \beta_1,...,\beta_{n-1}, t-\tau), 
+    $$
+    $$
+    p_i =  g_i(Q_1,...,Q_n; -P_1,...,-P_n) = g_i(\alpha_1,...,\alpha_n; \beta_1,...,\beta_{n-1}, t-\tau).
+    $$.
+</div>
+This procedure gives a recipe for finding \(S\) as functions of non-trivial constants of integration and the energy. 
+Then \(q_i\) can be found as functions of these constants of integration and time.
+<br>
+<br>
+Considering time as a position variable we consider a transformation 
+from \(q_i\),\(t\), \(p_i\),\(p_t\) to \(Q_i\), \(\bar{t}\), \(P_i\), \(P_\bar{t}\) so that 
+<div class="equation">
+$$
+ K = 0 = p_t + H = \frac{\partial S}{\partial t} + H = \bar{t} 
+$$.
+</div>
+Again, we may write 
+<div class="equation">
+    $$
+   \frac{\partial S}{\partial t} + H(q_1,...,q_n;t;\frac{\partial S}{\partial q_i},...,\frac{\partial S}{\partial q_n}) =0 
+    $$.
+</div>
+As before, since \(P_i\) are ignorable, we know that \(Q_i = \alpha_i = const. \) 
+and \(P_i = \frac{\partial S}{\partial Q_i} =  frac{\partial S}{\partial \alpha_i} = \beta_i \).
+We can obtain the position variables \(q_i\) in the form 
+<div class="equation">
+    $$
+    q_i = f_i(\alpha_1,...\alpha_n,\beta_1,...,\beta_n,t).
+    $$
+</div>
+The \(2n\) constants of integration can be adjusted to arbitrary inital conditions. 
+Under certain conditions this partial differential equation is completely solvable.
+This special class of problems is of great importance in theoretical physics (for example in Bohr's atomic theory).
+Such problems are called seperable problems where
+<div class="equation">
+    $$
+    S = S_1(q_1) + ...+ S_n(q_n) 
+    $$
+    $$
+    p_i = \frac{\partial S_k(q_k)}{\partial q_k}.
+    $$
+</div>
+can be found. 
 </body>
 </html>
         

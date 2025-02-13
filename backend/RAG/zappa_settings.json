@@ -1,6 +1,34 @@
 {
     "dev": {
-        "app_function": "respond.app",
+        "app_function": "chatbot_respond.app",
+        "aws_region": "eu-central-1",
+        "exclude": [
+            "boto3",
+            "dateutil",
+            "botocore",
+            "s3transfer",
+            "concurrent"
+        ],
+        "profile_name": "default",
+        "project_name": "rag",
+        "runtime": "python3.11",
+        "s3_bucket": "zappa-3mhxte3qf",
+        "api_gateway_enabled": true,
+        "lambda_handler": "handler.lambda_handler",
+    },
+    
+    "docker_dev": {
+        "app_function": "app.lambda_handler",
+        "aws_region": "eu-central-1",
+        "profile_name": "default",
+        "s3_bucket": "your-s3-bucket-name",
+        "runtime": "provided.al2",
+        "docker_image_uri": "your-docker-repo-url",
+        "memory_size": 4096
+    },
+
+    "basic_dev": {
+        "app_function": "basic_respond.app",
         "aws_region": "eu-central-1",
         "exclude": [
             "boto3",
