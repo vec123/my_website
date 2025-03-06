@@ -1164,7 +1164,7 @@ This independent parameter can be chosen so that \(q_{n+1}' = \frac{dq_{n+1}}{d\
 
 
 
-<h2>Canonical Transformations</h2>
+<h2>Canonical Transformations and the Jacobi-Hamilton equation</h2>
 The equations derived up until here are not necessarily easy to solve. 
 Transformations can help to simplify the equations.
 A transformation is called canonical if it preserves the action integral.
@@ -1377,6 +1377,82 @@ Such problems are called seperable problems where
     $$
 </div>
 can be found. 
+
+
+<h2>The Geometry connecting Action and Paths - Wave-Particle duality</h2>
+
+The variational energy principles of action minimization connect optics and mechanics.
+The minimization of an integral in optics is similar to the minimization of the action integral in mechanics.
+The principle of least time in optics is a variational principle which minimizes the time of travel, 
+whereas the principle of least action is a variational principle which minimizes the action integral.
+Both integrals can be expressed as a functional of the path.
+By variational calculus, one obtains special equations of motion from the stationary value of a functional.
+By applying a Legendre transform to the Lagrangian (which defines the action) 
+we can move from \(n\)-dimensional position-velocity space to \(2n\)-dimensional position space.
+The Hamiltonian equations of motion are then analagous to those of an incompressible fluid
+with the property that stream-lines never cross. This property is sometimes called the ray property.
+Solving the Hamiltonian differential equations is difficult even in this position space. 
+However, by finding an adequate canonical transformation, the equations can be simplified.
+The trajectories of the original position coordinates can be obtained as a function of \(2n\) constants of integration and time.
+The constants of integration can be adjusted to initial conditions.
+In general, even this simpler differential equation might be unsolvable. 
+However, in the important case of a seperable action (as it occurs in Bohr's atomic theory) the problem is completely solvable. 
+<br>
+<br>
+Let us consider a time-independent system
+<div class="equation">
+    $$
+    H(q_1,...,q_n, \frac{\partialS}{\partial q_1},...,\frac{S}{\partial q_n}) = E
+    $$
+</div>
+where \(E\) is the energy of the system. 
+Let us assume we have only a particular (not a complete) solution \(S(q_1,...,q_n)\).
+Without loss of generality let us move back to cartesian coordinates and examine \(S(x,y,z) = const. = C \)
+ and \(S(x,y,z) = const. = C +  \epsilon \), corresponding each to a different particular solution.
+ From any point \(P\) on the surface \(S(x,y,z) = C\) 
+ we can move along the gradient of \( \) and proceed to  \(S(x,y,z) = const. = C +  \epsilon \).
+Let us assume, that the normal distance between the two surfaces is \( \delta \).
+Then \( |\text{grad}(S)| = \frac{\epsilon}{\delta} \).
+Now let us assume that our system corresponds to the motion of a single particle in three-dimensional space subject to a conservative force.
+<div class="equation">
+    $$
+   \frac{1}{2m}(p_1^2 + p_2^2 + p_3^2) + V(x,y,z) = E	
+    $$
+</div>
+so that 
+<div class="equation">
+    $$
+    \frac{\partial S} {\partial x}^2 + \frac{\partial S} {\partial y}^2 + \frac{\partial S} {\partial z}^2 = 2m(E - V(x,y,z)).
+    $$.
+</div>
+Then from  \( |\text{grad}(S)| = \frac{\epsilon}{\delta} \), we obtain
+<div class="equation">
+    $$
+    \delta = \frac{\epsilon}{|\text{grad}(S)|} = \frac{\epsilon}{\sqrt{2m(E - V(x,y,z))}}.
+    $$.
+</div>
+This relation enables the construction of \(S = C + \epsilon \) from \(S = C \). 
+By sucessive infinitesimal steps, we can fill the space with surfaces of constant value.
+Note, that while we do not have the dependency of \(S\) on \(Q_i\) and \(P_i\), 
+we can still obtain the trajectories of the particle.
+To do this we consider 
+<div>
+$$
+p_i = \frac{\partial S}{\partial q_i}.
+$$
+</div>
+or 
+<div>
+    $$
+    P_i = \text{grad} S = mv.
+    $$
+</div>
+For all paths with equal energy, starting from a surface of constant \(S\),
+one can find a family of surfaces \(S\) to which they remain perpendicular.
+These mechanical paths are said to have the "ray property". The surfaces of constant \(S\) are called wavefronts.
+Just like light-rays, the mechanical paths of a conservative system remain orthogonal to the wavefronts.
+This is the wave-particle duality of classical mechanics.
+It holds only because the paths are derivable from variational principles.
 </body>
 </html>
         
